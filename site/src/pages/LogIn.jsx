@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function LogIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const navigate = useNavigate();
 
   function handleLoginClick() {
     // Construct the API request
@@ -27,7 +30,7 @@ function LogIn() {
         // Handle the response
         if (response.ok) {
           // Redirect the user to the dashboard or home page
-          window.location.href = 'https://example.com/dashboard';
+          navigate("/LogIn");
         } else {
           // Display an error message to the user
           setErrorMessage('Invalid email or password');
