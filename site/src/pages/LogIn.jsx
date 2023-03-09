@@ -10,7 +10,7 @@ function LogIn() {
 
   function handleLoginClick() {
     // Construct the API request
-    const apiUrl = 'https://example.com/login';
+    const apiUrl = 'api/login';
     const requestData = {
       email: email,
       password: password
