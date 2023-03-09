@@ -8,6 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.After;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -52,5 +53,10 @@ public class CounterStepDefinitions {
     @When("I click on the clear counter button")
     public void iClickOnTheClearCounterButton() {
         driver.findElement(By.id("clearcounter")).click();
+    }
+
+    @After
+    public void after(){
+        driver.quit();
     }
 }

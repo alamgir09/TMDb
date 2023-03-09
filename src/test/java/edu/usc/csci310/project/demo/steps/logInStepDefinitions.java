@@ -2,11 +2,14 @@ package edu.usc.csci310.project.demo.steps;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.After;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import static org.junit.Assert.assertTrue;
 
 public class logInStepDefinitions {
     private static final String ROOT_URL = "http://localhost:8080/";
@@ -42,4 +45,8 @@ public class logInStepDefinitions {
     }
 
 
+    @Then("I should see {string} in the page")
+    public void iShouldSeeInThePage(String arg0) {
+        assertTrue(driver.getPageSource().contains(arg0));
+    }
 }

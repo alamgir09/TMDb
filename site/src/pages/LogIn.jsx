@@ -9,6 +9,26 @@ function LogIn() {
   const navigate = useNavigate();
 
   function handleLoginClick() {
+    // validate text fields
+    // check if email is empty
+    if(email == "" || email.length == 0){
+        setErrorMessage("Email Required");
+        return;
+    }
+    // validate email
+    else{
+        if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)){
+            setErrorMessage("Invalid Email");
+            return;
+        }
+    }
+    // check if password is empty
+    if(password == "" || password.length == 0){
+        setErrorMessage("Password Required");
+        return;
+    }
+
+
     // Construct the API request
     const apiUrl = 'api/login';
     const requestData = {
