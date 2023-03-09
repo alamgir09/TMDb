@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function LogIn() {
+  const [fetchResponse, handleFetchResponse] = useState();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -46,20 +47,28 @@ function LogIn() {
 
     // Send the API request
     fetch(apiUrl, requestOptions)
-      .then(response => {
-        // Handle the response
-        if (response.ok) {
-          // Redirect the user to the dashboard or home page
-          navigate("/LogIn");
+      .then((res) => res.json())
+      .then((response) => {
+        console.log("API Responded With: ");
+        console.log(response);
+        console.log(response.data);
+        if (response?.data) {
+          if (response.data == "True") {
+          alert("You have successfully signed in!")
+          navigate("/")
+          }
+          else if (response.data == "False") {
+          alert("Incorrect password, try again.")
+          }
+          else if (response.data == "Null") {
+          alert("This user does not exist, try again.")}
         } else {
-          // Display an error message to the user
-          setErrorMessage('Invalid email or password');
+          console.log("Malformed data response"); //TODO: Handle me!
         }
       })
-      .catch(error => {
-        // Handle the error
-        console.error(error);
-        setErrorMessage('An error occurred, please try again later');
+      .catch((err) => {
+        console.log(err)
+        handleFetchResponse("An API error occurred");
       });
   }
 

@@ -14,8 +14,8 @@ public class LogInController {
     public ResponseEntity<LogInResponse> checkLogIn(@RequestBody LogInRequest request) {
         LogInResponse response = new LogInResponse();
         response.setData("Username: " + request.getEmail() + " Password: " + request.getPassword() + " - Received at " + Instant.now() + ".");
-        System.out.println("Email is " + request.getEmail());
-        System.out.println("Password is " + request.getPassword());
+//        System.out.println("Email is " + request.getEmail());
+//        System.out.println("Password is " + request.getPassword());
         return ResponseEntity.ok().body(response);
     }
 
