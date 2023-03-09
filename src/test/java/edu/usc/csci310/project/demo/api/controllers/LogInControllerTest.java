@@ -14,12 +14,35 @@ public class LogInControllerTest {
     @Test
     void verifyLogIn() {
         LogInRequest request = new LogInRequest();
-        request.setEmail("kevindon@usc.edu");
+        request.setEmail("tommytrojan@usc.edu");
+        request.setPassword("Password123");
+
+        ResponseEntity<LogInResponse> returnedResponse = logInController.checkLogIn(request);
+
+        assertNotNull(returnedResponse.getBody());
+        assertTrue(returnedResponse.getBody().getData().startsWith("True"));
+    }
+
+    @Test
+    void verifyIncorrectPassword() {
+        LogInRequest request = new LogInRequest();
+        request.setEmail("tommytrojan@usc.edu");
         request.setPassword("Password");
 
         ResponseEntity<LogInResponse> returnedResponse = logInController.checkLogIn(request);
 
         assertNotNull(returnedResponse.getBody());
-        assertTrue(returnedResponse.getBody().getData().startsWith("Username: " + request.getEmail() + " Password: " + request.getPassword()));
+        assertTrue(returnedResponse.getBody().getData().startsWith("False"));
+    }
+    @Test
+    void verifyAccountExists() {
+        LogInRequest request = new LogInRequest();
+        request.setEmail("tommytroj@usc.edu");
+        request.setPassword("Password");
+
+        ResponseEntity<LogInResponse> returnedResponse = logInController.checkLogIn(request);
+
+        assertNotNull(returnedResponse.getBody());
+        assertTrue(returnedResponse.getBody().getData().startsWith("Null"));
     }
 }
