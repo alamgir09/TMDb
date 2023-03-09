@@ -9,6 +9,26 @@ function LogIn() {
   const navigate = useNavigate();
 
   function handleLoginClick() {
+    // validate text fields
+    // check if email is empty
+    if(email == "" || email.length == 0){
+        setErrorMessage("Email Required");
+        return;
+    }
+    // validate email
+    else{
+        if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)){
+            setErrorMessage("Invalid Email");
+            return;
+        }
+    }
+    // check if password is empty
+    if(password == "" || password.length == 0){
+        setErrorMessage("Password Required");
+        return;
+    }
+
+
     // Construct the API request
     const apiUrl = 'api/login';
     const requestData = {
@@ -45,8 +65,8 @@ function LogIn() {
 
   return (
     <div>
-      <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
+      <input type="email" id="email" value={email}  onChange={e => setEmail(e.target.value)} placeholder="Email" />
+      <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
       <button onClick={handleLoginClick}>Login</button>
       {errorMessage && <div>{errorMessage}</div>}
     </div>
