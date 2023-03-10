@@ -1,6 +1,6 @@
 package edu.usc.csci310.project.demo.api.responses;
 
-public class LogInResponse {
+public class SignUpResponse {
     private String data;
 
     public String getData() {
@@ -8,6 +8,6 @@ public class LogInResponse {
     }
 
     public void setData(String data) {
-     this.data = data;
+        this.data = data;
     }
 }

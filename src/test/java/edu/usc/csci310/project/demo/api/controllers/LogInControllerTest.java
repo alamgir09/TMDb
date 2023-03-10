@@ -20,7 +20,7 @@ public class LogInControllerTest {
         ResponseEntity<LogInResponse> returnedResponse = logInController.checkLogIn(request);
 
         assertNotNull(returnedResponse.getBody());
-        assertTrue(returnedResponse.getBody().getData().startsWith("True"));
+        assertTrue(returnedResponse.getBody().getData().startsWith("Valid"));
     }
 
     @Test
@@ -32,7 +32,7 @@ public class LogInControllerTest {
         ResponseEntity<LogInResponse> returnedResponse = logInController.checkLogIn(request);
 
         assertNotNull(returnedResponse.getBody());
-        assertTrue(returnedResponse.getBody().getData().startsWith("False"));
+        assertTrue(returnedResponse.getBody().getData().startsWith("Password does not match"));
     }
     @Test
     void verifyAccountExists() {
@@ -43,6 +43,6 @@ public class LogInControllerTest {
         ResponseEntity<LogInResponse> returnedResponse = logInController.checkLogIn(request);
 
         assertNotNull(returnedResponse.getBody());
-        assertTrue(returnedResponse.getBody().getData().startsWith("Null"));
+        assertTrue(returnedResponse.getBody().getData().startsWith("Email not found"));
     }
 }

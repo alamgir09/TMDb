@@ -1,22 +1,22 @@
 package edu.usc.csci310.project;
 
 public class UserAccount {
+    String firstName;
+    String lastName;
+    String password;
 
-    private String username;
-    private String password;
+    public void setFirstName(String firstname) {
+        this.firstName = firstname;
+    }
+    public void setLastName(String lastname) {
+        this.lastName = lastname;
+    }
 
-    public UserAccount(String username, String password) {
-        this.username = username;
+    public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getUsername() {
-        return this.username;
-    }
-
     public String getPassword() {
-        return this.password;
+        return password;
     }
-
 
 }

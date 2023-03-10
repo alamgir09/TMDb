@@ -3,38 +3,26 @@ import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
   const [fetchResponse, handleFetchResponse] = useState();
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
   const navigate = useNavigate();
 
-  function handleLoginClick() {
-    // validate text fields
-    // check if email is empty
-    if(email == "" || email.length == 0){
-        setErrorMessage("Email Required");
-        return;
-    }
-    // validate email
-    else{
-        if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)){
-            setErrorMessage("Invalid Email");
-            return;
-        }
-    }
-    // check if password is empty
-    if(password == "" || password.length == 0){
-        setErrorMessage("Password Required");
-        return;
-    }
+  function handleSignUpForm(event){
+	  event.preventDefault();
 
+    // validate
+    if(firstName == "" || lastName == "" || email == "" || password == "" || !email.includes("@")){
+      return;
+    }
 
     // Construct the API request
-    const apiUrl = 'api/login';
+    const apiUrl = 'api/signup';
     const requestData = {
-      name: name,
+      firstName: firstName,
+      lastName: lastName,
       email: email,
       password: password
     };
@@ -51,37 +39,42 @@ function SignUp() {
     fetch(apiUrl, requestOptions)
       .then((res) => res.json())
       .then((response) => {
-        console.log("API Responded With: ");
-        console.log(response);
         console.log(response.data);
-        if (response?.data) {
-          if (response.data == "True") {
-          alert("You have successfully signed in!")
-          navigate("/")
-          }
-          else if (response.data == "False") {
-          alert("Incorrect password, try again.")
-          }
-          else if (response.data == "Null") {
-          alert("This user does not exist, try again.")}
-        } else {
-          console.log("Malformed data response"); //TODO: Handle me!
-        }
+        if(response.data == "User already exists"){
+          alert(response.data);
+         }
+//         }else{
+//           navigate("/LogIn");
+//         }
+
       })
       .catch((err) => {
         console.log(err)
         handleFetchResponse("An API error occurred");
       });
+
   }
 
   return (
-    <div>
-    <div>SignUp page </div>
-      <input type="name" id="name" value={name}  onChange={e => setName(e.target.value)} placeholder="Name" />
-      <input type="email" id="email" value={email}  onChange={e => setEmail(e.target.value)} placeholder="Email" />
-      <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
-      <button onClick={handleLoginClick} className="btn btn-primary"> Sign Up </button>
-      {errorMessage && <div>{errorMessage}</div>}
+    <div className="container-fluid">
+      <div className="text-center pb-3 pt-3"><h1>Sign Up</h1></div>
+      <form className="formStyle" onSubmit={handleSignUpForm}>
+				<div className="input-group mb-3 p-0">
+					<input className="form-control" type="input" id="firstName" value={firstName}  onChange={e => setFirstName(e.target.value)} placeholder="First Name" required/>
+				</div>
+				<div className="input-group mb-3 p-0">
+          <input className="form-control" type="input" id="lastName" value={lastName}  onChange={e => setLastName(e.target.value)} placeholder="Last Name" required/>
+				</div>
+				<div className="input-group mb-3 p-0">
+          <input className="form-control" type="email" id="email" value={email}  onChange={e => setEmail(e.target.value)} placeholder="Email" required/>
+				</div>
+				<div className="input-group mb-3 p-0">
+          <input className="form-control" type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" required/>
+				</div>
+        <button type="submit" className="btn btn-danger w-100" value="Submit">Submit</button>
+      </form>
+      <div>{fetchResponse}</div>
+      <div>{errorMessage}</div>
     </div>
   );
 }
