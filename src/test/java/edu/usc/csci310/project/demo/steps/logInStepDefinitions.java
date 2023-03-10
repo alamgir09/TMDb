@@ -1,21 +1,22 @@
 package edu.usc.csci310.project.demo.steps;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class CounterStepDefinitions {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+public class logInStepDefinitions {
     private static final String ROOT_URL = "http://localhost:8080/";
     private WebDriver driver;
 
@@ -24,7 +25,6 @@ public class CounterStepDefinitions {
         System.out.println("Setting Up Cucumber Driver");
         WebDriverManager.chromedriver().setup();
     }
-
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
@@ -35,24 +35,25 @@ public class CounterStepDefinitions {
         driver = new ChromeDriver(options);
     }
 
-    @Given("I am on endpoint {string}")
-    public void iAmOnEndpoint(String arg0) {
-        driver.get(ROOT_URL + arg0);
+    @Given("I am on the login page")
+    public void iAmOnTheLoginPage() {
+        driver.get(ROOT_URL + "LogIn");
     }
 
-    @When("I click on the increment counter button")
-    public void iClickOnTheIncrementCounterButton() {
-        driver.findElement(By.id("incrementcounter")).click();
+    @When("I enter {string} and the {string}")
+    public void iEnterAndThe(String arg0, String arg1) {
+        driver.findElement(By.id("email")).sendKeys(arg0);
+        driver.findElement(By.id("password")).sendKeys(arg1);
+    }
+    @And("I press the submit button")
+    public void iPressTheSubmitButton() {
+        driver.findElement(By.id("submitBtn")).click();
     }
 
-    @Then("I should see the text update to {string}")
-    public void iShouldSeeTheTextUpdateTo(String arg0) {
-        assertEquals(driver.findElement(By.id("counter")).getText(), arg0);
-    }
 
-    @When("I click on the clear counter button")
-    public void iClickOnTheClearCounterButton() {
-        driver.findElement(By.id("clearcounter")).click();
+    @Then("I should see {string} in the page")
+    public void iShouldSeeInThePage(String arg0) {
+        assertEquals(driver.findElement(By.id("response")).getText(), "");
     }
 
     @After
