@@ -1,0 +1,7 @@
+Best Practice ContinuousIntegration Report
+Owner: Team 4
+Grade: 12/12
+Comments: 
+	Found a total of 2 merge checks on branches: {'develop', 'main'}
+		Total successful merges: 2
+		Total failing merges: 0
