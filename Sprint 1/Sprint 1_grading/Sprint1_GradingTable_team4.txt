@@ -1,0 +1,20 @@
+			Grading Table - Team team4
+
+| Section                  | Grade               | Note                                                                                                               |
+|--------------------------|---------------------|--------------------------------------------------------------------------------------------------------------------|
+| Sprint Planning          | 8.0/8               | All 3 files should have been committed at the same time. Be careful the next time.                                 |
+| Scrums                   | 17.0/24             | Scrum 1:                                                                                                           |
+|                          |                     | Scrum 2:                                                                                                           |
+|                          |                     | Scrum 3:Tasks like create react frontend have been moved from completed in task chart 2 to 'To do' in task chart 3 |
+|                          |                     | Scrum 4:No scrum 4 held                                                                                            |
+| Retrospective            | TBD                 |                                                                                                                    |
+| TDD                      | 0.0/12              |                                                                                                                    |
+| GitFlow                  | 10.0/12             |                                                                                                                    |
+| Continuous Integration   | 12.0/12             |                                                                                                                    |
+| Refactor                 | 12.0/12             |                                                                                                                    |
+| Coverage                 | 6.3/12              |                                                                                                                    |
+| ------------------------ | ------------------- |                                                                                                                    |
+| Total                    |                     |                                                                                                                    |
+| ------------------------ | ------------------- |                                                                                                                    |
+| Implementation Score     | 9/400               |                                                                                                                    |
+| Sustainable Pace Penalty | 16                  |                                                                                                                    |
