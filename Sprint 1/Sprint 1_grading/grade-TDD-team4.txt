@@ -1,0 +1,10 @@
+Best Practice TDD Report
+Owner: Team 4
+Grade: 0.0/12
+Comments: 
+	Test method was not created before method for: logincontroller.checklogin
+		Method commit on 2023-03-08 20:47:43 UTC: https://github.com/CSCI310/20231-project-team-4/commit/3f3f1379aeef1d934b85d9303a242645ca699d4a
+		Test commit on 2023-03-09 04:59:53 UTC: https://github.com/CSCI310/20231-project-team-4/commit/152d6c05b2d4550c6624025b9be1e1a33bf14bce
+Correct TDD methods: 0
+Incorrect TDD methods: 1
+Total methods evaluated for TDD: 1
