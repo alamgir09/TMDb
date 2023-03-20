@@ -1,0 +1,10 @@
+Best Practice GitFlow Report
+Owner: Team 4
+Grade: 10.0/12
+Comments: 
+
+	Pull request #3 did not follow gitflow branch merge rules [develop <- feature-login] (https://github.com/CSCI310/20231-project-team-4/pull/3)
+
+	Pull request #2 did not follow gitflow branch merge rules [feature-LogIn <- testing-login] (https://github.com/CSCI310/20231-project-team-4/pull/2)
+	Incorrect Gitflow branch naming: feature-LogIn
+	Incorrect Gitflow branch naming: testing-LogIn
