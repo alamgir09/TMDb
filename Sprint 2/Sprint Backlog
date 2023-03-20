@@ -4,6 +4,7 @@ Absent Members: None
 Features:
 1) Search for movies based on various criteria 
 2) Provide movie details
+3) Create and save movie watch lists
 7) Create User Account
 
 In our process of picking features for this sprint development, we decided to utilize a top-down approach focusing on features that heavily rely on each other so that we can finish
