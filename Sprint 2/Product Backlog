@@ -1,0 +1,10 @@
+1. Search for movies based on various criteria 
+2. Provide movie details
+3. Create and save movie watch lists
+4. Compare movie lists with other users
+5. Create picture montages based on a list
+6. Generate suggestions for new movies
+7. Create a user account
+8. Works on Chrome browser and mobile devices 9. Be secure and protect users’ data.
+10. User interfaces must be attractive
+11. Client-side in HTML/JavaScript or React and server-side in SpringBoot, and running inside a Docker container.
