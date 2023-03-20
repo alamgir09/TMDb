@@ -1,0 +1,6 @@
+Best Practice IssuesPullRequests Report
+Owner: Team 4
+Grade: 12/12
+Comments: 
+	Using commit: https://github.com/CSCI310/20231-project-team-4/commit/17abc6f1757b5cf732b21db652eb661eda942586
+	No issues to address since this was sprint 1
