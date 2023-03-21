@@ -12,9 +12,9 @@
 | GitFlow                  | 10.0/12             |                                                                                                                    |
 | Continuous Integration   | 12.0/12             |                                                                                                                    |
 | Refactor                 | 12.0/12             |                                                                                                                    |
-| Coverage                 | 6.3/12              |                                                                                                                    |
+| Coverage                 | 6.4/12              |                                                                                                                    |
 | ------------------------ | ------------------- |                                                                                                                    |
-| Total                    |                     |                                                                                                                    |
+| Total                    | 65.4                |                                                                                                                    |
 | ------------------------ | ------------------- |                                                                                                                    |
 | Implementation Score     | 9/400               |                                                                                                                    |
 | Sustainable Pace Penalty | 16                  |                                                                                                                    |
