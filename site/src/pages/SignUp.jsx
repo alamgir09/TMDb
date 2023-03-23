@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
   const [fetchResponse, handleFetchResponse] = useState();
@@ -7,8 +7,7 @@ function SignUp() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
+  // const [errorMessage, setErrorMessage] = useState(' ');
 
   function handleSignUpForm(event){
 	  event.preventDefault();
@@ -74,7 +73,7 @@ function SignUp() {
         <button type="submit" className="btn btn-danger w-100" value="Submit">Submit</button>
       </form>
       <div>{fetchResponse}</div>
-      <div>{errorMessage}</div>
+      {/* <div>{errorMessage}</div> */}
     </div>
   );
 }
