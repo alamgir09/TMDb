@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 function LogIn() {
   // fetchResponse is a constant in this component's state. Use handleFetchResponse(newValue)
