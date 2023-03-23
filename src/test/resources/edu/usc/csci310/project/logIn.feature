@@ -4,4 +4,3 @@ Feature: testing out the various parts of the logIn page
     When I enter "tommytrojan@usc.edu" and the "Password123"
     And I press the submit button
     Then I should see "Valid" in the page
-
