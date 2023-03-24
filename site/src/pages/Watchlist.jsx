@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 
 function Watchlist() {
 
   // Construct the API request
-  const apiUrl = 'api/watchlist';
+  /* const apiUrl = 'api/watchlist';
   const requestData = {
     userID: localStorage.get("userID")
   };
@@ -26,6 +26,8 @@ function Watchlist() {
       console.log(err)
       // handleFetchResponse("An API error occurred");
     });
+
+   */
 
   return (
     <div className="container-fluid">
