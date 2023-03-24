@@ -2,47 +2,53 @@ package edu.usc.csci310.project.demo.api.controllers;
 
 import edu.usc.csci310.project.demo.api.requests.LogInRequest;
 import edu.usc.csci310.project.demo.api.responses.LogInResponse;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LogInControllerTest {
     LogInController logInController = new LogInController();
 
     @Test
-    void verifyLogIn() {
+    void verifyLogIn() throws JSONException {
         LogInRequest request = new LogInRequest();
-        request.setEmail("tommytrojan@usc.edu");
+        request.setUsername("tommyTrojan");
         request.setPassword("Password123");
 
         ResponseEntity<LogInResponse> returnedResponse = logInController.checkLogIn(request);
 
         assertNotNull(returnedResponse.getBody());
-        assertTrue(returnedResponse.getBody().getData().startsWith("Valid"));
+        JSONObject json = new JSONObject(returnedResponse.getBody().getData());
+        assertEquals(json.get("Type"), "Success");
     }
 
     @Test
-    void verifyIncorrectPassword() {
+    void verifyIncorrectPassword() throws JSONException {
         LogInRequest request = new LogInRequest();
-        request.setEmail("tommytrojan@usc.edu");
+        request.setUsername("tommyTrojan");
         request.setPassword("Password");
 
         ResponseEntity<LogInResponse> returnedResponse = logInController.checkLogIn(request);
 
         assertNotNull(returnedResponse.getBody());
-        assertTrue(returnedResponse.getBody().getData().startsWith("Password does not match"));
+        JSONObject json = new JSONObject(returnedResponse.getBody().getData());
+        assertEquals(json.get("Type"), "Error");
+        assertEquals(json.get("Message"), "Password does not match");
     }
     @Test
-    void verifyAccountExists() {
+    void verifyAccountExists() throws JSONException {
         LogInRequest request = new LogInRequest();
-        request.setEmail("tommytroj@usc.edu");
+        request.setUsername("tommytroj@usc.edu");
         request.setPassword("Password");
 
         ResponseEntity<LogInResponse> returnedResponse = logInController.checkLogIn(request);
 
         assertNotNull(returnedResponse.getBody());
-        assertTrue(returnedResponse.getBody().getData().startsWith("Email not found"));
+        JSONObject json = new JSONObject(returnedResponse.getBody().getData());
+        assertEquals(json.get("Type"), "Error");
+        assertEquals(json.get("Message"), "Username not found");
     }
 }
