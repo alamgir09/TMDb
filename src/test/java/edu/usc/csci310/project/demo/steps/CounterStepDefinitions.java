@@ -22,7 +22,7 @@ public class CounterStepDefinitions {
     @BeforeAll
     public static void beforeAll() {
         System.out.println("Setting Up Cucumber Driver");
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().driverVersion("110.0.5481").setup();
     }
 
     @Before
@@ -32,6 +32,7 @@ public class CounterStepDefinitions {
         options.addArguments("--whitelisted-ips");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-extensions");
+        options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
     }
 

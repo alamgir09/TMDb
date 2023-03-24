@@ -15,9 +15,9 @@ import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
+import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 @RestController
 @RequestMapping("/api/login")
@@ -37,23 +37,30 @@ public class LogInController {
             MongoDatabase database = mongoClient.getDatabase("Team4").withCodecRegistry(pojoCodecRegistry);
             MongoCollection<UserAccount> collection = database.getCollection("Users", UserAccount.class);
 
-            UserAccount userAccount = collection.find(eq("email", request.getEmail())).first();
+            UserAccount userAccount = collection.find(eq("username", request.getUsername())).first();
+
+            JSONObject json = new JSONObject();
 
             // check if password match
             if(userAccount != null){
                 // password does not match
                 if(!request.getPassword().equals(userAccount.getPassword())){
-                    response.setData("Password does not match");
+                    json.put("Type", "Error");
+                    json.put("Message", "Password does not match");
                 }
-                // password match (login is valid)
+                // password match (return userID)
                 else{
-                    response.setData("Valid");
+                    json.put("Type", "Success");
+                    json.put("userID", userAccount.getUserID());
                 }
             }
-            // no email found
+            // username not found
             else {
-                response.setData("Email not found");
+                json.put("Type", "Error");
+                json.put("Message", "Username not found");
             }
+            response.setData(json.toString());
+            System.out.println(json);
         }
 
         return ResponseEntity.ok().body(response);
