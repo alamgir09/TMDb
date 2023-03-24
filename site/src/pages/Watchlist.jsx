@@ -1,5 +1,4 @@
 // import React, { useState } from 'react';
-import React;
 
 function Watchlist() {
 
@@ -28,13 +27,13 @@ function Watchlist() {
       // handleFetchResponse("An API error occurred");
     });
 
-   */
 
   return (
     <div className="container-fluid">
       <div className="text-center pb-3 pt-3"><h1>Watchlist</h1></div>
     </div>
   );
+  */
 }
 
 export default Watchlist;
