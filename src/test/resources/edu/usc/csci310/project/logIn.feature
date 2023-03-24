@@ -8,4 +8,3 @@ Feature: testing out the various parts of the logIn page
     Given I am on the login page
     When I press the sign up button
     Then I am on the signup page
-
