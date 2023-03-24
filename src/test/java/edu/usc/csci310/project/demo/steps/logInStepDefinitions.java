@@ -14,7 +14,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class logInStepDefinitions {
     private static final String ROOT_URL = "http://localhost:8080/";
@@ -23,7 +22,7 @@ public class logInStepDefinitions {
     @BeforeAll
     public static void beforeAll() {
         System.out.println("Setting Up Cucumber Driver");
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().driverVersion("110.0.5481").setup();
     }
     @Before
     public void before() {
@@ -32,6 +31,7 @@ public class logInStepDefinitions {
         options.addArguments("--whitelisted-ips");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-extensions");
+        options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
     }
 
@@ -42,7 +42,7 @@ public class logInStepDefinitions {
 
     @When("I enter {string} and the {string}")
     public void iEnterAndThe(String arg0, String arg1) {
-        driver.findElement(By.id("email")).sendKeys(arg0);
+        driver.findElement(By.id("username")).sendKeys(arg0);
         driver.findElement(By.id("password")).sendKeys(arg1);
     }
     @And("I press the submit button")
@@ -59,5 +59,15 @@ public class logInStepDefinitions {
     @After
     public void after(){
         driver.quit();
+    }
+
+    @When("I press the sign up button")
+    public void iPressTheSignUpButton() {
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/p[2]/a")).click();
+    }
+
+    @Then("I am on the signup page")
+    public void iAmOnTheSignupPage() {
+        assertEquals(driver.getCurrentUrl(), ROOT_URL + "SignUp");
     }
 }

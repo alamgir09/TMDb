@@ -1,19 +1,36 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
   const [fetchResponse, handleFetchResponse] = useState();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  // const [errorMessage, setErrorMessage] = useState(' ');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+
+  // Calling navigate() will allow us to redirect the webpage
+  const navigate = useNavigate();
+
+  function resetForm(){
+    setFirstName("");
+    setLastName("");
+    setUsername("");
+    setPassword("");
+  }
 
   function handleSignUpForm(event){
 	  event.preventDefault();
 
     // validate
-    if(firstName == "" || lastName == "" || email == "" || password == "" || !email.includes("@")){
+    if(firstName == "" || lastName == "" || username == "" || password == ""){
+      return;
+    }
+
+    if(password != passwordConfirm){
+      alert("Password does not match. Please try again.");
+      resetForm();
+      setPasswordConfirm("");
       return;
     }
 
@@ -22,7 +39,7 @@ function SignUp() {
     const requestData = {
       firstName: firstName,
       lastName: lastName,
-      email: email,
+      username: username,
       password: password
     };
     const requestHeaders = {
@@ -40,12 +57,12 @@ function SignUp() {
       .then((response) => {
         console.log(response.data);
         if(response.data == "User already exists"){
-          alert(response.data);
-         }
-//         }else{
-//           navigate("/LogIn");
-//         }
-
+          resetForm();
+          handleFetchResponse(response.data);
+        }
+        else{
+          navigate("/LogIn");
+        }
       })
       .catch((err) => {
         console.log(err)
@@ -65,15 +82,17 @@ function SignUp() {
           <input className="form-control" type="input" id="lastName" value={lastName}  onChange={e => setLastName(e.target.value)} placeholder="Last Name" required/>
 				</div>
 				<div className="input-group mb-3 p-0">
-          <input className="form-control" type="email" id="email" value={email}  onChange={e => setEmail(e.target.value)} placeholder="Email" required/>
+          <input className="form-control" type="input" id="username" value={username}  onChange={e => setUsername(e.target.value)} placeholder="Username" required/>
 				</div>
 				<div className="input-group mb-3 p-0">
           <input className="form-control" type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" required/>
 				</div>
+				<div className="input-group mb-3 p-0">
+          <input className="form-control" type="password" id="passwordConfirm" value={passwordConfirm} onChange={e => setPasswordConfirm(e.target.value)} placeholder="Confirm Password" required/>
+        </div>
         <button type="submit" className="btn btn-danger w-100" value="Submit">Submit</button>
       </form>
-      <div>{fetchResponse}</div>
-      {/* <div>{errorMessage}</div> */}
+      <div className="text-center pt-3">{fetchResponse}</div>
     </div>
   );
 }
