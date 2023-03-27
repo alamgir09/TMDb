@@ -36,23 +36,23 @@ function SignUp() {
 
     // Construct the API request
     const apiUrl = 'api/signup';
-    const requestData = {
+    const requestDataInSignUp = {
       firstName: firstName,
       lastName: lastName,
       username: username,
       password: password
     };
-    const requestHeaders = {
+    const requestHeadersInSignUp = {
       'Content-Type': 'application/json'
     };
-    const requestOptions = {
+    const requestOptionsInSignUp = {
       method: 'POST',
-      headers: requestHeaders,
-      body: JSON.stringify(requestData)
+      headers: requestHeadersInSignUp,
+      body: JSON.stringify(requestDataInSignUp)
     };
 
     // Send the API request
-    fetch(apiUrl, requestOptions)
+    fetch(apiUrl, requestOptionsInSignUp)
       .then((res) => res.json())
       .then((response) => {
         console.log(response.data);
