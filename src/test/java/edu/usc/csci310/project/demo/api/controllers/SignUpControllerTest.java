@@ -27,11 +27,12 @@ public class SignUpControllerTest {
     }
 
     @Test
-    void verifySignUp(){
+    void verifySignUp() {
         SignUpRequest request = new SignUpRequest();
         request.setFirstName("test");
         request.setLastName("testing");
-        // create random email
+
+        // create random username
         // choose a Character random from this String
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 + "0123456789"
@@ -39,13 +40,13 @@ public class SignUpControllerTest {
 
         // create StringBuffer size of AlphaNumericString
         StringBuilder randomUsername = new StringBuilder(7);
-
+        
         for (int i = 0; i < 7; i++) {
 
             // generate a random number between
             // 0 to AlphaNumericString variable length
             int index
-                    = (int)(AlphaNumericString.length()
+                    = (int) (AlphaNumericString.length()
                     * Math.random());
 
             // add Character one by one in end of sb
