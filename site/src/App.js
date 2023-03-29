@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Other from "./pages/Other";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
+import Search from "./pages/Search";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/other" element={<Other />} />
         <Route path="/LogIn" element={<LogIn />} />
         <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/Search" element={<Search/>} />
         {/* 404 page not found redirect */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

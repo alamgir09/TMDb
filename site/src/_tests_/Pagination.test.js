@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import App from "./App";
+import App from "../App";
 import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 
@@ -10,19 +10,19 @@ beforeEach(() => {
 
 // Reset the browser history after each test
 afterEach(() => {
-  window.history.pushState(null, document.title, "/");
+  window.history.pushState(null, document.title, "/Search");
 });
 
 test("that math works", async () => {
   expect(5 + 5).toBe(10);
 });
 
-test("full app rendering/navigating", async () => {
+test("does page button exist", async () => {
   const user = userEvent.setup();
   render(<App />, { wrapper: BrowserRouter });
 
   // verify page content for default route
-  expect(screen.getByText(/Home Page/)).toBeInTheDocument();
+  expect(screen.getByText(/1/)).toBeInTheDocument();
 
   // verify page content for expected route after navigating
   await waitFor(() => user.click(screen.getByText(/click to go to other page/i)));
