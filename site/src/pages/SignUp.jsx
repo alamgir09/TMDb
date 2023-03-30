@@ -19,6 +19,7 @@ function SignUp() {
     setPassword("");
   }
 
+  // Empty fields handled through "required" flag in the input fields
   function handleSignUpForm(event){
 	  event.preventDefault();
 

@@ -7,6 +7,7 @@ function LogIn() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  // Empty fields handled through "required" flag in the input fields
   function handleLoginForm(e) {
     e.preventDefault();
 
