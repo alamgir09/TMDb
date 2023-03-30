@@ -47,12 +47,11 @@ function Search() {
         // Selects api request based on category selected by drop-down
         let url = ''
         if (category == "All") {
-            url = "";
-            // Currently the same as title
+            url = "https://api.themoviedb.org/3/search/multi?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&query=" + term +"&page=1&include_adult=false";
         } else if (category == "Title") {
             url = "https://api.themoviedb.org/3/search/movie?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&query=" + term + "&page=1&include_adult=false";
         } else if (category == "Actors") {
-            url = '';
+            url = 'https://api.themoviedb.org/3/search/person?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&query=' + term + '&page=1&include_adult=false';
         } else if (category == "Keywords") {
             url = "https://api.themoviedb.org/3/discover/movie?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_keywords=" + term + "&with_watch_monetization_types=flatrate";
         } 

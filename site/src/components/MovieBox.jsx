@@ -20,9 +20,15 @@ function MovieBox({imgURL, title, release_date, rating}) {
                         <strong>{rating}</strong>
                     </div>
                     <div className="box-hover-elements col-1 inner-text">
-                        <div>Add Watch List</div>
-                        <div>Little Eye</div>
-                        <div>Dollar Sign</div>
+                        <div>Add Watch List
+
+                        </div>
+                        <div>Little Eye
+
+                        </div>
+                        <div>Dollar Sign
+                            
+                        </div>
                     </div>
                 </div> // <!-- .movie-row -->
     );
