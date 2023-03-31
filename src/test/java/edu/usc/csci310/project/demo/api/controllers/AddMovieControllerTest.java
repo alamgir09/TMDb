@@ -1,5 +1,6 @@
 package edu.usc.csci310.project.demo.api.controllers;
 
+import edu.usc.csci310.project.Movie;
 import edu.usc.csci310.project.demo.api.requests.AddMovieRequest;
 import edu.usc.csci310.project.demo.api.responses.AddMovieResponse;
 import org.junit.jupiter.api.Test;
@@ -13,9 +14,9 @@ public class AddMovieControllerTest {
     @Test
     void verifyAddMovie() {
         AddMovieRequest request = new AddMovieRequest();
-        request.setUserID("641e53712027c440ac7d9edc");
-        request.setWatchlist("hi");
-        request.setMovie("new movie");
+        request.setUserID("6423e5633b51581fb8d36210");
+        request.setWatchlist("watchlist test");
+        request.setMovie(new Movie("test title", "test url", "test release date", "test rating"));
 
         ResponseEntity<AddMovieResponse> returnedResponse = addMovieController.addMovie(request);
 

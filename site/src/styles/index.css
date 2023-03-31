@@ -9,10 +9,21 @@
 
 .watchlistRow:hover{
 	cursor: pointer;
+	background-color: #bebebe;
 }
 
-.open > .dropdown-menu {
-    opacity: 1;
-    left: 0px;
-    display: block !important;
+.fa-pen, .fa-plus, .fa-trash{
+	font-size: 2em;
+	padding-left: 10px;
+	padding-right: 10px;
+
 }
+
+.fa-pen:hover, .fa-plus:hover{
+	color: #ffffff;
+}
+
+.fa-trash:hover{
+	color: red;
+}
+

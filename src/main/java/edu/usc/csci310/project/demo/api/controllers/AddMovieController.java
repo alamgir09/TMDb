@@ -42,11 +42,11 @@ public class AddMovieController {
             MongoDatabase database = mongoClient.getDatabase("Team4").withCodecRegistry(pojoCodecRegistry);
 
             MongoCollection<Document> collection = database.getCollection("Users");
-            
+
             Bson filter = Filters.and(eq("userID", request.getUserID()), eq("watchlist.name", request.getWatchlist()));
 
-            Bson updates = Updates.addToSet("watchlist.$.movies", new Movie(request.getMovie()));
-
+            Bson updates = Updates.addToSet("watchlist.$.movies", request.getMovie());
+            
             try {
                 UpdateResult result = collection.updateOne(filter, updates);
                 System.out.println("Added movie: " + request.getMovie() + " to watchlist");

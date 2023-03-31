@@ -42,10 +42,11 @@ public class CreateWatchlistController {
         try (MongoClient mongoClient = MongoClients.create(uri)) {
 
             MongoDatabase database = mongoClient.getDatabase("Team4").withCodecRegistry(pojoCodecRegistry);
-            
+
             MongoCollection<Document> collection = database.getCollection("Users");
 
             Document doc = collection.find(eq("userID", request.getUserID())).first();
+
             UserAccount user = collection.find(doc, UserAccount.class).first();
 
             ArrayList<Watchlist> watchlists = user.getWatchlist();
@@ -64,17 +65,6 @@ public class CreateWatchlistController {
             Watchlist watchlist = new Watchlist(request.getWatchlist(), request.getType());
 
             Bson updates = Updates.addToSet("watchlist", watchlist);
-
-
-//            Document query = new Document().append("userID", request.getUserID()).append("watchlist.name", request.getWatchlist());
-
-//            Watchlist watchlist = new Watchlist(request.getWatchlist());
-
-            // Movie movie = new Movie("movie");
-            // watchlist.addMovies(new Movie("test movie"));
-//            Bson filter = Filters.and(eq("userID", request.getUserID()), eq("watchlist.name", request.getWatchlist()));
-//
-//            Bson updates = Updates.addToSet("watchlist.$.movies", new Movie("movie1"));
 
             try {
                 UpdateResult result = collection.updateOne(query, updates);

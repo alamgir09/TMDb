@@ -14,7 +14,7 @@ public class GetWatchlistControllerTest {
     @Test
     void verifyGetWatchlist() throws JSONException {
         GetWatchlistRequest request = new GetWatchlistRequest();
-        request.setUserID("641e53712027c440ac7d9edc");
+        request.setUserID("6423e5633b51581fb8d36210");
 
         ResponseEntity<GetWatchlistResponse> returnedResponse = getWatchlistController.handleGetWatchlist(request);
 

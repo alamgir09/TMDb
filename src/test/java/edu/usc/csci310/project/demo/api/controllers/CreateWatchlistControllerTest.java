@@ -15,9 +15,9 @@ public class CreateWatchlistControllerTest {
     @Test
     void verifyCreateWatchlistAlreadyExists() throws JSONException {
         CreateWatchlistRequest request = new CreateWatchlistRequest();
-        request.setUserID("641e53712027c440ac7d9edc");
-        request.setWatchlist("sad movies2");
-        request.setType("public");
+        request.setUserID("6423e5633b51581fb8d36210");
+        request.setWatchlist("existing watchlist");
+        request.setType("Private");
 
         ResponseEntity<CreateWatchlistResponse> returnedResponse = createWatchlistController.createWatchlist(request);
 
@@ -29,7 +29,7 @@ public class CreateWatchlistControllerTest {
     @Test
     void verifyCreateWatchlist() throws JSONException {
         CreateWatchlistRequest request = new CreateWatchlistRequest();
-        request.setUserID("641e53712027c440ac7d9edc");
+        request.setUserID("6423e5633b51581fb8d36210");
 
         // create watchlist
         // choose a Character random from this String
@@ -54,7 +54,7 @@ public class CreateWatchlistControllerTest {
         }
 
         request.setWatchlist(randomWatchlist.toString());
-        request.setType("public");
+        request.setType("Private");
 
         ResponseEntity<CreateWatchlistResponse> returnedResponse = createWatchlistController.createWatchlist(request);
 

@@ -1,28 +1,27 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 function WatchlistDetail() {
-  const [heading, setHeading] = useState();
   const [list, updateList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [watchlist, setWatchlist] = useState();
 
   // api request to get movies for current user
-  const apiUrl = "api/getMovies";
-
-  const requestData = {
-    userID: localStorage.getItem("userID"),
-    watchlist: localStorage.getItem("watchlist"),
-  };
-  const requestHeaders = {
-    "Content-Type": "application/json",
-  };
-  const requestOptions = {
-    method: "POST",
-    headers: requestHeaders,
-    body: JSON.stringify(requestData),
-  };
-
   function fetchMovies() {
+    const apiUrl = "api/getMovies";
+
+    const requestData = {
+      userID: localStorage.getItem("userID"),
+      watchlist: localStorage.getItem("watchlist")
+    };
+    const requestHeaders = {
+      "Content-Type": "application/json"
+    };
+    const requestOptions = {
+      method: "POST",
+      headers: requestHeaders,
+      body: JSON.stringify(requestData)
+    };
+
     fetch(apiUrl, requestOptions)
       .then((res) => res.json())
       .then((response) => {
@@ -31,17 +30,12 @@ function WatchlistDetail() {
           console.log(JSON.parse(response.data));
 
           var jsonObject = JSON.parse(response.data);
-          if (jsonObject.length == 0) {
-            setHeading(<h2>No Movies added yet</h2>);
-          } else {
-            updateList(jsonObject);
-            setLoading(false);
-          }
+          updateList(jsonObject);
+          setLoading(false);
         }
       })
       .catch((err) => {
         console.log(err);
-        setHeading("An API error occurred");
       });
   }
 
@@ -57,16 +51,16 @@ function WatchlistDetail() {
         <h1>{watchlist}</h1>
       </div>
       <div className="row mb-3">
-        <div className="col-sm">{heading}</div>
+        <div className="col-sm">{!loading && list.length == 0 ? <h2>No movies added yet</h2> : null}</div>
         <div className="col-sm text-end">
-          <button className="btn btn-danger">Compare Watchlist</button>
+          <button className="btn btn-danger">Edit Watchlist</button>
         </div>
       </div>
       {!loading &&
         list.map((element, index) => (
           <div className="row mb-3 watchlistRow" key={index}>
             <div className="col">
-              <h1>{element["name"]}</h1>
+              <h1>{element["title"]}</h1>
             </div>
           </div>
         ))}

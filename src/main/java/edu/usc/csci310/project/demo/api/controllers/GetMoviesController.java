@@ -18,6 +18,7 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
 import static com.mongodb.MongoClientSettings.getDefaultCodecRegistry;
+import static com.mongodb.client.model.Projections.include;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -49,13 +50,14 @@ public class GetMoviesController {
 
             Bson filter = Filters.and(Filters.eq("userID", request.getUserID()), Filters.eq("watchlist.name", request.getWatchlist()));
 
-            Document doc = collection.find(filter).first();
+            // Document doc = collection.find(filter).first();
 
-            if (doc == null) {
+            UserAccount user = collection.find(filter, UserAccount.class).first();
+
+            if (user == null) {
                 System.out.println("No results found.");
                 response.setData("No results found.");
             } else {
-                UserAccount user = collection.find(doc, UserAccount.class).first();
 
                 List<Watchlist> watchlists = user.getWatchlist();
 
@@ -71,7 +73,7 @@ public class GetMoviesController {
                 String gsonString = new Gson().toJson(movies);
 
                 response.setData(gsonString);
-                System.out.println(doc.toJson());
+                System.out.println(gsonString);
             }
         }
 

@@ -13,8 +13,8 @@ public class GetMoviesControllerTest {
     @Test
     void verifyGetMovies() {
         GetMoviesRequest request = new GetMoviesRequest();
-        request.setUserID("641e53712027c440ac7d9edc");
-        request.setWatchlist("hi");
+        request.setUserID("6423e5633b51581fb8d36210");
+        request.setWatchlist("watchlist 1");
 
         ResponseEntity<GetMoviesResponse> returnedResponse = getMoviesController.handleGetMovies(request);
 
