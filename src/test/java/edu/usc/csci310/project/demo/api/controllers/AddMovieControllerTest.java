@@ -16,7 +16,31 @@ public class AddMovieControllerTest {
         AddMovieRequest request = new AddMovieRequest();
         request.setUserID("6423e5633b51581fb8d36210");
         request.setWatchlist("watchlist test");
-        request.setMovie(new Movie("test title", "test url", "test release date", "test rating"));
+
+        // create movie
+        // create watchlist
+        // choose a Character random from this String
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "0123456789"
+                + "abcdefghijklmnopqrstuvxyz";
+
+        // create StringBuffer size of AlphaNumericString
+        StringBuilder randomMovieTitle = new StringBuilder(5);
+
+        for (int i = 0; i < 5; i++) {
+
+            // generate a random number between
+            // 0 to AlphaNumericString variable length
+            int index
+                    = (int) (AlphaNumericString.length()
+                    * Math.random());
+
+            // add Character one by one in end of sb
+            randomMovieTitle.append(AlphaNumericString
+                    .charAt(index));
+        }
+
+        request.setMovie(new Movie(randomMovieTitle.toString(), "test url", "test release date", "test rating"));
 
         ResponseEntity<AddMovieResponse> returnedResponse = addMovieController.addMovie(request);
 

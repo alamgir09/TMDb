@@ -27,6 +27,20 @@ public class CreateWatchlistControllerTest {
     }
 
     @Test
+    void verifyUserDoesNotExist() throws JSONException {
+        CreateWatchlistRequest request = new CreateWatchlistRequest();
+        request.setUserID("6423e5633b51581d36210");
+        request.setWatchlist("existing watchlist");
+        request.setType("Private");
+
+        ResponseEntity<CreateWatchlistResponse> returnedResponse = createWatchlistController.createWatchlist(request);
+
+        assertNotNull(returnedResponse.getBody());
+        assertEquals(returnedResponse.getBody().getData(), "User does not exist");
+
+    }
+
+    @Test
     void verifyCreateWatchlist() throws JSONException {
         CreateWatchlistRequest request = new CreateWatchlistRequest();
         request.setUserID("6423e5633b51581fb8d36210");

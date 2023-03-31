@@ -46,16 +46,11 @@ public class AddMovieController {
             Bson filter = Filters.and(eq("userID", request.getUserID()), eq("watchlist.name", request.getWatchlist()));
 
             Bson updates = Updates.addToSet("watchlist.$.movies", request.getMovie());
-            
-            try {
-                UpdateResult result = collection.updateOne(filter, updates);
-                System.out.println("Added movie: " + request.getMovie() + " to watchlist");
-                response.setData("Success");
 
-            } catch (MongoException me) {
-                System.err.println("Unable to update due to an error: " + me);
-                response.setData(me.toString());
-            }
+            UpdateResult result = collection.updateOne(filter, updates);
+            System.out.println("Added movie: " + request.getMovie() + " to watchlist");
+            response.setData("Success");
+
         }
 
         return ResponseEntity.ok().body(response);

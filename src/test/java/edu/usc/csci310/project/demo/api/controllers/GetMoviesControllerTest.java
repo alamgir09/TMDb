@@ -5,6 +5,7 @@ import edu.usc.csci310.project.demo.api.responses.GetMoviesResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class GetMoviesControllerTest {
@@ -19,6 +20,19 @@ public class GetMoviesControllerTest {
         ResponseEntity<GetMoviesResponse> returnedResponse = getMoviesController.handleGetMovies(request);
 
         assertNotNull(returnedResponse.getBody());
+
+        System.out.println(returnedResponse.getBody().getData());
+    }
+
+    @Test
+    void verifyNoMoviesFound() {
+        GetMoviesRequest request = new GetMoviesRequest();
+        request.setUserID("6423e5633b51581fb8d36210");
+        request.setWatchlist("invalid watchlist");
+
+        ResponseEntity<GetMoviesResponse> returnedResponse = getMoviesController.handleGetMovies(request);
+
+        assertEquals("No results found.", returnedResponse.getBody().getData());
         // JSONObject json = new JSONObject(returnedResponse.getBody().getData());
         System.out.println(returnedResponse.getBody().getData());
     }

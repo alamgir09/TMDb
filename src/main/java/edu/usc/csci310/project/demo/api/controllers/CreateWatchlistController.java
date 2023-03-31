@@ -47,6 +47,12 @@ public class CreateWatchlistController {
 
             Document doc = collection.find(eq("userID", request.getUserID())).first();
 
+            if (doc == null) {
+                System.out.println("User does not exist");
+                response.setData("User does not exist");
+                return ResponseEntity.ok().body(response);
+            }
+
             UserAccount user = collection.find(doc, UserAccount.class).first();
 
             ArrayList<Watchlist> watchlists = user.getWatchlist();
@@ -66,19 +72,12 @@ public class CreateWatchlistController {
 
             Bson updates = Updates.addToSet("watchlist", watchlist);
 
-            try {
-                UpdateResult result = collection.updateOne(query, updates);
-                System.out.println("Added " + request.getWatchlist() + " to watchlist");
-                response.setData("Success");
+            UpdateResult result = collection.updateOne(query, updates);
+            System.out.println("Added " + request.getWatchlist() + " to watchlist");
+            response.setData("Success");
 
-            } catch (MongoException me) {
-                System.err.println("Unable to update due to an error: " + me);
-                response.setData(me.toString());
-            }
+            return ResponseEntity.ok().body(response);
         }
-
-        return ResponseEntity.ok().body(response);
-
     }
 
 }
