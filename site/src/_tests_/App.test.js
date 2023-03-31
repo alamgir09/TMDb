@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import App from "./App";
+import App from "../App";
 import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 
@@ -28,9 +28,12 @@ test("full app rendering/navigating", async () => {
   await waitFor(() => user.click(screen.getByText(/click to go to other page/i)));
   expect(screen.getByText(/Other Page/)).toBeInTheDocument();
 
-
   await waitFor(() => user.click(screen.getByText(/click to go to home page/i)));
   expect(screen.getByText(/Home Page/)).toBeInTheDocument();
+
+  // verify page content for expected route after navigating
+  await waitFor(() => user.click(screen.getByText(/Log In/i)));
+  expect(screen.getByText(/Log In/)).toBeInTheDocument();
 });
 
 test("fetching works on the home page", async () => {
