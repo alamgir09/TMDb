@@ -30,9 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "pretty": "prettier --check \"src/**/*.{js,ts,jsx,tsx}\"",
-    "fix:pretty": "prettier --write \"src/**/*.{js,ts,jsx,tsx}\"",
-    "coverage": "react-scripts test --coverage --watchAll --silent=false",
-    "coverage": "react-scripts test --coverage --watchAll"
+    "fix:pretty": "prettier --write \"src/**/*.{js,ts,jsx,tsx}\""
   },
   "eslintConfig": {
     "extends": [
