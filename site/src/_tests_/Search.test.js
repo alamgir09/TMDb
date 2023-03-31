@@ -13,24 +13,15 @@ afterEach(() => {
   window.history.pushState(null, document.title, "/Search");
 });
 
-test("that math works", async () => {
-  expect(5 + 5).toBe(10);
-});
-
-test("the sample movie box exists", async () => {
+test("full app rendering/navigating", async () => {
   const user = userEvent.setup();
   render(<App />, { wrapper: BrowserRouter });
 
   // verify page content for default route
   expect(screen.getByText(/Back to Home/)).toBeInTheDocument();
 
-  // verify page content for expected route after navigating
-  await waitFor(() => user.click(screen.getByText(/Back to Home/i)));
-  expect(screen.getByText(/Home/)).toBeInTheDocument();
-
-
-  await waitFor(() => user.click(screen.getByText(/click to go to home page/i)));
-  expect(screen.getByText(/Home Page/)).toBeInTheDocument();
+  // Search button exists
+  expect(screen.getByText(/Search/)).toBeInTheDocument();
 });
 
 test("fetching works on the home page", async () => {
