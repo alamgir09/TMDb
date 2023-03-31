@@ -35,6 +35,8 @@ test("full app rendering/navigating", async () => {
     await waitFor(() => user.click(screen.getByText(/Log In/i)));
     expect(screen.getByText(/Log In/)).toBeInTheDocument();
 
+});
+
 test("fetching works on the home page", async () => {
   fetch.mockResponseOnce(JSON.stringify({ data: "Pong Frontend. Received at 2023-02-25T20:49:00.813447Z." }));
 
