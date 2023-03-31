@@ -6,6 +6,7 @@ import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import Watchlist from "./pages/Watchlist";
 import WatchlistDetail from "./pages/WatchlistDetail";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Watchlist" element={<Watchlist />} />
         <Route path="/WatchlistDetail" element={<WatchlistDetail />} />
+        <Route path="/NavBar" element={<NavBar />} />
+
         {/* 404 page not found redirect */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
