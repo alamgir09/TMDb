@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MovieBox from '../components/MovieBox';
 import Pagination from '../components/Pagination';
+import { useParams } from 'react-router-dom';
 
 function Search() {
-
     // Handle all searches here
     // display question mark if null values
     // from year to year, range of years, default is thank 
@@ -20,29 +20,37 @@ function Search() {
     //             3. dollar sign, obtain free tickets (feasibility analysis)
 
     // General Hooks
+    const { id } = useParams();
+    const { type } = useParams();
+
     const [searchTerm, setTerm] = useState('');
     const [category, setCategory] = useState('Title');
     const [numResults, setNumResults] = useState('0');
     const [components, setComponents] = useState([]);
     const navigate = useNavigate();
 
+
+    useEffect(() => {
+        if(type === 'Actors' || type === "Genres") {
+            setCategory(type)
+        }
+        setTerm(id)
+    }, []);
+
     // Pagination Hooks
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(10);
-    
+    const [postsPerPage] = useState(10)
 
     // Constructing API Request below
-
     function searchItem(event) {
         event.preventDefault();
         setComponents([]);
 
-
-
+//         console.log(searchTerm)
         const term = searchTerm.trim();
+//         console.log(term)
 
-        console.log("You just hit the search button");
-
+//         console.log("You just hit the search button");
 
         // Selects api request based on category selected by drop-down
         let url = ''
@@ -54,7 +62,7 @@ function Search() {
             url = 'https://api.themoviedb.org/3/search/person?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&query=' + term + '&page=1&include_adult=false';
         } else if (category == "Keywords") {
             url = "https://api.themoviedb.org/3/discover/movie?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_keywords=" + term + "&with_watch_monetization_types=flatrate";
-        } 
+        }
 
         // Now make the API request with the search term
         const apiUrl = url;
@@ -63,59 +71,59 @@ function Search() {
             'Content-Type': 'application/json'
           };
         const requestOptions = {
-        method: 'GET',
-        headers: requestHeaders,
+            method: 'GET',
+            headers: requestHeaders,
         };
+
 
         // Send the API request
         fetch(apiUrl, requestOptions)
         .then((res) => res.json())
         .then((response) => {
-        console.log("Showing response.results");
-        console.log(response.results);
-        setNumResults(response.total_results);
+            console.log("Showing response.results");
+            console.log(response.results);
+            setNumResults(response.total_results);
 
-        setComponents(response);
+            setComponents(response);
 
-        let components = [];
+            let components = [];
 
-        // Go through response from the api and create each individual movie box
-        for (let i = 0; i < response.results.length; i++) {
-            let movie = response.results[i];
-            let imgURL = "http://image.tmdb.org/t/p/w500" + movie.poster_path;
-            let movieComponent = (
-              <MovieBox
-                key={i}
-                imgURL={imgURL}
-                title={movie.title}
-                release_date={movie.release_date}
-                rating={movie.vote_average}
-              />
-            );
+            // Go through response from the api and create each individual movie box
+            for (let i = 0; i < response.results.length; i++) {
+                let movie = response.results[i];
+                let imgURL = "http://image.tmdb.org/t/p/w500" + movie.poster_path;
+                let movieComponent = (
+                  <MovieBox
+                    key={i}
+                    id={movie.id}
+                    imgURL={imgURL}
+                    title={movie.title}
+                    release_date={movie.release_date}
+                    rating={movie.vote_average}
+                  />
+                );
 
-            components.push(movieComponent);
-        }
+                components.push(movieComponent);
+            }
 
-        // all the components have been pushed into the array, now set it to the global variable
-        setComponents(components);
+            // all the components have been pushed into the array, now set it to the global variable
+            setComponents(components);
 
-        console.log("We got here");
-        console.log(components);
-        console.log("the length of component is " + components.length)
+            console.log("We got here");
+            console.log(components);
+            console.log("the length of component is " + components.length)
 
 
-        })
+            })
         .catch((err) => {
-        console.log(err)
+            console.log(err)
         });
 
 
-        console.log("Searching for the term " + term);
+//         console.log("Searching for the term " + term);
 
         // dynamically add the elements here
         document.querySelector("#starter").innerHTML = "";
-
-
 
         setTerm("");
 
@@ -127,12 +135,10 @@ function Search() {
     const currentComponents = components.splice(indexofFirstPost,indexOfLastPost);
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
-
-
     return (
         <div className="container">
             <div className="container-fluid searchBar">
-            <form className="col-12" id="search-form" onSubmit={searchItem}>
+            <form className="col-12" id="search-form" onSubmit={searchItem}  >
                 <div className="searchHeader container">
                     <input value={searchTerm} onChange={e => setTerm(e.target.value)} type="text" placeholder="Search...." className="search" required/>
                     <button type="submit">Search</button>
@@ -178,27 +184,13 @@ function Search() {
                 </div> {/*<!-- .movie-header -->*/}
                 <div id="movies-all">
                 <div id="starter">
-                    <MovieBox key = {"1"} 
+                    <MovieBox key = {"1"}
                             imgURL={"https://assets.mubicdn.net/images/notebook/post_images/29882/images-w1400.jpg?1579663202"}
                             title={"Title"}
                             release_date={"Release Date"}
                             rating={"Rating"}/>
                 </div>
-                {/* <MovieBox key = {"1"} 
-                        imgURL={"https://assets.mubicdn.net/images/notebook/post_images/29882/images-w1400.jpg?1579663202"}
-                        title={"Title"}
-                        release_date={"Release Date"}
-                        rating={"10"}/>
-                <MovieBox key = {"2"} 
-                    imgURL={"https://assets.mubicdn.net/images/notebook/post_images/29882/images-w1400.jpg?1579663202"}
-                    title={"Parasite"}
-                    release_date={"October 11, 2019"}
-                    rating={"Rating"}/> */}
-                    
                     {currentComponents.map(component => component)}
-
-                    {/* {components.map(component => component)} */}
-                    
                     <div className="movies-all col-12 mt-4">
                         <Pagination postsPerPage={postsPerPage} totalPosts={components.length} paginate={paginate} />
                     </div>

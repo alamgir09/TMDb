@@ -105,10 +105,14 @@
 	visibility: hidden;
 }
 
+.movieButton {
+    border: 0;
+}
+
 
 
 /* // Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
 	.inner-text {
 		font-size: 15px;
 	}
@@ -118,4 +122,113 @@
 	.movie-row {
 		background-color: lightgray;
 	}
+}
+
+/* Movie details container */
+.movie-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* Movie image */
+.movie-image img {
+  width: 400px;
+  height: auto;
+}
+
+/* Movie info */
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+/* Movie meta data */
+.movie-meta {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+/* Movie meta fields */
+.movie-meta span {
+  margin-right: 20px;
+  font-size: 16px;
+}
+
+/* Movie cast */
+.movie-cast {
+  margin-bottom: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: calc(100% - 800px); /* Subtract width of image and some margin */
+}
+
+/* Movie cast fields */
+.movie-cast span {
+  margin-right: 10px;
+  font-size: 16px;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.movie-title {
+  display: flex;
+  flex-direction: column;
+  float:left;
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+/* Hide scroll bar for actors section */
+.movie-cast::-webkit-scrollbar {
+  display: none;
+}
+
+.movie-cast {
+   max-width: calc(90%);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body {
+  overflow-x: hidden;
+}
+
+/* Movie description */
+.movie-description {
+  overflow-y: hidden;
+  margin-bottom: 20px;
+  max-width: calc(90%); /* Subtract width of image and some margin */
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* Hide scroll bar for movie descripti  on section */
+.movie-description::-webkit-scrollbar {
+  display: none;
+}
+
+.movie-description {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.text-button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
 }
