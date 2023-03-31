@@ -1,29 +1,27 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
 
 function LogIn() {
   // fetchResponse is a constant in this component's state. Use handleFetchResponse(newValue)
   // to update the value of fetchResponse
   const [fetchResponse, handleFetchResponse] = useState();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
-
+  // Empty fields handled through "required" flag in the input fields
   function handleLoginForm(e) {
     e.preventDefault();
 
     // Construct the API request
-    const apiUrl = 'api/login';
+    const apiUrl = "api/login";
     const requestData = {
-      email: email,
+      username: username,
       password: password
     };
     const requestHeaders = {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     };
     const requestOptions = {
-      method: 'POST',
+      method: "POST",
       headers: requestHeaders,
       body: JSON.stringify(requestData)
     };
@@ -32,31 +30,66 @@ function LogIn() {
     fetch(apiUrl, requestOptions)
       .then((res) => res.json())
       .then((response) => {
-        console.log("response: " + response);
-          if(response?.data){
-            handleFetchResponse(response.data);
+        if (response?.data) {
+          console.log(response.data);
+          console.log(JSON.parse(response.data));
+
+          var jsonObject = JSON.parse(response.data);
+          if (jsonObject["Type"] == "Error") {
+            handleFetchResponse(jsonObject["Message"]);
+            setUsername("");
+            setPassword("");
+          } else {
+            localStorage.setItem("userID", jsonObject["userID"]);
+            handleFetchResponse(jsonObject["Type"]);
           }
+        }
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         handleFetchResponse("An API error occurred");
       });
   }
 
   return (
-        <div className="container-fluid">
-          <div className="text-center pb-3 pt-3"><h1>Log In</h1></div>
-          <form className="formStyle" onSubmit={handleLoginForm}>
-    				<div className="input-group mb-3 p-0">
-              <input className="form-control" type="email" id="email" value={email}  onChange={e => setEmail(e.target.value)} placeholder="Email" required/>
-    				</div>
-    				<div className="input-group mb-3 p-0">
-              <input className="form-control" type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" required/>
-    				</div>
-            <button id="submitBtn" type="submit" className="btn btn-danger w-100" value="Submit">Submit</button>
-          </form>
-          <p id="response">{fetchResponse}</p>
+    <div className="container-fluid">
+      <div className="text-center pb-3 pt-3">
+        <h1>Log In</h1>
+      </div>
+      <form className="formStyle" onSubmit={handleLoginForm}>
+        <div className="input-group mb-3 p-0">
+          <input
+            className="form-control"
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
+            required
+          />
         </div>
+        <div className="input-group mb-3 p-0">
+          <input
+            className="form-control"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+          />
+        </div>
+        <button id="submitBtn" type="submit" className="btn btn-danger w-100" value="Submit">
+          Submit
+        </button>
+      </form>
+      <p className="text-center pt-3" id="response">
+        {fetchResponse}
+      </p>
+      <p className="text-center">
+        Don&#x27;t have an account? <a href="/SignUp">Sign up!</a>
+      </p>
+    </div>
   );
 }
 

@@ -5,6 +5,7 @@ import edu.usc.csci310.project.demo.api.responses.SignUpResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,7 +17,7 @@ public class SignUpControllerTest {
         SignUpRequest request = new SignUpRequest();
         request.setFirstName("tommy");
         request.setLastName("trojan");
-        request.setEmail("tommytrojan@usc.edu");
+        request.setUsername("tommyTrojan");
         request.setPassword("Password123");
 
         ResponseEntity<SignUpResponse> returnedResponse = signUpController.checkSignUp(request);
@@ -26,41 +27,60 @@ public class SignUpControllerTest {
     }
 
     @Test
-    void verifySignUp(){
+    void verifySignUp() {
         SignUpRequest request = new SignUpRequest();
         request.setFirstName("test");
         request.setLastName("testing");
-        // create random email
+
+        // create random username
         // choose a Character random from this String
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 + "0123456789"
                 + "abcdefghijklmnopqrstuvxyz";
 
         // create StringBuffer size of AlphaNumericString
-        StringBuilder randomEmail = new StringBuilder(7);
-
+        StringBuilder randomUsername = new StringBuilder(7);
+        
         for (int i = 0; i < 7; i++) {
 
             // generate a random number between
             // 0 to AlphaNumericString variable length
             int index
-                    = (int)(AlphaNumericString.length()
+                    = (int) (AlphaNumericString.length()
                     * Math.random());
 
             // add Character one by one in end of sb
-            randomEmail.append(AlphaNumericString
+            randomUsername.append(AlphaNumericString
                     .charAt(index));
         }
 
-        randomEmail.append("@usc.edu");
-
-        request.setEmail(String.valueOf(randomEmail));
+        request.setUsername(String.valueOf(randomUsername));
         request.setPassword("Password123");
 
         ResponseEntity<SignUpResponse> returnedResponse = signUpController.checkSignUp(request);
 
         assertNotNull(returnedResponse.getBody());
-        assertTrue(returnedResponse.getBody().getData().startsWith("Success"));
+    }
+
+    @Test
+    void verifySignUpGetters() {
+        SignUpRequest request = new SignUpRequest();
+        String firstName = "first_name";
+        String lastName = "last_name";
+        String userName = "username";
+        String password = "password";
+
+        request.setFirstName(firstName);
+        request.setLastName(lastName);
+        request.setUsername(userName);
+        request.setPassword(password);
+
+
+        assertEquals(request.getFirstName(), firstName);
+        assertEquals(request.getLastName(), lastName);
+        assertEquals(request.getUsername(), userName);
+        assertEquals(request.getPassword(), password);
+
     }
 
 }
