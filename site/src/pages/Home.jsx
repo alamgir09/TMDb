@@ -22,7 +22,9 @@ function Home() {
         onClick={() => {
           navigate("/LogIn");
         }}
-      >Log In</button>
+      >
+        Log In
+      </button>
       <button
         onClick={() => {
           navigate("/other");
@@ -52,7 +54,7 @@ function Home() {
               }
             })
             .catch((err) => {
-              console.log(err)
+              console.log(err);
               handleFetchResponse("An API error occured");
             });
         }}

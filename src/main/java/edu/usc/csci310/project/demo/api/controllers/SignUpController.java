@@ -6,6 +6,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.InsertOneResult;
 import edu.usc.csci310.project.UserAccount;
+import edu.usc.csci310.project.Watchlist;
 import edu.usc.csci310.project.demo.api.requests.SignUpRequest;
 import edu.usc.csci310.project.demo.api.responses.SignUpResponse;
 import org.bson.Document;
@@ -20,6 +21,8 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 
 @RestController
@@ -58,6 +61,7 @@ public class SignUpController {
                         .append("firstName", request.getFirstName())
                         .append("lastName", request.getLastName())
                         .append("password", request.getPassword())
+                                .append("watchlist", new ArrayList<Watchlist>())
                         );
                 System.out.println("Success! Inserted document id: " + result.getInsertedId());
                 response.setData(userObjectID.toString());
