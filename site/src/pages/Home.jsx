@@ -61,6 +61,11 @@ function Home() {
       >
         Fetch backend
       </button>
+      <button
+              onClick={() => {
+                navigate("/Search");
+              }}
+            >Search</button>
       {/* Conditionally render this div if fetchResponse is a valid value */}
       {fetchResponse ? <div>{fetchResponse}</div> : null}
     </div>
