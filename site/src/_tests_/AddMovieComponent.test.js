@@ -3,6 +3,7 @@ import { render, screen, fireEvent, act, waitFor } from "@testing-library/react"
 import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import AddMovieDropdown from "../components/AddMovieComponent";
+import AddMovieComponent from "../components/AddMovieComponent";
 
 // mock the fetch function
 global.fetch = jest.fn(() =>
@@ -53,9 +54,123 @@ describe("AddMovieComponent", () => {
   });
 
   it("should add the movie to the selected watchlist", async () => {
-    const mockResponse = { data: JSON.stringify([{ name: "My List" }, { name: "Watchlist 2" }]) };
+    const mockResponse = { data: "Success" };
+    const consoleSpy = jest.spyOn(console, "log");
+
     jest.spyOn(window, "fetch").mockResolvedValueOnce({
       json: () => Promise.resolve(mockResponse)
     });
+
+    render(
+      <AddMovieDropdown
+        imgURL={imgURL}
+        title={title}
+        releaseDate={releaseDate}
+        rating={rating}
+        watchlists={watchlists}
+        handleShow={handleShow}
+      />,
+      { wrapper: BrowserRouter }
+    );
+    const addToWatchlistButton = await waitFor(() => screen.getByText(/Add to Watchlist/i));
+
+    fireEvent.click(addToWatchlistButton);
+
+    const watchlistButton = await waitFor(() => screen.getByText(/Watchlist 1/i));
+
+    fireEvent.click(watchlistButton);
+
+    await waitFor(() => expect(consoleSpy).toHaveBeenCalled());
+  });
+
+  test("error response", async () => {
+    const mockError = new Error("Something went wrong!");
+    const consoleSpy = jest.spyOn(console, "log");
+    jest
+      .spyOn(global, "fetch")
+      .mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(movie)
+      })
+      .mockResolvedValueOnce({
+        ok: false,
+        json: () => Promise.reject(mockError)
+      });
+
+    render(
+      <AddMovieDropdown
+        imgURL={imgURL}
+        title={title}
+        releaseDate={releaseDate}
+        rating={rating}
+        watchlists={watchlists}
+        handleShow={handleShow}
+      />,
+      { wrapper: BrowserRouter }
+    );
+
+    const addToWatchlistButton = await waitFor(() => screen.getByText(/Add to Watchlist/i));
+
+    fireEvent.click(addToWatchlistButton);
+
+    const watchlistButton = await waitFor(() => screen.getByText(/Watchlist 1/i));
+
+    fireEvent.click(watchlistButton);
+
+    await waitFor(() => expect(consoleSpy).toHaveBeenCalled());
+  });
+
+  test("test handleShow", async () => {
+    render(
+      <AddMovieDropdown
+        imgURL={imgURL}
+        title={title}
+        releaseDate={releaseDate}
+        rating={rating}
+        watchlists={watchlists}
+        handleShow={handleShow}
+      />,
+      { wrapper: BrowserRouter }
+    );
+
+    const addToWatchlistButton = await waitFor(() => screen.getByText(/Add to Watchlist/i));
+
+    fireEvent.click(addToWatchlistButton);
+
+    const watchlistButton = await waitFor(() => screen.getByText(/Create Watchlist/i));
+
+    fireEvent.click(watchlistButton);
+
+    await waitFor(() => expect(screen.getByText(/Create Watchlist/i)));
+  });
+
+  it("not success", async () => {
+    const mockResponse = { data: "Not Success" };
+    const consoleSpy = jest.spyOn(console, "log");
+
+    jest.spyOn(window, "fetch").mockResolvedValueOnce({
+      json: () => Promise.resolve(mockResponse)
+    });
+
+    render(
+      <AddMovieDropdown
+        imgURL={imgURL}
+        title={title}
+        releaseDate={releaseDate}
+        rating={rating}
+        watchlists={watchlists}
+        handleShow={handleShow}
+      />,
+      { wrapper: BrowserRouter }
+    );
+    const addToWatchlistButton = await waitFor(() => screen.getByText(/Add to Watchlist/i));
+
+    fireEvent.click(addToWatchlistButton);
+
+    const watchlistButton = await waitFor(() => screen.getByText(/Watchlist 1/i));
+
+    fireEvent.click(watchlistButton);
+
+    await waitFor(() => expect(consoleSpy).toHaveBeenCalledTimes(0));
   });
 });

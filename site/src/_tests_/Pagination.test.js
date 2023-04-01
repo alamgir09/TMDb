@@ -28,7 +28,6 @@
 //   await waitFor(() => user.click(screen.getByText(/click to go to other page/i)));
 //   expect(screen.getByText(/Other Page/)).toBeInTheDocument();
 
-
 //   await waitFor(() => user.click(screen.getByText(/click to go to home page/i)));
 //   expect(screen.getByText(/Home Page/)).toBeInTheDocument();
 // });

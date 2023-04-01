@@ -32,9 +32,8 @@ test("full app rendering/navigating", async () => {
   expect(screen.getByText(/Home Page/)).toBeInTheDocument();
 
   // verify page content for expected route after navigating
-    await waitFor(() => user.click(screen.getByText(/Log In/i)));
-    expect(screen.getByText(/Log In/)).toBeInTheDocument();
-
+  await waitFor(() => user.click(screen.getByText(/Log In/i)));
+  expect(screen.getByText(/Log In/)).toBeInTheDocument();
 });
 
 test("fetching works on the home page", async () => {
