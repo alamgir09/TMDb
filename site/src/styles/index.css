@@ -60,9 +60,10 @@
 }
 /* Ends */
 .movie-row {
-	background-color: aliceblue;
+	background-color: #e5e5e5;
 	display: flex;
 	flex-direction: row;
+	transition: 0.5s;
 }
 .movie-row:hover{
 	scale: 1.05;
@@ -107,6 +108,7 @@
 
 .movieButton {
     border: 0;
+    display: flex;
 }
 
 
