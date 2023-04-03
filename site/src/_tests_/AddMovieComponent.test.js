@@ -1,7 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent, act, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import userEvent from "@testing-library/user-event";
 import AddMovieDropdown from "../components/AddMovieComponent";
 import AddMovieComponent from "../components/AddMovieComponent";
 
