@@ -90,7 +90,7 @@ it("check if username state is updated when user inputs username into text box",
 });
 
 it("check if password state is updated when user inputs password into text box", () => {
-  const user = userEvent.setup();
+//  const user = userEvent.setup();
   const { getByPlaceholderText } = render(<LogIn />);
   const usernameInput = getByPlaceholderText("Password");
   fireEvent.change(usernameInput, { target: { value: "test-password" } });
