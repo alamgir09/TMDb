@@ -1,0 +1,21 @@
+Meeting Participants: Kerry Meng-Lin, Jasmine Lee, Kevin Dong, Mohammed Alamgir, Andrew Gonzalez
+
+What process aspects will be changed? Explain why this will address the problem?
+1. For Scrum meetings, we need to make sure everyone covers all 3 questions including if there are no roadblocks. We also need to make sure we update the 
+task chart to reflect our progress on tickets. 
+2. For TDD, we need to also write testing in JEST before writing our functions in React to follow Test Driven Development policies and make sure we have test 
+cases for each function. 
+3. For Gitflow, we need to follow the naming conventions and rename the branch. Moving forward we need to follow the naming convention.
+4. For CI, we need to make sure after we make the PR that we wait for checks to run and fix any erros or warnings so our project build does not break. 
+5. For refactor, we need to make sure every team member starts early and finishes their refactor ticket in the beginning of the sprint and not wait 
+until last minute.
+6. For coverage, we need to make sure our JEST testing has complete statement coverage and complete branch coverage. We need to start early with testing
+and seek help when we are stuck. We also need to make sure we are following TDD practices where we consistently write test cases as we are developing. 
+7. For sustainable pace penalty, according to our CP, we need to list the features we want graded in use case files. Because we did not do this, 
+we were not graded on the features we completed in this sprint. 
+
+What tasks will be added to the product backlog as a result of review feedback?
+1. Search - searching by genre, actor, and all 
+2. Movie Details - finish up testing 
+3. Movie Watchlist - create functionality for editing watchlist name, deleting watchlist, adding movies into watchlist, integrating add watchlist button
+on movie details page 
