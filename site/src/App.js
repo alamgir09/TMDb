@@ -7,7 +7,7 @@ import SignUp from "./pages/SignUp";
 import Watchlist from "./pages/Watchlist";
 import WatchlistDetail from "./pages/WatchlistDetail";
 import Search from "./pages/Search";
-import MovieDetails from "./components/MovieDetails"
+import MovieDetails from "./components/MovieDetails";
 
 function App() {
   return (
@@ -18,9 +18,9 @@ function App() {
         <Route path="/other" element={<Other />} />
         <Route path="/LogIn" element={<LogIn />} />
         <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/Search" element={<Search/>} />
-        <Route path="/Search/:type/:id" element={<Search/>}/>
-        <Route path="/movies/:id" element={<MovieDetails/>}/>
+        <Route path="/Search" element={<Search />} />
+        <Route path="/Search/:type/:id" element={<Search />} />
+        <Route path="/movies/:id" element={<MovieDetails />} />
 
         <Route path="/Watchlist" element={<Watchlist />} />
         <Route path="/WatchlistDetail" element={<WatchlistDetail />} />

@@ -1,97 +1,30 @@
-// import React from "react";
-// import { render, screen, waitFor } from "@testing-library/react";
-// import App from "../App";
-// import { BrowserRouter } from "react-router-dom";
-// import userEvent from "@testing-library/user-event";
+import React from "react";
+import { render, fireEvent } from "@testing-library/react";
+import Pagination from "../components/Pagination";
 
-// beforeEach(() => {
-//   fetch.resetMocks();
-// });
+describe("Pagination", () => {
+  test("renders page numbers correctly", () => {
+    const { getByText } = render(
+      <Pagination postsPerPage={10} totalPosts={100} paginate={() => {}} />
+    );
 
-// // Reset the browser history after each test
-// afterEach(() => {
-//   window.history.pushState(null, document.title, "/Search");
-// });
+    // Check if the first page number is rendered
+    expect(getByText("1")).toBeInTheDocument();
 
-// test("that math works", async () => {
-//   expect(5 + 5).toBe(10);
-// });
+    // Check if the last page number is rendered
+    expect(getByText("10")).toBeInTheDocument();
+  });
 
-// test("does page button exist", async () => {
-//   const user = userEvent.setup();
-//   render(<App />, { wrapper: BrowserRouter });
+  test("calls paginate function on click", () => {
+    const paginateMock = jest.fn();
+    const { getByText } = render(
+      <Pagination postsPerPage={10} totalPosts={100} paginate={paginateMock} />
+    );
 
-//   // verify page content for default route
-//   expect(screen.getByText(/1/)).toBeInTheDocument();
+    // Click on the third page number
+    fireEvent.click(getByText("3"));
 
-//   // verify page content for expected route after navigating
-//   await waitFor(() => user.click(screen.getByText(/click to go to other page/i)));
-//   expect(screen.getByText(/Other Page/)).toBeInTheDocument();
-
-
-//   await waitFor(() => user.click(screen.getByText(/click to go to home page/i)));
-//   expect(screen.getByText(/Home Page/)).toBeInTheDocument();
-// });
-
-// test("fetching works on the home page", async () => {
-//   fetch.mockResponseOnce(JSON.stringify({ data: "Pong Frontend. Received at 2023-02-25T20:49:00.813447Z." }));
-
-//   const user = userEvent.setup();
-//   render(<App />, { wrapper: BrowserRouter });
-
-//   // verify page content for default route
-//   expect(screen.getByText(/Home Page/)).toBeInTheDocument();
-//   await waitFor(() => user.click(screen.getByText(/fetch backend/i)));
-//   expect(screen.getByText(/pong frontend./i)).toBeInTheDocument();
-
-//   expect(fetch).toHaveBeenCalledTimes(1);
-// });
-
-// test("fetching fails on the home page with no connection", async () => {
-//   fetch.mockRejectOnce(new Error("API is down"));
-
-//   const user = userEvent.setup();
-//   render(<App />, { wrapper: BrowserRouter });
-
-//   expect(screen.getByText(/Home Page/)).toBeInTheDocument();
-//   await waitFor(() => user.click(screen.getByText(/fetch backend/i)));
-//   expect(screen.getByText(/An API error occured/i)).toBeInTheDocument();
-
-//   expect(fetch).toHaveBeenCalledTimes(1);
-// });
-
-// test("fetching fails on the home page with malformed API response", async () => {
-//   fetch.mockResponseOnce(JSON.stringify({ data: null }));
-
-//   const user = userEvent.setup();
-//   render(<App />, { wrapper: BrowserRouter });
-
-//   expect(screen.getByText(/Home Page/)).toBeInTheDocument();
-//   await waitFor(() => user.click(screen.getByText(/fetch backend/i)));
-
-//   expect(fetch).toHaveBeenCalledTimes(1);
-// });
-
-// test("counting works on the other page", async () => {
-//   const user = userEvent.setup();
-//   render(<App />, { wrapper: BrowserRouter });
-
-//   // verify page content for default route
-//   expect(screen.getByText(/Home Page/)).toBeInTheDocument();
-
-//   // verify page content for expected route after navigating
-//   await waitFor(() => user.click(screen.getByText(/click to go to other page/i)));
-//   expect(screen.getByText(/current state counter/i)).toBeInTheDocument();
-
-//   await waitFor(() => user.click(screen.getByText(/increment counter/i)));
-//   await waitFor(() => user.click(screen.getByText(/increment counter/i)));
-//   expect(screen.getByText(/current state counter: 2/i)).toBeInTheDocument();
-//   await waitFor(() => user.click(screen.getByText(/clear counter/i)));
-//   expect(screen.getByText(/current state counter: 0/i)).toBeInTheDocument();
-//   let counter = 12;
-//   for (let i = 0; i < counter; i++) {
-//     await waitFor(() => user.click(screen.getByText(/increment counter/i)));
-//   }
-//   expect(screen.getByText(/current state counter: 12/i)).toBeInTheDocument();
-//   expect(screen.getByText(/Counter is greater than 10./i)).toBeInTheDocument();
-// });
+    // Check if the paginate function is called with the correct argument
+    expect(paginateMock).toHaveBeenCalledWith(3);
+  });
+});

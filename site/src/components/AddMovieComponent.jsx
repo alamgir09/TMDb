@@ -24,14 +24,12 @@ function AddMovieDropdown({ imgURL, title, releaseDate, rating, watchlists, hand
     fetch(apiUrl, requestOptions)
       .then((res) => res.json())
       .then((response) => {
-        if (response?.data) {
-          if (response.data == "Success") {
-            console.log(response.data);
-            //               fetchWatchlist();
-            //               handleClose();
-            //               setWatchlistName("");
-            //               setType("");
-          }
+        if (response.data == "Success") {
+          console.log(response.data);
+          //               fetchWatchlist();
+          //               handleClose();
+          //               setWatchlistName("");
+          //               setType("");
         }
       })
       .catch((err) => {
