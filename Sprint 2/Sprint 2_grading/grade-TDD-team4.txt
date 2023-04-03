@@ -1,0 +1,49 @@
+Best Practice TDD Report
+Owner: Team 4
+Grade: 5.4/12
+Comments: 
+	Test method was not created before method for: src\pages\LogIn.jsx\handleLoginForm
+		Method commit on 2023-03-21 20:23:58+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/3b6a2db75ff3c1ec8f419b46ec0a0fec7188dfd2
+		Test commit on 2023-03-30 22:02:34+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/d9cbe168c1f25574d069f9e110e72617ae0f6b5e
+	Test method was not created before method for: src\pages\SignUp.jsx\handleSignUpForm
+		Method commit on 2023-03-21 20:23:58+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/3b6a2db75ff3c1ec8f419b46ec0a0fec7188dfd2
+		Test commit on 2023-03-30 23:53:58+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/4812054006f0ae3885002129b53f43b050305fdf
+	Test method was not created before method for: src\pages\SignUp.jsx\resetForm
+		Method commit on 2023-03-24 03:13:39+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/1ba50135b01ca226d33ac929ae27f56079883d8c
+		Test commit on 2023-03-30 23:53:58+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/4812054006f0ae3885002129b53f43b050305fdf
+	Test method was not created before method for: src\pages\Watchlist.jsx\Watchlist
+		Method commit on 2023-03-24 03:30:08+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/b860f17d32d4caced99b809234928f549be4f5ae
+		Test commit on 2023-03-31 01:41:33+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/0447ce18530bb2705f1407cce08cb79c7287e615
+	Test method was not created before method for: src\pages\Watchlist.jsx\fetchWatchlist
+		Method commit on 2023-03-27 02:28:08+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/ec94648ba3d114f39f61b8200e4b9956b510792a
+		Test commit on 2023-03-31 01:41:33+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/0447ce18530bb2705f1407cce08cb79c7287e615
+	No test found for: src\pages\Watchlist.jsx\handleCreateWatchlistForm
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/ec94648ba3d114f39f61b8200e4b9956b510792a
+	No test found for: src\pages\Watchlist.jsx\closeModal
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/ec94648ba3d114f39f61b8200e4b9956b510792a
+	No test found for: src\pages\Watchlist.jsx\showModal
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/ec94648ba3d114f39f61b8200e4b9956b510792a
+	Test method was not created before method for: src\pages\Watchlist.jsx\navigateWatchlistDetail
+		Method commit on 2023-03-27 02:28:08+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/ec94648ba3d114f39f61b8200e4b9956b510792a
+		Test commit on 2023-03-31 01:41:33+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/0447ce18530bb2705f1407cce08cb79c7287e615
+	No test found for: src\pages\Watchlist.jsx\WatchlistDropdown
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/ec94648ba3d114f39f61b8200e4b9956b510792a
+	No test found for: src\pages\Watchlist.jsx\addMovie
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/ec94648ba3d114f39f61b8200e4b9956b510792a
+	Test method was not created before method for: src\pages\WatchlistDetail.jsx\WatchlistDetail
+		Method commit on 2023-03-27 02:28:08+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/ec94648ba3d114f39f61b8200e4b9956b510792a
+		Test commit on 2023-03-31 02:26:08+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/9b2efee767ba117b3d90b31ef61fbbc05f8390b7
+	Test method was not created before method for: src\pages\WatchlistDetail.jsx\fetchMovies
+		Method commit on 2023-03-27 02:28:08+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/ec94648ba3d114f39f61b8200e4b9956b510792a
+		Test commit on 2023-03-31 02:26:08+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/9b2efee767ba117b3d90b31ef61fbbc05f8390b7
+	No test found for: watchlist.addmovies
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/ec94648ba3d114f39f61b8200e4b9956b510792a
+	No test found for: src\components\AddMovieComponent.jsx\AddMovie
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/0447ce18530bb2705f1407cce08cb79c7287e615
+	No test found for: src\components\CreateWatchlistModal.jsx\onValueChange
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/0447ce18530bb2705f1407cce08cb79c7287e615
+	No test found for: src\components\CreateWatchlistModal.jsx\handleCreateWatchlistForm
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/0447ce18530bb2705f1407cce08cb79c7287e615
+Correct TDD methods: 14
+Incorrect TDD methods: 17
+Total methods evaluated for TDD: 31
