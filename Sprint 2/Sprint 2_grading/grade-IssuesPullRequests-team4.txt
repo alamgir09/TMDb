@@ -1,0 +1,69 @@
+Best Practice IssuesPullRequests Report
+Owner: Team 4
+Grade: 10.9/12
+Comments: 
+	Using commit: https://github.com/CSCI310/20231-project-team-4/commit/030b138e211f8728f4afe14620a83054b1237dc7
+		Reviewing issue 12
+			Found refactor/12: +1
+			Found matching PR #18: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed properly: +1
+			Issue score: 7/7
+		Reviewing issue 11
+			Found refactor/11: +1
+			Found matching PR #19: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed but not by authorized user (.5 deduction): +.5
+			Issue score: 6.5/7
+		Reviewing issue 10
+			Found refactor/10: +1
+			Found matching PR #13: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed properly: +1
+			Issue score: 7/7
+		Reviewing issue 9
+			Found refactor/9: +1
+			Found matching PR #27: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			PR not merged: -2
+			Issue not closed: -1
+			Issue score: 4/7
+		Reviewing issue 7
+			Found refactor/7: +1
+			Found matching PR #17: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed properly: +1
+			Issue score: 7/7
+		Reviewing issue 6
+			Found refactor/6: +1
+			Found matching PR #14: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed properly: +1
+			Issue score: 7/7
+		Reviewing issue 5
+			Found refactor/5: +1
+			Found matching PR #26: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue not closed: -1
+			Issue score: 6/7
+		Total issue score count: 44.5/49
+		Points earned: 10.9
