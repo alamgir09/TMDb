@@ -53,11 +53,11 @@ test("fetching works on the home page", async () => {
 test("fetching fails on the home page with no connection", async () => {
   fetch.mockRejectOnce(new Error("API is down"));
 
-  const user = userEvent.setup();
+  const userOne = userEvent.setup();
   render(<App />, { wrapper: BrowserRouter });
 
   expect(screen.getByText(/Home Page/)).toBeInTheDocument();
-  await waitFor(() => user.click(screen.getByText(/fetch backend/i)));
+  await waitFor(() => userOne.click(screen.getByText(/fetch backend/i)));
   expect(screen.getByText(/An API error occured/i)).toBeInTheDocument();
 
   expect(fetch).toHaveBeenCalledTimes(1);
@@ -66,11 +66,11 @@ test("fetching fails on the home page with no connection", async () => {
 test("fetching fails on the home page with malformed API response", async () => {
   fetch.mockResponseOnce(JSON.stringify({ data: null }));
 
-  const user = userEvent.setup();
+  const userTwo = userEvent.setup();
   render(<App />, { wrapper: BrowserRouter });
 
   expect(screen.getByText(/Home Page/)).toBeInTheDocument();
-  await waitFor(() => user.click(screen.getByText(/fetch backend/i)));
+  await waitFor(() => userTwo.click(screen.getByText(/fetch backend/i)));
 
   expect(fetch).toHaveBeenCalledTimes(1);
 });
