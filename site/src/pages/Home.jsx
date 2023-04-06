@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../components/NavBar";
 
 // This page provides a button with a redirect to "/other"
 function Home() {
@@ -13,6 +14,9 @@ function Home() {
   // Anything returned will be rendered in React
   return (
     <div>
+      <div>
+        <NavBar />
+      </div>
       <div>Home Page</div>
       <button
         onClick={() => {
@@ -56,6 +60,13 @@ function Home() {
         }}
       >
         Fetch backend
+      </button>
+      <button
+        onClick={() => {
+          navigate("/Search");
+        }}
+      >
+        Search
       </button>
       {/* Conditionally render this div if fetchResponse is a valid value */}
       {fetchResponse ? <div>{fetchResponse}</div> : null}

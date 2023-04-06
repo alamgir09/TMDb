@@ -8,3 +8,4 @@ Feature: Increment Counter
     Given I am on endpoint "other"
     When I click on the clear counter button
     Then I should see the text update to "Current state counter: 0"
+
