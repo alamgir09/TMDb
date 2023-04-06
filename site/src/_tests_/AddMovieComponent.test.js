@@ -54,7 +54,7 @@ describe("AddMovieComponent", () => {
 
   it("should add the movie to the selected watchlist", async () => {
     const mockResponse = { data: "Success" };
-    const consoleSpy = jest.spyOn(console, "log");
+    const consoleLogSpy = jest.spyOn(console, "log");
 
     jest.spyOn(window, "fetch").mockResolvedValueOnce({
       json: () => Promise.resolve(mockResponse)
@@ -79,7 +79,7 @@ describe("AddMovieComponent", () => {
 
     fireEvent.click(watchlistButton);
 
-    await waitFor(() => expect(consoleSpy).toHaveBeenCalled());
+    await waitFor(() => expect(consoleLogSpy).toHaveBeenCalled());
   });
 
   test("error response", async () => {
