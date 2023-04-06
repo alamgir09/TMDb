@@ -6,6 +6,8 @@ import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import Watchlist from "./pages/Watchlist";
 import WatchlistDetail from "./pages/WatchlistDetail";
+import Search from "./pages/Search";
+import MovieDetails from "./components/MovieDetails";
 
 function App() {
   return (
