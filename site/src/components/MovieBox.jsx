@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import AddMovieDropdown from "./AddMovieComponent";
 
-function MovieBox({ id, imgURL, title, release_date, rating }) {
+function MovieBox({ id, imgURL, title, release_date, rating, list, handleShow }) {
   const navigate = useNavigate();
 
   if (id == "") id = "?";
@@ -20,7 +21,7 @@ function MovieBox({ id, imgURL, title, release_date, rating }) {
 
   return (
     <div className="movie-row col-12 mt-4">
-      <button className="col-12 movieButton" onClick={() => handleClick(id)}>
+      <div className="col-12 movieButton" onClick={() => handleClick(id)}>
         <img src={imgURL} alt={title} />
         <div className="col-3 inner-text">{title}</div>
         <div className="col-3 inner-text">{release_date}</div>
@@ -28,11 +29,18 @@ function MovieBox({ id, imgURL, title, release_date, rating }) {
           <strong>{rating}</strong>
         </div>
         <div className="box-hover-elements col-1 inner-text">
-          <div>Add Watch List</div>
+          <AddMovieDropdown
+            imgURL={imgURL}
+            title={title}
+            releaseDate={release_date}
+            rating={rating}
+            watchlists={list}
+            handleShow={handleShow}
+          />
           <div>Little Eye</div>
           <div>Dollar Sign</div>
         </div>
-      </button>
+      </div>
     </div>
   );
 }

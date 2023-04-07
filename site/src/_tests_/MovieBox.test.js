@@ -13,7 +13,9 @@ describe("MovieBox", () => {
     imgURL: "https://example.com/movie.jpg",
     title: "Example Movie",
     release_date: "2022-01-01",
-    rating: "8.5"
+    rating: "8.5",
+    list: [{ name: "Watchlist 1" }, { name: "Watchlist 2" }, { name: "Watchlist 3" }],
+    handleShow: jest.fn()
   };
 
   it("renders a movie button", () => {
@@ -22,10 +24,12 @@ describe("MovieBox", () => {
   });
 
   it("renders a movie button with null values", () => {
-      const { getAllByText } = render(<MovieBox id={""} imgURL={""} title={""} release_date={""} rating={""} />);
+    const { getAllByText } = render(
+      <MovieBox id={""} imgURL={""} title={""} release_date={""} rating={""} list={[]} handleShow={jest.fn()} />
+    );
 
-      expect(getAllByText("?")[0]).toBeInTheDocument();
-    });
+    expect(getAllByText("?")[0]).toBeInTheDocument();
+  });
 
   it("renders the movie image with the expected URL and alt text", () => {
     const { getByAltText } = render(<MovieBox {...props} />);

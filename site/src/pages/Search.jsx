@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MovieBox from "../components/MovieBox";
 import Pagination from "../components/Pagination";
 import { useParams } from "react-router-dom";
+import CreateWatchlistModal from "../components/CreateWatchlistModal";
 
 function Search() {
   // Handle all searches here
@@ -28,6 +29,14 @@ function Search() {
   const [numResults, setNumResults] = useState("0");
   const [components, setComponents] = useState([]);
   const navigate = useNavigate();
+
+  // create watchlist modal
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  // update watchlist
+  const [list, updateList] = useState([]);
 
   useEffect(() => {
     if (type === "Actors" || type === "Genres") {
@@ -110,6 +119,8 @@ function Search() {
               title={movie.title}
               release_date={movie.release_date}
               rating={movie.vote_average}
+              list={list}
+              handleShow={handleShow}
             />
           );
 
@@ -141,6 +152,43 @@ function Search() {
   const currentComponents = components.splice(indexofFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // fetch watchlist
+  // api request to get watchlist for current user
+  function fetchWatchlist() {
+    const apiUrl = "api/getWatchlist";
+    const requestData = {
+      userID: localStorage.getItem("userID")
+    };
+    const requestHeaders = {
+      "Content-Type": "application/json"
+    };
+    const requestOptions = {
+      method: "POST",
+      headers: requestHeaders,
+      body: JSON.stringify(requestData)
+    };
+
+    fetch(apiUrl, requestOptions)
+      .then((res) => res.json())
+      .then((response) => {
+        if (response?.data) {
+          console.log(response.data);
+
+          var jsonObject = JSON.parse(response.data);
+          updateList(jsonObject);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  // On page load
+  useEffect(() => {
+    fetchWatchlist();
+  }, []);
+
   return (
     <div className="container">
       <div className="container-fluid searchBar">
@@ -219,6 +267,8 @@ function Search() {
               title={"Title"}
               release_date={"Release Date"}
               rating={"Rating"}
+              list={list}
+              handleShow={handleShow}
             />
           </div>
           {currentComponents.map((component) => component)}
@@ -229,6 +279,11 @@ function Search() {
         {/* <!-- #movies-all --> */}
       </div>{" "}
       {/* <!-- #results-row --> */}
+      <CreateWatchlistModal
+        show={show}
+        handleClose={handleClose}
+        fetchWatchlist={fetchWatchlist}
+      ></CreateWatchlistModal>
     </div>
   );
 }
