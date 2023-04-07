@@ -4,9 +4,7 @@ import Pagination from "../components/Pagination";
 
 describe("Pagination", () => {
   test("renders page numbers correctly", () => {
-    const { getByText } = render(
-      <Pagination postsPerPage={10} totalPosts={100} paginate={() => {}} />
-    );
+    const { getByText } = render(<Pagination postsPerPage={10} totalPosts={100} paginate={() => {}} />);
 
     // Check if the first page number is rendered
     expect(getByText("1")).toBeInTheDocument();
@@ -17,9 +15,7 @@ describe("Pagination", () => {
 
   test("calls paginate function on click", () => {
     const paginateMock = jest.fn();
-    const { getByText } = render(
-      <Pagination postsPerPage={10} totalPosts={100} paginate={paginateMock} />
-    );
+    const { getByText } = render(<Pagination postsPerPage={10} totalPosts={100} paginate={paginateMock} />);
 
     // Click on the third page number
     fireEvent.click(getByText("3"));
