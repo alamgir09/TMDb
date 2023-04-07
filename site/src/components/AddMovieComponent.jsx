@@ -26,10 +26,6 @@ function AddMovieDropdown({ imgURL, title, releaseDate, rating, watchlists, hand
       .then((response) => {
         if (response.data == "Success") {
           console.log(response.data);
-          //               fetchWatchlist();
-          //               handleClose();
-          //               setWatchlistName("");
-          //               setType("");
         }
       })
       .catch((err) => {
@@ -38,7 +34,7 @@ function AddMovieDropdown({ imgURL, title, releaseDate, rating, watchlists, hand
   }
 
   return (
-    <Dropdown>
+    <Dropdown onClick={(e) => e.stopPropagation()}>
       <Dropdown.Toggle variant="primary" id={imgURL}>
         Add to Watchlist
       </Dropdown.Toggle>
