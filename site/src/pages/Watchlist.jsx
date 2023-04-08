@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import AddMovieDropdown from "../components/AddMovieComponent";
 import CreateWatchlistButton from "../components/CreateWatchlistButton";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
+import EditWatchlistModal from "../components/EditWatchlistModal";
+import DeleteWatchlistModal from "../components/DeleteWatchlistModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,9 +11,18 @@ function Watchlist() {
   const [list, updateList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
+  const [editShow, setEditShow] = useState(false);
+  const [deleteShow, setDeleteShow] = useState(false);
+  const [watchlist, setWatchlist] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleEditClose = () => setEditShow(false);
+  const handleEditShow = () => setEditShow(true);
+
+  const handleDeleteClose = () => setDeleteShow(false);
+  const handleDeleteShow = () => setDeleteShow(true);
 
   // Calling navigate() will allow us to redirect the webpage
   const navigate = useNavigate();
@@ -56,11 +66,15 @@ function Watchlist() {
 
   function handleDelete(e, watchlist) {
     e.stopPropagation();
+    setWatchlist(watchlist);
+    handleDeleteShow();
     console.log("delete watchlist: " + watchlist);
   }
 
   function handleEdit(e, watchlist) {
     e.stopPropagation();
+    setWatchlist(watchlist);
+    handleEditShow();
     console.log("edit watchlist: " + watchlist);
   }
 
@@ -79,16 +93,6 @@ function Watchlist() {
         <div className="col-sm text-end">
           <CreateWatchlistButton handleShow={handleShow}></CreateWatchlistButton>
         </div>
-        <div className="col-sm">
-          <AddMovieDropdown
-            imgURL="url"
-            title="title"
-            releaseDate="2022"
-            rating="8.9"
-            watchlists={list}
-            handleShow={handleShow}
-          />
-        </div>
       </div>
       {!loading &&
         list.map((element, index) => (
@@ -97,7 +101,12 @@ function Watchlist() {
               <h1>{element["name"]}</h1>
             </div>
             <div className="col-2 align-self-center">
-              <FontAwesomeIcon data-testid="edit-icon" icon={faPen} onClick={(e) => handleEdit(e, element["name"])} />
+              <FontAwesomeIcon
+                id="editWatchlist"
+                data-testid="edit-icon"
+                icon={faPen}
+                onClick={(e) => handleEdit(e, element["name"])}
+              />
               <FontAwesomeIcon
                 data-testid="delete-icon"
                 icon={faTrash}
@@ -111,6 +120,18 @@ function Watchlist() {
         handleClose={handleClose}
         fetchWatchlist={fetchWatchlist}
       ></CreateWatchlistModal>
+      <EditWatchlistModal
+        show={editShow}
+        handleClose={handleEditClose}
+        fetchWatchlist={fetchWatchlist}
+        watchlistOld={watchlist}
+      ></EditWatchlistModal>
+      <DeleteWatchlistModal
+        show={deleteShow}
+        handleClose={handleDeleteClose}
+        fetchWatchlist={fetchWatchlist}
+        watchlist={watchlist}
+      ></DeleteWatchlistModal>
     </div>
   );
 }

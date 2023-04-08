@@ -3,33 +3,29 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-function CreateWatchlistModal({ show, handleClose, fetchWatchlist }) {
+function EditWatchlistModal({ show, handleClose, fetchWatchlist, watchlistOld }) {
   const [watchlistName, setWatchlistName] = useState("");
-  const [type, setType] = useState("Private");
   const [errorMessage, setErrorMessage] = useState();
 
-  function onValueChange(event) {
-    setType(event.target.value);
-  }
-
-  function handleCreateWatchlistForm(e) {
+  function handleEditWatchlistForm(e) {
     e.preventDefault();
 
     // reset errorMessage if needed
     setErrorMessage("");
 
     // check if inputs have been entered
-    if (watchlistName.length == "" || type == "") {
-      setErrorMessage("Please fill in all fields");
+    if (watchlistName.length == "") {
+      setErrorMessage("Please enter watchlist name");
       return;
     }
 
     // Construct the API request
-    const apiUrl = "api/createWatchlist";
+    const apiUrl = "api/editWatchlist";
     const requestData = {
-      watchlist: watchlistName,
+      watchlistOld: watchlistOld,
+      watchlistNew: watchlistName,
       userID: localStorage.getItem("userID"),
-      type: type
+      operation: "edit"
     };
     const requestHeaders = {
       "Content-Type": "application/json"
@@ -48,10 +44,6 @@ function CreateWatchlistModal({ show, handleClose, fetchWatchlist }) {
           fetchWatchlist();
           handleClose();
           setWatchlistName("");
-          setType("Private");
-        }
-        if (response.data == "Watchlist already exists") {
-          setErrorMessage("Watchlist already exists");
         }
       })
       .catch((err) => {
@@ -62,7 +54,7 @@ function CreateWatchlistModal({ show, handleClose, fetchWatchlist }) {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title id="createWatchlistTitle">Create Watchlist</Modal.Title>
+        <Modal.Title id="editWatchlistTitle">Edit Watchlist</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -71,33 +63,10 @@ function CreateWatchlistModal({ show, handleClose, fetchWatchlist }) {
               type="text"
               value={watchlistName}
               onChange={(e) => setWatchlistName(e.target.value)}
-              placeholder="Name"
+              placeholder={watchlistOld}
               required
             />
           </Form.Group>
-          <h5>Type</h5>
-          <Form.Check>
-            <Form.Check.Input
-              type="radio"
-              name="flexRadio"
-              id="radioPublic"
-              onChange={(e) => onValueChange(e)}
-              checked={type === "Public"}
-              value="Public"
-            />
-            <Form.Check.Label htmlFor="radioPublic">Public</Form.Check.Label>
-          </Form.Check>
-          <Form.Check>
-            <Form.Check.Input
-              type="radio"
-              name="flexRadio"
-              id="radioPrivate"
-              onChange={(e) => onValueChange(e)}
-              checked={type === "Private"}
-              value="Private"
-            />
-            <Form.Check.Label htmlFor="radioPrivate">Private</Form.Check.Label>
-          </Form.Check>
         </Form>
         {errorMessage ? <div style={{ color: "red", textAlign: "center" }}>{errorMessage}</div> : null}
       </Modal.Body>
@@ -105,12 +74,12 @@ function CreateWatchlistModal({ show, handleClose, fetchWatchlist }) {
         <Button variant="danger" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="success" onClick={handleCreateWatchlistForm}>
-          Create
+        <Button variant="success" onClick={handleEditWatchlistForm}>
+          Save
         </Button>
       </Modal.Footer>
     </Modal>
   );
 }
 
-export default CreateWatchlistModal;
+export default EditWatchlistModal;

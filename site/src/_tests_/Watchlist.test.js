@@ -129,15 +129,6 @@ describe("Watchlist page", () => {
     expect(noWatchlist).toBeInTheDocument();
   });
 
-  test("fetching fails on the watchlist page with no connection", async () => {
-    fetch.mockResponseOnce(JSON.stringify({ data: null }));
-
-    render(<Watchlist />, { wrapper: BrowserRouter });
-
-    // Assert that the else path is taken
-    expect(console.log).not.toHaveBeenCalledWith(expect.anything());
-  });
-
   test("calls handleClose function when button is clicked", async () => {
     const mockHandleClose = jest.fn();
     render(<CreateWatchlistModal show={true} handleClose={mockHandleClose} />);

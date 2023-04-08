@@ -2,7 +2,6 @@ package edu.usc.csci310.project.demo.api.controllers;
 
 import edu.usc.csci310.project.demo.api.requests.CreateWatchlistRequest;
 import edu.usc.csci310.project.demo.api.responses.CreateWatchlistResponse;
-import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
@@ -13,9 +12,9 @@ public class CreateWatchlistControllerTest {
     CreateWatchlistController createWatchlistController = new CreateWatchlistController();
 
     @Test
-    void verifyCreateWatchlistAlreadyExists() throws JSONException {
+    void verifyCreateWatchlistAlreadyExists() {
         CreateWatchlistRequest request = new CreateWatchlistRequest();
-        request.setUserID("6423e5633b51581fb8d36210");
+        request.setUserID("64266002aa425f3c58eb9644");
         request.setWatchlist("existing watchlist");
         request.setType("Private");
 
@@ -27,7 +26,7 @@ public class CreateWatchlistControllerTest {
     }
 
     @Test
-    void verifyUserDoesNotExist() throws JSONException {
+    void verifyUserDoesNotExist() {
         CreateWatchlistRequest request = new CreateWatchlistRequest();
         request.setUserID("6423e5633b51581d36210");
         request.setWatchlist("existing watchlist");
@@ -41,9 +40,9 @@ public class CreateWatchlistControllerTest {
     }
 
     @Test
-    void verifyCreateWatchlist() throws JSONException {
+    void verifyCreateWatchlist() {
         CreateWatchlistRequest request = new CreateWatchlistRequest();
-        request.setUserID("6423e5633b51581fb8d36210");
+        request.setUserID("64266002aa425f3c58eb9644");
 
         // create watchlist
         // choose a Character random from this String

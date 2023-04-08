@@ -14,7 +14,6 @@
     "@types/node": "^16.18.12",
     "@types/react-dom": "^18.0.11",
     "bootstrap": "5.2.3",
-    "bootstrap": "5.2.3",
     "jest-fetch-mock": "^3.0.3",
     "react": "^18.2.0",
     "react-bootstrap": "2.7.2",
@@ -31,7 +30,6 @@
     "eject": "react-scripts eject",
     "pretty": "prettier --check \"src/**/*.{js,ts,jsx,tsx}\"",
     "fix:pretty": "prettier --write \"src/**/*.{js,ts,jsx,tsx}\"",
-    "coverage": "react-scripts test --coverage --watchAll --silent=false",
     "coverage": "react-scripts test --coverage --watchAll"
   },
   "eslintConfig": {
