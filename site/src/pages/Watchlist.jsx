@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import AddMovieDropdown from "../components/AddMovieComponent";
 import CreateWatchlistButton from "../components/CreateWatchlistButton";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
 import EditWatchlistModal from "../components/EditWatchlistModal";
