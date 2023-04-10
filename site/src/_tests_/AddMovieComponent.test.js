@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen, fireEvent, act, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import AddMovieDropdown from "../components/AddMovieComponent";
-import AddMovieComponent from "../components/AddMovieComponent";
 
 
 // mock the fetch function
@@ -21,7 +20,6 @@ describe("AddMovieComponent", () => {
   const handleShow = jest.fn();
 
   beforeEach(() => {
-    // fetch.resetMocks();
     jest.clearAllMocks();
     localStorage.clear();
   });
