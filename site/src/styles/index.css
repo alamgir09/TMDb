@@ -2,3 +2,261 @@
 	max-width: 500px;
 	margin: auto;
 }
+.searchBar{
+	margin: 50px;
+  	display: flex;
+  	flex-direction: row;
+  	align-items: center;
+  	width: 900px;
+}
+/* drop down CSS */
+#nav, #nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#nav li {
+    width: 132px;
+
+    text-align: center;
+    position: relative;
+
+    z-index: 1;
+}
+#nav li > ul {
+    background-color: white;
+}
+#active-nav {
+    background-color: grey;
+}
+#nav ul {
+    position: absolute;
+    display: none;
+}
+#nav ul ul {
+    left: 150px;
+    top: 0px;
+}
+#nav li:hover > ul {
+    display: block;
+}
+
+#nav a{
+    text-decoration: none;
+    color: #444;
+
+    width: 132px;
+    height: 50px;
+
+    text-align: center;
+    line-height: 50px;
+    border-bottom: 2px solid #FFF;
+
+    display: block;
+}
+#nav a:hover {
+    border-bottom: 2px solid gold;
+    color: gold;
+}
+/* Ends */
+.movie-row {
+	background-color: #e5e5e5;
+	display: flex;
+	flex-direction: row;
+	transition: 0.5s;
+	cursor: pointer;
+}
+.movie-row:hover{
+	scale: 1.05;
+}
+.movie-row:hover .box-hover-elements{
+	visibility: visible;
+}
+.movie-row img {
+	height: 150px;
+	width: 150px;
+	padding: 0;
+}
+.movie-header {
+	display: flex;
+	flex-direction: row;
+	font-weight: bold;
+	align-self: center;
+	height: 50px;
+}
+#movies-all {
+	padding: 0;
+}
+#poster {
+	width: 150px;
+}
+.inner-text {
+	text-align: center;
+	/* padding-top: 60px; */
+	align-self: center;
+	font-size: 10px;
+}
+
+.header-text {
+	text-align: center;
+	/* padding-top: 60px; */
+	align-self: center;
+	font-size: 15px;
+}
+.box-hover-elements {
+	visibility: hidden;
+}
+
+.movieButton {
+    border: 0;
+    display: flex;
+}
+
+
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+	.inner-text {
+		font-size: 15px;
+	}
+	.header-text {
+		font-size: 20px;
+	}
+	.movie-row {
+		background-color: lightgray;
+	}
+}
+
+/* Movie details container */
+.movie-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* Movie image */
+.movie-image img {
+  width: 400px;
+  height: auto;
+}
+
+/* Movie info */
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+/* Movie meta data */
+.movie-meta {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+/* Movie meta fields */
+.movie-meta span {
+  margin-right: 20px;
+  font-size: 16px;
+}
+
+/* Movie cast */
+.movie-cast {
+  margin-bottom: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: calc(100% - 800px); /* Subtract width of image and some margin */
+}
+
+/* Movie cast fields */
+.movie-cast span {
+  margin-right: 10px;
+  font-size: 16px;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.movie-title {
+  display: flex;
+  flex-direction: column;
+  float:left;
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+/* Hide scroll bar for actors section */
+.movie-cast::-webkit-scrollbar {
+  display: none;
+}
+
+.movie-cast {
+   max-width: calc(90%);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body {
+  overflow-x: hidden;
+}
+
+/* Movie description */
+.movie-description {
+  overflow-y: hidden;
+  margin-bottom: 20px;
+  max-width: calc(90%); /* Subtract width of image and some margin */
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* Hide scroll bar for movie descripti  on section */
+.movie-description::-webkit-scrollbar {
+  display: none;
+}
+
+.movie-description {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.text-button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.watchlistRow{
+	background-color: #e5e5e5;
+}
+
+.watchlistRow:hover{
+	cursor: pointer;
+	background-color: #bebebe;
+}
+
+.fa-pen, .fa-plus, .fa-trash{
+	font-size: 2em;
+	padding-left: 10px;
+	padding-right: 10px;
+
+}
+
+.fa-pen:hover, .fa-plus:hover{
+	color: #ffffff;
+}
+
+.fa-trash:hover{
+	color: red;
+}
+
