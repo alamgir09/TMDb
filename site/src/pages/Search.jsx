@@ -25,7 +25,7 @@ function Search() {
   const { type } = useParams();
 
   const [searchTerm, setTerm] = useState("");
-  const [category, setCategory] = useState("Title");
+  const [category, setCategory] = useState("All");
   const [numResults, setNumResults] = useState("0");
   const [components, setComponents] = useState([]);
   const navigate = useNavigate();
@@ -63,93 +63,164 @@ function Search() {
     // Selects api request based on category selected by drop-down
     let url = "";
     if (category == "All") {
-      url =
-        "https://api.themoviedb.org/3/search/multi?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&query=" +
-        term +
-        "&page=1&include_adult=false";
+      url = "https://api.themoviedb.org/3/search/multi?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&query=" + term + "&page=1&include_adult=false";
+      
+      nonIdSearch(url);
+
     } else if (category == "Title") {
       url =
         "https://api.themoviedb.org/3/search/movie?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&query=" +
         term +
         "&page=1&include_adult=false";
+      
+      nonIdSearch(url);
+
     } else if (category == "Actors") {
-      url =
-        "https://api.themoviedb.org/3/search/person?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&query=" +
-        term +
-        "&page=1&include_adult=false";
-    } else if (category == "Keywords") {
-      url =
-        "https://api.themoviedb.org/3/discover/movie?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_keywords=" +
-        term +
-        "&with_watch_monetization_types=flatrate";
-    }
 
-    // Now make the API request with the search term
-    const apiUrl = url;
-
-    const requestHeaders = {
-      "Content-Type": "application/json"
-    };
-    const requestOptions = {
-      method: "GET",
-      headers: requestHeaders
-    };
-
-    // Send the API request
-    fetch(apiUrl, requestOptions)
-      .then((res) => res.json())
-      .then((response) => {
-        console.log("Showing response.results");
-        console.log(response.results);
-        setNumResults(response.total_results);
-
-        setComponents(response);
-
-        let components = [];
-
-        // Go through response from the api and create each individual movie box
-        for (let i = 0; i < response.results.length; i++) {
-          let movie = response.results[i];
-          let imgURL = "http://image.tmdb.org/t/p/w500" + movie.poster_path;
-          let movieComponent = (
-            <MovieBox
-              key={i}
-              id={movie.id}
-              imgURL={imgURL}
-              title={movie.title}
-              release_date={movie.release_date}
-              rating={movie.vote_average}
-              list={list}
-              handleShow={handleShow}
-            />
-          );
-
-          components.push(movieComponent);
-        }
-
-        // all the components have been pushed into the array, now set it to the global variable
-        setComponents(components);
-
-        console.log("We got here");
-        console.log(components);
-        console.log("the length of component is " + components.length);
+      url = "https://api.themoviedb.org/3/search/person?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&query=" + term + "&page=1&include_adult=false"
+      
+      idSearch(url)
+      .then((termID) => {
+        // Use the returned ID here
+        console.log("termID is " + termID);
+        url = "https://api.themoviedb.org/3/person/" + termID + "/movie_credits?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US"
+        nonIdSearch(url);
       })
       .catch((err) => {
         console.log(err);
       });
 
-    //         console.log("Searching for the term " + term);
+    } else if (category == "Keywords") {
 
-    // dynamically add the elements here
+      url = "https://api.themoviedb.org/3/search/keyword?api_key=b8f33277c38d4286ab9e30134ebf037e&query="+ term + "&page=1";
+      
+      idSearch(url)
+      .then((termID) => {
+        // Use the returned ID here
+        console.log("termID is " + termID);
+        url = "https://api.themoviedb.org/3/keyword/" + termID + "/movies?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&include_adult=false"
+        nonIdSearch(url);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+
+
+    // delete starter MovieBox
     document.querySelector("#starter").innerHTML = "";
 
     setTerm("");
   }
 
-  // Change page
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexofFirstPost = indexOfLastPost - postsPerPage;
-  const currentComponents = components.splice(indexofFirstPost, indexOfLastPost);
+  // returns an id after fetching from api endpoint
+  function idSearch(apiUrl) {
+    const requestHeaders = {
+        "Content-Type": "application/json"
+    };
+    const requestOptions = {
+      method: "GET",
+      headers: requestHeaders
+    };
+  
+    // Send the API request
+    return fetch(apiUrl, requestOptions)
+    .then((res) => res.json())
+    .then((response) => {
+      // Return the ID from the response
+      console.log("Showing response.results[0].id");
+      console.log(response.results[0].id);
+      return response.results[0].id;
+    })
+    .catch((err) => {
+      console.log(err);
+      return "0";
+    });
+  }
+
+  // regular search with either id or string term
+  function nonIdSearch(apiUrl) {
+    //
+     const requestHeaders = {
+       "Content-Type": "application/json"
+     };
+     const requestOptions = {
+       method: "GET",
+       headers: requestHeaders
+     };
+ 
+     // Send the API request
+     fetch(apiUrl, requestOptions)
+       .then((res) => res.json())
+       .then((response) => {
+         console.log("Showing response.results");
+         console.log(response);
+         setNumResults(response.total_results);
+ 
+         setComponents(response);
+ 
+         let components = [];
+         // if category is Actors, adjust parsing accordingly, else use regular parsing
+         if (category == "Actors") {
+            setNumResults(response.cast.length);
+            // Go through response from the api and create each individual movie box
+            for (let i = 0; i < response.cast.length; i++) {
+              let movie = response.cast[i];
+              let imgURL = "http://image.tmdb.org/t/p/w500" + movie.poster_path;
+              let movieComponent = (
+                <MovieBox
+                  key={i}
+                  id={movie.id}
+                  imgURL={imgURL}
+                  title={movie.title}
+                  release_date={movie.release_date}
+                  rating={movie.vote_average}
+                  list={list}
+                  handleShow={handleShow}
+                />
+              );
+
+              components.push(movieComponent);
+            }
+         } else {
+            // Go through response from the api and create each individual movie box
+            for (let i = 0; i < response.results.length; i++) {
+              let movie = response.results[i];
+              let imgURL = "http://image.tmdb.org/t/p/w500" + movie.poster_path;
+              let movieComponent = (
+                <MovieBox
+                  key={i}
+                  id={movie.id}
+                  imgURL={imgURL}
+                  title={movie.title}
+                  release_date={movie.release_date}
+                  rating={movie.vote_average}
+                  list={list}
+                  handleShow={handleShow}
+                />
+              );
+
+              components.push(movieComponent);
+            }
+         }
+ 
+         // all the components have been pushed into the array, now set it to the global variable
+         setComponents(components);
+ 
+         console.log("We got here");
+         console.log(components);
+         console.log("the length of component is " + components.length);
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+  }
+
+
+  // Change page - Pagination
+  // const indexOfLastPost = currentPage * postsPerPage;
+  // const indexofFirstPost = indexOfLastPost - postsPerPage;
+  // const currentComponents = components.splice(indexofFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -222,6 +293,7 @@ function Search() {
                 </ul>
               </li>
             </ul>{" "}
+            <button type='button'>Year Filter</button>
             {/*<!-- nav --> */}
             <div>
               <button
@@ -238,10 +310,10 @@ function Search() {
       <div className="results-row">
         <div className="col-12 mt-4">
           Showing{" "}
-          <span id="num-results" className="font-weight-bold">
+          {/* <span id="num-results" className="font-weight-bold">
             0
           </span>{" "}
-          of{" "}
+          of{" "} */}
           <span id="total-results" className="font-weight-bold">
             {numResults}
           </span>{" "}
@@ -271,7 +343,8 @@ function Search() {
               handleShow={handleShow}
             />
           </div>
-          {currentComponents.map((component) => component)}
+          {/* {currentComponents.map((component) => component)} part of pagination*/} 
+          {components.map((component) => component)}
           <div className="movies-all col-12 mt-4">
             <Pagination postsPerPage={postsPerPage} totalPosts={components.length} paginate={paginate} />
           </div>
@@ -279,7 +352,7 @@ function Search() {
         {/* <!-- #movies-all --> */}
       </div>{" "}
       {/* <!-- #results-row --> */}
-      <CreateWatchlistModal
+      <CreateWatchlistModal change back
         show={show}
         handleClose={handleClose}
         fetchWatchlist={fetchWatchlist}

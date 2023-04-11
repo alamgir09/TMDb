@@ -1,15 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import AddMovieDropdown from "./AddMovieComponent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDollarSign, faEye } from "@fortawesome/free-solid-svg-icons";
 
 function MovieBox({ id, imgURL, title, release_date, rating, list, handleShow }) {
   const navigate = useNavigate();
 
-  if (id == "") id = "?";
-  if (imgURL == "") imgURL = "?";
-  if (title == "") title = "?";
-  if (release_date == "") release_date = "?";
-  if (rating == "") rating = "?";
+  if (id == "" || id == null) id = "?";
+  if (imgURL == "" || imgURL == null) imgURL = "?";
+  if (title == "" || title == null) title = "?";
+  if (release_date == "" || release_date == null) release_date = "?";
+  if (rating == "" || rating == null) rating = "?";
 
   //     const openPost = (e) => {
   //         history.push(`/posts/2000`);
@@ -37,8 +39,21 @@ function MovieBox({ id, imgURL, title, release_date, rating, list, handleShow })
             watchlists={list}
             handleShow={handleShow}
           />
-          <div>Little Eye</div>
-          <div>Dollar Sign</div>
+          <div>
+            <FontAwesomeIcon
+              data-testid="eye-icon"
+              icon={faEye}
+            />
+            {/* Little Eye */}
+          </div>
+          <div>
+            <FontAwesomeIcon
+              data-testid="dollar-icon"
+              icon={faDollarSign}
+              // onClick={(e) => handleDelete(e, element["name"])}
+            />
+            {/* Dollar Sign */}
+          </div>
         </div>
       </div>
     </div>
