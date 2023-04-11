@@ -64,6 +64,15 @@ public class EditWatchlistController {
 
                 response.setData("Success");
             }
+            if (request.getOperation().equals("update")) {
+                Bson filter = Filters.and(eq("userID", request.getUserID()), eq("watchlist.name", request.getWatchlistOld()));
+
+                Bson updates = Updates.set("watchlist.$.type", request.getType());
+
+                UpdateResult result = collection.updateOne(filter, updates);
+
+                response.setData("Success");
+            }
 
 
         }

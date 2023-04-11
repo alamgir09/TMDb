@@ -172,7 +172,7 @@ function Search() {
     fetch(apiUrl, requestOptions)
       .then((res) => res.json())
       .then((response) => {
-        if (response?.data) {
+        if (Object.keys(response.data).length !== 0) {
           console.log(response.data);
 
           var jsonObject = JSON.parse(response.data);

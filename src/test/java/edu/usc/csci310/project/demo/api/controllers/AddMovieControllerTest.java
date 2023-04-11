@@ -40,7 +40,7 @@ public class AddMovieControllerTest {
                     .charAt(index));
         }
 
-        request.setMovie(new Movie(randomMovieTitle.toString(), "test url", "test release date", "test rating"));
+        request.setMovie(new Movie("test id", randomMovieTitle.toString(), "test url", "test release date", "test rating"));
 
         ResponseEntity<AddMovieResponse> returnedResponse = addMovieController.addMovie(request);
 

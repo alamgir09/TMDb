@@ -57,14 +57,17 @@ public class CreateWatchlistController {
 
             ArrayList<Watchlist> watchlists = user.getWatchlist();
 
-            // check if watchlist already exists
-            for (Watchlist w : watchlists) {
-                if (w.getName().equals(request.getWatchlist())) {
-                    System.out.println("Watchlist already exists");
-                    response.setData("Watchlist already exists");
-                    return ResponseEntity.ok().body(response);
+            if (watchlists != null) {
+                // check if watchlist already exists
+                for (Watchlist w : watchlists) {
+                    if (w.getName().equals(request.getWatchlist())) {
+                        System.out.println("Watchlist already exists");
+                        response.setData("Watchlist already exists");
+                        return ResponseEntity.ok().body(response);
+                    }
                 }
             }
+
 
             Document query = new Document().append("userID", request.getUserID());
 

@@ -51,4 +51,19 @@ public class EditWatchlistControllerTest {
         assertEquals(returnedResponse.getBody().getData(), "Success");
 
     }
+
+    @Test
+    void verifyEditWatchlistUpdate() {
+        EditWatchlistRequest request = new EditWatchlistRequest();
+        request.setUserID("64266002aa425f3c58eb9644");
+        request.setWatchlistOld("existing watchlist");
+        request.setOperation("update");
+        request.setType("Public");
+
+        ResponseEntity<EditWatchlistResponse> returnedResponse = editWatchlistController.editWatchlist(request);
+
+        assertNotNull(returnedResponse.getBody());
+        assertEquals(returnedResponse.getBody().getData(), "Success");
+
+    }
 }

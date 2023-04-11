@@ -50,9 +50,8 @@ function Watchlist() {
     fetch(apiUrl, requestOptions)
       .then((res) => res.json())
       .then((response) => {
-        if (response?.data) {
+        if (Object.keys(response.data).length !== 0) {
           console.log(response.data);
-          console.log(JSON.parse(response.data));
 
           var jsonObject = JSON.parse(response.data);
           updateList(jsonObject);
@@ -96,11 +95,11 @@ function Watchlist() {
       </div>
       {!loading &&
         list.map((element, index) => (
-          <div className="row mb-3 watchlistRow" key={index} onClick={() => navigateWatchlistDetail(element["name"])}>
-            <div className="col-10">
+          <div className="row mb-4 watchlistRow" key={index} onClick={() => navigateWatchlistDetail(element["name"])}>
+            <div className="col-6">
               <h1>{element["name"]}</h1>
             </div>
-            <div className="col-2 align-self-center">
+            <div className="col-6 text-end align-self-center">
               <FontAwesomeIcon
                 id="editWatchlist"
                 data-testid="edit-icon"

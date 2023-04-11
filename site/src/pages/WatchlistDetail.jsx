@@ -1,9 +1,23 @@
 import React, { useState, useEffect } from "react";
+import MovieBoxWatchlist from "../components/MovieBoxWatchlist";
+import EditMovieModal from "../components/EditMovieModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import Button from "react-bootstrap/Button";
+import WatchlistTypeDropdown from "../components/WatchlistTypeDropdown";
 
 function WatchlistDetail() {
   const [list, updateList] = useState([]);
+  const [watchlistAll, setWatchlistAll] = useState([]);
   const [loading, setLoading] = useState(true);
   const [watchlist, setWatchlist] = useState();
+  const [watchlistType, setWatchlistType] = useState();
+  const [watchlistTypeDiv, setWatchlistDiv] = useState();
+
+  const [modal, setModal] = useState({ show: false, data: { text: "" } });
+  const handleClose = () => {
+    setModal({ show: false, data: { text: "" } });
+  };
 
   // api request to get movies for current user
   function fetchMovies() {
@@ -27,11 +41,38 @@ function WatchlistDetail() {
       .then((response) => {
         if (response?.data) {
           console.log(response.data);
-          console.log(JSON.parse(response.data));
 
           var jsonObject = JSON.parse(response.data);
-          updateList(jsonObject);
           setLoading(false);
+          updateList(jsonObject);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  // api request to get watchlist for current user
+  function fetchWatchlist() {
+    const apiUrl = "api/getWatchlist";
+    const requestData = {
+      userID: localStorage.getItem("userID")
+    };
+    const requestHeaders = {
+      "Content-Type": "application/json"
+    };
+    const requestOptions = {
+      method: "POST",
+      headers: requestHeaders,
+      body: JSON.stringify(requestData)
+    };
+
+    fetch(apiUrl, requestOptions)
+      .then((res) => res.json())
+      .then((response) => {
+        if (response?.data) {
+          var jsonObject = JSON.parse(response.data);
+          setWatchlistAll(jsonObject);
         }
       })
       .catch((err) => {
@@ -42,8 +83,18 @@ function WatchlistDetail() {
   // On page load
   useEffect(() => {
     fetchMovies();
+    fetchWatchlist();
     setWatchlist(localStorage.getItem("watchlist"));
   }, []);
+
+  // when watchlistAll mounts
+  useEffect(() => {
+    // Find the watchlist with name "watchlist 1" and set its type in state
+    const watchlist1 = watchlistAll.find((list) => list.name === "watchlist 1");
+    if (watchlist1) {
+      setWatchlistType(watchlist1.type);
+    }
+  }, [watchlistAll]);
 
   return (
     <div className="container">
@@ -53,17 +104,35 @@ function WatchlistDetail() {
       <div className="row mb-3">
         <div className="col-sm">{!loading && list.length == 0 ? <h2>No movies added yet</h2> : null}</div>
         <div className="col-sm text-end">
-          <button className="btn btn-danger">Edit Watchlist</button>
+          <WatchlistTypeDropdown watchlist={watchlist} type={watchlistType} />
         </div>
       </div>
-      {!loading &&
-        list.map((element, index) => (
-          <div className="row mb-3 watchlistRow" key={index}>
-            <div className="col">
-              <h1>{element["title"]}</h1>
+      {!loading && list.length > 0 ? (
+        <div className="movie-header row mt-4">
+          <div className="col-3 col-md-2 header-text">Poster</div>
+          <div className="col-9 col-md-10">
+            <div className="row h-100">
+              <div className="col-sm-4 header-text">Title</div>
+              <div className="col-sm-2 header-text">Release Date</div>
+              <div className="col-sm-2 header-text">Rating</div>
             </div>
           </div>
+        </div>
+      ) : null}
+      {!loading &&
+        list.map((element, index) => (
+          <MovieBoxWatchlist
+            key={index}
+            id={element["id"]}
+            title={element["title"]}
+            imgURL={element["imgURL"]}
+            release_date={element["releaseDate"]}
+            rating={element["rating"]}
+            list={watchlistAll}
+            modal={setModal}
+          />
         ))}
+      <EditMovieModal modal={modal} handleClose={handleClose} fetchMovies={fetchMovies} />
     </div>
   );
 }
