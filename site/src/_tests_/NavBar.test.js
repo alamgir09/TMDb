@@ -31,6 +31,5 @@ describe("<NavBar />", () => {
 
     expect(setItemSpy).toHaveBeenCalledWith("userID", "null");
     expect(localStorage.getItem("userID")).toBe("null");
-    //        setItem.mockRestore();
   });
 });

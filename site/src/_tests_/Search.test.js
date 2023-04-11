@@ -115,23 +115,3 @@ test("should fetch watchlist on mount", async () => {
   expect(fetch.mock.calls[0][1].headers).toEqual({ "Content-Type": "application/json" });
   expect(fetch.mock.calls[0][1].body).toEqual(JSON.stringify({ userID: null }));
 });
-
-// it("check if search state is updated when user inputs text into search box", () => {
-//   const user = userEvent.setup();
-//   const { getByPlaceholderText } = render(<Search />, { wrapper: BrowserRouter });
-
-//   const usernameInput = getByPlaceholderText("Search....");
-//   fireEvent.change(usernameInput, { target: { value: "test-search" } });
-
-//   expect(usernameInput).toHaveValue("test-search");
-// });
-
-// it("check if search state is updated when user inputs text into search box", () => {
-//   const user = userEvent.setup();
-//   const { getByPlaceholderText } = render(<Search />, { wrapper: BrowserRouter });
-
-//   const usernameInput = getByPlaceholderText("Search....");
-//   fireEvent.change(usernameInput, { target: { value: "test-search" } });
-
-//   expect(usernameInput).toHaveValue("test-search");
-// });
