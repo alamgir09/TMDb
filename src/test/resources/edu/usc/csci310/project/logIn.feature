@@ -1,4 +1,5 @@
 Feature: testing out the various parts of the logIn page
+
   Scenario: LogIn to with valid account
     Given I am on the login page
     When I enter "tommyTrojan" and the "Password123"

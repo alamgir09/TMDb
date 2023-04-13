@@ -1,6 +1,5 @@
 Feature: SignUp As a new user I want to create an account So that I can access the application
 
-
   Scenario: User signs up successfully
     Given I am on the SignUp page
     When I enter my first name "tim" , last name "timmy", user name "Timjan", my password "password", and confirming password "password"
@@ -18,7 +17,6 @@ Feature: SignUp As a new user I want to create an account So that I can access t
     When I enter my first name "Tommy" , last name "Trojan", user name "Tomjan", my password "incorrect", and confirming password "password"
     And I click the submit button
     Then I should see an error message "Password does not match. Please try again."
-
 
   Scenario: User leaves required fields blank
     Given I am on the SignUp page
