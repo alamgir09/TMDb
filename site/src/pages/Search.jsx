@@ -4,6 +4,7 @@ import MovieBox from "../components/MovieBox";
 import Pagination from "../components/Pagination";
 import { useParams } from "react-router-dom";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
+import NavBar from "../components/NavBar";
 
 function Search() {
   // Handle all searches here
@@ -190,6 +191,8 @@ function Search() {
   }, []);
 
   return (
+  <div>
+  <NavBar />
     <div className="container">
       <div className="container-fluid searchBar">
         <form className="col-12" id="search-form" onSubmit={searchItem}>
@@ -285,6 +288,7 @@ function Search() {
         fetchWatchlist={fetchWatchlist}
       ></CreateWatchlistModal>
     </div>
+   </div>
   );
 }
 

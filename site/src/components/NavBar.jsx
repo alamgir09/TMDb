@@ -1,5 +1,6 @@
 import React from "react";
 // import { useNavigate } from "react-router-dom";
+import Watchlist from "../pages/Watchlist";
 
 const NavBar = () => {
   //   const navigate = useNavigate();
@@ -37,13 +38,19 @@ const NavBar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
+              <a className="nav-link active" aria-current="page" href="/Home">
                 Home
               </a>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link" href="/SignUp">
+              <a className="nav-link" href="/Search">
+                Search
+              </a>
+            </li>
+
+            <li className="nav-item">
+              <a className="nav-link" href="/Watchlist">
                 MyWatchLists
               </a>
             </li>
@@ -63,7 +70,6 @@ const NavBar = () => {
           </ul>
         </div>
       </div>
-      d
     </nav>
   );
 };
