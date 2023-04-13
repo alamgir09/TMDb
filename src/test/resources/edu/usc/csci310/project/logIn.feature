@@ -16,3 +16,8 @@ Feature: testing out the various parts of the logIn page
     When I enter "" and the ""
     And I press the submit button
     Then I should see "" in the page
+
+  Scenario: User doesn't have account, makes one by clicking href link
+    Given I am on the login page
+    When I click on the "Sign up!" hyperlink at the bottom
+    Then I should be redirected to the SignUp page

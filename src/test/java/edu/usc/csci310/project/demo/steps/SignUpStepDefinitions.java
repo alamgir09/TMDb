@@ -64,7 +64,7 @@ public class SignUpStepDefinitions {
     }
     @Then("I should be redirected to the LogIn page")
     public void iShouldBeRedirectedToTheLogInPage() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(8));
         wait.until(ExpectedConditions.urlToBe(ROOT_URL + "LogIn"));
         assertEquals(ROOT_URL + "LogIn", driver.getCurrentUrl());
     }
@@ -72,7 +72,6 @@ public class SignUpStepDefinitions {
     public void iShouldSeeOnThePage(String arg0) {
         assertEquals(driver.findElement(By.id("response")).getText(), "");
     }
-
 
     @Then("I should see {string}")
     public void iShouldSee(String arg0) {
@@ -88,5 +87,10 @@ public class SignUpStepDefinitions {
     @Then("it should stay on SignUp page")
     public void itShouldStayOnSignUpPage() {
         assertEquals(ROOT_URL + "SignUp", driver.getCurrentUrl());
+    }
+
+    @When("I click on the {string} hyperlink")
+    public void iClockOnTheHyperlink(String arg0) {
+        driver.findElement(By.linkText(arg0)).click();
     }
 }

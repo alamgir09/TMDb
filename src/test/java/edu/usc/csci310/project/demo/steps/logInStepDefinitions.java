@@ -12,6 +12,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;
 
@@ -46,8 +50,6 @@ public class logInStepDefinitions {
     public void iPressTheSubmitButton() {
         driver.findElement(By.id("submitBtn")).click();
     }
-
-
     @Then("I should see {string} in the page")
     public void iShouldSeeInThePage(String arg0) {
         if(arg0 == "Username not found"){
@@ -57,7 +59,6 @@ public class logInStepDefinitions {
             assertEquals(driver.findElement(By.id("response")).getText(), "Success");
         }
     }
-
     @After
     public void after(){
         driver.quit();
@@ -71,5 +72,16 @@ public class logInStepDefinitions {
     @Then("I am on the signup page")
     public void iAmOnTheSignupPage() {
         assertEquals(driver.getCurrentUrl(), ROOT_URL + "SignUp");
+    }
+    @Then("I should be redirected to the SignUp page")
+    public void iShouldBeRedirectedToTheSignUpPage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+        wait.until(ExpectedConditions.urlToBe(ROOT_URL + "SignUp"));
+        assertEquals(ROOT_URL + "SignUp", driver.getCurrentUrl());
+    }
+
+    @When("I click on the {string} hyperlink at the bottom")
+    public void iClickOnTheHyperlinkAtTheBottom(String arg0) {
+        driver.findElement(By.linkText(arg0)).click();
     }
 }

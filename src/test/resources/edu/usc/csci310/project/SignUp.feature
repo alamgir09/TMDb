@@ -25,3 +25,8 @@ Feature: SignUp As a new user I want to create an account So that I can access t
     When I enter my first name "" , last name "", user name "", my password "", and confirming password ""
     And I click the submit button
     Then it should stay on SignUp page
+
+  Scenario: User leave fields empty and returns to logIn page
+    Given I am on the SignUp page
+    When I click on the "LogIn" hyperlink
+    Then I should be redirected to the LogIn page
