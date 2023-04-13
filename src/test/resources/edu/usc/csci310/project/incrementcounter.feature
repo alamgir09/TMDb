@@ -1,4 +1,5 @@
 Feature: Increment Counter
+
   Scenario: Press increment counter button
     Given I am on endpoint "other"
     When I click on the increment counter button
@@ -8,4 +9,3 @@ Feature: Increment Counter
     Given I am on endpoint "other"
     When I click on the clear counter button
     Then I should see the text update to "Current state counter: 0"
-

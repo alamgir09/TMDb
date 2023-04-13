@@ -60,9 +60,11 @@
 }
 /* Ends */
 .movie-row {
-	background-color: aliceblue;
+	background-color: #e5e5e5;
 	display: flex;
 	flex-direction: row;
+	transition: 0.5s;
+	cursor: pointer;
 }
 .movie-row:hover{
 	scale: 1.05;
@@ -107,6 +109,7 @@
 
 .movieButton {
     border: 0;
+    display: flex;
 }
 
 
@@ -235,25 +238,59 @@ body {
 
 .watchlistRow{
 	background-color: #e5e5e5;
+	padding: 12px;
+	transition: 0.5s;
 }
 
 .watchlistRow:hover{
 	cursor: pointer;
 	background-color: #bebebe;
+	scale: 1.03;
 }
 
-.fa-pen, .fa-plus, .fa-trash{
+.fa-pen, .fa-plus, .fa-trash, .fa-copy, .fa-arrow-right-from-bracket{
 	font-size: 2em;
 	padding-left: 10px;
 	padding-right: 10px;
-
 }
 
 .fa-pen:hover, .fa-plus:hover{
 	color: #ffffff;
 }
 
-.fa-trash:hover{
+.fa-trash:hover, .fa-copy:hover, .fa-arrow-right-from-bracket:hover{
+	cursor: pointer;
 	color: red;
+}
+
+.movie-row-watchlist{
+	background-color: #e5e5e5;
+}
+
+.movie-row-watchlist-img-div{
+	background-color: #000;
+}
+
+.movie-row-watchlist img{
+	height: 150px;
+	width: 100%;
+	object-fit: contain;
+}
+
+.watchlistTypeMenu{
+	max-width: 300px;
+}
+
+.watchlistTypeMenu h3{
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.watchlistTypeMenu p{
+	font-size: 13px;
+}
+
+.watchlistTypeMenu .row{
+	white-space: break-spaces !important;
 }
 

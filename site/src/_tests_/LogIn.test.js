@@ -63,25 +63,7 @@ test("error message when user inputs invalid login credentials", async () => {
   expect(fetch).toHaveBeenCalledTimes(1);
 });
 
-//test("fetching fails on the home page with no connection", async () => {
-//  const mockResponse = { data: JSON.stringify({ Type: "Error", Message: "Username not found" }) };
-//  jest.spyOn(window, "fetch").mockResolvedValueOnce({
-//    json: () => Promise.resolve(mockResponse)
-//  });
-//
-//  await act(async () => {
-//    await new Promise((resolve) => setTimeout(resolve, 0));
-//  });
-//
-//  const logSpy = jest.spyOn(console, "log");
-//  console.log = jest.fn();
-//  fetch.mockResponseOnce(JSON.stringify({ data: null }));
-//  render(<LogIn />, { wrapper: BrowserRouter });
-//  expect(console.log).toHaveBeenCalledWith("");
-//});
-
 it("check if username state is updated when user inputs username into text box", () => {
-  const user = userEvent.setup();
   const { getByPlaceholderText } = render(<LogIn />);
   const usernameInput = getByPlaceholderText("Username");
   fireEvent.change(usernameInput, { target: { value: "test-user" } });
@@ -90,20 +72,9 @@ it("check if username state is updated when user inputs username into text box",
 });
 
 it("check if password state is updated when user inputs password into text box", () => {
-  const user = userEvent.setup();
   const { getByPlaceholderText } = render(<LogIn />);
   const usernameInput = getByPlaceholderText("Password");
   fireEvent.change(usernameInput, { target: { value: "test-password" } });
 
   expect(usernameInput).toHaveValue("test-password");
 });
-
-//test("test", async () => {
-//  const setItemSpy = jest.spyOn(window.localStorage, "setItem");
-//  const handleResponse = jest.fn();
-//  const mockResponse = { data: JSON.stringify({ Type: "Success", userID: "6424ef2270dbc64dd74ce0aa" }) };
-//
-//  handleResponse(mockResponse, handleResponse, "test-username", "test-password");
-//
-//  expect(setItemSpy).toHaveBeenCalledWith("userID", "6424ef2270dbc64dd74ce0aa");
-//});
