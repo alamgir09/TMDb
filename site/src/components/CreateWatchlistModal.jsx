@@ -102,7 +102,7 @@ function CreateWatchlistModal({ show, handleClose, fetchWatchlist }) {
         {errorMessage ? <div style={{ color: "red", textAlign: "center" }}>{errorMessage}</div> : null}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="danger" onClick={handleClose}>
+        <Button data-testid="createHandleClose" id="createWatchlistDeleteBtn" variant="danger" onClick={handleClose}>
           Close
         </Button>
         <Button variant="success" onClick={handleCreateWatchlistForm}>
