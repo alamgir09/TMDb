@@ -22,14 +22,11 @@ public class logInStepDefinitions {
     @BeforeAll
     public static void beforeAll() {
         System.out.println("Setting Up Cucumber Driver");
-        WebDriverManager.chromedriver().driverVersion("110.0.5481").setup();
+        WebDriverManager.chromedriver().setup();
     }
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--whitelisted-ips");
-        options.addArguments("--no-sandbox");
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
@@ -53,7 +50,12 @@ public class logInStepDefinitions {
 
     @Then("I should see {string} in the page")
     public void iShouldSeeInThePage(String arg0) {
-        assertEquals(driver.findElement(By.id("response")).getText(), "");
+        if(arg0 == "Username not found"){
+            assertEquals(driver.findElement(By.id("response")).getText(), "Username not found");
+        }
+        if(arg0 == "Success"){
+            assertEquals(driver.findElement(By.id("response")).getText(), "Success");
+        }
     }
 
     @After
