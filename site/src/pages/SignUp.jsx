@@ -136,6 +136,9 @@ function SignUp() {
         </button>
       </form>
       <div className="text-center pt-3">{fetchResponse}</div>
+      <p className="text-center">
+        Already have an account <a href="/LogIn">LogIn</a>
+      </p>
     </div>
   );
 }
