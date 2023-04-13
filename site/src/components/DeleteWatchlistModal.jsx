@@ -45,7 +45,7 @@ function DeleteWatchlistModal({ show, handleClose, fetchWatchlist, watchlist }) 
         <p className="text-center">This action can not be undone.</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="success" onClick={handleClose}>
+        <Button data-testid="deleteHandleClose" variant="success" onClick={handleClose}>
           Cancel
         </Button>
         <Button variant="danger" onClick={handleDeleteWatchlistForm}>

@@ -71,7 +71,7 @@ function EditWatchlistModal({ show, handleClose, fetchWatchlist, watchlistOld })
         {errorMessage ? <div style={{ color: "red", textAlign: "center" }}>{errorMessage}</div> : null}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="danger" onClick={handleClose}>
+        <Button data-testid="editHandleClose" variant="danger" onClick={handleClose}>
           Close
         </Button>
         <Button variant="success" onClick={handleEditWatchlistForm}>

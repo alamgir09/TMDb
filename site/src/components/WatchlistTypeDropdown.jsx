@@ -3,7 +3,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faGlobe } from "@fortawesome/free-solid-svg-icons";
 
-function WatchlistTypeDropdown({ type, watchlist }) {
+function WatchlistTypeDropdown({ type }) {
   const [watchlistDiv, setWatchlistDiv] = useState();
   const [isPublic, setIsPublic] = useState(false);
 
@@ -81,11 +81,17 @@ function WatchlistTypeDropdown({ type, watchlist }) {
 
   return (
     <Dropdown>
-      <Dropdown.Toggle size="lg" variant="outline-primary">
+      <Dropdown.Toggle id="watchlistTypeBtn" size="lg" variant="outline-primary">
         {watchlistDiv}
       </Dropdown.Toggle>
       <Dropdown.Menu className="watchlistTypeMenu">
-        <Dropdown.Item onClick={() => handleClick("Public")} className={isPublic === true ? "active" : ""} href="#">
+        <Dropdown.Item
+          id="publicWatchlist"
+          data-testid="publicWatchlist"
+          onClick={() => handleClick("Public")}
+          className={isPublic === true ? "active" : ""}
+          href="#"
+        >
           <div className="row">
             <div className="col-2 inner-text">
               <FontAwesomeIcon size="2x" icon={faGlobe} />
@@ -100,7 +106,13 @@ function WatchlistTypeDropdown({ type, watchlist }) {
             </div>
           </div>
         </Dropdown.Item>
-        <Dropdown.Item onClick={() => handleClick("Private")} className={isPublic === false ? "active" : ""} href="#">
+        <Dropdown.Item
+          id="privateWatchlist"
+          data-testid="privateWatchlist"
+          onClick={() => handleClick("Private")}
+          className={isPublic === false ? "active" : ""}
+          href="#"
+        >
           <div className="row">
             <div className="col-2 inner-text">
               <FontAwesomeIcon size="2x" icon={faLock} />

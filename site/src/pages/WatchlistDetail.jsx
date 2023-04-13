@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MovieBoxWatchlist from "../components/MovieBoxWatchlist";
 import EditMovieModal from "../components/EditMovieModal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock, faGlobe } from "@fortawesome/free-solid-svg-icons";
-import Button from "react-bootstrap/Button";
 import WatchlistTypeDropdown from "../components/WatchlistTypeDropdown";
 
 function WatchlistDetail() {
@@ -12,7 +9,6 @@ function WatchlistDetail() {
   const [loading, setLoading] = useState(true);
   const [watchlist, setWatchlist] = useState();
   const [watchlistType, setWatchlistType] = useState();
-  const [watchlistTypeDiv, setWatchlistDiv] = useState();
 
   const [modal, setModal] = useState({ show: false, data: { text: "" } });
   const handleClose = () => {
@@ -90,7 +86,7 @@ function WatchlistDetail() {
   // when watchlistAll mounts
   useEffect(() => {
     // Find the watchlist with name "watchlist 1" and set its type in state
-    const watchlist1 = watchlistAll.find((list) => list.name === "watchlist 1");
+    const watchlist1 = watchlistAll.find((list) => list.name === localStorage.getItem("watchlist"));
     if (watchlist1) {
       setWatchlistType(watchlist1.type);
     }
@@ -104,7 +100,7 @@ function WatchlistDetail() {
       <div className="row mb-3">
         <div className="col-sm">{!loading && list.length == 0 ? <h2>No movies added yet</h2> : null}</div>
         <div className="col-sm text-end">
-          <WatchlistTypeDropdown watchlist={watchlist} type={watchlistType} />
+          <WatchlistTypeDropdown type={watchlistType} />
         </div>
       </div>
       {!loading && list.length > 0 ? (

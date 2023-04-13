@@ -1,8 +1,7 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy, faTrash, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { addMovie, deleteMovie } from "../functions.js";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 function MoveMovieComponent({ id, imgURL, title, releaseDate, rating, watchlists, modal }) {
   // The forwardRef is important!!
@@ -14,20 +13,13 @@ function MoveMovieComponent({ id, imgURL, title, releaseDate, rating, watchlists
         e.preventDefault();
         onClick(e);
       }}
+      data-testid="move-icon"
       icon={faArrowRightFromBracket}
       {...children}
     />
   ));
 
-  //   function moveMovie(watchlist) {
-  //     console.log("move movie called");
-  //     deleteMovie(id, localStorage.getItem("watchlist"));
-  //     addMovie(id, title, imgURL, releaseDate, rating, watchlist);
-  //     fetchMovies();
-  //   }
-
   function openMove(watchlist) {
-    console.log("open move called");
     modal({
       show: true,
       data: {

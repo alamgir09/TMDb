@@ -1,13 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy, faTrash, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import DeleteMovieComponent from "./DeleteMovieComponent";
 import CopyMovieComponent from "./CopyMovieComponent";
 import MoveMovieComponent from "./MoveMovieComponent";
 
-function MovieBoxWatchlist({ id, imgURL, title, release_date, rating, list, modal, fetchMovies }) {
-  const navigate = useNavigate();
+function MovieBoxWatchlist({ id, imgURL, title, release_date, rating, list, modal }) {
 
   return (
     <div className="movie-row-watchlist row mt-4">
@@ -29,7 +25,6 @@ function MovieBoxWatchlist({ id, imgURL, title, release_date, rating, list, moda
               releaseDate={release_date}
               rating={rating}
               watchlists={list}
-              fetchMovies={fetchMovies}
               modal={modal}
             />
             <MoveMovieComponent
@@ -42,7 +37,7 @@ function MovieBoxWatchlist({ id, imgURL, title, release_date, rating, list, moda
               modal={modal}
             />
 
-            <DeleteMovieComponent id={id} title={title} watchlists={list} modal={modal} />
+            <DeleteMovieComponent id={id} title={title} modal={modal} />
           </div>
         </div>
       </div>

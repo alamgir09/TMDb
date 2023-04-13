@@ -107,6 +107,7 @@ function Watchlist() {
                 onClick={(e) => handleEdit(e, element["name"])}
               />
               <FontAwesomeIcon
+                id="deleteWatchlist"
                 data-testid="delete-icon"
                 icon={faTrash}
                 onClick={(e) => handleDelete(e, element["name"])}

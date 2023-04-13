@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { addMovie, deleteMovie } from "../functions.js";
 
 function EditMovieModal({ modal, handleClose, fetchMovies }) {
-  const [modalBody, setModalBody] = useState("");
 
   function handleClick() {
     if (modal.data.type == "copy") {
@@ -34,12 +33,14 @@ function EditMovieModal({ modal, handleClose, fetchMovies }) {
       deleteMovie(modal.data.id, modal.data.watchlist);
     }
 
-    handleClose();
-    fetchMovies();
+    setTimeout(() => {
+      handleClose();
+      fetchMovies();
+    }, 1000);
   }
 
   return (
-    <Modal show={modal.show} onHide={handleClose}>
+    <Modal data-testid="editMovieModal" id="editMovieModal" show={modal.show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title id="editMovieTitle">Edit Movie</Modal.Title>
       </Modal.Header>
@@ -48,7 +49,7 @@ function EditMovieModal({ modal, handleClose, fetchMovies }) {
         <p className="text-center">This action can not be undone.</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="success" onClick={handleClose}>
+        <Button data-testid="editMovieClose" variant="success" onClick={handleClose}>
           Cancel
         </Button>
         <Button variant="danger" onClick={handleClick}>

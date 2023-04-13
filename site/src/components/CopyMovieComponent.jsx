@@ -1,10 +1,9 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy, faTrash, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { addMovie } from "../functions.js";
+import { faCopy } from "@fortawesome/free-solid-svg-icons";
 
-function CopyMovieComponent({ id, imgURL, title, releaseDate, rating, watchlists, fetchMovies, modal }) {
+function CopyMovieComponent({ id, imgURL, title, releaseDate, rating, watchlists, modal }) {
   // The forwardRef is important!!
   // Dropdown needs access to the DOM node in order to position the Menu
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -15,12 +14,12 @@ function CopyMovieComponent({ id, imgURL, title, releaseDate, rating, watchlists
         onClick(e);
       }}
       icon={faCopy}
+      data-testid="copy-icon"
       {...children}
     />
   ));
 
   function openCopy(watchlist) {
-    console.log("open copy called");
     modal({
       show: true,
       data: {
