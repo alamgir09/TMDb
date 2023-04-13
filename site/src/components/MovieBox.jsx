@@ -32,6 +32,7 @@ function MovieBox({ id, imgURL, title, release_date, rating, list, handleShow })
         </div>
         <div className="box-hover-elements col-1 inner-text">
           <AddMovieDropdown
+            id={id}
             imgURL={imgURL}
             title={title}
             releaseDate={release_date}

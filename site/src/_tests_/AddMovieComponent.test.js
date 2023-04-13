@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen, fireEvent, act, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import AddMovieDropdown from "../components/AddMovieComponent";
-import AddMovieComponent from "../components/AddMovieComponent";
 
 
 // mock the fetch function
@@ -21,7 +20,6 @@ describe("AddMovieComponent", () => {
   const handleShow = jest.fn();
 
   beforeEach(() => {
-    // fetch.resetMocks();
     jest.clearAllMocks();
     localStorage.clear();
   });
@@ -50,7 +48,7 @@ describe("AddMovieComponent", () => {
     const toggleButton = screen.getByRole("button", { name: "Add to Watchlist" });
     fireEvent.click(toggleButton);
 
-    await waitFor(() => expect(container.querySelectorAll(".dropdown-item").length).toBe(watchlists.length + 1)); // +1 for Create Watchlist Button
+    await waitFor(() => expect(container.querySelectorAll(".dropdown-item")).toHaveLength(watchlists.length + 1)); // +1 for Create Watchlist Button
   });
 
   it("should add the movie to the selected watchlist", async () => {
