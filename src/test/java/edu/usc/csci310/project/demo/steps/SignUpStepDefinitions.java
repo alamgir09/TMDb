@@ -93,4 +93,9 @@ public class SignUpStepDefinitions {
     public void iClockOnTheHyperlink(String arg0) {
         driver.findElement(By.linkText(arg0)).click();
     }
+
+    @After
+    public void after() {
+        driver.quit();
+    }
 }
