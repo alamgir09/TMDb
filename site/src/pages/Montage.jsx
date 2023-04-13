@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import CollageComponent from "../components/CollageComponent";
 // import { render } from '@testing-library/react';
