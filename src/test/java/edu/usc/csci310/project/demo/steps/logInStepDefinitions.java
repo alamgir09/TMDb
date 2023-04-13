@@ -21,15 +21,17 @@ public class logInStepDefinitions {
 
     @BeforeAll
     public static void beforeAll() {
-        System.out.println("Setting Up Cucumber Driver");
-        WebDriverManager.chromedriver().driverVersion("110.0.5481").setup();
+        // System.out.println("Setting Up Cucumber Driver");
+        // WebDriverManager.chromedriver().driverVersion("110.0.5481").setup();
+        WebDriverManager.chromedriver().setup();
     }
+
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        // options.addArguments("--headless");
         options.addArguments("--whitelisted-ips");
-        options.addArguments("--no-sandbox");
+        //   options.addArguments("--no-sandbox");
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
@@ -45,6 +47,7 @@ public class logInStepDefinitions {
         driver.findElement(By.id("username")).sendKeys(arg0);
         driver.findElement(By.id("password")).sendKeys(arg1);
     }
+
     @And("I press the submit button")
     public void iPressTheSubmitButton() {
         driver.findElement(By.id("submitBtn")).click();
@@ -57,7 +60,7 @@ public class logInStepDefinitions {
     }
 
     @After
-    public void after(){
+    public void after() {
         driver.quit();
     }
 

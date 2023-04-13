@@ -32,6 +32,13 @@ function Home() {
       >
         Click to go to Other page
       </button>
+      <button data-testid="navigate-search"
+        onClick={() => {
+          navigate("/Search");
+        }}
+      >
+        Search
+      </button>
       <button
         onClick={() => {
           fetch("/api/ping", {
@@ -60,13 +67,6 @@ function Home() {
         }}
       >
         Fetch backend
-      </button>
-      <button
-        onClick={() => {
-          navigate("/Search");
-        }}
-      >
-        Search
       </button>
       {/* Conditionally render this div if fetchResponse is a valid value */}
       {fetchResponse ? <div>{fetchResponse}</div> : null}

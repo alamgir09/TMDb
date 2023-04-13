@@ -4,7 +4,6 @@ import CopyMovieComponent from "./CopyMovieComponent";
 import MoveMovieComponent from "./MoveMovieComponent";
 
 function MovieBoxWatchlist({ id, imgURL, title, release_date, rating, list, modal }) {
-
   return (
     <div className="movie-row-watchlist row mt-4">
       <div className="col-3 col-md-2 movie-row-watchlist-img-div">
