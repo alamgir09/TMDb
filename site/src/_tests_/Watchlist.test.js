@@ -46,9 +46,9 @@ describe("Watchlist page", () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });
 
-    const deleteIcons = await screen.queryAllByTestId("edit-icon");
+    const editIcons = await screen.queryAllByTestId("edit-icon");
 
-    await waitFor(() => user.click(deleteIcons[0]));
+    await waitFor(() => user.click(editIcons[0]));
 
     expect(mockConsoleLog).toHaveBeenCalledWith("edit watchlist: Watchlist 1");
   });
@@ -129,10 +129,68 @@ describe("Watchlist page", () => {
     expect(noWatchlist).toBeInTheDocument();
   });
 
-  test("calls handleClose function when button is clicked", async () => {
-    const mockHandleClose = jest.fn();
-    render(<CreateWatchlistModal show={true} handleClose={mockHandleClose} />);
-    fireEvent.click(screen.getByText(/Close/i));
-    expect(mockHandleClose).toHaveBeenCalled();
+  test("handleClose when closing the CreateWatchlistModal", async () => {
+    const user = userEvent.setup();
+
+    const { container, getByTestId } = render(<Watchlist />, { wrapper: BrowserRouter });
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    const element1 = container.querySelector("#createWatchlist");
+
+    await waitFor(() => user.click(element1));
+
+    await waitFor(() => fireEvent.click(getByTestId("createHandleClose")));
+
+     await waitFor(() => expect(screen.queryByText("Edit Watchlist")).not.toBeInTheDocument());
   });
+
+  test("handleClose when closing the EditWatchlistModal", async () => {
+      const user = userEvent.setup();
+          const mockConsoleLog = jest.spyOn(console, "log").mockImplementation(() => {});
+          const mockResponse = { data: JSON.stringify([{ name: "Watchlist 1" }, { name: "Watchlist 2" }]) };
+          jest.spyOn(window, "fetch").mockResolvedValueOnce({
+            json: () => Promise.resolve(mockResponse)
+          });
+
+          const { getByText, getByTestId} = render(<Watchlist />, { wrapper: BrowserRouter });
+
+          await act(async () => {
+            await new Promise((resolve) => setTimeout(resolve, 0));
+          });
+
+          const editIcons = await screen.queryAllByTestId("edit-icon");
+
+          await waitFor(() => user.click(editIcons[0]));
+
+           await waitFor(() => user.click(getByTestId("editHandleClose")));
+
+            await waitFor(() => expect(screen.queryByText("Edit Watchlist")).not.toBeInTheDocument());
+
+
+    });
+
+    test("handleDelete when closing the DeleteWatchlistModal", async () => {
+        const user = userEvent.setup();
+        const mockConsoleLog = jest.spyOn(console, "log").mockImplementation(() => {});
+        const mockResponse = { data: JSON.stringify([{ name: "Watchlist 1" }, { name: "Watchlist 2" }]) };
+        jest.spyOn(window, "fetch").mockResolvedValueOnce({
+          json: () => Promise.resolve(mockResponse)
+        });
+
+        const { getByText, getByTestId } = render(<Watchlist />, { wrapper: BrowserRouter });
+
+        await act(async () => {
+          await new Promise((resolve) => setTimeout(resolve, 0));
+        });
+
+        const deleteIcons = await screen.queryAllByTestId("delete-icon");
+
+        await waitFor(() => user.click(deleteIcons[0]));
+
+        await waitFor(() => user.click(getByTestId("deleteHandleClose")));
+
+         await waitFor(() => expect(screen.queryByText("Edit Watchlist")).not.toBeInTheDocument());
+      });
 });

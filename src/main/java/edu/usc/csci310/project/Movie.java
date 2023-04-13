@@ -6,6 +6,8 @@ public class Movie {
     String releaseDate;
     String rating;
 
+    String id;
+
     public String getTitle() {
         return title;
     }
@@ -20,6 +22,10 @@ public class Movie {
 
     public String getRating() {
         return rating;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setTitle(String title) {
@@ -38,7 +44,12 @@ public class Movie {
         this.rating = rating;
     }
 
-    public Movie(String title, String imgURL, String releaseDate, String rating) {
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Movie(String id, String title, String imgURL, String releaseDate, String rating) {
+        this.id = id;
         this.title = title;
         this.imgURL = imgURL;
         this.releaseDate = releaseDate;
