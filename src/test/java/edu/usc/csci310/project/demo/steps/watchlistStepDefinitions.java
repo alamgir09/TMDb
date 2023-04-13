@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -52,7 +53,7 @@ public class watchlistStepDefinitions {
 
     @After
     public void after() {
-        driver.quit();
+        //driver.quit();
     }
 
     @Given("I am on the watchlist page")
@@ -231,5 +232,27 @@ public class watchlistStepDefinitions {
     @And("I press the {string} dropdown menu item")
     public void iPressTheDropdownMenuItem(String arg0) {
         driver.findElement(By.id(arg0)).click();
+    }
+
+    @And("I press the cancel button")
+    public void iPressTheCancelButton() throws InterruptedException {
+        driver.findElement(By.xpath("//*[contains(text(), 'Cancel')]")).click();
+        Thread.sleep(10000);
+    }
+
+    @Then("I should not see the pop-up modal")
+    public void iShouldNotSeeThePopUpModal() {
+        //WebElement movie_box_div = driver.findElement(By.id("editMovieModal"));
+
+        List<WebElement> elements = driver.findElements(By.id("editMovieModal"));
+
+        assertEquals(0, elements.size());
+
+//        if (elements.size() == 0) {
+//            System.out.println("Element doesn't exist on the page");
+//        } else {
+//            System.out.println("Element exists on the page");
+//        }
+
     }
 }

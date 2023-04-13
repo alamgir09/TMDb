@@ -33,7 +33,7 @@ Feature: Create and save movie watch lists
     And I press the create button
     Then I should see "Watchlist Edited" on the page
 
-  Scenario: Delete a watchlist and confirm
+  Scenario: Delete a watchlist and press confirm should delete the watchlist
     Given I am on the watchlist page
     When I press the delete watchlist button
     And I press the create button
@@ -45,6 +45,13 @@ Feature: Create and save movie watch lists
     And I type "Watchlist 1" into modal
     And I press the create button
     Then I should see "Watchlist 1" on the page
+
+  Scenario: On click of deleting a watchlist but clicking cancel should not delete it
+    Given I am on the watchlist page
+    When I press the delete watchlist button
+    And I press the cancel button
+    Then I should not see the pop-up modal
+    And I should see "Watchlist 1" on the page
 
   Scenario: On click of watchlist should take to watchlist detail page
     Given I am on the watchlist page
@@ -58,20 +65,20 @@ Feature: Create and save movie watch lists
     And I should see "Release Date" on the page
     And I should see "Rating" on the page
 
-  Scenario: Copy Movie to another Watchlist and confirm
+  Scenario: Copy Movie to another Watchlist (by clicking on copy-icon, clicking confirm)
     Given I am on the watchlist detail page for "Watchlist Test"
     When I press the "fa-copy" where movie box is "Iron Man 2"
     And I click on "Watchlist 1" dropdown item
     And I press the confirm button
     Then I should see "Iron Man 2" on "Watchlist 1"
 
-  Scenario: Delete Movie to from a Watchlist and confirm
+  Scenario: Delete Movie to from a Watchlist and confirm (by clicking on delete-icon, clicking confirm)
     Given I am on the watchlist detail page for "Watchlist 1"
     When I press the "fa-trash" where movie box is "Iron Man 2"
     And I press the confirm button
     Then I should not see "Iron Man 2" on the page
 
-  Scenario: Move Movie to another Watchlist and confirm
+  Scenario: Move Movie to another Watchlist and confirm (by clicking on move-icon, clicking confirm)
     Given I am on the watchlist detail page for "Watchlist Test"
     When I press the "fa-arrow-right-from-bracket" where movie box is "Iron Man 2"
     And I click on "Watchlist 1" dropdown item
@@ -86,6 +93,27 @@ Feature: Create and save movie watch lists
     And I press the confirm button
     Then I should not see "Iron Man 2" on the page
     And I should see "Iron Man 2" on "Watchlist Test"
+
+  Scenario: click on copy-icon and cancel should not perform the action and closes the modal
+    Given I am on the watchlist detail page for "Watchlist Test"
+    When I press the "fa-copy" where movie box is "Iron Man 2"
+    And I click on "Watchlist 1" dropdown item
+    And I press the cancel button
+    Then I should not see the pop-up modal
+
+  Scenario: click on delete-icon and cancel should not perform the action and closes the modal
+    Given I am on the watchlist detail page for "Watchlist Test"
+    When I press the "fa-trash" where movie box is "Iron Man 2"
+    And I press the cancel button
+    Then I should not see the pop-up modal
+
+  Scenario: click on move-icon and cancel should not perform the action and closes the modal
+    Given I am on the watchlist detail page for "Watchlist Test"
+    When I press the "fa-arrow-right-from-bracket" where movie box is "Iron Man 2"
+    And I click on "Watchlist 1" dropdown item
+    And I press the cancel button
+    Then I should not see the pop-up modal
+
 
 
 
