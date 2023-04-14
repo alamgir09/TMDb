@@ -31,6 +31,7 @@ public class searchStepDefinitions {
     @BeforeAll
     public static void beforeAll() {
         System.out.println("Setting Up Cucumber Driver");
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
         // WebDriverManager.chromedriver().driverVersion("110.0.5481").setup();
         WebDriverManager.chromedriver().setup();
 
@@ -39,12 +40,12 @@ public class searchStepDefinitions {
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
-        // options.addArguments("--headless");
+        options.addArguments("--headless");
         // options.addArguments("--whitelisted-ips");
         // options.addArguments("--no-sandbox");
         options.addArguments("--disable-extensions");
-        options.addArguments("--disable-web-security");
-        options.addArguments("--allow-file-access-from-files");
+        // options.addArguments("--disable-web-security");
+        // options.addArguments("--allow-file-access-from-files");
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
 
@@ -64,7 +65,7 @@ public class searchStepDefinitions {
     @When("I press the submit search button")
     public void iPressTheSubmitSearchButton() throws InterruptedException {
         driver.findElement(By.xpath("//*[@id=\"search-form\"]/div/button[1]")).click();
-        Thread.sleep( 1000);
+        Thread.sleep(1000);
     }
 
 

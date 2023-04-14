@@ -17,6 +17,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -26,17 +27,20 @@ public class movieDetailsStepDefinitions {
 
     private static final String ROOT_URL = "http://localhost:8080/";
     private static WebDriver driver;
+
     @BeforeAll
     public static void beforeAll() {
         System.out.println("Setting Up Cucumber Driver");
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
         // WebDriverManager.chromedriver().driverVersion("110.0.5481").setup();
         WebDriverManager.chromedriver().setup();
 
     }
+
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
-        // options.addArguments("--headless");
+        options.addArguments("--headless");
         // options.addArguments("--whitelisted-ips");
         // options.addArguments("--no-sandbox");
         options.addArguments("--disable-extensions");
@@ -45,12 +49,13 @@ public class movieDetailsStepDefinitions {
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
     }
+
     @After
     public void after() {
-        driver.quit();
+        //driver.quit();
     }
 
-    @Given("I search for {string}" )
+    @Given("I search for {string}")
     public void search_for_movie(String arg0) throws InterruptedException {
         driver.get(ROOT_URL + "Search"); //go to search
 
@@ -59,11 +64,13 @@ public class movieDetailsStepDefinitions {
         driver.findElement(By.xpath("//*[@id=\"search-form\"]/div/button[1]")).click();
         Thread.sleep(1000);
     }
+
     @When("I click a movie")
     public void click_movie() {
         WebElement movie = driver.findElement(By.xpath("//*[@id=\"movies-all\"]/div[2]/div"));
         movie.click();
     }
+
     @Then("I should navigate to a new page")
     public void navigate_to_new_page() {
         String currentUrl = driver.getCurrentUrl();
@@ -164,6 +171,7 @@ public class movieDetailsStepDefinitions {
 
         assertEquals(0, (int) castListScrollLeft);
     }
+
     @When("I click on {string} from the cast list")
     public void click_on_actor(String actorName) throws InterruptedException {
         WebElement castList = driver.findElement(By.className("movie-cast"));
@@ -184,6 +192,7 @@ public class movieDetailsStepDefinitions {
         String currentUrl = driver.getCurrentUrl();
         assertTrue(currentUrl.contains("/Search/Actors/"));
     }
+
     @And("the search URL should contain {string}")
     public void verifySearchURLContainsActorName(String actorName) {
         String currentUrl = driver.getCurrentUrl();
@@ -197,14 +206,14 @@ public class movieDetailsStepDefinitions {
     public void verifySearchField(String expectedValue) {
         WebElement searchField = driver.findElement(By.xpath("//*[@id=\"search-form\"]/div/input")); // Assuming the search field has name "q"
         String actualValue = searchField.getAttribute("value");
-        assert(actualValue.equals(expectedValue));
+        assert (actualValue.equals(expectedValue));
     }
 
     @And("the search criteria should say Actors")
     public void verifySearchCriteria() {
         WebElement searchCriteria = driver.findElement(By.xpath("//*[@id=\"active-nav\"]/a")); // Assuming the search criteria has class "search-criteria"
         String actualValue = searchCriteria.getText();
-        assert(actualValue.equals("Actors"));
+        assert (actualValue.equals("Actors"));
     }
 
     @When("I click on {string} from the genre list")
@@ -234,7 +243,7 @@ public class movieDetailsStepDefinitions {
     public void verifySearchCriteriaGenre() {
         WebElement searchCriteria = driver.findElement(By.xpath("//*[@id=\"active-nav\"]/a")); // Assuming the search criteria has class "search-criteria"
         String actualValue = searchCriteria.getText();
-        assert(actualValue.equals("Genres"));
+        assert (actualValue.equals("Genres"));
     }
 
 }

@@ -1,4 +1,5 @@
 Feature: Provide Movie Details for displayed movies
+
   Scenario: clicking on a movie after searching should navigate to a new page
     Given I search for "iron man"
     When I click a movie

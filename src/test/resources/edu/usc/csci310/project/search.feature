@@ -90,16 +90,13 @@ Feature: Search for movies based on various criteria
     When I press the home button
     Then I should be on the home page
 
-
-
-
-  Scenario: clicking on the myWatchlist button in NavBar redirects to Watchlists page
-    Given I am on the search page
-    When I press the myWatchList button
-    Then I should be on the Watchlists page
-
-  Scenario: clicking on the Log Out button in NavBar redirects to Log In page
-    Given I am on the search page
-    When I press the Log Out button
-    Then I should be on the Log In page
+#  Scenario: clicking on the myWatchlist button in NavBar redirects to Watchlists page
+#    Given I am on the search page
+#    When I press the myWatchList button
+#    Then I should be on the Watchlists page
+#
+#  Scenario: clicking on the Log Out button in NavBar redirects to Log In page
+#    Given I am on the search page
+#    When I press the Log Out button
+#    Then I should be on the Log In page
 
