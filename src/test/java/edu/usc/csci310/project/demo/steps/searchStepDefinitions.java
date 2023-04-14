@@ -64,7 +64,7 @@ public class searchStepDefinitions {
     @When("I press the submit search button")
     public void iPressTheSubmitSearchButton() throws InterruptedException {
         driver.findElement(By.xpath("//*[@id=\"search-form\"]/div/button[1]")).click();
-        Thread.sleep(1000);
+        Thread.sleep( 1000);
     }
 
 

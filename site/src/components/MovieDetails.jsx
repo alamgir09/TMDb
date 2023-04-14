@@ -132,7 +132,7 @@ function MovieDetails() {
           <strong> Cast: </strong>
         </div>
         <div className="movie-cast">
-          <p>{actorList}</p>
+          {actorList}
         </div>
         <div className="movie-description">
           <p> {description} </p>
