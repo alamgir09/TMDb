@@ -1,3 +1,9 @@
 Participants: Kevin Dong, Jasmine Lee, Mohammed Alamgir, Andrew Gonzales
 
 Zoom Link: https://usc.zoom.us/rec/share/x8pELyN4HnevFpGWRV2nI7R7PzAazmCff6dBNED3ReH0nfdSHtjTk_1xONZCJAUG.3nts0VWbWmpaDJBv
+
+Absent: 
+Kerry Meng-Lin: 
+1) I’ve experimented with other APIs to populate the movie suggestions
+2) Hopefully will have a basic version of the suggestions by end of this sprint
+3) no road blocks 
