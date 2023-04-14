@@ -96,20 +96,20 @@ Feature: Create and save movie watch lists
 
   Scenario: click on copy-icon and cancel should not perform the action and closes the modal
     Given I am on the watchlist detail page for "Watchlist Test"
-    When I press the "fa-copy" where movie box is "Iron Man 2"
+    When I press the "fa-copy" where movie box is "Iron Man"
     And I click on "Watchlist 1" dropdown item
     And I press the cancel button
     Then I should not see the pop-up modal
 
   Scenario: click on delete-icon and cancel should not perform the action and closes the modal
     Given I am on the watchlist detail page for "Watchlist Test"
-    When I press the "fa-trash" where movie box is "Iron Man 2"
+    When I press the "fa-trash" where movie box is "Iron Man"
     And I press the cancel button
     Then I should not see the pop-up modal
 
   Scenario: click on move-icon and cancel should not perform the action and closes the modal
     Given I am on the watchlist detail page for "Watchlist Test"
-    When I press the "fa-arrow-right-from-bracket" where movie box is "Iron Man 2"
+    When I press the "fa-arrow-right-from-bracket" where movie box is "Iron Man"
     And I click on "Watchlist 1" dropdown item
     And I press the cancel button
     Then I should not see the pop-up modal
