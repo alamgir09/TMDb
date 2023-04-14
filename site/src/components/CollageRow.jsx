@@ -1,7 +1,7 @@
 import React from "react";
 // import {Component} from 'react';
 
-function CollageRow({ startIndex, numColumns, images, width }) {
+function CollageRow({ startIndex, numColumns, images, movieIDs, width }) {
   var columns = [];
 
   for (var i = startIndex; i < startIndex + numColumns; i++) {
@@ -15,7 +15,7 @@ function CollageRow({ startIndex, numColumns, images, width }) {
         className="vCol"
         style={{ width: width + "%", transform: "rotate(" + randNum + "deg)" }}
       >
-        <img src={images[i]} />
+        <img className={movieIDs[i]} src={images[i]} />
       </div>
     );
   }
