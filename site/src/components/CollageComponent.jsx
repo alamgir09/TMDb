@@ -2,18 +2,25 @@ import React, { useState, useEffect } from "react";
 // import {Component} from 'react';
 import CollageRow from "./CollageRow.jsx";
 import "../styles/collage.css";
-import { act } from "react-dom/test-utils";
 
 function Collage({movieIDList}) {
+
+  console.log("COLLAGE");
+  console.log(movieIDList);
+
+  //IMPORTANT: these 2 arrays line up perfectly
+
   //store the image urls
   const [imageURLs, setImageURLs] = useState([]);
 
-//   const movieIDList = ["225", "550", "2038", "18", "601759", "68721", "428045", "169934", "339259", "10679"]; // test movie id array
-//     const movieIDList = ["225"];
+  //also keep track of the corresponding movie id
+  const [movieIDs, setMovieIDs] = useState([]);
 
   //get the image urls from the movie ids
   async function getImageURLs() {
+
     var urls = [];
+    var ids = [];
 
     //for each movie id, do an api call to get the images, on success add a certain amount of those images to the image url array
     for (var i = 0; i < movieIDList.length; i++) {
@@ -31,6 +38,8 @@ function Collage({movieIDList}) {
         numImages = getNumImages(numMovies);
       }
 
+      console.log(numImages);
+
       try {
         let response = await fetch(
           "https://api.themoviedb.org/3/movie/" + id + "/images?api_key=528c625029ff80e41b72cc37a0c389af"
@@ -40,27 +49,42 @@ function Collage({movieIDList}) {
         //get the backdrops
         var backdrops = json["backdrops"];
 
+        console.log("backdrops:");
+        console.log(backdrops);
+
         //add a certain number of images to the image url array
-        for (var j = 0; j < numImages; j++) {
+        for (var j = 0; j < Math.min(backdrops.length, numImages); j++) {
           var path = backdrops[j]["file_path"];
           var fullURL = "http://image.tmdb.org/t/p/w400" + path;
           urls.push(fullURL);
+          ids.push(id);
         }
+
+        //if the api has less than the required amount of images for this movie, add in duplicates
+        if(backdrops.length < numImages){
+            console.log("NEED MORE");
+            var index = 0;
+            for(var overflow = backdrops.length; overflow < numImages; overflow++){
+                path = backdrops[index]["file_path"];
+                fullURL = "http://image.tmdb.org/t/p/w400" + path;
+                urls.push(fullURL);
+                ids.push(id);
+                index++;
+            }
+        }
+
       } catch (err) {
         console.log(err);
-        //             handleFetchResponse("An API error occurred");
+        //handleFetchResponse("An API error occurred");
       }
     }
-    act(() => {
-      setImageURLs(urls);
-    });
-    module.exports = { setImageURLs}
-
+    setImageURLs(urls);
+    setMovieIDs(ids);
   }
 
 
   function getNumImages(numMovies) {
-    Math.ceil(10 / numMovies);
+    return Math.ceil(10 / numMovies);
   }
 
 
@@ -97,6 +121,7 @@ function Collage({movieIDList}) {
           startIndex={i * columns}
           numColumns={columns}
           images={imageURLs}
+          movieIDs={movieIDs}
           width={width}
 //           data-testid={`collage // add test id attribute
         />
@@ -111,13 +136,14 @@ function Collage({movieIDList}) {
           startIndex={rows * columns}
           numColumns={remainder}
           images={imageURLs}
+          movieIDs={movieIDs}
           width={width}
 
         />
       );
     }
 
-    return <div id="collage" data-testid="collageTestID">{collageRows}</div>;
+    return <div id="collage" data-testid="collageTestID">{collageRows}</div>
   }
 
   useEffect(() => {

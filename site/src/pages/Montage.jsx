@@ -9,6 +9,8 @@ function Montage() {
   // Anything returned will be rendered in React
   const location = useLocation();
   const movieIDList = location.state.movieIDList;
+  console.log("MONTAGE");
+  console.log(movieIDList);
   return (
     <div>
       <NavBar />
