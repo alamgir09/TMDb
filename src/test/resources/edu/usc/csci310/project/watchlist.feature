@@ -14,24 +14,12 @@ Feature: Create and save movie watch lists
     And I press the create button
     Then I should see "Watchlist already exists" error message on the modal
 
-  Scenario: Change watchlist type from Private to Public for "Watchlist Test"
-    Given I am on the watchlist detail page for "Watchlist Test"
-    When I press the change watchlist type button
-    And I press the "publicWatchlist" dropdown menu item
-    Then I should see "Public" on the page
-
-  Scenario: Change watchlist type back to Private for "Watchlist Test"
-    Given I am on the watchlist detail page for "Watchlist Test"
-    When I press the change watchlist type button
-    And I press the "privateWatchlist" dropdown menu item
-    Then I should see "Private" on the page
-
   Scenario: Edit watchlist name and confirm
     Given I am on the watchlist page
     When I press the edit watchlist button
     And I type "Watchlist Edited" into edit watchlist modal
     And I press the create button
-    Then I should see "Watchlist Edited" on the page
+    Then I should see "Watchlist Edited" on the watchlist page
 
   Scenario: Delete a watchlist and press confirm should delete the watchlist
     Given I am on the watchlist page
@@ -44,26 +32,38 @@ Feature: Create and save movie watch lists
     When I press the create watchlist button
     And I type "Watchlist 1" into modal
     And I press the create button
-    Then I should see "Watchlist 1" on the page
+    Then I should see "Watchlist 1" on the watchlist page
 
   Scenario: On click of deleting a watchlist but clicking cancel should not delete it
     Given I am on the watchlist page
     When I press the delete watchlist button
     And I press the cancel button
     Then I should not see the pop-up modal
-    And I should see "Watchlist 1" on the page
+    And I should see "Watchlist 1" on the watchlist page
 
   Scenario: On click of watchlist should take to watchlist detail page
     Given I am on the watchlist page
     When I press on Watchlist Test Div
-    Then I should see "Watchlist Test" on the page
+    Then I should see "Watchlist Test" on the watchlist page
 
   Scenario: Watchlist detail page should show movies
     Given I am on the watchlist detail page for "Watchlist Test"
-    Then I should see "Poster" on the page
-    And I should see "Title" on the page
-    And I should see "Release Date" on the page
-    And I should see "Rating" on the page
+    Then I should see "Poster" on the watchlist page
+    And I should see "Title" on the watchlist page
+    And I should see "Release Date" on the watchlist page
+    And I should see "Rating" on the watchlist page
+
+  Scenario: Change watchlist type from Private to Public for "Watchlist Test"
+    Given I am on the watchlist detail page for "Watchlist Test"
+    When I press the change watchlist type button
+    And I press the "publicWatchlist" dropdown menu item
+    Then I should see "Public" on the watchlist page
+
+  Scenario: Change watchlist type back to Private for "Watchlist Test"
+    Given I am on the watchlist detail page for "Watchlist Test"
+    When I press the change watchlist type button
+    And I press the "privateWatchlist" dropdown menu item
+    Then I should see "Private" on the watchlist page
 
   Scenario: Copy Movie to another Watchlist (by clicking on copy-icon, clicking confirm)
     Given I am on the watchlist detail page for "Watchlist Test"
