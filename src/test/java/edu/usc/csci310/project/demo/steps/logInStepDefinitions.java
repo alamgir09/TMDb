@@ -55,14 +55,13 @@ public class logInStepDefinitions {
 
     @Then("I should see {string} in the page")
     public void iShouldSeeInThePage(String arg0) {
-        if (arg0 == "Username not found") {
+        if(arg0 == "Username not found"){
             assertEquals(driver.findElement(By.id("response")).getText(), "Username not found");
         }
-        if (arg0 == "Success") {
+        if(arg0 == "Success"){
             assertEquals(driver.findElement(By.id("response")).getText(), "Success");
         }
     }
-
     @After
     public void after() {
         driver.quit();
@@ -89,4 +88,5 @@ public class logInStepDefinitions {
     public void iClickOnTheHyperlinkAtTheBottom(String arg0) {
         driver.findElement(By.linkText(arg0)).click();
     }
+
 }

@@ -63,7 +63,6 @@ const NavBar = () => {
           </ul>
         </div>
       </div>
-      d
     </nav>
   );
 };

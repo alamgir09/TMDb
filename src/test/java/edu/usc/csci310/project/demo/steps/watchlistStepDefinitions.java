@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -32,6 +33,7 @@ public class watchlistStepDefinitions {
     public static void beforeAll() {
         System.out.println("Setting Up Cucumber Driver");
         // WebDriverManager.chromedriver().driverVersion("110.0.5481").setup();
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
         WebDriverManager.chromedriver().setup();
 
     }
@@ -39,20 +41,15 @@ public class watchlistStepDefinitions {
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
-        // options.addArguments("--headless");
-        // options.addArguments("--whitelisted-ips");
+        options.addArguments("--headless");
+        options.addArguments("--whitelisted-ips");
         // options.addArguments("--no-sandbox");
         options.addArguments("--disable-extensions");
-        options.addArguments("--disable-web-security");
-        options.addArguments("--allow-file-access-from-files");
+        // options.addArguments("--disable-web-security");
+        // options.addArguments("--allow-file-access-from-files");
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
 
-    }
-
-    @After
-    public void after() {
-        driver.quit();
     }
 
     @Given("I am on the watchlist page")
@@ -84,10 +81,6 @@ public class watchlistStepDefinitions {
         driver.findElement(By.xpath("/html/body/div[3]/div/div/div[2]/form/div[1]/input")).sendKeys(arg0 + timestamp);
     }
 
-    @Then("I should see {string} on the page")
-    public void iShouldSeeOnThePage(String arg0) {
-        assertTrue(driver.getPageSource().contains(arg0));
-    }
 
     @And("I press the create button")
     public void iPressTheCreateButton() throws InterruptedException {
@@ -212,6 +205,9 @@ public class watchlistStepDefinitions {
         // find the div element with text "arg1"
         WebElement movie_box_div = driver.findElement(By.xpath("//*[contains(text(), '" + arg1 + "')]"));
 
+        // Scroll down to the div element
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", movie_box_div);
+
         WebElement grandParentDiv = (WebElement) ((JavascriptExecutor) driver)
                 .executeScript("return arguments[0].parentElement.parentElement;", movie_box_div);
 
@@ -230,5 +226,30 @@ public class watchlistStepDefinitions {
     @And("I press the {string} dropdown menu item")
     public void iPressTheDropdownMenuItem(String arg0) {
         driver.findElement(By.id(arg0)).click();
+    }
+
+    @And("I press the cancel button")
+    public void iPressTheCancelButton() throws InterruptedException {
+        driver.findElement(By.xpath("//*[contains(text(), 'Cancel')]")).click();
+        Thread.sleep(10000);
+    }
+
+    @Then("I should not see the pop-up modal")
+    public void iShouldNotSeeThePopUpModal() {
+
+        List<WebElement> elements = driver.findElements(By.id("editMovieModal"));
+        assertEquals(0, elements.size());
+
+    }
+
+    @Then("I should see {string} on the watchlist page")
+    public void iShouldSeeOnTheWatchlistPage(String arg0) {
+        assertTrue(driver.getPageSource().contains(arg0));
+    }
+
+    @After
+    public void after() {
+        driver.close();
+        //driver.quit();
     }
 }
