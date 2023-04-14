@@ -46,7 +46,7 @@ function Search() {
   }, []);
 
   // Pagination Hooks
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
 
   // Constructing API Request below
@@ -227,7 +227,12 @@ function Search() {
   // const indexofFirstPost = indexOfLastPost - postsPerPage;
   // const currentComponents = components.splice(indexofFirstPost, indexOfLastPost);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  //const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  function paginate(pageNumber) {
+    pageNumber + 1;
+    console.log("xxx");
+  };
 
   // fetch watchlist
   // api request to get watchlist for current user
