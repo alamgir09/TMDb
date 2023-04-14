@@ -135,7 +135,6 @@ public class watchlistStepDefinitions {
     public void iShouldNotSeeOnThePage(String arg0) throws InterruptedException {
         Thread.sleep(5000);
         String pageSource = driver.getPageSource();
-        System.out.println(pageSource);
         assertFalse(pageSource.contains(arg0));
     }
 

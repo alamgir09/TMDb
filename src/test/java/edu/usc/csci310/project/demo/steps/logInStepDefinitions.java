@@ -28,6 +28,7 @@ public class logInStepDefinitions {
         System.out.println("Setting Up Cucumber Driver");
         WebDriverManager.chromedriver().setup();
     }
+
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
@@ -46,10 +47,12 @@ public class logInStepDefinitions {
         driver.findElement(By.id("username")).sendKeys(arg0);
         driver.findElement(By.id("password")).sendKeys(arg1);
     }
+
     @And("I press the submit button")
     public void iPressTheSubmitButton() {
         driver.findElement(By.id("submitBtn")).click();
     }
+
     @Then("I should see {string} in the page")
     public void iShouldSeeInThePage(String arg0) {
         if(arg0 == "Username not found"){
@@ -60,7 +63,7 @@ public class logInStepDefinitions {
         }
     }
     @After
-    public void after(){
+    public void after() {
         driver.quit();
     }
 
@@ -73,6 +76,7 @@ public class logInStepDefinitions {
     public void iAmOnTheSignupPage() {
         assertEquals(driver.getCurrentUrl(), ROOT_URL + "SignUp");
     }
+
     @Then("I should be redirected to the SignUp page")
     public void iShouldBeRedirectedToTheSignUpPage() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
@@ -84,4 +88,5 @@ public class logInStepDefinitions {
     public void iClickOnTheHyperlinkAtTheBottom(String arg0) {
         driver.findElement(By.linkText(arg0)).click();
     }
+
 }
