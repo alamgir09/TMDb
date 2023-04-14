@@ -3,7 +3,6 @@ import { render, screen, fireEvent, act, waitFor } from "@testing-library/react"
 import { BrowserRouter } from "react-router-dom";
 import AddMovieDropdown from "../components/AddMovieComponent";
 
-
 // mock the fetch function
 global.fetch = jest.fn(() =>
   Promise.resolve({

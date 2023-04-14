@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 import { addMovie, deleteMovie } from "../functions.js";
 
 function EditMovieModal({ modal, handleClose, fetchMovies }) {
-
   function handleClick() {
     if (modal.data.type == "copy") {
       addMovie(

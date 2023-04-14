@@ -62,7 +62,7 @@ function CreateWatchlistModal({ show, handleClose, fetchWatchlist }) {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title id="createWatchlistTitle">Create Watchlist</Modal.Title>
+        <Modal.Title data-testid="modal-title" id="createWatchlistTitle">Create Watchlist</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
