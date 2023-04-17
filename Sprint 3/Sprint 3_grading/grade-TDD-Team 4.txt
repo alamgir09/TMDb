@@ -1,0 +1,71 @@
+Best Practice TDD Report
+Owner: Team 4
+Grade: 1.9/12
+Comments: 
+	No test found for: src.pages.Search.jsx.fetchWatchlist
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/88688c2ece907d9bc6f8e767b64ceb48d73812af
+	No test found for: src.components.DeleteWatchlistModal.jsx.DeleteWatchlistModal
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/a780643d3f99b32b6e76096ecba19d145e6d437e
+	No test found for: src.components.DeleteWatchlistModal.jsx.handleDeleteWatchlistForm
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/a780643d3f99b32b6e76096ecba19d145e6d437e
+	No test found for: src.components.EditWatchlistModal.jsx.EditWatchlistModal
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/a780643d3f99b32b6e76096ecba19d145e6d437e
+	No test found for: src.components.EditWatchlistModal.jsx.handleEditWatchlistForm
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/a780643d3f99b32b6e76096ecba19d145e6d437e
+	Test method was not created before method for: src.functions.js.deleteMovie
+		Method commit on 2023-04-11 07:40:50+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/67d2c84832088021525684fd155eb52498195714
+		Test commit on 2023-04-13 00:37:41+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/78d1b1524b1d5fab85086000b9962b29c476a02e
+	Test method was not created before method for: src.components.CopyMovieComponent.jsx.CopyMovieComponent
+		Method commit on 2023-04-11 07:40:50+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/67d2c84832088021525684fd155eb52498195714
+		Test commit on 2023-04-13 00:37:41+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/78d1b1524b1d5fab85086000b9962b29c476a02e
+	Test method was not created before method for: src.components.CopyMovieComponent.jsx.openCopy
+		Method commit on 2023-04-11 07:40:50+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/67d2c84832088021525684fd155eb52498195714
+		Test commit on 2023-04-13 00:37:41+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/78d1b1524b1d5fab85086000b9962b29c476a02e
+	Test method was not created before method for: src.components.DeleteMovieComponent.jsx.DeleteMovieComponent
+		Method commit on 2023-04-11 07:40:50+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/67d2c84832088021525684fd155eb52498195714
+		Test commit on 2023-04-13 00:37:41+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/78d1b1524b1d5fab85086000b9962b29c476a02e
+	Test method was not created before method for: src.components.DeleteMovieComponent.jsx.openDelete
+		Method commit on 2023-04-11 07:40:50+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/67d2c84832088021525684fd155eb52498195714
+		Test commit on 2023-04-13 00:37:41+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/78d1b1524b1d5fab85086000b9962b29c476a02e
+	No test found for: src.components.EditMovieModal.jsx.EditMovieModal
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/67d2c84832088021525684fd155eb52498195714
+	No test found for: src.components.EditMovieModal.jsx.handleClick
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/67d2c84832088021525684fd155eb52498195714
+	Test method was not created before method for: src.components.MoveMovieComponent.jsx.MoveMovieComponent
+		Method commit on 2023-04-11 07:40:50+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/67d2c84832088021525684fd155eb52498195714
+		Test commit on 2023-04-13 00:37:41+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/78d1b1524b1d5fab85086000b9962b29c476a02e
+	Test method was not created before method for: src.components.MoveMovieComponent.jsx.openMove
+		Method commit on 2023-04-11 07:40:50+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/67d2c84832088021525684fd155eb52498195714
+		Test commit on 2023-04-13 00:37:41+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/78d1b1524b1d5fab85086000b9962b29c476a02e
+	No test found for: src.components.MovieBoxWatchlist.jsx.MovieBoxWatchlist
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/67d2c84832088021525684fd155eb52498195714
+	No test found for: src.pages.WatchlistDetail.jsx.fetchWatchlist
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/67d2c84832088021525684fd155eb52498195714
+	Test method was not created before method for: src.components.WatchlistTypeDropdown.jsx.WatchlistTypeDropdown
+		Method commit on 2023-04-11 07:42:05+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/d8f318e4db6ded73dff0edf3bad6e609f5e8fc25
+		Test commit on 2023-04-13 00:37:41+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/78d1b1524b1d5fab85086000b9962b29c476a02e
+	Test method was not created before method for: src.components.WatchlistTypeDropdown.jsx.handleUpdateWatchlistType
+		Method commit on 2023-04-11 07:42:05+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/d8f318e4db6ded73dff0edf3bad6e609f5e8fc25
+		Test commit on 2023-04-13 00:37:41+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/78d1b1524b1d5fab85086000b9962b29c476a02e
+	Test method was not created before method for: src.components.WatchlistTypeDropdown.jsx.handleClick
+		Method commit on 2023-04-11 07:42:05+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/d8f318e4db6ded73dff0edf3bad6e609f5e8fc25
+		Test commit on 2023-04-13 00:37:41+00:00 UTC: https://github.com/CSCI310/20231-project-team-4/commit/78d1b1524b1d5fab85086000b9962b29c476a02e
+	No test found for: src.pages.TestMontageButtonPage.jsx.TestMontageButton
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/ff61735b9939c4fb35f45dcebb25f5da2612238b
+	No test found for: src.pages.Montage.jsx.Montage
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/d33f60c4c162f13ebcb44baa6e1a45feaf92e28b
+	No test found for: src.components.CollageRow.jsx.CollageRow
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/a3a09dec2e4718102494e1784b592d7f27ad2ce1
+	No test found for: src.components.CollageComponent.jsx.Collage
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/494e6fe50b9315d2c14a09f0d85805df2e7ffa4b
+	No test found for: src.components.CollageComponent.jsx.BuildCollage
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/494e6fe50b9315d2c14a09f0d85805df2e7ffa4b
+	No test found for: src.pages.Search.jsx.idSearch
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/bc549e480014ebb798ba27395c6fba61eb9a0728
+	No test found for: src.pages.Search.jsx.nonIdSearch
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/bc549e480014ebb798ba27395c6fba61eb9a0728
+	No test found for: src.pages.Search.jsx.paginate
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/9f69e41800e0798ca9c2ef79b065044ca8c13deb
+Correct TDD methods: 5
+Incorrect TDD methods: 27
+Total methods evaluated for TDD: 32
