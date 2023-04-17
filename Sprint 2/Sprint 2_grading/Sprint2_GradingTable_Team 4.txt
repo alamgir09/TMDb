@@ -1,0 +1,21 @@
+			Grading Table - Team Team 4
+
+| Section                  | Grade               | Note                                                                                                 |
+|--------------------------|---------------------|------------------------------------------------------------------------------------------------------|
+| Sprint Planning          | 6.0/8               | Product Backlog should contain feature items which were not completed correctly in last sprint       |
+| Scrums                   | 19.5/24             | Scrum 1:                                                                                             |
+|                          |                     | Scrum 2:Jasmine Lee didn't speak about roadblockers                                                  |
+|                          |                     | Scrum 3:No progress in task chart 3 from task chart 2                                                |
+|                          |                     | Scrum 4:No progress in task chart 3 from task chart 2                                                |
+| Retrospective            | 7.0/8               | Mostly complete and well explained discussion. Omitted discussion of sprint planning penalties (-1). |
+| TDD                      | 5.4/12              |                                                                                                      |
+| GitFlow                  | 10.5/12             |                                                                                                      |
+| Continuous Integration   | 8.0/12              |                                                                                                      |
+| Refactor                 | 10.9/12             |                                                                                                      |
+| Coverage                 | 9.1/12              |                                                                                                      |
+| ------------------------ | ------------------- |                                                                                                      |
+| Total                    | 76.4                |                                                                                                      |
+| ------------------------ | ------------------- |                                                                                                      |
+| Implementation Score     | 15/400              |                                                                                                      |
+| Sustainable Pace Penalty | 60.0                |                                                                                                      |
+|                          |                     |                                                                                                      |
