@@ -8,5 +8,8 @@ Features:
 	4. Be secure and protect users’ data.	
 
 In our process of picking features for this sprint development, 
-We chose to finalizes previous features from our last sprint as soon as possible so we can get started with the features that remain. 
-We will be trying to finish most features listed by our first week, so we can make any last touches before the final sprint review.
+We chose to finalizes previous features from our last sprint as soon as possible so we can get started with the features that remain.
+We chose the remaining features mostly on what we have left and prioritized the larger features to tackle first. We picked feature user interfaces must be 
+attractive to be in the last sprint so that we have the main functionality implemented and we can make it pretty. We picked compare with other users
+and generate suggestions to be in sprint 4 since they depended on other major features such as watchlist and search. Lastly we added secruity in the
+last sprint as well since it is also dependent on other features such as login/sign up and other features.
