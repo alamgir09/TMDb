@@ -1,0 +1,21 @@
+			Grading Table - Team Team 4
+
+| Section                  | Grade               | Note                                                                                                       |
+|--------------------------|---------------------|------------------------------------------------------------------------------------------------------------|
+| Sprint Planning          | 8.0/8               |                                                                                                            |
+| Scrums                   | 24.0/24             | Scrum 1:                                                                                                   |
+|                          |                     | Scrum 2:                                                                                                   |
+|                          |                     | Scrum 3:Note : Absentees should give their updates before the meeting so that files can be updated on time |
+|                          |                     | Scrum 4:Note : Absentees should give their updates before the meeting so that files can be updated on time |
+| Retrospective            | TBD                 |                                                                                                            |
+| TDD                      | 1.9/12              |                                                                                                            |
+| GitFlow                  | 12.0/12             |                                                                                                            |
+| Continuous Integration   | 12.0/12             |                                                                                                            |
+| Refactor                 | 11.7/12             |                                                                                                            |
+| Coverage                 | 11.0/12             |                                                                                                            |
+| ------------------------ | ------------------- |                                                                                                            |
+| Total                    | 80.6                |                                                                                                            |
+| ------------------------ | ------------------- |                                                                                                            |
+| Implementation Score     | 230.67/400          |                                                                                                            |
+| Sustainable Pace Penalty | 60.0                |                                                                                                            |
+|                          |                     |                                                                                                            |
