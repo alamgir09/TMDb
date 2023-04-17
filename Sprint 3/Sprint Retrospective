@@ -1,0 +1,13 @@
+Meeting Participants: Kerry Meng-Lin, Jasmine Lee, Kevin Dong, Mohammed Alamgir, Andrew Gonzalez
+
+What process aspects will be changed? Explain why this will address the problem?
+1. For TDD, we need to make sure we need to wtite commit the test method before the method. We also need to make sure the naming convention is correct so
+that the grader can find the test methods. 
+2. For refactor, we need to make sure an authorized user is closing the ticket which is the owner of the issue or another team member who is assigned 
+by the issue owner.
+3. For coverage, we need to make sure we are getting full branch coverage on our JUNIT and JEST tests
+
+What tasks will be added to the product backlog as a result of review feedback?
+1. Search - finishing up year picker feature, little eye, and dollar sign (Acceptance testing and implementation)
+2. Movie Details - fix acceptance test for scrollable actor feature 
+3. Movie Montage - write acceptance testing for use cases 
