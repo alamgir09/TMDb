@@ -6,6 +6,7 @@
 
 .vCol img{
     max-width: 100%;
+    border: 5px solid #fff;
 }
 
 /* Clear floats after the columns */
