@@ -1,4 +1,5 @@
 #Feature: Be secure and protect user data
+#
 #  Scenario: Home page is secure
 #    Given I am logged in
 #    When I navigate to the home page
@@ -125,14 +126,14 @@
 #    Then I am logged out
 #    And I am returned to the log-in screen
 #
-#  Scenario: Session timeouts on home page
+#  Scenario: Session timeouts on home page for 60 seconds
 #    Given I am logged in
 #    When I navigate to the home page
 #    And I am inactive for 60 seconds
 #    Then I am logged out
 #    And I am returned to the log-in screen
 #
-#  Scenario: Session timeouts on montage page
+#  Scenario: Session timeouts on montage page for 60 seconds
 #    When I navigate to the montage page
 #    And I am inactive for 60 seconds
 #    Then I am logged out
@@ -192,3 +193,4 @@
 #    Then My account should be locked
 #    When I wait 30 seconds
 #    Then My account should not be locked
+

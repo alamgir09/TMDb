@@ -14,12 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -32,20 +26,14 @@ public class movieDetailsStepDefinitions {
     public static void beforeAll() {
         System.out.println("Setting Up Cucumber Driver");
         System.setProperty("webdriver.http.factory", "jdk-http-client");
-        // WebDriverManager.chromedriver().driverVersion("110.0.5481").setup();
         WebDriverManager.chromedriver().setup();
-
     }
 
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
-        // options.addArguments("--whitelisted-ips");
-        // options.addArguments("--no-sandbox");
         options.addArguments("--disable-extensions");
-        options.addArguments("--disable-web-security");
-        options.addArguments("--allow-file-access-from-files");
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
     }

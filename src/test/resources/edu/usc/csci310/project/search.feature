@@ -99,4 +99,48 @@ Feature: Search for movies based on various criteria
 #    Given I am on the search page
 #    When I press the Log Out button
 #    Then I should be on the Log In page
+#
+#  Scenario: Successfully add new movie to watchlist with success confirmation
+#    Given I am on the search page
+#    When I press the Add Movie button
+#    Then I should see "Movie added to Watchlist"
+#
+#  Scenario: Attempts to add duplicate movie to watchlist giving with error
+#    Given I am on the search page
+#    When I press the Add Movie button
+#    Then I should see "Error: Movie exists in Watchlist"
+#
+#  Scenario: Click eye icon and see movie is not in any watchlist
+#    Given I am on the search page
+#    When I press the eye icon on movie
+#    Then I should see "Not in any watchlists"
+#
+#  Scenario: Click eye icon and see movie is in at least on watchlist
+#    Given I am on the search page
+#    When I press the eye icon on movie
+#    Then I should see movie in "Horror watchlist"
+#
+#  Scenario: Year picker defaults to no year
+#    Given I am on the search page
+#    Then I should see movies from all years
+#
+#  Scenario: Year picker selects starting year
+#    Given I am on the search page
+#    When I select starting year
+#    Then I should see all movies made after starting year
+#
+#  Scenario: Year picker selects ending year
+#    Given I am on the search page
+#    When I select starting year
+#    Then I should see movies made before ending year
+#
+#  Scenario: Year picker selects starting year and ending year
+#    Given I am on the search page
+#    When I select starting year and ending year
+#    Then I should see movies made between starting year ans ending year
+#
+#  Scenario: Select dollar sign and get free movie ticket
+#    Given I am on the search page
+#    When I select dollar icon
+#    Then I should "free movie ticket" and be redirected to movie theatre website
 

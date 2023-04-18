@@ -11,18 +11,15 @@ import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 
-import static org.junit.Assert.assertTrue;
 
 
 import static org.junit.Assert.assertEquals;
@@ -38,11 +35,13 @@ public class SignUpStepDefinitions {
     @BeforeAll
     public static void beforeAll() {
         System.out.println("Setting Up Cucumber Driver");
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
         WebDriverManager.chromedriver().setup();
     }
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
@@ -50,8 +49,7 @@ public class SignUpStepDefinitions {
     @When("I enter my first name {string} , last name {string}, user name {string}, my password {string}, and confirming password {string}")
     public void iEnterMyFirstNameLastNameUserNameMyPasswordAndConfirmingPassword(String arg0, String arg1, String arg2, String arg3, String arg4) {
         Date now = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String formattedDate = formatter.format(now);
+
         driver.findElement(By.id("firstName")).sendKeys(arg0 + now);
         driver.findElement(By.id("lastName")).sendKeys(arg1 + now);
         driver.findElement(By.id("username")).sendKeys(arg2 + now);

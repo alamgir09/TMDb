@@ -1,4 +1,5 @@
 #Feature: Generate suggestions for new movies
+#
 #  Scenario: Get list of suggested movies based on one or more of user’s watchlist
 #    Given I am on the watchlist page
 #    When I select all watchlists I want to generate suggestions from (“Movie Nights”)

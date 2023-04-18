@@ -1,6 +1,6 @@
 Feature: Create and save movie watch lists
 
-  Scenario: Create a new watchlist
+  Scenario: Create a new unique watchlist
     Given I am on the watchlist page
     When I press the create watchlist button
     And I type "Watchlist 1" with timestamp
@@ -16,14 +16,14 @@ Feature: Create and save movie watch lists
 
   Scenario: Edit watchlist name and confirm
     Given I am on the watchlist page
-    When I press the edit watchlist button
+    When I press the edit watchlist for button for "Watchlist 1"
     And I type "Watchlist Edited" into edit watchlist modal
     And I press the create button
     Then I should see "Watchlist Edited" on the watchlist page
 
   Scenario: Delete a watchlist and press confirm should delete the watchlist
     Given I am on the watchlist page
-    When I press the delete watchlist button
+    When I press the delete watchlist button for "Watchlist Edited"
     And I press the create button
     Then I should not see "Watchlist Edited" on the page
 
@@ -72,7 +72,7 @@ Feature: Create and save movie watch lists
     And I press the confirm button
     Then I should see "Iron Man 2" on "Watchlist 1"
 
-  Scenario: Delete Movie to from a Watchlist and confirm (by clicking on delete-icon, clicking confirm)
+  Scenario: Delete Movie from a Watchlist and confirm (by clicking on delete-icon, clicking confirm)
     Given I am on the watchlist detail page for "Watchlist 1"
     When I press the "fa-trash" where movie box is "Iron Man 2"
     And I press the confirm button
@@ -114,9 +114,26 @@ Feature: Create and save movie watch lists
     And I press the cancel button
     Then I should not see the pop-up modal
 
+#  Scenario: copy movie into another watchlist but already exists should throw error message
+#    Given I am on the watchlist detail page for "Watchlist Test"
+#    When I press the "fa-copy" where movie box is "Iron Man"
+#    And I click on "Watchlist 1" dropdown item
+#    And I press the submit button
+#    Then I should error message on pop-up modal
 
+  #  Scenario: move movie into another watchlist but already exists should throw error message
+#    Given I am on the watchlist detail page for "Watchlist Test"
+#    When I press the "fa-arrow-right-from-bracket" where movie box is "Iron Man"
+#    And I click on "Watchlist 1" dropdown item
+#    And I press the submit button
+#    Then I should error message on pop-up modal
 
+    #  Scenario: clicking on the Search button in NavBar redirects to Search page
+#    Given I am on the watchlist page
+#    When I press Search on the navbar
+#    Then I should be on the search page
 
-
-
-
+      #  Scenario: clicking on the myWatchlist button in NavBar redirects to Watchlists page
+#    Given I am on the watchlist detail page
+#    When I press Watchlists on the navbar
+#    Then I should be on the Watchlist page
