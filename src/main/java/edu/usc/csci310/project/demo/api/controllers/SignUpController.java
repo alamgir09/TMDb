@@ -33,7 +33,7 @@ import java.util.ArrayList;
 @RequestMapping("/api/signup")
 public class SignUpController {
     @PostMapping
-    public ResponseEntity<SignUpResponse> checkSignUp(@RequestBody SignUpRequest request) {
+    public ResponseEntity<SignUpResponse> checkSignUp(@RequestBody SignUpRequest request) throws NoSuchAlgorithmException {
 
         SignUpResponse response = new SignUpResponse();
 
@@ -59,8 +59,8 @@ public class SignUpController {
             else{
 
                 String password = request.getPassword();
-                String hashedPassword = "";
-                try {
+                String hashedPassword;
+
                     MessageDigest digest = MessageDigest.getInstance("SHA-256");
                     byte[] hash = digest.digest(password.getBytes());
 
@@ -76,9 +76,7 @@ public class SignUpController {
 
                     hashedPassword = hexString.toString();
                     System.out.println("SHA-256 hash: " + hashedPassword);
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                }
+
 
                 ObjectId userObjectID = new ObjectId();
                 InsertOneResult result = collection.insertOne(new Document()

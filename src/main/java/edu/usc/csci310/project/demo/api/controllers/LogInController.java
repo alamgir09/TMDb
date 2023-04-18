@@ -26,7 +26,7 @@ import java.security.NoSuchAlgorithmException;
 @RequestMapping("/api/login")
 public class LogInController {
     @PostMapping
-    public ResponseEntity<LogInResponse> checkLogIn(@RequestBody LogInRequest request) {
+    public ResponseEntity<LogInResponse> checkLogIn(@RequestBody LogInRequest request) throws NoSuchAlgorithmException {
 
         CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
         CodecRegistry pojoCodecRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
@@ -48,8 +48,8 @@ public class LogInController {
             if(userAccount != null){
 
                 String password = request.getPassword();
-                String hashedPass = "";
-                try {
+                String hashedPass;
+
                     MessageDigest digest = MessageDigest.getInstance("SHA-256");
                     byte[] hash = digest.digest(password.getBytes());
 
@@ -65,9 +65,7 @@ public class LogInController {
 
                     hashedPass = hexString.toString();
                     System.out.println("SHA-256 hash: " + hashedPass);
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                }
+
                 // password does not matchs
                 if(!hashedPass.equals(userAccount.getPassword())){
                     json.put("Type", "Error");
