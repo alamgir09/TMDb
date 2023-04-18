@@ -19,6 +19,9 @@ import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 @RestController
 @RequestMapping("/api/login")
 public class LogInController {
@@ -43,8 +46,30 @@ public class LogInController {
 
             // check if password match
             if(userAccount != null){
-                // password does not match
-                if(!request.getPassword().equals(userAccount.getPassword())){
+
+                String password = request.getPassword();
+                String hashedPass = "";
+                try {
+                    MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                    byte[] hash = digest.digest(password.getBytes());
+
+                    // Convert the byte array to a hex string
+                    StringBuilder hexString = new StringBuilder();
+                    for (byte b : hash) {
+                        String hex = Integer.toHexString(0xff & b);
+                        if (hex.length() == 1) hexString.append('0');
+                        hexString.append(hex);
+                    }
+
+                    System.out.println("Original string: " + password);
+
+                    hashedPass = hexString.toString();
+                    System.out.println("SHA-256 hash: " + hashedPass);
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
+                // password does not matchs
+                if(!hashedPass.equals(userAccount.getPassword())){
                     json.put("Type", "Error");
                     json.put("Message", "Password does not match");
                 }
