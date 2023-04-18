@@ -22,17 +22,17 @@ public class CounterStepDefinitions {
     @BeforeAll
     public static void beforeAll() {
         System.out.println("Setting Up Cucumber Driver");
-        WebDriverManager.chromedriver().driverVersion("110.0.5481").setup();
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
+        WebDriverManager.chromedriver().setup();
     }
 
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
-        options.addArguments("--whitelisted-ips");
-        options.addArguments("--no-sandbox");
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
+        // options.addArguments("--whitelisted-ips");
         driver = new ChromeDriver(options);
     }
 

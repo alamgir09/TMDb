@@ -32,7 +32,6 @@ public class searchStepDefinitions {
     public static void beforeAll() {
         System.out.println("Setting Up Cucumber Driver");
         System.setProperty("webdriver.http.factory", "jdk-http-client");
-        // WebDriverManager.chromedriver().driverVersion("110.0.5481").setup();
         WebDriverManager.chromedriver().setup();
 
     }
@@ -41,14 +40,9 @@ public class searchStepDefinitions {
     public void before() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
-        // options.addArguments("--whitelisted-ips");
-        // options.addArguments("--no-sandbox");
         options.addArguments("--disable-extensions");
-        // options.addArguments("--disable-web-security");
-        // options.addArguments("--allow-file-access-from-files");
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
-
     }
 
     @After
@@ -89,7 +83,7 @@ public class searchStepDefinitions {
 
 
     @And("I filter by {string}")
-    public void iFilterBy(String arg0) throws InterruptedException {
+    public void iFilterBy(String arg0) {
         Actions action = new Actions(driver);
 
         WebElement ele = driver.findElement(By.xpath("//*[@id=\"active-nav\"]"));
