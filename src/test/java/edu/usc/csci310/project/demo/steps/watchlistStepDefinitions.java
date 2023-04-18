@@ -14,10 +14,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -31,7 +33,7 @@ public class watchlistStepDefinitions {
     @BeforeAll
     public static void beforeAll() {
         System.out.println("Setting Up Cucumber Driver");
-        // WebDriverManager.chromedriver().driverVersion("110.0.5481").setup();
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
         WebDriverManager.chromedriver().setup();
 
     }
@@ -39,20 +41,12 @@ public class watchlistStepDefinitions {
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
-        // options.addArguments("--headless");
+        options.addArguments("--headless");
         // options.addArguments("--whitelisted-ips");
-        // options.addArguments("--no-sandbox");
         options.addArguments("--disable-extensions");
-        options.addArguments("--disable-web-security");
-        options.addArguments("--allow-file-access-from-files");
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
 
-    }
-
-    @After
-    public void after() {
-        driver.quit();
     }
 
     @Given("I am on the watchlist page")
@@ -84,10 +78,6 @@ public class watchlistStepDefinitions {
         driver.findElement(By.xpath("/html/body/div[3]/div/div/div[2]/form/div[1]/input")).sendKeys(arg0 + timestamp);
     }
 
-    @Then("I should see {string} on the page")
-    public void iShouldSeeOnThePage(String arg0) {
-        assertTrue(driver.getPageSource().contains(arg0));
-    }
 
     @And("I press the create button")
     public void iPressTheCreateButton() throws InterruptedException {
@@ -142,7 +132,6 @@ public class watchlistStepDefinitions {
     public void iShouldNotSeeOnThePage(String arg0) throws InterruptedException {
         Thread.sleep(5000);
         String pageSource = driver.getPageSource();
-        System.out.println(pageSource);
         assertFalse(pageSource.contains(arg0));
     }
 
@@ -158,14 +147,18 @@ public class watchlistStepDefinitions {
     }
 
     @Then("I should see {string} on {string}")
-    public void iShouldSeeOn(String arg0, String arg1) throws InterruptedException {
+    public void iShouldSeeOn(String arg0, String arg1) {
         driver.navigate().to("http://localhost:8080/WatchlistDetail");
 
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("localStorage.setItem('userID', '642617a23405041b9f616538');");
         jsExecutor.executeScript("localStorage.setItem('watchlist', '" + arg1 + "');");
         driver.navigate().refresh();
-        Thread.sleep(10000);
+
+        Duration duration = Duration.ofSeconds(30);
+
+        WebDriverWait wait = new WebDriverWait(driver, duration);
+        wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.tagName("body")), arg0));
 
         assertTrue(driver.getPageSource().contains(arg0));
     }
@@ -211,16 +204,33 @@ public class watchlistStepDefinitions {
     public void iPressTheWhereMovieBoxIs(String arg0, String arg1) {
 
         // find the div element with text "arg1"
-        WebElement movie_box_div = driver.findElement(By.xpath("//*[contains(text(), '" + arg1 + "')]"));
+        WebElement movie_box_div = driver.findElement(By.xpath("//*[text() = '" + arg1 + "']"));
+
+        // Scroll down to the div element
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", movie_box_div);
 
         WebElement grandParentDiv = (WebElement) ((JavascriptExecutor) driver)
                 .executeScript("return arguments[0].parentElement.parentElement;", movie_box_div);
 
+        Duration duration = Duration.ofSeconds(60);
+
+        // create a new WebDriverWait object
+        WebDriverWait wait = new WebDriverWait(driver, duration);
+
+        // create a new Actions object
+        Actions actions = new Actions(driver);
+
         // find the svg element with data-icon="arg0" inside the movie_box div
         WebElement svg = grandParentDiv.findElement(By.className(arg0));
 
-        // click on the svg element
-        svg.click();
+        // scroll to the element
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", svg);
+
+        // wait for the element to be clickable
+        wait.until(ExpectedConditions.elementToBeClickable(svg));
+
+        // move to the element and click it
+        actions.moveToElement(svg).click().perform();
     }
 
     @When("I press the change watchlist type button")
@@ -231,5 +241,74 @@ public class watchlistStepDefinitions {
     @And("I press the {string} dropdown menu item")
     public void iPressTheDropdownMenuItem(String arg0) {
         driver.findElement(By.id(arg0)).click();
+    }
+
+    @And("I press the cancel button")
+    public void iPressTheCancelButton() throws InterruptedException {
+        driver.findElement(By.xpath("//*[contains(text(), 'Cancel')]")).click();
+        Thread.sleep(10000);
+    }
+
+    @Then("I should not see the pop-up modal")
+    public void iShouldNotSeeThePopUpModal() {
+
+        List<WebElement> elements = driver.findElements(By.id("editMovieModal"));
+        assertEquals(0, elements.size());
+
+    }
+
+    @Then("I should see {string} on the watchlist page")
+    public void iShouldSeeOnTheWatchlistPage(String arg0) {
+        assertTrue(driver.getPageSource().contains(arg0));
+    }
+
+    @After
+    public void after() {
+        driver.quit();
+    }
+
+    @When("I press the edit watchlist for button for {string}")
+    public void iPressTheEditWatchlistForButtonFor(String arg0) {
+        WebElement element = driver.findElement(By.xpath("//*[text() = '" + arg0 + "']"));
+
+        WebElement grandParentDiv = (WebElement) ((JavascriptExecutor) driver)
+                .executeScript("return arguments[0].parentElement.parentElement;", element);
+
+        Duration duration = Duration.ofSeconds(60);
+
+        // create a new WebDriverWait object
+        WebDriverWait wait = new WebDriverWait(driver, duration);
+
+        // find the copy icon
+        WebElement svg = grandParentDiv.findElement(By.className("fa-pen"));
+
+        // wait for the element to be clickable
+        wait.until(ExpectedConditions.elementToBeClickable(svg));
+
+        // click on the svg element
+        svg.click();
+
+    }
+
+    @When("I press the delete watchlist button for {string}")
+    public void iPressTheDeleteWatchlistButtonFor(String arg0) {
+        WebElement element = driver.findElement(By.xpath("//*[text() = '" + arg0 + "']"));
+
+        WebElement grandParentDiv = (WebElement) ((JavascriptExecutor) driver)
+                .executeScript("return arguments[0].parentElement.parentElement;", element);
+
+        Duration duration = Duration.ofSeconds(60);
+
+        // create a new WebDriverWait object
+        WebDriverWait wait = new WebDriverWait(driver, duration);
+
+        // find the delete icon
+        WebElement svg = grandParentDiv.findElement(By.className("fa-trash"));
+
+        // wait for the element to be clickable
+        wait.until(ExpectedConditions.elementToBeClickable(svg));
+
+        // click on the svg element
+        svg.click();
     }
 }

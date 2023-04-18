@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CreateWatchlistButton from "../components/CreateWatchlistButton";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
+import GetSuggestionListButton from '../components/GetSuggestionListButton';
+import GetSuggestionListModal from '../components/GetSuggestionListModal'
 import EditWatchlistModal from "../components/EditWatchlistModal";
 import DeleteWatchlistModal from "../components/DeleteWatchlistModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,12 +13,16 @@ function Watchlist() {
   const [list, updateList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
-  const [editShow, setEditShow] = useState(false);
+  const [suggestionShow, setSuggestionShow] = useState(false);
+  const [editShow, setEditShow] = useState (false);
   const [deleteShow, setDeleteShow] = useState(false);
   const [watchlist, setWatchlist] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleSuggestionClose = () => setSuggestionShow(false);
+  const handleSuggestionShow = () => setSuggestionShow(true);
 
   const handleEditClose = () => setEditShow(false);
   const handleEditShow = () => setEditShow(true);
@@ -91,6 +97,7 @@ function Watchlist() {
         <div className="col-sm">{!loading && list.length == 0 ? <h2>No watchlist created yet</h2> : null}</div>
         <div className="col-sm text-end">
           <CreateWatchlistButton handleShow={handleShow}></CreateWatchlistButton>
+          <GetSuggestionListButton handleShow={handleSuggestionShow}></GetSuggestionListButton>
         </div>
       </div>
       {!loading &&
@@ -120,6 +127,12 @@ function Watchlist() {
         handleClose={handleClose}
         fetchWatchlist={fetchWatchlist}
       ></CreateWatchlistModal>
+      <GetSuggestionListModal
+        show={suggestionShow}
+        handleClose={handleSuggestionClose}
+        fetchWatchlist={fetchWatchlist}
+        watchlists={list}
+      ></GetSuggestionListModal>
       <EditWatchlistModal
         show={editShow}
         handleClose={handleEditClose}

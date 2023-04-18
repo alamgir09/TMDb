@@ -34,6 +34,20 @@ test("full app rendering/navigating", async () => {
   // verify page content for expected route after navigating
   await waitFor(() => user.click(screen.getByText(/Log In/i)));
   expect(screen.getByText(/Log In/)).toBeInTheDocument();
+
+});
+
+test("full app rendering/navigating", async () => {
+  const user = userEvent.setup();
+  render(<App />, { wrapper: BrowserRouter });
+
+  // verify page content for default route
+  expect(screen.getByText(/Home Page/)).toBeInTheDocument();
+
+  // verify page content for expected route after navigating
+  await waitFor(() => user.click(screen.getByTestId("navigate-search")));
+  await waitFor(() => expect(screen.getByText(/Search/)).toBeInTheDocument());
+
 });
 
 test("fetching works on the home page", async () => {
