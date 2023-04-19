@@ -12,10 +12,10 @@ import Montage from "./pages/Montage";
 import TestMontageButton from "./pages/TestMontageButtonPage";
 
 function App() {
-  const [user, updateUser] = useState('test');
+  const [user, updateUser] = useState(localStorage.getItem('userID')); //
 
   const handleUser = (e) => {
-          console.log("updating uyser")
+          console.log("updating user")
           updateUser(e);
       };
   return (

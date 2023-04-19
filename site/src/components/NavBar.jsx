@@ -58,9 +58,10 @@ const NavBar = ({user, updateUser}) => {
             <li className="nav-item">
               <a
                 onClick={() => {
-//                   localStorage.setItem("userID", "null");
+
                   console.log("navbar before=", user);
                   updateUser(null);
+                  localStorage.removeItem("userID");
                   console.log("navbar after=", user);
                 }}
                 className="nav-link"
