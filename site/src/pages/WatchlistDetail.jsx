@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import MovieBoxWatchlist from "../components/MovieBoxWatchlist";
 import EditMovieModal from "../components/EditMovieModal";
 import WatchlistTypeDropdown from "../components/WatchlistTypeDropdown";
-import { useNavigate } from "react-router-dom";
+import NavBar from "../components/NavBar";
+
 
 function WatchlistDetail() {
   const [list, updateList] = useState([]);
@@ -113,7 +114,7 @@ function WatchlistDetail() {
     }
   }, [watchlistAll]);
 
-  return (
+   return (
     <div className="container">
       <div className="text-center pb-3 pt-3">
         <h1>{watchlist}</h1>
