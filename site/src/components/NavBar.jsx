@@ -1,7 +1,8 @@
 import React from "react";
+// import { useNavigate } from "react-router-dom";
 
-const NavBar = () => {
-  //   const navigate = useNavigate();
+const NavBar = ({user, updateUser}) => {
+//    const navigate = useNavigate();
   return (
     <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "#dc3545" }}>
       <div className="container-fluid">
@@ -44,7 +45,7 @@ const NavBar = () => {
 
             <li className="nav-item">
               <a className="nav-link" href="/Search">
-                Home
+                Search
               </a>
             </li>
 
@@ -57,13 +58,16 @@ const NavBar = () => {
             <li className="nav-item">
               <a
                 onClick={() => {
-                  localStorage.setItem("userID", "null");
+//                   localStorage.setItem("userID", "null");
+                  console.log("navbar before=", user);
+                  updateUser(null);
+                  console.log("navbar after=", user);
                 }}
                 className="nav-link"
-                href="/LogIn"
+//                 href="/LogIn"
                 data-testid="btn-logout"
               >
-                Log Out{" "}
+                Log XX Out{" "}
               </a>
             </li>
           </ul>

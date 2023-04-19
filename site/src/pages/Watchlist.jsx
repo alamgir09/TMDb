@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "../components/NavBar";
 
-function Watchlist() {
+function Watchlist({user, updateUser}) {
   const [list, updateList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
@@ -31,8 +31,21 @@ function Watchlist() {
   const handleDeleteClose = () => setDeleteShow(false);
   const handleDeleteShow = () => setDeleteShow(true);
 
+//   const [user, updateUser] = useState(localStorage.getItem('userID'));
+
   // Calling navigate() will allow us to redirect the webpage
   const navigate = useNavigate();
+
+  useEffect(() => {
+//       updateUser(user);
+      console.log("useffect:")
+      console.log(user);
+//       updateUser(null)
+      if (user === null) {
+//         navigate('/LogIn');
+      }
+    }, [user, navigate]);
+
 
   function navigateWatchlistDetail(currentWatchlist) {
     localStorage.setItem("watchlist", currentWatchlist);
@@ -91,7 +104,7 @@ function Watchlist() {
 
   return (
   <div>
-        <NavBar />
+     <NavBar user={user} updateUser={(e) => updateUser(e)}/>
 
     <div className="container">
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Other from "./pages/Other";
@@ -12,6 +12,12 @@ import Montage from "./pages/Montage";
 import TestMontageButton from "./pages/TestMontageButtonPage";
 
 function App() {
+  const [user, updateUser] = useState('test');
+
+  const handleUser = (e) => {
+          console.log("updating uyser")
+          updateUser(e);
+      };
   return (
     <div>
       <Routes>
@@ -24,7 +30,7 @@ function App() {
         <Route path="/Search/:type/:id" element={<Search />} />
         <Route path="/movies/:id" element={<MovieDetails />} />
 
-        <Route path="/Watchlist" element={<Watchlist />} />
+        <Route path="/Watchlist" element={<Watchlist user={user} updateUser={handleUser}/>} />
         <Route path="/WatchlistDetail" element={<WatchlistDetail />} />
 
         <Route path="/Montage" element={<Montage />} />
