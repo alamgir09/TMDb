@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MovieBoxWatchlist from "../components/MovieBoxWatchlist";
 import EditMovieModal from "../components/EditMovieModal";
 import WatchlistTypeDropdown from "../components/WatchlistTypeDropdown";
-import NavBar from "../components/NavBar";
+import { useNavigate } from "react-router-dom";
 
 
 function WatchlistDetail() {

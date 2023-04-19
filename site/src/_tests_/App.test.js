@@ -94,7 +94,7 @@ test("counting works on the other page", async () => {
   render(<App />, { wrapper: BrowserRouter });
 
   // verify page content for default route
-  expect(screen.getByText(/Home Page/)).toBeInTheDocument();
+  expect(screen.getByText(/Log In/)).toBeInTheDocument();
 
   // verify page content for expected route after navigating
   await waitFor(() => user.click(screen.getByText(/click to go to other page/i)));
