@@ -8,6 +8,7 @@ import EditWatchlistModal from "../components/EditWatchlistModal";
 import DeleteWatchlistModal from "../components/DeleteWatchlistModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import NavBar from "../components/NavBar";
 
 function Watchlist() {
   const [list, updateList] = useState([]);
@@ -89,7 +90,11 @@ function Watchlist() {
   }, []);
 
   return (
+  <div>
+        <NavBar />
+
     <div className="container">
+
       <div className="text-center pb-3 pt-3">
         <h1>Watchlists</h1>
       </div>
@@ -145,6 +150,7 @@ function Watchlist() {
         fetchWatchlist={fetchWatchlist}
         watchlist={watchlist}
       ></DeleteWatchlistModal>
+    </div>
     </div>
   );
 }
