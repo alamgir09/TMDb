@@ -58,17 +58,15 @@ const NavBar = ({user, updateUser}) => {
             <li className="nav-item">
               <a
                 onClick={() => {
-
-                  console.log("navbar before=", user);
-                  updateUser(null);
+                  console.log(user);
                   localStorage.removeItem("userID");
-                  console.log("navbar after=", user);
+                  updateUser(null);
                 }}
                 className="nav-link"
-//                 href="/LogIn"
+                href="/LogIn"
                 data-testid="btn-logout"
               >
-                Log XX Out{" "}
+                Log Out{" "}
               </a>
             </li>
           </ul>

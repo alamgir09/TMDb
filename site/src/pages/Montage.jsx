@@ -1,11 +1,22 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import CollageComponent from "../components/CollageComponent";
 // import { render } from '@testing-library/react';
 
 // This page provides a button with a redirect to "/other"
-function Montage() {
+function Montage({user}) {
+
+   const navigate = useNavigate();
+
+     // access to page only if logged in
+     useEffect(() => {
+         console.log(user);
+         if (user === null) {
+           navigate('/LogIn');
+         }
+       }, [user, navigate]);
+
   // Anything returned will be rendered in React
   const location = useLocation();
   const movieIDList = location.state.movieIDList;

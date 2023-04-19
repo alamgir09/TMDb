@@ -5,7 +5,7 @@ import WatchlistTypeDropdown from "../components/WatchlistTypeDropdown";
 import { useNavigate } from "react-router-dom";
 
 
-function WatchlistDetail() {
+function WatchlistDetail({user}) {
   const [list, updateList] = useState([]);
   const [watchlistAll, setWatchlistAll] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,6 +17,15 @@ function WatchlistDetail() {
 
   //NEW
   const navigate = useNavigate();
+
+    // access to page only if logged in
+    useEffect(() => {
+        console.log(user);
+        if (user === null) {
+          navigate('/LogIn');
+        }
+      }, [user, navigate]);
+
 
   const [modal, setModal] = useState({ show: false, data: { text: "" } });
   const handleClose = () => {

@@ -36,13 +36,11 @@ function Watchlist({user, updateUser}) {
   // Calling navigate() will allow us to redirect the webpage
   const navigate = useNavigate();
 
+  // access to page only if logged in
   useEffect(() => {
-//       updateUser(user);
-      console.log("useffect:")
       console.log(user);
-//       updateUser(null)
       if (user === null) {
-//         navigate('/LogIn');
+        navigate('/LogIn');
       }
     }, [user, navigate]);
 

@@ -5,6 +5,10 @@ import "../styles/collage.css";
 
 function Collage({movieIDList}) {
 
+  if (movieIDList == null) {
+    return null;
+  }
+
   console.log("COLLAGE");
   console.log(movieIDList);
 

@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
 import NavBar from "../components/NavBar";
 
-function Search() {
+function Search({user}) {
   // Handle all searches here
   // display question mark if null values
   // from year to year, range of years, default is thank
@@ -38,6 +38,14 @@ function Search() {
 
   // update watchlist
   const [list, updateList] = useState([]);
+
+  // access to page only if logged in
+  useEffect(() => {
+      console.log(user);
+      if (user === null) {
+          navigate('/LogIn');
+      }
+  }, [user, navigate]);
 
   useEffect(() => {
     if (type === "Actors" || type === "Genres") {
