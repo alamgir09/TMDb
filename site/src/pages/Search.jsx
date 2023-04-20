@@ -5,6 +5,7 @@ import Pagination from "../components/Pagination";
 import { useParams } from "react-router-dom";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
 import NavBar from "../components/NavBar";
+import "../styles/index.css"
 
 function Search() {
   // Handle all searches here
@@ -286,7 +287,7 @@ function Search() {
               className="search"
               required
             />
-            <button data-testid="search-submit-btn" type="submit">
+            <button id="search-button" data-testid="search-submit-btn" type="submit">
               Search
             </button>
             <ul id="nav">
@@ -308,16 +309,16 @@ function Search() {
                 </ul>
               </li>
             </ul>{" "}
-            <button type="button">Year Filter</button>
+            <button id="year-button" type="button">Year Filter</button>
             {/*<!-- nav --> */}
             <div>
-              <button
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
-                Back to Home
-              </button>
+              {/*<button*/}
+              {/*  onClick={() => {*/}
+              {/*    navigate("/");*/}
+              {/*  }}*/}
+              {/*>*/}
+              {/*  Back to Home*/}
+              {/*</button>*/}
             </div>
           </div>
         </form>

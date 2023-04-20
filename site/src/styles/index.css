@@ -8,7 +8,23 @@
   	flex-direction: row;
   	align-items: center;
   	width: 900px;
+
 }
+
+#search-button {
+    background: #dc3545;
+    font-size: 18px;
+    color: black;
+    border-color: #dc3545;
+}
+#search-button:hover{
+    color: #fff;
+    background: #bb2d3b;
+    border-color: #b02a37;
+}
+
+
+
 /* drop down CSS */
 #nav, #nav ul {
     list-style: none;
@@ -27,7 +43,7 @@
     background-color: white;
 }
 #active-nav {
-    background-color: grey;
+    background-color: white;
 }
 #nav ul {
     position: absolute;
@@ -41,22 +57,44 @@
     display: block;
 }
 
-#nav a{
+#year-button{
     text-decoration: none;
-    color: #444;
+    color: black;
 
-    width: 132px;
+    width: 110px;
     height: 50px;
 
+    font-size: 18px;
     text-align: center;
     line-height: 50px;
     border-bottom: 2px solid #FFF;
+    background: #e5e5e5;
+    display: block;
+    border: none;
+}
 
+#year-button:hover {
+    border-bottom: 2px solid #dc3545;
+    color: #dc3545;
+}
+
+#nav a{
+    text-decoration: none;
+    color: black;
+
+    width: 110px;
+    height: 50px;
+
+    font-size: 18px;
+    text-align: center;
+    line-height: 50px;
+    border-bottom: 2px solid #FFF;
+    background: #e5e5e5;
     display: block;
 }
 #nav a:hover {
-    border-bottom: 2px solid gold;
-    color: gold;
+    border-bottom: 2px solid #dc3545;
+    color: #dc3545;
 }
 /* Ends */
 .movie-row {
@@ -94,14 +132,14 @@
 	text-align: center;
 	/* padding-top: 60px; */
 	align-self: center;
-	font-size: 10px;
+	font-size: 18px;
 }
 
 .header-text {
 	text-align: center;
 	/* padding-top: 60px; */
 	align-self: center;
-	font-size: 15px;
+	font-size: 18px;
 }
 .box-hover-elements {
 	visibility: hidden;
