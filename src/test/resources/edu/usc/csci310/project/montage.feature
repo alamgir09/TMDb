@@ -1,4 +1,14 @@
 #Feature: Montage
+#  Scenario: Montage has at least one picture from every movie in watchlist
+#    Given I am on watchlist detail page for watchlist "10movies"
+#    When I press the create montage button
+#    Then I should be on montage page
+#    Then I should see image from movie id "11"
+#
+#
+#
+
+#Feature: Montage
 #Scenario: Select "Create Montage" button and brings you to Montage page in less than 1.5 seconds
 #Given I am on the watchlist page
 #When I press the Create Montage button
