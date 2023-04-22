@@ -8,6 +8,8 @@ import Watchlist from "./pages/Watchlist";
 import WatchlistDetail from "./pages/WatchlistDetail";
 import Search from "./pages/Search";
 import MovieDetails from "./components/MovieDetails";
+import Montage from "./pages/Montage";
+import TestMontageButton from "./pages/TestMontageButtonPage";
 
 function App() {
   return (
@@ -24,6 +26,10 @@ function App() {
 
         <Route path="/Watchlist" element={<Watchlist />} />
         <Route path="/WatchlistDetail" element={<WatchlistDetail />} />
+
+        <Route path="/Montage" element={<Montage />} />
+
+        <Route path="/TestMontageButtonPage" element={<TestMontageButton />} />
 
         {/* 404 page not found redirect */}
         <Route path="*" element={<Navigate to="/" replace />} />

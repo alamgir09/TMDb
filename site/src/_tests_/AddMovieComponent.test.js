@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen, fireEvent, act, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import AddMovieDropdown from "../components/AddMovieComponent";
-import AddMovieComponent from "../components/AddMovieComponent";
 
 // mock the fetch function
 global.fetch = jest.fn(() =>
@@ -20,7 +19,6 @@ describe("AddMovieComponent", () => {
   const handleShow = jest.fn();
 
   beforeEach(() => {
-    // fetch.resetMocks();
     jest.clearAllMocks();
     localStorage.clear();
   });
@@ -49,12 +47,12 @@ describe("AddMovieComponent", () => {
     const toggleButton = screen.getByRole("button", { name: "Add to Watchlist" });
     fireEvent.click(toggleButton);
 
-    await waitFor(() => expect(container.querySelectorAll(".dropdown-item").length).toBe(watchlists.length + 1)); // +1 for Create Watchlist Button
+    await waitFor(() => expect(container.querySelectorAll(".dropdown-item")).toHaveLength(watchlists.length + 1)); // +1 for Create Watchlist Button
   });
 
   it("should add the movie to the selected watchlist", async () => {
     const mockResponse = { data: "Success" };
-    const consoleSpy = jest.spyOn(console, "log");
+    const consoleLogSpy = jest.spyOn(console, "log");
 
     jest.spyOn(window, "fetch").mockResolvedValueOnce({
       json: () => Promise.resolve(mockResponse)
@@ -79,22 +77,21 @@ describe("AddMovieComponent", () => {
 
     fireEvent.click(watchlistButton);
 
-    await waitFor(() => expect(consoleSpy).toHaveBeenCalled());
+    await waitFor(() => expect(consoleLogSpy).toHaveBeenCalled());
   });
 
   test("error response", async () => {
     const mockError = new Error("Something went wrong!");
     const consoleSpy = jest.spyOn(console, "log");
-    jest
-      .spyOn(global, "fetch")
-      .mockResolvedValueOnce({
+    jest.spyOn(global, "fetch").mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve(movie)
-      })
-      .mockResolvedValueOnce({
+        json: () => Promise.resolve(null)
+      }).mockResolvedValueOnce({
         ok: false,
         json: () => Promise.reject(mockError)
       });
+
+
 
     render(
       <AddMovieDropdown

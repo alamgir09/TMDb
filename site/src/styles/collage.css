@@ -1,0 +1,27 @@
+.vCol {
+    float: left;
+    height: 100%;
+    padding: 0px;
+}
+
+.vCol img{
+    max-width: 100%;
+    border: 5px solid #fff;
+}
+
+/* Clear floats after the columns */
+.vRow:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* overall collage size */
+#collage{
+    width: 40%;
+    padding-top: 7%;
+    margin: auto;
+}
+#collage img{
+    transform: scale(1.2);
+}

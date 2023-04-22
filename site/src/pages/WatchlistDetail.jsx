@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import MovieBoxWatchlist from "../components/MovieBoxWatchlist";
 import EditMovieModal from "../components/EditMovieModal";
 import WatchlistTypeDropdown from "../components/WatchlistTypeDropdown";
+import { useNavigate } from "react-router-dom";
+
 
 function WatchlistDetail() {
   const [list, updateList] = useState([]);
@@ -9,6 +11,12 @@ function WatchlistDetail() {
   const [loading, setLoading] = useState(true);
   const [watchlist, setWatchlist] = useState();
   const [watchlistType, setWatchlistType] = useState();
+
+  //NEW
+  const [movieIDs, setMovieIDs] = useState([]);
+
+  //NEW
+  const navigate = useNavigate();
 
   const [modal, setModal] = useState({ show: false, data: { text: "" } });
   const handleClose = () => {
@@ -39,7 +47,17 @@ function WatchlistDetail() {
           console.log(response.data);
 
           var jsonObject = JSON.parse(response.data);
+
           setLoading(false);
+
+          console.log(jsonObject);
+
+          var vMovieIDs = [];
+          for(var i = 0; i < jsonObject.length; i++){
+            vMovieIDs.push(jsonObject[i]["id"]);
+          }
+          setMovieIDs(vMovieIDs);
+
           updateList(jsonObject);
         }
       })
@@ -67,8 +85,12 @@ function WatchlistDetail() {
       .then((res) => res.json())
       .then((response) => {
         if (response?.data) {
+
           var jsonObject = JSON.parse(response.data);
+
           setWatchlistAll(jsonObject);
+
+
         }
       })
       .catch((err) => {
@@ -92,7 +114,7 @@ function WatchlistDetail() {
     }
   }, [watchlistAll]);
 
-  return (
+   return (
     <div className="container">
       <div className="text-center pb-3 pt-3">
         <h1>{watchlist}</h1>
@@ -101,6 +123,9 @@ function WatchlistDetail() {
         <div className="col-sm">{!loading && list.length == 0 ? <h2>No movies added yet</h2> : null}</div>
         <div className="col-sm text-end">
           <WatchlistTypeDropdown type={watchlistType} />
+          <button
+            onClick={() => { navigate("/Montage", { state: { movieIDList: movieIDs } });}}> Create Montage
+          </button>
         </div>
       </div>
       {!loading && list.length > 0 ? (
