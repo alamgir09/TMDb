@@ -83,16 +83,15 @@ describe("AddMovieComponent", () => {
   test("error response", async () => {
     const mockError = new Error("Something went wrong!");
     const consoleSpy = jest.spyOn(console, "log");
-    jest
-      .spyOn(global, "fetch")
-      .mockResolvedValueOnce({
+    jest.spyOn(global, "fetch").mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve(movie)
-      })
-      .mockResolvedValueOnce({
+        json: () => Promise.resolve(null)
+      }).mockResolvedValueOnce({
         ok: false,
         json: () => Promise.reject(mockError)
       });
+
+
 
     render(
       <AddMovieDropdown
