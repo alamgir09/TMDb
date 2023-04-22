@@ -1,12 +1,3 @@
-#createWatchlist {
-    color: black;
-}
-#createWatchlist:hover {
-    color: #fff;
-}
-#getSuggestionList {
-    color: black;
-}
-#getSuggestionList:hover {
-    color: #fff;
+#createWatchlist{
+margin-right: 10px;
 }

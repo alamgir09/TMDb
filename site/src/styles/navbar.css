@@ -1,15 +1,14 @@
-
-
 .navbar .navbar-brand{
     font-size: 24px;
-    color: black;
+    color: #fff;
 }
 .navbar .nav-link {
-    color: black;
+    color: #fff;
     font-size: 18px;
 }
 
 .navbar .nav-link:hover {
+    text-decoration: underline;
     color: #fff;
 }
 
