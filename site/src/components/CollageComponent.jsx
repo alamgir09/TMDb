@@ -38,12 +38,12 @@ function Collage({movieIDList}) {
         numImages = getNumImages(numMovies);
       }
 
+      var url = "https://api.themoviedb.org/3/movie/" + id + "/images?api_key=528c625029ff80e41b72cc37a0c389af"
+
       console.log(numImages);
 
       try {
-        let response = await fetch(
-          "https://api.themoviedb.org/3/movie/" + id + "/images?api_key=528c625029ff80e41b72cc37a0c389af"
-        );
+        let response = await fetch(url);
         let json = await response.json();
 
         //get the backdrops
