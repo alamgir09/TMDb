@@ -7,13 +7,15 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
+import java.security.NoSuchAlgorithmException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LogInControllerTest {
     LogInController logInController = new LogInController();
 
     @Test
-    void verifyLogIn() throws JSONException {
+    void verifyLogIn() throws JSONException, NoSuchAlgorithmException {
         LogInRequest request = new LogInRequest();
         request.setUsername("tommyTrojan");
         request.setPassword("Password123");
@@ -26,7 +28,7 @@ public class LogInControllerTest {
     }
 
     @Test
-    void verifyIncorrectPassword() throws JSONException {
+    void verifyIncorrectPassword() throws JSONException, NoSuchAlgorithmException {
         LogInRequest request = new LogInRequest();
         request.setUsername("tommyTrojan");
         request.setPassword("Password");
@@ -39,7 +41,7 @@ public class LogInControllerTest {
         assertEquals(json.get("Message"), "Password does not match");
     }
     @Test
-    void verifyAccountExists() throws JSONException {
+    void verifyAccountExists() throws JSONException, NoSuchAlgorithmException {
         LogInRequest request = new LogInRequest();
         request.setUsername("tommytroj@usc.edu");
         request.setPassword("Password");

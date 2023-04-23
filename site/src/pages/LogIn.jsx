@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function LogIn() {
+function LogIn({user, updateUser}) {
+  const navigate = useNavigate();
   // fetchResponse is a constant in this component's state. Use handleFetchResponse(newValue)
   // to update the value of fetchResponse
   const [fetchResponse, handleFetchResponse] = useState();
@@ -40,8 +42,12 @@ function LogIn() {
             setUsername("");
             setPassword("");
           } else {
-            localStorage.setItem("userID", jsonObject["userID"]);
+
             handleFetchResponse(jsonObject["Type"]);
+            localStorage.setItem("userID", jsonObject["userID"]);
+            updateUser(jsonObject["userID"]);
+            console.log("redirect");
+            navigate('/Search');
           }
         }
       })

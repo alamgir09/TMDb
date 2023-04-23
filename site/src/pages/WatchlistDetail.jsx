@@ -132,8 +132,8 @@ function WatchlistDetail({user}) {
         <div className="col-sm">{!loading && list.length == 0 ? <h2>No movies added yet</h2> : null}</div>
         <div className="col-sm text-end">
           <WatchlistTypeDropdown type={watchlistType} />
-          <button
-            onClick={() => { navigate("/Montage", { state: { movieIDList: movieIDs } });}}> Create Montage
+          <button id="create-montage"
+            onClick={() => {  navigate("/Montage", { state: { movieIDList: movieIDs } });}}> Create Montage
           </button>
         </div>
       </div>

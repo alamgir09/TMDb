@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import App from "../App";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter} from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 
 beforeEach(() => {
@@ -37,18 +37,18 @@ test("full app rendering/navigating", async () => {
 
 });
 
-test("full app rendering/navigating", async () => {
-  const user = userEvent.setup();
-  render(<App />, { wrapper: BrowserRouter });
-
-  // verify page content for default route
-  expect(screen.getByText(/Home Page/)).toBeInTheDocument();
-
-  // verify page content for expected route after navigating
-  await waitFor(() => user.click(screen.getByTestId("navigate-search")));
-  await waitFor(() => expect(screen.getByText(/Search/)).toBeInTheDocument());
-
-});
+//test("full app rendering/navigating", async () => {
+//  const user = userEvent.setup();
+//  render(<App />, { wrapper: BrowserRouter });
+//
+//  // verify page content for default route
+//  expect(screen.getByText(/Home Page/)).toBeInTheDocument();
+//
+//  // verify page content for expected route after navigating
+//  await waitFor(() => user.click(screen.getByTestId("navigate-search")));
+//  await waitFor(() => expect(screen.getByText(/Search/)).toBeInTheDocument());
+//
+//});
 
 test("fetching works on the home page", async () => {
   fetch.mockResponseOnce(JSON.stringify({ data: "Pong Frontend. Received at 2023-02-25T20:49:00.813447Z." }));

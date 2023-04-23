@@ -1,3 +1,30 @@
+Feature: Montage
+  Scenario: Montage has at least one picture from every movie in watchlist
+    Given I am on watchlist detail page for watchlist "10movies"
+    When I press the create montage button
+    Then I should be on montage page
+    Then I should see at least 10 images
+    Then I should see image from movie id "11"
+    Then I should see image from movie id "51162"
+    Then I should see image from movie id "1726"
+    Then I should see image from movie id "18126"
+    Then I should see image from movie id "496243"
+    Then I should see image from movie id "12"
+    Then I should see image from movie id "920"
+    Then I should see image from movie id "9502"
+    Then I should see image from movie id "862"
+    Then I should see image from movie id "496243"
+
+  # navigate to search
+  # add button to go back to page with movie details page
+
+
+
+
+
+
+
+#    Then style should have varying degrees from -45 deg to 45 deg
 #Feature: Montage
 #Scenario: Select "Create Montage" button and brings you to Montage page in less than 1.5 seconds
 #Given I am on the watchlist page

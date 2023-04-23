@@ -5,7 +5,7 @@ import CollageComponent from "../components/CollageComponent";
 // import { render } from '@testing-library/react';
 
 // This page provides a button with a redirect to "/other"
-function Montage({user}) {
+function Montage({user, updateUser}) {
 
    const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ function Montage({user}) {
   console.log(movieIDList);
   return (
     <div>
-      <NavBar />
+      <NavBar user={user} updateUser={(e) => updateUser(e)}/>
       <div className="text-center pb-3 pt-3">
         <h1>Montage</h1>
       </div>

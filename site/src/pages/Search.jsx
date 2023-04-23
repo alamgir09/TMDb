@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
 import NavBar from "../components/NavBar";
 
-function Search({user}) {
+function Search({user, updateUser}) {
   // Handle all searches here
   // display question mark if null values
   // from year to year, range of years, default is thank
@@ -21,6 +21,14 @@ function Search({user}) {
   //             2. little eye to see the set of lists that this movie is already on (user)
   //             3. dollar sign, obtain free tickets (feasibility analysis)
 
+ const navigate = useNavigate();
+// access to page only if logged in
+  useEffect(() => {
+      console.log(user);
+      if (user === null) {
+          navigate('/LogIn');
+      }
+  }, [user, navigate]);
   // General Hooks
   const { id } = useParams();
   const { type } = useParams();
@@ -29,7 +37,7 @@ function Search({user}) {
   const [category, setCategory] = useState("All");
   const [numResults, setNumResults] = useState("0");
   const [components, setComponents] = useState([]);
-  const navigate = useNavigate();
+
 
   // create watchlist modal
   const [show, setShow] = useState(false);
@@ -39,13 +47,7 @@ function Search({user}) {
   // update watchlist
   const [list, updateList] = useState([]);
 
-  // access to page only if logged in
-  useEffect(() => {
-      console.log(user);
-      if (user === null) {
-          navigate('/LogIn');
-      }
-  }, [user, navigate]);
+
 
   useEffect(() => {
     if (type === "Actors" || type === "Genres") {
@@ -281,7 +283,7 @@ function Search({user}) {
 
   return (
   <div>
-  <NavBar />
+  <NavBar user={user} updateUser={(e) => updateUser(e)} />
     <div className="container">
       <div className="container-fluid searchBar">
         <form className="col-12" data-testid="search-form" id="search-form" onSubmit={searchItem}>
