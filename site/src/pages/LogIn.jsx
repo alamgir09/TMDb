@@ -43,9 +43,10 @@ function LogIn({user, updateUser}) {
             setPassword("");
           } else {
 
-            handleFetchResponse(jsonObject["Type"]);
+            handleFetchResponse(jsonObject["Message"]);
             localStorage.setItem("userID", jsonObject["userID"]);
             updateUser(jsonObject["userID"]);
+//             updateUser("hi");
             console.log("redirect");
             navigate('/Search');
           }

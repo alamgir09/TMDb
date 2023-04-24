@@ -3,6 +3,7 @@ import MovieBoxWatchlist from "../components/MovieBoxWatchlist";
 import EditMovieModal from "../components/EditMovieModal";
 import WatchlistTypeDropdown from "../components/WatchlistTypeDropdown";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../components/NavBar";
 
 
 function WatchlistDetail({user}) {
@@ -21,7 +22,7 @@ function WatchlistDetail({user}) {
     // access to page only if logged in
     useEffect(() => {
         console.log(user);
-        if (user === null) {
+        if (user == null || user == "null") {
           navigate('/LogIn');
         }
       }, [user, navigate]);
@@ -124,6 +125,8 @@ function WatchlistDetail({user}) {
   }, [watchlistAll]);
 
    return (
+   <div>
+   <NavBar />
     <div className="container">
       <div className="text-center pb-3 pt-3">
         <h1>{watchlist}</h1>
@@ -163,6 +166,7 @@ function WatchlistDetail({user}) {
           />
         ))}
       <EditMovieModal modal={modal} handleClose={handleClose} fetchMovies={fetchMovies} />
+    </div>
     </div>
   );
 }

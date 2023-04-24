@@ -69,7 +69,6 @@ public class watchlistStepDefinitions {
 
     @When("I press the create watchlist button")
     public void iPressTheCreateWatchlistButton() {
-
         driver.findElement(By.id("createWatchlist")).click();
     }
 

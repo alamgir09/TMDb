@@ -24,8 +24,9 @@ function Search({user, updateUser}) {
  const navigate = useNavigate();
 // access to page only if logged in
   useEffect(() => {
-      console.log(user);
-      if (user === null) {
+      console.log("user:" + user);
+      if (user == null || user == "null") {
+          console.log("inside null");
           navigate('/LogIn');
       }
   }, [user, navigate]);

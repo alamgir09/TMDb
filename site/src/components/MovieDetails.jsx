@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import NavBar from "../components/NavBar";
 
 function MovieDetails() {
   const { id } = useParams();
@@ -105,6 +106,8 @@ function MovieDetails() {
   }, []);
 
   return (
+  <div>
+  <NavBar />
     <div className="movie-details">
       <div className="movie-image">
         <img src={imgURL} alt={title} />
@@ -138,6 +141,7 @@ function MovieDetails() {
           <p> {description} </p>
         </div>
       </div>
+    </div>
     </div>
   );
 }

@@ -39,7 +39,7 @@ function Watchlist({user, updateUser}) {
   // access to page only if logged in
   useEffect(() => {
       console.log(user);
-      if (user === null) {
+      if (user == null || user == "null") {
         navigate('/LogIn');
       }
     }, [user, navigate]);

@@ -42,7 +42,7 @@ function App() {
 
 
 // Set state for user id
-  const [user, updateUser] = useState(localStorage.getItem('userID')); //
+  const [user, updateUser] = useState(localStorage.getItem('userID'));
 
   return (
     <div>
