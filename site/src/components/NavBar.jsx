@@ -9,7 +9,7 @@ const NavBar = () => {
       <div className="container-fluid">
         <div className="col-3">
           <a className="navbar-brand" href="#">
-            Movie Time
+            Movie Time 4
           </a>
         </div>
 

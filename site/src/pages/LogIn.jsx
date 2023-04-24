@@ -55,7 +55,7 @@ function LogIn() {
   return (
     <div className="container-fluid">
       <div id="title-name">
-        Movie Time
+        Movie Time 4
       </div>
       <div className="text-center pb-3 pt-3">
         <h1>Log In</h1>
