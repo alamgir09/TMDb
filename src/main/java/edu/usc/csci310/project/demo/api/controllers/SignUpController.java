@@ -61,7 +61,12 @@ public class SignUpController {
                         .append("firstName", request.getFirstName())
                         .append("lastName", request.getLastName())
                         .append("password", request.getPassword())
+                                .append("attempts", 0)
+                                .append("timestamp", (long)0)
+                                .append("firstFailed", (long)0)
                                 .append("watchlist", new ArrayList<Watchlist>())
+
+
                         );
                 System.out.println("Success! Inserted document id: " + result.getInsertedId());
                 response.setData(userObjectID.toString());

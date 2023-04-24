@@ -26,6 +26,17 @@ public class LogInControllerTest {
     }
 
     @Test
+    void verifyIncorrectPasswordAttempts() throws JSONException {
+        LogInRequest request = new LogInRequest();
+        request.setUsername("kn");
+        request.setPassword("idontremember");
+
+        ResponseEntity<LogInResponse> returnedResponse = logInController.checkLogIn(request);
+
+        System.out.println(returnedResponse.getBody().getData());
+    }
+
+    @Test
     void verifyIncorrectPassword() throws JSONException {
         LogInRequest request = new LogInRequest();
         request.setUsername("tommyTrojan");
@@ -38,6 +49,7 @@ public class LogInControllerTest {
         assertEquals(json.get("Type"), "Error");
         assertEquals(json.get("Message"), "Password does not match");
     }
+
     @Test
     void verifyAccountExists() throws JSONException {
         LogInRequest request = new LogInRequest();
