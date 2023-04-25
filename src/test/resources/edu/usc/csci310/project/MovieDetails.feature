@@ -113,8 +113,8 @@ Feature: Provide Movie Details for displayed movies
     When I click a movie
     Then I should navigate to a new page
     And I should see "Add to Watchlist" button
-    Then I add the movie to "Watchlist Test"
-    Then I should see "Iron Man" in "Watchlist Test"
+    And I add the movie to "Watchlist Test"
+    And I should see "Iron Man" in "Watchlist Test"
 
   Scenario: The movie details page shows the dollar sign
     Given I search for "Iron Man"
