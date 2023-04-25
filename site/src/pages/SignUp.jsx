@@ -131,7 +131,7 @@ function SignUp() {
             required
           />
         </div>
-        <button type="submit" className="btn btn-danger w-100" value="Submit">
+        <button id="submit-button" type="submit" className="btn btn-danger w-100" value="Submit">
           Submit
         </button>
       </form>
