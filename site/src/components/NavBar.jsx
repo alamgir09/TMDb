@@ -1,4 +1,6 @@
 import React from "react";
+import "../styles/navbar.css";
+// import {colors} from "@material-ui/core";
 
 const NavBar = () => {
   //   const navigate = useNavigate();
@@ -7,7 +9,7 @@ const NavBar = () => {
       <div className="container-fluid">
         <div className="col-3">
           <a className="navbar-brand" href="#">
-            Movie Time
+            Movie Time 4
           </a>
         </div>
 
@@ -42,7 +44,7 @@ const NavBar = () => {
             {/*               </a> */}
             {/*             </li> */}
 
-            <li className="nav-item">
+            <li className="nav-item test">
               <a className="nav-link" href="/Search">
                 Home
               </a>

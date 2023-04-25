@@ -172,7 +172,7 @@ function WatchlistDetail() {
           list.map((element, index) => (
             <MovieBoxWatchlist
               key={index}
-              id={element["id"]}
+              id={element["_id"]}
               title={element["title"]}
               imgURL={element["imgURL"]}
               release_date={element["releaseDate"]}
