@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/login.css";
 
 function LogIn() {
   // fetchResponse is a constant in this component's state. Use handleFetchResponse(newValue)
@@ -53,6 +54,9 @@ function LogIn() {
 
   return (
     <div className="container-fluid">
+      <div id="title-name">
+        Movie Time 4
+      </div>
       <div className="text-center pb-3 pt-3">
         <h1>Log In</h1>
       </div>
@@ -83,7 +87,7 @@ function LogIn() {
           Submit
         </button>
       </form>
-      <p className="text-center pt-3" id="response">
+      <p className="text-center pt-3" id="resdponse">
         {fetchResponse}
       </p>
       <p className="text-center">

@@ -31,12 +31,14 @@ function EditMovieModal({ modal, handleClose, fetchMovies, setModal }) {
     }
 
     if (modal.data.type == "delete") {
+      console.log("id: " + modal.data.id);
+      console.log("watchlist: " + modal.data.watchlist);
       deleteMovie(modal.data.id, modal.data.watchlist, "null");
     }
     console.log("show: " + modal.data.show);
 
     setTimeout(() => {
-      // handleClose();
+      handleClose();
       fetchMovies();
     }, 3000);
   }

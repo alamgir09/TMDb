@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "../components/NavBar";
 
+
 function Watchlist() {
   const [list, updateList] = useState([]);
   const [loading, setLoading] = useState(true);

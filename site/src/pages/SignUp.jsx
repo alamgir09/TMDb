@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "../styles/signup.css";
 function SignUp() {
   const [fetchResponse, handleFetchResponse] = useState();
   const [firstName, setFirstName] = useState("");
@@ -72,6 +72,9 @@ function SignUp() {
 
   return (
     <div className="container-fluid">
+      <div id="title-name">
+        Movie Time 4
+      </div>
       <div className="text-center pb-3 pt-3">
         <h1>Sign Up</h1>
       </div>
