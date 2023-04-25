@@ -5,6 +5,8 @@ import Pagination from "../components/Pagination";
 import { useParams } from "react-router-dom";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
 import NavBar from "../components/NavBar";
+import "../styles/index.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Search() {
   // Handle all searches here
@@ -220,7 +222,7 @@ function Search() {
         console.log("We got here");
         console.log(components);
         console.log("the length of component is " + components.length);
-      });
+      })
   }
 
   // Change page - Pagination
@@ -233,7 +235,7 @@ function Search() {
   function paginate(pageNumber) {
     pageNumber + 1;
     console.log("xxx");
-  }
+  };
 
   // fetch watchlist
   // api request to get watchlist for current user
@@ -272,24 +274,16 @@ function Search() {
   }, []);
 
   return (
-    <div>
-      <NavBar />
-      <div className="container">
-        <div className="container-fluid searchBar">
-          <form className="col-12" data-testid="search-form" id="search-form" onSubmit={searchItem}>
-            <div className="searchHeader container">
-              <input
-                value={searchTerm}
-                onChange={(e) => setTerm(e.target.value)}
-                type="text"
-                placeholder="Search...."
-                className="search"
-                required
-              />
-              <button data-testid="search-submit-btn" type="submit">
-                Search
-              </button>
-              <ul id="nav">
+  <div>
+  <NavBar />
+    <div className="container">
+      <div className="container-fluid searchBar">
+        <form className="col-12" data-testid="search-form" id="search-form" onSubmit={searchItem}>
+
+
+          <div className="searchHeader-container d-flex justify-content-center align-items-center">
+            <div className="d-flex align-items-center">
+              <ul id="nav" className="mr-2">
                 <li id="active-nav">
                   <a href=""> {category} </a>
                   <ul>
@@ -308,74 +302,95 @@ function Search() {
                   </ul>
                 </li>
               </ul>{" "}
-              <button type="button">Year Filter</button>
-              {/*<!-- nav --> */}
-              <div>
-                <button
-                  onClick={() => {
-                    navigate("/");
-                  }}
-                >
-                  Back to Home
-                </button>
-              </div>
+              <button id="year-button" type="button">Year Filter</button>
             </div>
-          </form>
-        </div>
-        <div className="results-row">
-          <div className="col-12 mt-4">
-            Showing{" "}
-            {/* <span id="num-results" className="font-weight-bold">
+
+            <input
+              id="search-bar"
+              value={searchTerm}
+              onChange={(e) => setTerm(e.target.value)}
+              type="text"
+              placeholder="Search...."
+              className="search"
+              required
+            />
+            <button id="search-button" data-testid="search-submit-btn" type="submit">
+              Search
+            </button>
+
+
+            {/*<!-- nav --> */}
+            <div>
+              {/*<button*/}
+              {/*  onClick={() => {*/}
+              {/*    navigate("/");*/}
+              {/*  }}*/}
+              {/*>*/}
+              {/*  Back to Home*/}
+              {/*</button>*/}
+            </div>
+          </div>
+
+
+
+
+
+        </form>
+      </div>
+      <div className="results-row">
+        <div className="col-12 mt-4">
+          Showing{" "}
+          {/* <span id="num-results" className="font-weight-bold">
             0
           </span>{" "}
           of{" "} */}
-            <span id="total-results" className="font-weight-bold">
-              {numResults}
-            </span>{" "}
-            result(s).
-          </div>
-          <div className="movie-header">
-            <div className="movie-header col-12 mt-4">
-              <div id="poster" className="header-text">
-                Poster
-              </div>
-              <div className="col-3 header-text">Title</div>
-              <div className="col-3 header-text">Release Date</div>
-              <div className="col-3 header-text">Rating</div>
-            </div>{" "}
-            {/*<!-- inner-header --> */}
-          </div>{" "}
-          {/*<!-- .movie-header -->*/}
-          <div id="movies-all">
-            <div id="starter">
-              <MovieBox
-                key={"1"}
-                imgURL={"https://assets.mubicdn.net/images/notebook/post_images/29882/images-w1400.jpg?1579663202"}
-                title={"Title"}
-                release_date={"Release Date"}
-                rating={"Rating"}
-                list={list}
-                handleShow={handleShow}
-              />
+          <span id="total-results" className="font-weight-bold">
+            {numResults}
+          </span>{" "}
+          result(s).
+        </div>
+        <div className="movie-header">
+          <div className="movie-header col-12 mt-4">
+            <div id="poster" className="header-text">
+              Poster
             </div>
-            {/* {currentComponents.map((component) => component)} part of pagination*/}
-            {components.map((component) => component)}
-            <div className="movies-all col-12 mt-4">
-              <Pagination postsPerPage={postsPerPage} totalPosts={components.length} paginate={paginate} />
-            </div>
+            <div className="col-3 header-text">Title</div>
+            <div className="col-3 header-text">Release Date</div>
+            <div className="col-3 header-text">Rating</div>
           </div>{" "}
-          {/* <!-- #movies-all --> */}
+          {/*<!-- inner-header --> */}
         </div>{" "}
-        {/* <!-- #results-row --> */}
-        <CreateWatchlistModal
-          change
-          back
-          show={show}
-          handleClose={handleClose}
-          fetchWatchlist={fetchWatchlist}
-        ></CreateWatchlistModal>
-      </div>
+        {/*<!-- .movie-header -->*/}
+        <div id="movies-all">
+          <div id="starter">
+            <MovieBox
+              key={"1"}
+              imgURL={"https://assets.mubicdn.net/images/notebook/post_images/29882/images-w1400.jpg?1579663202"}
+              title={"Title"}
+              release_date={"Release Date"}
+              rating={"Rating"}
+              list={list}
+              handleShow={handleShow}
+            />
+          </div>
+          {/* {currentComponents.map((component) => component)} part of pagination*/}
+          {components.map((component) => component)}
+          <div className="movies-all col-12 mt-4">
+            <Pagination postsPerPage={postsPerPage} totalPosts={components.length} paginate={paginate} />
+          </div>
+        </div>{" "}
+        {/* <!-- #movies-all --> */}
+      </div>{" "}
+      {/* <!-- #results-row --> */}
+      <CreateWatchlistModal
+        change
+        back
+        show={show}
+        handleClose={handleClose}
+        fetchWatchlist={fetchWatchlist}
+      ></CreateWatchlistModal>
     </div>
+   </div>
   );
 }
 
