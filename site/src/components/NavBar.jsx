@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/navbar.css";
-import {colors} from "@material-ui/core";
+// import {colors} from "@material-ui/core";
 
 const NavBar = () => {
   //   const navigate = useNavigate();

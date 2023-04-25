@@ -64,23 +64,18 @@
 #year-button{
     text-decoration: none;
     color: black;
-
-    width: 110px;
     height: 50px;
-
     font-size: 18px;
     text-align: center;
-    line-height: 50px;
-    border-bottom: 2px solid #FFF;
     background: #e5e5e5;
     display: block;
     border: none;
 }
 
-#year-button:hover {
+/* #year-button:hover {
     border-bottom: 2px solid #dc3545;
     color: #dc3545;
-}
+} */
 
 #nav a{
     text-decoration: none;
@@ -94,18 +89,14 @@
     font-size: 18px;
     text-align: center;
     line-height: 50px;
-    border-bottom: 2px solid #FFF;
     background: #e5e5e5;
     display: block;
 }
-#nav a:hover {
+/* #nav a:hover {
     border-bottom: 2px solid #dc3545;
     color: #dc3545;
-}
+} */
 /* Ends */
-
-
-
 
 
 .movie-row {
@@ -293,7 +284,6 @@ body {
 
 .watchlistRow:hover{
 	cursor: pointer;
-	background-color: #bebebe;
 	scale: 1.03;
 }
 
@@ -304,7 +294,7 @@ body {
 }
 
 .fa-pen:hover, .fa-plus:hover{
-	color: #ffffff;
+	color: red;
 }
 
 .fa-trash:hover, .fa-copy:hover, .fa-arrow-right-from-bracket:hover{
@@ -341,6 +331,55 @@ body {
 
 .watchlistTypeMenu .row{
 	white-space: break-spaces !important;
+}
+
+/* Refresh styling... */
+
+.dropElements a{
+  cursor: pointer;
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
+}
+
+#active-nav a, #year-button, .movie-row button{
+  background-color: #dd3545;
+  color: white;
+}
+
+#active-nav .dropElements a:hover, .movie-row button:hover{
+  color: white;
+  background-color: #bb2d3b;
+}
+
+#year-button:hover{
+  background-color: #bb2d3b;
+}
+
+#search-bar{
+  padding: 11px;
+  border-radius: 0px;
+  box-shadow: none;
+  border-right: none;
+}
+
+#search-button{
+  font-size: 18px;
+  height:50px;
+  border: none;
+  width: 110px;
+}
+
+.movie-row, .movie-row-watchlist, .watchlistRow{
+  box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+  background-color: transparent;
+}
+
+#year-button{
+  padding: 0px 20px;
+}
+
+.title, .release-date, .rating, .movie-row-watchlist .inner-text{
+  font-size: 20px;
 }
 
 /* Compare watchlist css */
