@@ -1,6 +1,5 @@
 package edu.usc.csci310.project.demo.api.controllers;
 
-import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -8,7 +7,6 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
-import edu.usc.csci310.project.Movie;
 import edu.usc.csci310.project.demo.api.requests.AddMovieRequest;
 import edu.usc.csci310.project.demo.api.responses.AddMovieResponse;
 import org.bson.Document;
@@ -24,6 +22,9 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import org.bson.conversions.Bson;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/addMovie")
@@ -42,6 +43,28 @@ public class AddMovieController {
             MongoDatabase database = mongoClient.getDatabase("Team4").withCodecRegistry(pojoCodecRegistry);
 
             MongoCollection<Document> collection = database.getCollection("Users");
+
+            // check if movie already exists
+            Document query = collection.find(eq("userID", request.getUserID())).first();
+
+            // Get the watchlist array where name is from request
+            List<Document> watchlist = collection.find(query)
+                    .projection(Filters.elemMatch("watchlist", Filters.eq("name", request.getWatchlist())))
+                    .into(new ArrayList<>())
+                    .get(0)
+                    .getList("watchlist", Document.class);
+
+            // Get the movies array from the watchlist
+            List<Document> movies = watchlist.get(0).getList("movies", Document.class);
+
+            // Go through the movies
+            for (Document m : movies) {
+                String id = m.getString("_id");
+                if (id.equals(request.getMovie().getId())) {
+                    response.setData("Movie already exists");
+                    return ResponseEntity.ok().body(response);
+                }
+            }
 
             Bson filter = Filters.and(eq("userID", request.getUserID()), eq("watchlist.name", request.getWatchlist()));
 

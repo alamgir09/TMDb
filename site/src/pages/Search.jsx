@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import MovieBox from "../components/MovieBox";
 import Pagination from "../components/Pagination";
 import { useParams } from "react-router-dom";
@@ -31,7 +31,7 @@ function Search() {
   const [category, setCategory] = useState("All");
   const [numResults, setNumResults] = useState("0");
   const [components, setComponents] = useState([]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // create watchlist modal
   const [show, setShow] = useState(false);

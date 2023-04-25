@@ -1,4 +1,6 @@
-export function addMovie(id, title, imgURL, releaseDate, rating, watchlist) {
+import React from "react";
+
+export function addMovie(id, title, imgURL, releaseDate, rating, watchlist, modal) {
   // Construct the API request
   const apiUrl = "api/addMovie";
   const requestData = {
@@ -21,20 +23,43 @@ export function addMovie(id, title, imgURL, releaseDate, rating, watchlist) {
     .then((res) => res.json())
     .then((response) => {
       if (response.data == "Success") {
-        console.log("movie added success");
+        console.log("Success");
+        modal({
+          show: true,
+          data: {
+            text: <p className="text-center">Success</p>
+          }
+        });
+      } else if (response.data == "Movie already exists") {
+        console.log("movie already exists");
+        modal({
+          show: true,
+          data: {
+            text: <p className="text-center">Error: Movie already exists</p>
+          }
+        });
       }
+      //      setTimeout(() => {
+      //        modal({
+      //          show: false,
+      //          data: {
+      //            text: null
+      //          }
+      //        });
+      //      }, 3000);
     })
     .catch((err) => {
       console.log(err);
     });
 }
 
-export function deleteMovie(id, watchlist) {
+export function deleteMovie(id, watchlistFrom, watchlistTo) {
   const apiUrl = "api/deleteMovie";
   const requestData = {
     userID: localStorage.getItem("userID"),
     movieID: id,
-    watchlist: watchlist
+    watchlistFrom: watchlistFrom,
+    watchlistTo: watchlistTo
   };
   const requestHeaders = {
     "Content-Type": "application/json"
