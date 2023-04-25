@@ -11,6 +11,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -33,7 +34,7 @@ public class SecurityStepDefinitions {
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
-        // options.addArguments("--headless");
+//        options.addArguments("--headless");
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
         options.setAcceptInsecureCerts(true);
@@ -42,7 +43,7 @@ public class SecurityStepDefinitions {
 
     @After
     public void after() {
-//        driver.quit();
+        driver.quit();
     }
 
     @When("I navigate to the {string} without SSL")
@@ -77,17 +78,18 @@ public class SecurityStepDefinitions {
 
         Duration duration = Duration.ofSeconds(30);
 
-        WebDriverWait wait = new WebDriverWait(driver, duration); // wait up to 30 seconds
-        wait.until(ExpectedConditions.jsReturnsValue("return document.getElementsByClassName('container-fluid') !== null;"));
+        WebDriverWait wait = new WebDriverWait(driver, duration);
+        WebElement logout = driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[3]/a"));
+        wait.until(ExpectedConditions.elementToBeClickable(logout));
 
         Thread.sleep(5000);
 
-        //driver.navigate().refresh();
+//        driver.navigate().refresh();
     }
 
     @Then("I should see that I am on the {string} page")
     public void iShouldSeeThatIAmOnThePage(String arg0) {
-//        driver.navigate().refresh();
+        driver.navigate().refresh();
         assertEquals(driver.getCurrentUrl(), "https://localhost:8080/" + arg0);
     }
 
@@ -104,13 +106,52 @@ public class SecurityStepDefinitions {
 
     @And("I logout")
     public void iLogout() {
+//        Duration duration = Duration.ofSeconds(30);
+//
+//        WebDriverWait wait = new WebDriverWait(driver, duration);
+//        WebElement logout = driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[3]/a"));
+//        wait.until(ExpectedConditions.elementToBeClickable(logout));
+
         driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[3]/a")).click();
     }
 
     @And("I am inactive for {int} seconds")
     public void iAmInactiveForSeconds(int arg0) throws InterruptedException {
-        Thread.sleep(63000);
-//        driver.navigate().refresh();
+        Thread.sleep(65000);
+//        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+//        jsExecutor.executeScript("localStorage.setItem('userID', null);");
+
+        Duration duration = Duration.ofSeconds(30);
+
+        WebDriverWait wait = new WebDriverWait(driver, duration); // wait up to 30 seconds
+        wait.until(ExpectedConditions.jsReturnsValue("return document.getElementsByClassName('container-fluid') !== null;"));
+
+
+
     }
 
+    @When("I enter {string} into username and {string} into password")
+    public void iEnterIntoUsernameAndIntoPassword(String arg0, String arg1) {
+        driver.findElement(By.id("username")).sendKeys(arg0);
+        driver.findElement(By.id("password")).sendKeys(arg1);
+    }
+
+    @And("I submit my login credentials")
+    public void iSubmitMyLoginCredentials() throws InterruptedException {
+        driver.findElement(By.id("submitBtn")).click();
+        Thread.sleep(10000);
+
+    }
+
+    @Then("I should see response on the screen {string}")
+    public void iShouldSeeResponseOnTheScreen(String arg0) {
+        String result = driver.findElement(By.id("response")).getText();
+        assertEquals(arg0, result);
+    }
+
+
+    @And("I navigate securely to the {string} without logging in")
+    public void iNavigateSecurelyToTheWithoutLoggingIn(String arg0) {
+        driver.get("https://localhost:8080/" + arg0);
+    }
 }

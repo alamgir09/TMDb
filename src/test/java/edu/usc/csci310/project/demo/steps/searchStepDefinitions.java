@@ -42,6 +42,7 @@ public class searchStepDefinitions {
         options.addArguments("--headless");
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
+        options.setAcceptInsecureCerts(true);
         driver = new ChromeDriver(options);
     }
 
