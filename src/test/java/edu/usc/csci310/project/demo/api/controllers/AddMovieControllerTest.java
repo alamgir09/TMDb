@@ -6,6 +6,7 @@ import edu.usc.csci310.project.demo.api.responses.AddMovieResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class AddMovieControllerTest {
@@ -14,8 +15,8 @@ public class AddMovieControllerTest {
     @Test
     void verifyAddMovie() {
         AddMovieRequest request = new AddMovieRequest();
-        request.setUserID("6423e5633b51581fb8d36210");
-        request.setWatchlist("watchlist test");
+        request.setUserID("6430c19cb1f4505a0619df69");
+        request.setWatchlist("watchlist 2");
 
         // create movie
         // create watchlist
@@ -46,5 +47,22 @@ public class AddMovieControllerTest {
 
         assertNotNull(returnedResponse.getBody());
         System.out.println(returnedResponse.getBody().getData());
+    }
+
+    @Test
+    void verifyAddMovieExists() {
+        AddMovieRequest request = new AddMovieRequest();
+        request.setUserID("6437499e7c0bb318ab942ace");
+        request.setWatchlist("watchlist 1");
+
+
+        request.setMovie(new Movie("test id", "Iron Will", "test url", "test release date", "test rating"));
+
+        ResponseEntity<AddMovieResponse> returnedResponse = addMovieController.addMovie(request);
+
+        assertNotNull(returnedResponse.getBody());
+        assertEquals("Movie already exists", returnedResponse.getBody().getData());
+        System.out.println(returnedResponse.getBody().getData());
+
     }
 }

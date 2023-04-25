@@ -10,7 +10,6 @@ function GetSuggestionListModal({ show, handleClose, fetchWatchlist, watchlists 
   const [selectedWatchLists, setSelectedWatchlists] = useState([]);
   const [errorMessage, setErrorMessage] = useState();
 
-
   function onValueChange(event) {
     setType(event.target.value);
   }
@@ -119,11 +118,7 @@ function GetSuggestionListModal({ show, handleClose, fetchWatchlist, watchlists 
               as="select"
               multiple
               value={selectedWatchLists}
-              onChange={(e) =>
-                setSelectedWatchlists(
-                  Array.from(e.target.selectedOptions, (option) => option.value)
-                )
-              }
+              onChange={(e) => setSelectedWatchlists(Array.from(e.target.selectedOptions, (option) => option.value))}
             >
               {watchlists.map((watchlist) => (
                 <option key={watchlist.id} value={watchlist.name}>

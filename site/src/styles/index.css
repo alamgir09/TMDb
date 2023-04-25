@@ -294,3 +294,21 @@ body {
 	white-space: break-spaces !important;
 }
 
+/* Compare watchlist css */
+#compareWatchlistModal{
+	max-width: 700px;
+}
+
+#compareWatchlistModal .modal-body{
+	padding: 20px 50px 50px 50px;
+}
+
+#compareWatchlistModal .list-group{
+	font-size: 20px;
+	border-radius: 0;
+}
+
+#compareWatchlistModal .list-group-item{
+	border: none;
+	border-bottom: 1px solid;
+}
