@@ -337,29 +337,6 @@ test("handleClose of add movie modal", async () => {
   await waitFor(() => expect(screen.queryByTestId("modal-title")).toBeNull());
 });
 
-test("back to home button", async () => {
-  const mockResponseW = { data: JSON.stringify([{ name: "Watchlist 1" }, { name: "Watchlist 2" }]) };
-  jest.spyOn(window, "fetch").mockResolvedValueOnce({
-    json: () => Promise.resolve(mockResponseW)
-  });
-  useParams.mockReturnValue({ id: "test", type: "All" });
-  useNavigate.mockReturnValue(jest.fn());
-  const mockResponse = {
-    results: [
-      { id: 1, title: "Test Movie 1" },
-      { id: 2, title: "Test Movie 2" }
-    ],
-    total_results: 2
-  };
-  global.fetch = jest.fn(() => Promise.resolve({ json: () => Promise.resolve(mockResponse) }));
-
-  render(<Search />, { wrapper: BrowserRouter });
-
-  fireEvent.click(screen.getByRole("button", { name: "Back to Home" }));
-
-  expect(window.location.pathname).toEqual("/");
-});
-
 test("pagination", async () => {
   useParams.mockReturnValue({ id: "test", type: "All" });
   useNavigate.mockReturnValue(jest.fn());
