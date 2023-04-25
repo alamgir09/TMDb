@@ -30,6 +30,7 @@ public class CounterStepDefinitions {
     public void before() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
+        options.setAcceptInsecureCerts(true);
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
         // options.addArguments("--whitelisted-ips");
@@ -57,7 +58,7 @@ public class CounterStepDefinitions {
     }
 
     @After
-    public void after(){
+    public void after() {
         driver.quit();
     }
 }

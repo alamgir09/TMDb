@@ -3,8 +3,7 @@ import React, { useState, useEffect } from "react";
 import CollageRow from "./CollageRow.jsx";
 import "../styles/collage.css";
 
-function Collage({movieIDList}) {
-
+function Collage({ movieIDList }) {
   console.log("COLLAGE");
   console.log(movieIDList);
 
@@ -18,7 +17,6 @@ function Collage({movieIDList}) {
 
   //get the image urls from the movie ids
   async function getImageURLs() {
-
     var urls = [];
     var ids = [];
 
@@ -38,7 +36,7 @@ function Collage({movieIDList}) {
         numImages = getNumImages(numMovies);
       }
 
-      var url = "https://api.themoviedb.org/3/movie/" + id + "/images?api_key=528c625029ff80e41b72cc37a0c389af"
+      var url = "https://api.themoviedb.org/3/movie/" + id + "/images?api_key=528c625029ff80e41b72cc37a0c389af";
 
       console.log(numImages);
 
@@ -61,18 +59,17 @@ function Collage({movieIDList}) {
         }
 
         //if the api has less than the required amount of images for this movie, add in duplicates
-        if(backdrops.length < numImages){
-            console.log("NEED MORE");
-            var index = 0;
-            for(var overflow = backdrops.length; overflow < numImages; overflow++){
-                path = backdrops[index]["file_path"];
-                fullURL = "http://image.tmdb.org/t/p/w400" + path;
-                urls.push(fullURL);
-                ids.push(id);
-                index++;
-            }
+        if (backdrops.length < numImages) {
+          console.log("NEED MORE");
+          var index = 0;
+          for (var overflow = backdrops.length; overflow < numImages; overflow++) {
+            path = backdrops[index]["file_path"];
+            fullURL = "http://image.tmdb.org/t/p/w400" + path;
+            urls.push(fullURL);
+            ids.push(id);
+            index++;
+          }
         }
-
       } catch (err) {
         console.log(err);
         //handleFetchResponse("An API error occurred");
@@ -82,11 +79,9 @@ function Collage({movieIDList}) {
     setMovieIDs(ids);
   }
 
-
   function getNumImages(numMovies) {
     return Math.ceil(10 / numMovies);
   }
-
 
   function BuildCollage() {
     //maximum number of rows (I think this will work in terms of responsiveness)
@@ -123,7 +118,7 @@ function Collage({movieIDList}) {
           images={imageURLs}
           movieIDs={movieIDs}
           width={width}
-//           data-testid={`collage // add test id attribute
+          //           data-testid={`collage // add test id attribute
         />
       );
     }
@@ -138,21 +133,22 @@ function Collage({movieIDList}) {
           images={imageURLs}
           movieIDs={movieIDs}
           width={width}
-
         />
       );
     }
 
-    return <div id="collage" data-testid="collageTestID">{collageRows}</div>
+    return (
+      <div id="collage" data-testid="collageTestID">
+        {collageRows}
+      </div>
+    );
   }
 
   useEffect(() => {
     getImageURLs();
   }, []);
 
-  return (
-    <div>{BuildCollage()};</div>
-  );
+  return <div>{BuildCollage()};</div>;
 }
 
 export default Collage;

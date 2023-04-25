@@ -1,8 +1,6 @@
 package edu.usc.csci310.project.demo.api.controllers;
 
-import edu.usc.csci310.project.demo.api.requests.GetMoviesRequest;
 import edu.usc.csci310.project.demo.api.requests.GetWatchlistRequest;
-import edu.usc.csci310.project.demo.api.responses.GetMoviesResponse;
 import edu.usc.csci310.project.demo.api.responses.GetWatchlistResponse;
 import org.json.JSONException;
 import org.junit.jupiter.api.Test;
@@ -17,12 +15,11 @@ public class GetWatchlistControllerTest {
     @Test
     void verifyGetWatchlist() throws JSONException {
         GetWatchlistRequest request = new GetWatchlistRequest();
-        request.setUserID("6423e5633b51581fb8d36210");
+        request.setUserID("642617a23405041b9f616538");
 
         ResponseEntity<GetWatchlistResponse> returnedResponse = getWatchlistController.handleGetWatchlist(request);
 
         assertNotNull(returnedResponse.getBody());
-        // JSONObject json = new JSONObject(returnedResponse.getBody().getData());
         System.out.println(returnedResponse.getBody().getData());
     }
 

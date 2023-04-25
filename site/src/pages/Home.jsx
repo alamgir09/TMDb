@@ -32,7 +32,8 @@ function Home() {
       >
         Click to go to Other page
       </button>
-      <button data-testid="navigate-search"
+      <button
+        data-testid="navigate-search"
         onClick={() => {
           navigate("/Search");
         }}

@@ -30,7 +30,14 @@ function MoveMovieComponent({ id, imgURL, title, releaseDate, rating, watchlists
         rating: rating,
         type: "move",
         watchlist: watchlist,
-        text: `Are you sure you want to move [${title}] to [${watchlist}]?`
+        text: (
+          <div className="text-center">
+            <p>
+              Are you sure you want to move [{title}] to [{watchlist}]?
+            </p>
+            <p>This action cannot be undone.</p>
+          </div>
+        )
       }
     });
   }

@@ -14,8 +14,8 @@ public class GetMoviesControllerTest {
     @Test
     void verifyGetMovies() {
         GetMoviesRequest request = new GetMoviesRequest();
-        request.setUserID("6423e5633b51581fb8d36210");
-        request.setWatchlist("watchlist 1");
+        request.setUserID("642617a23405041b9f616538");
+        request.setWatchlist("Watchlist 1");
 
         ResponseEntity<GetMoviesResponse> returnedResponse = getMoviesController.handleGetMovies(request);
 
@@ -27,13 +27,25 @@ public class GetMoviesControllerTest {
     @Test
     void verifyNoMoviesFound() {
         GetMoviesRequest request = new GetMoviesRequest();
-        request.setUserID("6423e5633b51581fb8d36210");
+        request.setUserID("642617a23405041b9f616538");
         request.setWatchlist("invalid watchlist");
 
         ResponseEntity<GetMoviesResponse> returnedResponse = getMoviesController.handleGetMovies(request);
 
         assertEquals("No results found.", returnedResponse.getBody().getData());
-        // JSONObject json = new JSONObject(returnedResponse.getBody().getData());
         System.out.println(returnedResponse.getBody().getData());
+    }
+
+    @Test
+    void verifyNoUserFound() {
+        GetMoviesRequest request = new GetMoviesRequest();
+        request.setUserID("642617a23405041b9f6160000");
+        request.setWatchlist("invalid watchlist");
+
+        ResponseEntity<GetMoviesResponse> returnedResponse = getMoviesController.handleGetMovies(request);
+
+        assertEquals("No results found.", returnedResponse.getBody().getData());
+        System.out.println(returnedResponse.getBody().getData());
+
     }
 }
