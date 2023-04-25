@@ -15,40 +15,46 @@ import { useIdleTimer } from 'react-idle-timer'
 function App() {
 
 //     Idle checker for timeout
-//    const navigate = useNavigate();
-//    const [count, setCount] = useState(0)
-//    const [remaining, setRemaining] = useState(0)
-//
-//    const onIdle = () => {
-//       localStorage.removeItem("userID")
-//       navigate('/LogIn')
-//    }
-//
-//     const { getRemainingTime } = useIdleTimer({
-//       onIdle,
-//       timeout: 60_000,
-//       throttle: 500
-//     })
-//
-//     useEffect(() => {
-//       const interval = setInterval(() => {
-//         setRemaining(Math.ceil(getRemainingTime() / 1000))
-//       }, 500)
-//
-//       return () => {
-//         clearInterval(interval)
-//       }
-//     }) // end check
+    const navigate = useNavigate();
+    const [count, setCount] = useState(0)
+    const [remaining, setRemaining] = useState(0)
+
+    const onIdle = () => {
+       localStorage.removeItem("userID")
+       navigate('/LogIn')
+    }
+
+    const onActive = () => {
+        console.log("active");
+    }
+
+     const { getRemainingTime } = useIdleTimer({
+       onIdle,
+       onActive,
+       timeout: 60_000,
+       throttle: 500
+     })
+
+     useEffect(() => {
+       const interval = setInterval(() => {
+         setRemaining(Math.ceil(getRemainingTime() / 1000))
+       }, 500)
+
+       return () => {
+         clearInterval(interval)
+       }
+     }) // end check
 
 
 // Set state for user id
+//  const [user, updateUser] = useState(localStorage.getItem('userID'));
   const [user, updateUser] = useState(localStorage.getItem('userID'));
 
   return (
     <div>
       <Routes>
         {/* Root pages, located in /pages/ */}
-        <Route path="/" element={<LogIn />} />
+        <Route path="/" element={<LogIn user={user} updateUser={updateUser}/>} />
         <Route path="/other" element={<Other />} />
         <Route path="/LogIn" element={<LogIn user={user} updateUser={updateUser}/>} />
         <Route path="/SignUp" element={<SignUp />} />

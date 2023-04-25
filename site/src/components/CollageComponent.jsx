@@ -73,7 +73,10 @@ function Collage({movieIDList}) {
                 fullURL = "http://image.tmdb.org/t/p/w400" + path;
                 urls.push(fullURL);
                 ids.push(id);
-                index++;
+                index++
+                if(index > backdrops.length - 1){
+                    index = 0;
+                }
             }
         }
 

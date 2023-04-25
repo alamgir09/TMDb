@@ -22,10 +22,6 @@ import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-//hashing
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import java.util.ArrayList;
 
 
@@ -33,7 +29,7 @@ import java.util.ArrayList;
 @RequestMapping("/api/signup")
 public class SignUpController {
     @PostMapping
-    public ResponseEntity<SignUpResponse> checkSignUp(@RequestBody SignUpRequest request) throws NoSuchAlgorithmException {
+    public ResponseEntity<SignUpResponse> checkSignUp(@RequestBody SignUpRequest request) {
 
         SignUpResponse response = new SignUpResponse();
 
@@ -57,27 +53,6 @@ public class SignUpController {
                 response.setData("User already exists");
             }
             else{
-
-                String password = request.getPassword();
-                String hashedPassword;
-
-                MessageDigest digest = MessageDigest.getInstance("SHA-256");
-                byte[] hash = digest.digest(password.getBytes());
-
-                // Convert the byte array to a hex string
-                StringBuilder hexString = new StringBuilder();
-                for (byte b : hash) {
-                    String hex = Integer.toHexString(0xff & b);
-                    if (hex.length() == 1) hexString.append('0');
-                    hexString.append(hex);
-                }
-
-                System.out.println("Original string: " + password);
-
-                hashedPassword = hexString.toString();
-                System.out.println("SHA-256 hash: " + hashedPassword);
-
-
                 ObjectId userObjectID = new ObjectId();
                 InsertOneResult result = collection.insertOne(new Document()
                         .append("_id", userObjectID)
@@ -85,10 +60,13 @@ public class SignUpController {
                         .append("username", request.getUsername())
                         .append("firstName", request.getFirstName())
                         .append("lastName", request.getLastName())
-                        // hash password with 256 hash
-
-                        .append("password", hashedPassword )
+                        .append("password", request.getPassword())
+                        .append("attempts", 0)
+                        .append("timestamp", (long)0)
+                        .append("firstFailed", (long)0)
                         .append("watchlist", new ArrayList<Watchlist>())
+
+
                 );
                 System.out.println("Success! Inserted document id: " + result.getInsertedId());
                 response.setData(userObjectID.toString());

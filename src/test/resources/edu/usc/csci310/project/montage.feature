@@ -15,6 +15,20 @@ Feature: Montage
     Then I should see image from movie id "862"
     Then I should see image from movie id "496243"
 
+  Scenario: Navigate to Search page from Montage page
+    Given I am on watchlist detail page for watchlist "10movies"
+    When I press Search on the NavBar
+    Then I should see that I am on the Search page
+
+  Scenario: Navigate back to movie details of current watchlist
+    Given I am on watchlist detail page for watchlist "10movies"
+    When I press the create montage button
+    Then I should be on montage page
+    When I press the Back button
+    Then I am on watchlist detail page for watchlist "10movies"
+
+
+
   # navigate to search
   # add button to go back to page with movie details page
 

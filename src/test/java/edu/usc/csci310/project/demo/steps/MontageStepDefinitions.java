@@ -41,6 +41,7 @@ public class MontageStepDefinitions {
         // options.addArguments("--whitelisted-ips");
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
+        options.setAcceptInsecureCerts(true);
         driver = new ChromeDriver(options);
 
     }
@@ -52,13 +53,13 @@ public class MontageStepDefinitions {
 
     @Given("I am on watchlist detail page for watchlist {string}")
     public void iAmOnTheWatchlistDetailPageForWatchlist(String arg0) throws InterruptedException {
-        driver.navigate().to("http://localhost:8080/LogIn");
+        driver.navigate().to("https://localhost:8080/LogIn");
 
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("localStorage.setItem('userID', '6440816539efa11e9b641da6');");
         jsExecutor.executeScript("localStorage.setItem('watchlist', '" + arg0 + "');");
 
-        driver.navigate().to("http://localhost:8080/WatchlistDetail");
+        driver.navigate().to("https://localhost:8080/WatchlistDetail");
 
         Duration duration = Duration.ofSeconds(30);
 
@@ -79,7 +80,7 @@ public class MontageStepDefinitions {
 
     @Then("I should be on montage page")
     public void iShouldBeOnMontagePage() {
-        assertEquals("http://localhost:8080/Montage", driver.getCurrentUrl());
+        assertEquals("https://localhost:8080/Montage", driver.getCurrentUrl());
     }
 
     @Then("I should see at least {int} images")
@@ -122,5 +123,21 @@ public class MontageStepDefinitions {
             String transform = img.getCssValue("transform");
             assertTrue(transform.contains("rotate(-12deg)") || transform.contains("rotate(12deg)"));
         }
+    }
+
+    @When("I press Search on the NavBar")
+    public void iPressSearchOnTheNavBar() {
+        driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[1]/a")).click();
+    }
+
+    @Then("I should see that I am on the Search page")
+    public void iShouldSeeThatIAmOnTheSearchPage() {
+        assertEquals(driver.getCurrentUrl(), "https://localhost:8080/Search");
+
+    }
+
+    @When("I press the Back button")
+    public void iPressTheBackButton() {
+        driver.findElement(By.xpath("//*[@id=\"backButton\"]")).click();
     }
 }
