@@ -24,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 
 public class SignUpStepDefinitions {
 
-    private static final String ROOT_URL = "http://localhost:8080/";
+    private static final String ROOT_URL = "https://localhost:8080/";
     private static WebDriver driver;
 
     @Given("I am on the SignUp page")
@@ -42,23 +42,23 @@ public class SignUpStepDefinitions {
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+//        options.addArguments("--headless");
         options.setAcceptInsecureCerts(true);
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
     }
 
-    @When("I enter my first name {string} , last name {string}, user name {string}, my password {string}, and confirming password {string}")
-    public void iEnterMyFirstNameLastNameUserNameMyPasswordAndConfirmingPassword(String arg0, String arg1, String arg2, String arg3, String arg4) {
-        Date now = new Date();
-
-        driver.findElement(By.id("firstName")).sendKeys(arg0 + now);
-        driver.findElement(By.id("lastName")).sendKeys(arg1 + now);
-        driver.findElement(By.id("username")).sendKeys(arg2 + now);
-        driver.findElement(By.id("password")).sendKeys(arg3);
-        driver.findElement(By.id("passwordConfirm")).sendKeys(arg4);
-    }
+//    @When("I enter my first name {string} , last name {string}, user name {string}, my password {string}, and confirming password {string}")
+//    public void iEnterMyFirstNameLastNameUserNameMyPasswordAndConfirmingPassword(String arg0, String arg1, String arg2, String arg3, String arg4) {
+//        Date now = new Date();
+//
+//        driver.findElement(By.id("firstName")).sendKeys(arg0 + now);
+//        driver.findElement(By.id("lastName")).sendKeys(arg1 + now);
+//        driver.findElement(By.id("username")).sendKeys(arg2 + now);
+//        driver.findElement(By.id("password")).sendKeys(arg3);
+//        driver.findElement(By.id("passwordConfirm")).sendKeys(arg4);
+//    }
 
     @And("I click the submit button")
     public void iClickTheSubmitButton() {
@@ -82,11 +82,10 @@ public class SignUpStepDefinitions {
         assertEquals("User already exists", arg0);
     }
 
-    @Then("I should see an error message {string}")
-    public void iShouldSeeAnErrorMessage(String arg0) {
-        String actualMessage = driver.switchTo().alert().getText();
-        assertEquals(arg0, actualMessage);
-    }
+//    @Then("I should see an error message {string}")
+//    public void iShouldSeeAnErrorMessage(String arg0) {
+//
+//    }
 
     @Then("it should stay on SignUp page")
     public void itShouldStayOnSignUpPage() {
@@ -101,5 +100,22 @@ public class SignUpStepDefinitions {
     @After
     public void after() {
         driver.quit();
+    }
+
+    @When("I enter {string} , {string}, {string}, {string}, and {string}")
+    public void iEnterAnd(String arg0, String arg1, String arg2, String arg3, String arg4) {
+        Date now = new Date();
+
+        driver.findElement(By.id("firstName")).sendKeys(arg0 + now);
+        driver.findElement(By.id("lastName")).sendKeys(arg1 + now);
+        driver.findElement(By.id("username")).sendKeys(arg2 + now);
+        driver.findElement(By.id("password")).sendKeys(arg3);
+        driver.findElement(By.id("passwordConfirm")).sendKeys(arg4);
+    }
+
+    @Then("I should see an error message")
+    public void iShouldSeeAnErrorMessage() {
+        String actualMessage = driver.switchTo().alert().getText();
+        assertEquals("Password does not match. Please try again.", actualMessage);
     }
 }
