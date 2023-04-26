@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
@@ -30,8 +30,9 @@ function SaveSuggestions() {
         // Send the API request
         await fetch(apiUrl, requestOptions)
           .then((res) => res.json())
-          .then((response) => {
-                console.log('deleting ' + localStorage.getItem("watchlist") )
+          .then(() => {
+                console.log('deleting ' + localStorage.getItem("watchlist") );
+
           })
           .catch((err) => {
             console.log(err);

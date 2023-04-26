@@ -327,12 +327,17 @@ describe("WatchlistDetail page", () => {
 				expect(queryByTestId('cancel-button')).not.toBeNull();
 				expect(queryByTestId('save-button')).not.toBeNull();
 
-
-			    const mockError = new Error("API call failed");
-				mockFetch.mockRejectedValue(mockError);
+					const fetchSpyFail = jest.spyOn(global, "fetch").mockImplementation(() =>
+          Promise.resolve({
+            json: () => Promise.mockRejectedValue(mockError)
+          })
+        );
+			  const mockError = new Error("API call failed");
 				const saveButton = getByTestId("save-button");
 				fireEvent.click(saveButton);
-				await waitFor(() => expect(mockFetch).toHaveBeenCalledTimes(1));
+
+				await waitFor(() => expect(fetchSpyFail).toHaveBeenCalledTimes(3));
+
 			},20000);
 });
 
