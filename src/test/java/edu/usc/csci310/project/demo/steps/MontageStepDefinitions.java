@@ -46,10 +46,10 @@ public class MontageStepDefinitions {
 
     }
 
-    @After
-    public void after() {
-        driver.quit();
-    }
+//    @After
+//    public void after() {
+//        driver.quit();
+//    }
 
     @Given("I am on watchlist detail page for watchlist {string}")
     public void iAmOnTheWatchlistDetailPageForWatchlist(String arg0) throws InterruptedException {
@@ -75,7 +75,7 @@ public class MontageStepDefinitions {
     @When("I press the create montage button")
     public void iPressTheCreateMontageButton() throws InterruptedException {
         driver.findElement(By.id("create-montage")).click();
-        Thread.sleep(1000);
+        Thread.sleep(10000);
     }
 
     @Then("I should be on montage page")

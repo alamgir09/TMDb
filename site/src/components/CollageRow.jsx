@@ -4,12 +4,11 @@ import React from "react";
 function CollageRow({ startIndex, numColumns, images, movieIDs, width }) {
   var columns = [];
 
-  var multiplier = 1;
   for (var i = startIndex; i < startIndex + numColumns; i++) {
     //get -1 or +1
-    multiplier *= -1;
+    var randNum = Math.ceil(Math.random() * 1) * (Math.round(Math.random()) ? 1 : -1);
     //12 degrees of rotation (clockwise or counter-clockwise)
-    var randNum = 12 * multiplier;
+    randNum *= 12;
     columns.push(
       <div
         key={"collageRow" + i}

@@ -41,10 +41,10 @@ public class SecurityStepDefinitions {
         driver = new ChromeDriver(options);
     }
 
-    @After
-    public void after() {
-        driver.quit();
-    }
+//    @After
+//    public void after() {
+//        driver.quit();
+//    }
 
     @When("I navigate to the {string} without SSL")
     public void iNavigateToTheWithoutSSL(String arg0) {
@@ -90,7 +90,7 @@ public class SecurityStepDefinitions {
     @Then("I should see that I am on the {string} page")
     public void iShouldSeeThatIAmOnThePage(String arg0) {
         driver.navigate().refresh();
-        assertEquals(driver.getCurrentUrl(), "https://localhost:8080/" + arg0);
+        assertEquals("https://localhost:8080/" + arg0, driver.getCurrentUrl());
     }
 
     @Given("I am not logged in")
@@ -151,7 +151,35 @@ public class SecurityStepDefinitions {
 
 
     @And("I navigate securely to the {string} without logging in")
-    public void iNavigateSecurelyToTheWithoutLoggingIn(String arg0) {
+    public void iNavigateSecurelyToTheWithoutLoggingIn(String arg0) throws InterruptedException {
         driver.get("https://localhost:8080/" + arg0);
+        Thread.sleep(10000);
+    }
+
+    @And("I am on watchlist detail page for watchlist {int}movies")
+    public void iAmOnWatchlistDetailPageForWatchlistMovies(int arg0) throws InterruptedException {
+        driver.navigate().to("https://localhost:8080/LogIn");
+
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("localStorage.setItem('userID', '6440816539efa11e9b641da6');");
+        jsExecutor.executeScript("localStorage.setItem('watchlist', '" + arg0 + "');");
+
+        driver.navigate().to("https://localhost:8080/WatchlistDetail");
+
+        Duration duration = Duration.ofSeconds(30);
+
+        WebDriverWait wait = new WebDriverWait(driver, duration); // wait up to 30 seconds
+        wait.until(ExpectedConditions.jsReturnsValue("return localStorage.getItem('userID');"));
+        wait.until(ExpectedConditions.jsReturnsValue("return document.getElementById('create-montage') !== null;"));
+        wait.until(ExpectedConditions.jsReturnsValue("return document.getElementsByClassName('movie-row-watchlist') !== null;"));
+
+        driver.navigate().refresh();
+        Thread.sleep(5000);
+    }
+
+    @When("I press the create montage button here")
+    public void iPressTheCreateMontageButtonHere() throws InterruptedException {
+        driver.findElement(By.id("create-montage")).click();
+        Thread.sleep(10000);
     }
 }
