@@ -3,6 +3,8 @@ import MovieBoxWatchlist from "../components/MovieBoxWatchlist";
 import EditMovieModal from "../components/EditMovieModal";
 import WatchlistTypeDropdown from "../components/WatchlistTypeDropdown";
 import { useNavigate } from "react-router-dom";
+import SaveSuggestions from "../components/SaveSuggestions";
+
 
 function WatchlistDetail() {
   const [list, updateList] = useState([]);
@@ -43,6 +45,9 @@ function WatchlistDetail() {
       .then((res) => res.json())
       .then((response) => {
         if (response?.data) {
+            if(response.data === 'No results found.') {
+                navigate("/Watchlist")
+            }
           console.log(response.data);
 
           var jsonObject = JSON.parse(response.data);
@@ -114,6 +119,7 @@ function WatchlistDetail() {
   }, [watchlistAll]);
 
   return (
+
     <div className="container">
       <div className="text-center pb-3 pt-3">
         <h1>{watchlist}</h1>
@@ -121,6 +127,7 @@ function WatchlistDetail() {
       <div className="row mb-3">
         <div className="col-sm">{!loading && list.length == 0 ? <h2>No movies added yet</h2> : null}</div>
         <div className="col-sm text-end">
+          <SaveSuggestions data-testid="save-suggestions"/>
           <WatchlistTypeDropdown type={watchlistType} />
           <button
             onClick={() => { navigate("/Montage", { state: { movieIDList: movieIDs } });}}> Create Montage

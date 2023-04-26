@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import CreateSuggestionlistButton from '../components/CreateSuggestionlistButton'
+import CreateSuggestionlistModal from '../components/CreateSuggestionlistModal'
 import CreateWatchlistButton from "../components/CreateWatchlistButton";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
 import EditWatchlistModal from "../components/EditWatchlistModal";
@@ -11,12 +13,16 @@ function Watchlist() {
   const [list, updateList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
+  const [suggestionShow, setSuggestionShow] = useState(false);
   const [editShow, setEditShow] = useState(false);
   const [deleteShow, setDeleteShow] = useState(false);
   const [watchlist, setWatchlist] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleSuggestionClose = () => setSuggestionShow(false);
+  const handleSuggestionShow = () => setSuggestionShow(true);
 
   const handleEditClose = () => setEditShow(false);
   const handleEditShow = () => setEditShow(true);
@@ -51,9 +57,10 @@ function Watchlist() {
       .then((res) => res.json())
       .then((response) => {
         if (Object.keys(response.data).length !== 0) {
-          console.log(response.data);
+//           console.log(response.data);
 
           var jsonObject = JSON.parse(response.data);
+//           console.log(jsonObject)
           updateList(jsonObject);
           setLoading(false);
         }
@@ -80,6 +87,7 @@ function Watchlist() {
   // On page load
   useEffect(() => {
     fetchWatchlist();
+//     console.log(list)
   }, []);
 
   return (
@@ -91,6 +99,7 @@ function Watchlist() {
         <div className="col-sm">{!loading && list.length == 0 ? <h2>No watchlist created yet</h2> : null}</div>
         <div className="col-sm text-end">
           <CreateWatchlistButton handleShow={handleShow}></CreateWatchlistButton>
+          <CreateSuggestionlistButton handleShow={handleSuggestionShow}></CreateSuggestionlistButton>
         </div>
       </div>
       {!loading &&
@@ -115,6 +124,12 @@ function Watchlist() {
             </div>
           </div>
         ))}
+      <CreateSuggestionlistModal
+        show={suggestionShow}
+        handleClose={handleSuggestionClose}
+//         fetchWatchlist={fetchWatchlist}
+        list={list}
+      ></CreateSuggestionlistModal>
       <CreateWatchlistModal
         show={show}
         handleClose={handleClose}

@@ -39,7 +39,7 @@ function Search() {
   const [list, updateList] = useState([]);
 
   useEffect(() => {
-    if (type === "Actors" || type === "Genres") {
+    if (type === "Actors" || type === "Keywords") {
       setCategory(type);
     }
     setTerm(id);

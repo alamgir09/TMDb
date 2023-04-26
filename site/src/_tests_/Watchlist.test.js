@@ -104,6 +104,7 @@ describe("Watchlist page", () => {
     });
 
     const element1 = container.querySelector("#createWatchlist");
+//    const element2 = container.querySelector("#CreateSuggestionlistButton")
 
     await waitFor(() => user.click(element1));
 
@@ -113,6 +114,26 @@ describe("Watchlist page", () => {
 
     expect(element).toBeInTheDocument();
   });
+
+    test("should show create suggestion modal when create suggestion button is clicked", async () => {
+      const user = userEvent.setup();
+
+      const { container } = render(<Watchlist />, { wrapper: BrowserRouter });
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      });
+
+      const element1 = container.querySelector("#CreateSuggestionlistButton");
+  //    const element2 = container.querySelector("#CreateSuggestionlistButton")
+
+      await waitFor(() => user.click(element1));
+
+      const element = screen.queryByText("Create Suggestion List", {
+        selector: ".modal-title"
+      });
+
+      expect(element).toBeInTheDocument();
+    });
 
   test('renders "No watchlist created yet" when loading is false and list length is 0', async () => {
     const mockResponse = { data: JSON.stringify([]) };

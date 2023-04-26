@@ -25,7 +25,7 @@ function CreateWatchlistModal({ show, handleClose, fetchWatchlist }) {
     }
 
     // Construct the API request
-    const apiUrl = "api/createWatchlist";
+    const apiUrl = "/api/createWatchlist";
     const requestData = {
       watchlist: watchlistName,
       userID: localStorage.getItem("userID"),
