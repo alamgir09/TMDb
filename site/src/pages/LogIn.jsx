@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/login.css";
 
 function LogIn({user, updateUser}) {
   const navigate = useNavigate();
@@ -60,6 +61,9 @@ function LogIn({user, updateUser}) {
 
   return (
     <div className="container-fluid">
+      <div id="title-name">
+        Movie Time 4
+      </div>
       <div className="text-center pb-3 pt-3">
         <h1>Log In</h1>
       </div>
@@ -90,7 +94,7 @@ function LogIn({user, updateUser}) {
           Submit
         </button>
       </form>
-      <p className="text-center pt-3" id="response">
+      <p className="text-center pt-3" id="resdponse">
         {fetchResponse}
       </p>
       <p className="text-center">

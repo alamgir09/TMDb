@@ -12,7 +12,14 @@ function DeleteMovieComponent({ id, title, modal }) {
         title: title,
         type: "delete",
         watchlist: watchlist,
-        text: `Are you sure you want to delete [${title}] from [${watchlist}]?`
+        text: (
+          <div className="text-center">
+            <p>
+              Are you sure you want to delete [{title}] from [{watchlist}]?
+            </p>
+            <p>This action cannot be undone.</p>
+          </div>
+        )
       }
     });
   }

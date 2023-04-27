@@ -24,7 +24,6 @@ test("full app rendering/navigating", async () => {
   // verify page content for expected route after navigating
   await waitFor(() => user.click(screen.getByText(/Log In/i)));
   expect(screen.getByText(/Log In/)).toBeInTheDocument();
-
 });
 
 test("full app rendering/navigating", async () => {

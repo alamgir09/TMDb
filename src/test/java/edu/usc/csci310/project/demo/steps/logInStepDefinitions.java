@@ -33,7 +33,8 @@ public class logInStepDefinitions {
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless");
+        options.addArguments("--headless");
+        options.setAcceptInsecureCerts(true);
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
@@ -57,13 +58,14 @@ public class logInStepDefinitions {
 
     @Then("I should see {string} in the page")
     public void iShouldSeeInThePage(String arg0) {
-        if(arg0 == "Username not found"){
+        if (arg0 == "Username not found") {
             assertEquals(driver.findElement(By.id("response")).getText(), "Username not found");
         }
-        if(arg0 == "Success"){
+        if (arg0 == "Success") {
             assertEquals(driver.findElement(By.id("response")).getText(), "Success");
         }
     }
+
     @After
     public void after() {
         driver.quit();

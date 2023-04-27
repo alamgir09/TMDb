@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import MovieBox from "../components/MovieBox";
 import Pagination from "../components/Pagination";
 import { useParams } from "react-router-dom";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
 import NavBar from "../components/NavBar";
+import "../styles/index.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Search({user, updateUser}) {
   // Handle all searches here
@@ -288,8 +290,34 @@ function Search({user, updateUser}) {
     <div className="container">
       <div className="container-fluid searchBar">
         <form className="col-12" data-testid="search-form" id="search-form" onSubmit={searchItem}>
-          <div className="searchHeader container">
+
+
+          <div className="searchHeader-container d-flex justify-content-center align-items-center">
+            <div className="d-flex align-items-center">
+              <ul id="nav" className="mr-2">
+                <li id="active-nav">
+                  <a href=""> {category} </a>
+                  <ul>
+                    <li className="dropElements" onClick={() => setCategory("All")}>
+                      <a>All</a>
+                    </li>
+                    <li className="dropElements" onClick={() => setCategory("Title")}>
+                      <a>Title</a>
+                    </li>
+                    <li className="dropElements" onClick={() => setCategory("Actors")}>
+                      <a>Actors</a>
+                    </li>
+                    <li className="dropElements" onClick={() => setCategory("Keywords")}>
+                      <a>Keywords</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>{" "}
+              <button id="year-button" type="button">Year Filter</button>
+            </div>
+
             <input
+              id="search-bar"
               value={searchTerm}
               onChange={(e) => setTerm(e.target.value)}
               type="text"
@@ -297,40 +325,27 @@ function Search({user, updateUser}) {
               className="search"
               required
             />
-            <button data-testid="search-submit-btn" type="submit">
+            <button id="search-button" data-testid="search-submit-btn" type="submit">
               Search
             </button>
-            <ul id="nav">
-              <li id="active-nav">
-                <a href=""> {category} </a>
-                <ul>
-                  <li className="dropElements" onClick={() => setCategory("All")}>
-                    <a>All</a>
-                  </li>
-                  <li className="dropElements" onClick={() => setCategory("Title")}>
-                    <a>Title</a>
-                  </li>
-                  <li className="dropElements" onClick={() => setCategory("Actors")}>
-                    <a>Actors</a>
-                  </li>
-                  <li className="dropElements" onClick={() => setCategory("Keywords")}>
-                    <a>Keywords</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>{" "}
-            <button type="button">Year Filter</button>
+
+
             {/*<!-- nav --> */}
             <div>
-              <button
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
-                Back to Home
-              </button>
+              {/*<button*/}
+              {/*  onClick={() => {*/}
+              {/*    navigate("/");*/}
+              {/*  }}*/}
+              {/*>*/}
+              {/*  Back to Home*/}
+              {/*</button>*/}
             </div>
           </div>
+
+
+
+
+
         </form>
       </div>
       <div className="results-row">

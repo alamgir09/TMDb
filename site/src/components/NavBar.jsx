@@ -1,5 +1,5 @@
 import React from "react";
-// import { useNavigate } from "react-router-dom";
+import "../styles/navbar.css";
 
 const NavBar = ({user, updateUser}) => {
 //    const navigate = useNavigate();
@@ -8,7 +8,7 @@ const NavBar = ({user, updateUser}) => {
       <div className="container-fluid">
         <div className="col-3">
           <a className="navbar-brand" href="#">
-            Movie Time
+            Movie Time 4
           </a>
         </div>
 
@@ -43,7 +43,7 @@ const NavBar = ({user, updateUser}) => {
             {/*               </a> */}
             {/*             </li> */}
 
-            <li className="nav-item">
+            <li className="nav-item test">
               <a className="nav-link" href="/Search">
                 Search
               </a>

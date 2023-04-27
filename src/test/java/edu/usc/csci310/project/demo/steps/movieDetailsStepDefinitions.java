@@ -32,7 +32,8 @@ public class movieDetailsStepDefinitions {
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless");
+        options.addArguments("--headless");
+        options.setAcceptInsecureCerts(true);
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
         options.setAcceptInsecureCerts(true);
