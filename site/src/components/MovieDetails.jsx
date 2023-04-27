@@ -4,6 +4,8 @@ import AddMovieDropdown from "./AddMovieComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign, faEye } from "@fortawesome/free-solid-svg-icons";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
+import NavBar from "../components/NavBar";
+
 
 function MovieDetails() {
   const { id } = useParams();
