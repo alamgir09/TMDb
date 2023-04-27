@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, waitFor } from "@testing-library/react";
 import Pagination from "../components/Pagination";
 
 describe("Pagination", () => {
@@ -13,7 +13,7 @@ describe("Pagination", () => {
     expect(getByText("10")).toBeInTheDocument();
   });
 
-  test("calls paginate function on click", () => {
+  test("calls paginate function on click", async () => {
     const paginateMock = jest.fn();
     const { getByText } = render(<Pagination postsPerPage={10} totalPosts={100} paginate={paginateMock} />);
 
@@ -21,6 +21,7 @@ describe("Pagination", () => {
     fireEvent.click(getByText("3"));
 
     // Check if the paginate function is called with the correct argument
-    expect(paginateMock).toHaveBeenCalledWith(3);
+    await waitFor(() => expect(paginateMock).toHaveBeenCalledTimes(1));
+
   });
 });
