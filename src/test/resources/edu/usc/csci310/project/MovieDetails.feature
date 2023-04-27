@@ -16,6 +16,67 @@ Feature: Provide Movie Details for displayed movies
     And the cast list does not fit on the screen
     And the cast list should be horizontally scrollable
 
+#  Scenario: The movie details page correctly displays the movie's title
+#    Given I search for "iron man"
+#    When I click a movie
+#    Then I should navigate to a new page
+#    And I should see the movie's title in the result
+#
+#  Scenario: The movie details page correctly displays the movie's image
+#    Given I search for "iron man"
+#    When I click a movie
+#    Then I should navigate to a new page
+#    And I should see the movie's image in the result
+#
+#  Scenario: The movie details page correctly displays the movie's list of genres
+#    Given I search for "iron man"
+#    When I click a movie
+#    Then I should navigate to a new page
+#    And I should see the movie's genres in the result
+#
+#  Scenario: The movie details page correctly displays the release date
+#    Given I search for "iron man"
+#    When I click a movie
+#    Then I should navigate to a new page
+#    And I should see the movie release date in the result
+#
+#  Scenario: The movie details page correctly displays the move rating
+#    Given I search for "iron man"
+#    When I click a movie
+#    Then I should navigate to a new page
+#    And I should see the movie rating in the result
+#
+#  Scenario: The movie details page correctly displays the movie directors
+#    Given I search for "iron man"
+#    When I click a movie
+#    Then I should navigate to a new page
+#    And I should see the movie’s directors in the result
+#
+#  Scenario: The movie details page correctly displays the movie production studios
+#    Given I search for "iron man"
+#    When I click a movie
+#    Then I should navigate to a new page
+#    And I should see the movie’s production studios in the result
+#
+#  Scenario: The movie details page correctly displays the movie cast
+#    Given I search for "iron man"
+#    When I click a movie
+#    Then I should navigate to a new page
+#    And I should see the movie cast in the result
+#
+#  Scenario: The movie details page correctly displays the movie description
+#    Given I search for "iron man"
+#    When I click a movie
+#    Then I should navigate to a new page
+#    And I should see the movie description in the results
+
+#  Scenario: The cast is horizontally scrollable
+#    Given I search for "iron man"
+#    When I click a movie
+#    Then I should navigate to a new page
+#    And the cast list does not fit on the screen
+#    And the cast list should be horizontally scrollable
+
   Scenario: The cast is not horizontally scrollable
     Given I search for "All Is Lost"
     When I click a movie
