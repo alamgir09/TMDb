@@ -40,11 +40,13 @@ Feature: Provide Movie Details for displayed movies
 #    Then I should navigate to a new page
 #    And I should see the movie release date in the result
 #
+#
 #  Scenario: The movie details page correctly displays the move rating
 #    Given I search for "iron man"
 #    When I click a movie
 #    Then I should navigate to a new page
 #    And I should see the movie rating in the result
+#
 #
 #  Scenario: The movie details page correctly displays the movie directors
 #    Given I search for "iron man"
