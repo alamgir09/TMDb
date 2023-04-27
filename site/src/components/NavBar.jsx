@@ -1,13 +1,14 @@
 import React from "react";
+import "../styles/navbar.css";
 
-const NavBar = () => {
-  //   const navigate = useNavigate();
+const NavBar = ({user, updateUser}) => {
+//    const navigate = useNavigate();
   return (
     <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "#dc3545" }}>
       <div className="container-fluid">
         <div className="col-3">
           <a className="navbar-brand" href="#">
-            Movie Time
+            Movie Time 4
           </a>
         </div>
 
@@ -42,9 +43,9 @@ const NavBar = () => {
             {/*               </a> */}
             {/*             </li> */}
 
-            <li className="nav-item">
+            <li className="nav-item test">
               <a className="nav-link" href="/Search">
-                Home
+                Search
               </a>
             </li>
 
@@ -57,7 +58,9 @@ const NavBar = () => {
             <li className="nav-item">
               <a
                 onClick={() => {
-                  localStorage.setItem("userID", "null");
+                  console.log(user);
+                  localStorage.removeItem("userID");
+                  updateUser(null);
                 }}
                 className="nav-link"
                 href="/LogIn"

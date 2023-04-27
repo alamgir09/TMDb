@@ -44,7 +44,7 @@ describe("AddMovieComponent", () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });
 
-    const toggleButton = screen.getByRole("button", { name: "Add to Watchlist" });
+    const toggleButton = screen.getByTestId("add-icon");
     fireEvent.click(toggleButton);
 
     await waitFor(() => expect(container.querySelectorAll(".dropdown-item")).toHaveLength(watchlists.length + 1)); // +1 for Create Watchlist Button
@@ -69,7 +69,7 @@ describe("AddMovieComponent", () => {
       />,
       { wrapper: BrowserRouter }
     );
-    const addToWatchlistButton = await waitFor(() => screen.getByText(/Add to Watchlist/i));
+    const addToWatchlistButton = await waitFor(() => screen.getByTestId("add-icon"));
 
     fireEvent.click(addToWatchlistButton);
 
@@ -77,21 +77,24 @@ describe("AddMovieComponent", () => {
 
     fireEvent.click(watchlistButton);
 
+    fireEvent.click(screen.getByTestId("add-btn"));
+
     await waitFor(() => expect(consoleLogSpy).toHaveBeenCalled());
   });
 
   test("error response", async () => {
     const mockError = new Error("Something went wrong!");
     const consoleSpy = jest.spyOn(console, "log");
-    jest.spyOn(global, "fetch").mockResolvedValueOnce({
+    jest
+      .spyOn(global, "fetch")
+      .mockResolvedValueOnce({
         ok: true,
         json: () => Promise.resolve(null)
-      }).mockResolvedValueOnce({
+      })
+      .mockResolvedValueOnce({
         ok: false,
         json: () => Promise.reject(mockError)
       });
-
-
 
     render(
       <AddMovieDropdown
@@ -105,13 +108,15 @@ describe("AddMovieComponent", () => {
       { wrapper: BrowserRouter }
     );
 
-    const addToWatchlistButton = await waitFor(() => screen.getByText(/Add to Watchlist/i));
+    const addToWatchlistButton = await waitFor(() => screen.getByTestId("add-icon"));
 
     fireEvent.click(addToWatchlistButton);
 
     const watchlistButton = await waitFor(() => screen.getByText(/Watchlist 1/i));
 
     fireEvent.click(watchlistButton);
+
+    fireEvent.click(screen.getByTestId("add-btn"));
 
     await waitFor(() => expect(consoleSpy).toHaveBeenCalled());
   });
@@ -129,7 +134,7 @@ describe("AddMovieComponent", () => {
       { wrapper: BrowserRouter }
     );
 
-    const addToWatchlistButton = await waitFor(() => screen.getByText(/Add to Watchlist/i));
+    const addToWatchlistButton = await waitFor(() => screen.getByTestId("add-icon"));
 
     fireEvent.click(addToWatchlistButton);
 
@@ -159,7 +164,7 @@ describe("AddMovieComponent", () => {
       />,
       { wrapper: BrowserRouter }
     );
-    const addToWatchlistButton = await waitFor(() => screen.getByText(/Add to Watchlist/i));
+    const addToWatchlistButton = await waitFor(() => screen.getByTestId(/add-icon/i));
 
     fireEvent.click(addToWatchlistButton);
 

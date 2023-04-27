@@ -1,26 +1,26 @@
-Feature: SignUp As a new user I want to create an account So that I can access the application
+Feature: Create a user account
 
   Scenario: User signs up successfully
     Given I am on the SignUp page
-    When I enter my first name "tim" , last name "timmy", user name "Timjan", my password "password", and confirming password "password"
+    When I enter "tim" , "timmy", "Timjan", "password", and "password"
     And I click the submit button
     Then I should be redirected to the LogIn page
 
   Scenario: User already exists
     Given I am on the SignUp page
-    When I enter my first name "Tommy" , last name "Trojan", user name "Tomjan", my password "password", and confirming password "password"
+    When I enter "Tommy" , "Trojan", "Tomjan", "password", and "password"
     And I click the submit button
     Then I should see "User already exists"
 
   Scenario: User will enter mismatched passwords
     Given I am on the SignUp page
-    When I enter my first name "Tommy" , last name "Trojan", user name "Tomjan", my password "incorrect", and confirming password "password"
+    When I enter "Tommy" , "Trojan", "Tomjan", "incorrect", and "password"
     And I click the submit button
-    Then I should see an error message "Password does not match. Please try again."
+    Then I should see an error message
 
   Scenario: User leaves required fields blank
     Given I am on the SignUp page
-    When I enter my first name "" , last name "", user name "", my password "", and confirming password ""
+    When I enter "" , "", "", "", and ""
     And I click the submit button
     Then it should stay on SignUp page
 

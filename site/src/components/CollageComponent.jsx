@@ -5,6 +5,10 @@ import "../styles/collage.css";
 
 function Collage({movieIDList}) {
 
+  if (movieIDList == null) {
+    return null;
+  }
+
   console.log("COLLAGE");
   console.log(movieIDList);
 
@@ -38,12 +42,12 @@ function Collage({movieIDList}) {
         numImages = getNumImages(numMovies);
       }
 
-      var url = "https://api.themoviedb.org/3/movie/" + id + "/images?api_key=528c625029ff80e41b72cc37a0c389af"
-
       console.log(numImages);
 
       try {
-        let response = await fetch(url);
+        let response = await fetch(
+          "https://api.themoviedb.org/3/movie/" + id + "/images?api_key=528c625029ff80e41b72cc37a0c389af"
+        );
         let json = await response.json();
 
         //get the backdrops
@@ -69,7 +73,10 @@ function Collage({movieIDList}) {
                 fullURL = "http://image.tmdb.org/t/p/w400" + path;
                 urls.push(fullURL);
                 ids.push(id);
-                index++;
+                index++
+                if(index > backdrops.length - 1){
+                    index = 0;
+                }
             }
         }
 

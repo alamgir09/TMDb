@@ -40,8 +40,10 @@ public class searchStepDefinitions {
     public void before() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
+        options.setAcceptInsecureCerts(true);
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
+        options.setAcceptInsecureCerts(true);
         driver = new ChromeDriver(options);
     }
 
@@ -154,6 +156,7 @@ public class searchStepDefinitions {
     public void iPressTheHomeButton() {
 
         driver.findElement(By.xpath("//*[@id=\"search-form\"]/div/div/button")).click();
+        
 
     }
 

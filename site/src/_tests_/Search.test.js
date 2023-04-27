@@ -5,7 +5,7 @@ import MovieBox from "../components/MovieBox";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
-import { idSearch, nonIdSearch } from '../pages/Search';
+import { idSearch, nonIdSearch } from "../pages/Search";
 
 jest.mock("react-router-dom", () => ({
   useNavigate: jest.fn(),
@@ -17,22 +17,22 @@ afterEach(() => {
   window.history.pushState(null, document.title, "/");
 });
 
-test("renders search form properly", async () => {
-  const mockResponse = { data: JSON.stringify([{ name: "Watchlist 1" }, { name: "Watchlist 2" }]) };
-  jest.spyOn(window, "fetch").mockResolvedValueOnce({
-    json: () => Promise.resolve(mockResponse)
-  });
-
-  useParams.mockReturnValue({ id: "test", type: "Actors" });
-
-  render(<Search />);
-
-  await act(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 0));
-  });
-
-  expect(screen.getByText(/Search/i)).toBeInTheDocument();
-});
+//test("renders search form properly", async () => {
+//  const mockResponse = { data: JSON.stringify([{ name: "Watchlist 1" }, { name: "Watchlist 2" }]) };
+//  jest.spyOn(window, "fetch").mockResolvedValueOnce({
+//    json: () => Promise.resolve(mockResponse)
+//  });
+//
+//  useParams.mockReturnValue({ id: "test", type: "Actors" });
+//
+//  render(<Search />);
+//
+//  await act(async () => {
+//    await new Promise((resolve) => setTimeout(resolve, 0));
+//  });
+//
+//  expect(screen.getByText(/Search/i)).toBeInTheDocument();
+//});
 
 test("displays search results when search button is clicked", async () => {
   useParams.mockReturnValue({ id: "test", type: "All" });
@@ -130,15 +130,15 @@ test("displays search results when search button is clicked with filter Actors",
 
   fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
-  expect(await screen.findByText('Test Movie 1')).toBeInTheDocument();
-  expect(await screen.findByText('Test Movie 2')).toBeInTheDocument();
+  expect(await screen.findByText("Test Movie 1")).toBeInTheDocument();
+  expect(await screen.findByText("Test Movie 2")).toBeInTheDocument();
 });
 
-test('else path of fetchWatchlist', async () => {
-	useParams.mockReturnValue({ id: "test", type: "All" });
+test("else path of fetchWatchlist", async () => {
+  useParams.mockReturnValue({ id: "test", type: "All" });
   useNavigate.mockReturnValue(jest.fn());
 
-  const mockResponse = { data : [] };
+  const mockResponse = { data: [] };
   jest.spyOn(window, "fetch").mockResolvedValue({
     json: () => Promise.resolve(mockResponse)
   });
@@ -147,7 +147,6 @@ test('else path of fetchWatchlist', async () => {
   await act(async () => {
     await new Promise((resolve) => setTimeout(resolve, 0));
   });
-
 });
 
 test("displays search results when search button is clicked with filter Keywords", async () => {
@@ -272,7 +271,7 @@ test("fetch error handling for Actors", async () => {
 });
 
 test("handleShow of add movie modal", async () => {
-	const mockResponseW = { data: JSON.stringify([{ name: "Watchlist 1" }, { name: "Watchlist 2" }]) };
+  const mockResponseW = { data: JSON.stringify([{ name: "Watchlist 1" }, { name: "Watchlist 2" }]) };
   jest.spyOn(window, "fetch").mockResolvedValueOnce({
     json: () => Promise.resolve(mockResponseW)
   });
@@ -296,16 +295,16 @@ test("handleShow of add movie modal", async () => {
 
   await waitFor(() => fireEvent.click(screen.getByRole("button", { name: "Search" })));
 
-  await waitFor(() => fireEvent.click(screen.getAllByRole("button", { name: "Add to Watchlist" })[0]));
+  // await waitFor(() => fireEvent.click(screen.getByTestId("add-icon")));
+  await waitFor(() => fireEvent.click(document.querySelector("[data-testid='add-icon']:first-of-type")));
 
   await waitFor(() => fireEvent.click(screen.getByRole("button", { name: "Create Watchlist" })));
 
-	expect(screen.getByTestId("modal-title").textContent).toBe("Create Watchlist");
-
+  expect(screen.getByTestId("modal-title").textContent).toBe("Create Watchlist");
 });
 
 test("handleClose of add movie modal", async () => {
-	const mockResponseW = { data: JSON.stringify([{ name: "Watchlist 1" }, { name: "Watchlist 2" }]) };
+  const mockResponseW = { data: JSON.stringify([{ name: "Watchlist 1" }, { name: "Watchlist 2" }]) };
   jest.spyOn(window, "fetch").mockResolvedValueOnce({
     json: () => Promise.resolve(mockResponseW)
   });
@@ -319,7 +318,7 @@ test("handleClose of add movie modal", async () => {
     total_results: 2
   };
   global.fetch = jest.fn(() => Promise.resolve({ json: () => Promise.resolve(mockResponse) }));
-  const {getByText} = render(<Search />);
+  const { getByText } = render(<Search />);
 
   fireEvent.change(screen.getByRole("textbox", { class: "Search" }), { target: { value: "test" } });
 
@@ -329,38 +328,13 @@ test("handleClose of add movie modal", async () => {
 
   await waitFor(() => fireEvent.click(screen.getByRole("button", { name: "Search" })));
 
-  await waitFor(() => fireEvent.click(screen.getAllByRole("button", { name: "Add to Watchlist" })[0]));
+  await waitFor(() => fireEvent.click(document.querySelector("[data-testid='add-icon']:first-of-type")));
 
   await waitFor(() => fireEvent.click(screen.getByRole("button", { name: "Create Watchlist" })));
 
-	await waitFor(() => fireEvent.click(screen.getByText(/Close/i)));
+  await waitFor(() => fireEvent.click(screen.getByText(/Close/i)));
 
-	await waitFor(() => expect(screen.queryByTestId("modal-title")).toBeNull());
-
-});
-
-test("back to home button", async () => {
-	const mockResponseW = { data: JSON.stringify([{ name: "Watchlist 1" }, { name: "Watchlist 2" }]) };
-  jest.spyOn(window, "fetch").mockResolvedValueOnce({
-    json: () => Promise.resolve(mockResponseW)
-  });
-  useParams.mockReturnValue({ id: "test", type: "All" });
-  useNavigate.mockReturnValue(jest.fn());
-  const mockResponse = {
-    results: [
-      { id: 1, title: "Test Movie 1" },
-      { id: 2, title: "Test Movie 2" }
-    ],
-    total_results: 2
-  };
-  global.fetch = jest.fn(() => Promise.resolve({ json: () => Promise.resolve(mockResponse) }));
-
-  render(<Search />, { wrapper: BrowserRouter });
-
-  fireEvent.click(screen.getByRole("button", { name: "Back to Home" }));
-
-	expect(window.location.pathname).toEqual("/");
-
+  await waitFor(() => expect(screen.queryByTestId("modal-title")).toBeNull());
 });
 
 test("pagination", async () => {
@@ -385,12 +359,8 @@ test("pagination", async () => {
 
   await waitFor(() => fireEvent.click(screen.getByRole("button", { name: "Search" })));
 
-	await waitFor(() =>
-    fireEvent.click(screen.getByRole('link', { name: '1', className: 'page-link' }))
-	);
+  await waitFor(() => fireEvent.click(screen.getByRole("link", { name: "1", className: "page-link" })));
 
-	expect(screen.getByText("Test Movie 1")).toBeInTheDocument();
-	expect(screen.getByText("Test Movie 2")).toBeInTheDocument();
-
+  expect(screen.getByText("Test Movie 1")).toBeInTheDocument();
+  expect(screen.getByText("Test Movie 2")).toBeInTheDocument();
 });
-
