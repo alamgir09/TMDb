@@ -41,10 +41,10 @@ public class SecurityStepDefinitions {
         driver = new ChromeDriver(options);
     }
 
-//    @After
-//    public void after() {
-//        driver.quit();
-//    }
+    @After
+    public void after() {
+        driver.quit();
+    }
 
     @When("I navigate to the {string} without SSL")
     public void iNavigateToTheWithoutSSL(String arg0) {
@@ -79,10 +79,12 @@ public class SecurityStepDefinitions {
         Duration duration = Duration.ofSeconds(30);
 
         WebDriverWait wait = new WebDriverWait(driver, duration);
+
         WebElement logout = driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[3]/a"));
+
         wait.until(ExpectedConditions.elementToBeClickable(logout));
 
-        Thread.sleep(5000);
+//        Thread.sleep(6000);
 
 //        driver.navigate().refresh();
     }
@@ -181,5 +183,22 @@ public class SecurityStepDefinitions {
     public void iPressTheCreateMontageButtonHere() throws InterruptedException {
         driver.findElement(By.id("create-montage")).click();
         Thread.sleep(10000);
+    }
+
+    @When("search the Up movie")
+    public void searchTheUpMovie() {
+        driver.findElement(By.className("search")).sendKeys("Up");
+    }
+
+    @And("I press search")
+    public void iPressSearch() throws InterruptedException {
+        driver.findElement(By.xpath("//*[@id=\"search-form\"]/div/button[1]")).click();
+        Thread.sleep(1000);
+    }
+
+    @And("I click the Up movie")
+    public void iClickTheUpMovie() throws InterruptedException {
+        driver.findElement(By.xpath("//*[@id=\"search-form\"]/div/button[1]")).click();
+        Thread.sleep(1000);
     }
 }

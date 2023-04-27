@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 public class movieDetailsStepDefinitions {
 
-    private static final String ROOT_URL = "http://localhost:8080/";
+    private static final String ROOT_URL = "https://localhost:8080/";
     private static WebDriver driver;
 
     @BeforeAll
@@ -32,15 +32,16 @@ public class movieDetailsStepDefinitions {
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+//        options.addArguments("--headless");
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
+        options.setAcceptInsecureCerts(true);
         driver = new ChromeDriver(options);
     }
 
     @After
     public void after() {
-        //driver.quit();
+        driver.quit();
     }
 
     @Given("I search for {string}")

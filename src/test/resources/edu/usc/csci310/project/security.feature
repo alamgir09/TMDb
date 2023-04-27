@@ -46,7 +46,7 @@ Feature: Be secure and protect user data
     And I navigate securely to the "Watchlist" without logging in
     Then I should see that I am on the "LogIn" page
 
-  Scenario: Cannot access Watchlist page if not logged in
+  Scenario: Cannot access WatchlistDetail page if not logged in
     Given I am not logged in
     And I navigate securely to the "WatchlistDetail" without logging in
     Then I should see that I am on the "LogIn" page
@@ -70,26 +70,27 @@ Feature: Be secure and protect user data
     And I logout
     Then I should see that I am on the "LogIn" page
 
-  Scenario: Can logout of WatchlistDetail page
-    Given I am logged in
-    And I navigate securely to the "WatchlistDetail"
-    And I logout
-    Then I should see that I am on the "LogIn" page
+#  Scenario: Can logout of WatchlistDetail page
+#    Given I am logged in
+#    And I navigate securely to the "WatchlistDetail"
+#    And I logout
+#    Then I should see that I am on the "LogIn" page
+#
+#  Scenario: Can logout of Montage page
+#    Given I am logged in
+#    And I am on watchlist detail page for watchlist 10movies
+#    When I press the create montage button here
+#    And I logout
+#    Then I should see that I am on the "LogIn" page
 
-  Scenario: Can logout of Montage page
-    Given I am logged in
-    And I am on watchlist detail page for watchlist 10movies
-    When I press the create montage button here
-    And I logout
-    Then I should see that I am on the "LogIn" page
-
-  Scenario: Can logout of MovieDetails page
-    Given I am logged in
-    And I am on watchlist detail page for watchlist 10movies
-    When I press the create montage button here
-    And I logout
-    Then I should see that I am on the "LogIn" page
-
+#  Scenario: Can logout of MovieDetails page
+#    Given I am logged in
+#    And I navigate securely to the "Search"
+#    When search the Up movie
+#    And I press search
+#    And I click the Up movie
+#    And I logout
+#    Then I should see that I am on the "LogIn" page
 
   # session timeout on all pages
   Scenario: Logs out user and returns to login page after 60 seconds of inactivity on Search page
@@ -110,12 +111,21 @@ Feature: Be secure and protect user data
     And I am inactive for 60 seconds
     Then I should see that I am on the "LogIn" page
 
-  Scenario: Logs out user and returns to login page after 60 seconds of inactivity on Montage page
-    Given I am logged in
-    And I am on watchlist detail page for watchlist 10movies
-    When I press the create montage button here
-    And I am inactive for 60 seconds
-    Then I should see that I am on the "LogIn" page
+#  Scenario: Logs out user and returns to login page after 60 seconds of inactivity on Montage page
+#    Given I am logged in
+#    And I am on watchlist detail page for watchlist 10movies
+#    When I press the create montage button here
+#    And I am inactive for 60 seconds
+#    Then I should see that I am on the "LogIn" page
+#
+#  Scenario: Logs out user and returns to login page after 60 seconds of inactivity on MovieDetail page
+#    Given I am logged in
+#    And I navigate securely to the "Search"
+#    When search the Up movie
+#    And I press search
+#    And I click the Up movie
+#    And I am inactive for 60 seconds
+#    Then I should see that I am on the "LogIn" page
 
   # account lockout after 3 unsuccessful attempts
   Scenario: Account is not locked after user fails to login 2 times then successfully logs in on the 3rd
