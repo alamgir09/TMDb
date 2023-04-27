@@ -45,12 +45,14 @@ function MovieBox({ id, imgURL, title, release_date, rating, list, handleShow })
             {/* Little Eye */}
           </div>
           <div>
+          <a href="https://www.fandango.com/">
             <FontAwesomeIcon
               data-testid="dollar-icon"
               icon={faDollarSign}
               className="dollar-icon"
               // onClick={(e) => handleDelete(e, element["name"])}
             />
+          </a>
             {/* Dollar Sign */}
           </div>
         </div>
