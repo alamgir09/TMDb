@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "../components/NavBar";
 
-function Watchlist({user, updateUser}) {
+function Watchlist({user}) {
 
   const [list, updateList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -100,27 +100,11 @@ function Watchlist({user, updateUser}) {
   }, []);
 
   return (
-<<<<<<< HEAD
-  <div>
-     <NavBar user={user} updateUser={(e) => updateUser(e)}/>
-
-    <div className="container">
-
-      <div className="text-center pb-3 pt-3">
-        <h1>Watchlists</h1>
-      </div>
-      <div className="row mb-3">
-        <div className="col-sm">{!loading && list.length == 0 ? <h2>No watchlist created yet</h2> : null}</div>
-        <div className="col-sm text-end">
-          <CreateWatchlistButton handleShow={handleShow}></CreateWatchlistButton>
-          <GetSuggestionListButton handleShow={handleSuggestionShow}></GetSuggestionListButton>
-=======
     <div>
       <NavBar />
       <div className="container">
         <div className="text-center pb-3 pt-3">
           <h1>Watchlists</h1>
->>>>>>> develop
         </div>
         <div className="row mb-3">
           <div className="col-sm">{!loading && list.length == 0 ? <h2>No watchlist created yet</h2> : null}</div>

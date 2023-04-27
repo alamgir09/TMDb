@@ -15,7 +15,7 @@ describe("NavBar component", () => {
   });
 
   test("renders the Movie Time brand", () => {
-    const brandElement = screen.getByText("Movie Time");
+    const brandElement = screen.getByText("Movie Time 4");
     expect(brandElement).toBeInTheDocument();
   });
 

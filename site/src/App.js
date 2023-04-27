@@ -60,7 +60,7 @@ function App() {
         <Route path="/Search/:type/:id" element={<Search />} />
         <Route path="/movies/:id" element={<MovieDetails />} />
 
-        <Route path="/Watchlist" element={<Watchlist user={user} updateUser={updateUser}/>} />
+        <Route path="/Watchlist" element={<Watchlist user={user} />} />
         <Route path="/WatchlistDetail" element={<WatchlistDetail user={user} />} />
 
         <Route path="/Montage" element={<Montage user={user} updateUser={updateUser}/>} />
