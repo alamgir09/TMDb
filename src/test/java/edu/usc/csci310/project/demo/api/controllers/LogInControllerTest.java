@@ -17,8 +17,8 @@ public class LogInControllerTest {
     @Test
     void verifyLogIn() throws JSONException, NoSuchAlgorithmException {
         LogInRequest request = new LogInRequest();
-        request.setUsername("tommyTrojan");
-        request.setPassword("Password123");
+        request.setUsername("jas");
+        request.setPassword("jas");
 
         ResponseEntity<LogInResponse> returnedResponse = logInController.checkLogIn(request);
 
@@ -30,7 +30,7 @@ public class LogInControllerTest {
     @Test
     void verifyIncorrectPassword() throws JSONException, NoSuchAlgorithmException {
         LogInRequest request = new LogInRequest();
-        request.setUsername("tommyTrojan");
+        request.setUsername("jas");
         request.setPassword("Password");
 
         ResponseEntity<LogInResponse> returnedResponse = logInController.checkLogIn(request);
