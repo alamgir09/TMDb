@@ -4,6 +4,8 @@ import AddMovieDropdown from "./AddMovieComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign, faEye } from "@fortawesome/free-solid-svg-icons";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
+import NavBar from "../components/NavBar";
+
 
 function MovieDetails() {
   const { id } = useParams();
@@ -146,6 +148,8 @@ function MovieDetails() {
 
 
   return (
+  <div>
+  <NavBar />
     <div className="movie-details">
       <div className="movie-image">
         <img src={imgURL} alt={title} />
@@ -194,6 +198,7 @@ function MovieDetails() {
 {/* //       <div className="box-hover-elements col-1 inner-text"> */}
 
 {/* 	  </div> */}
+    </div>
     </div>
   );
 }

@@ -1,9 +1,8 @@
 import React from "react";
 import "../styles/navbar.css";
-// import {colors} from "@material-ui/core";
 
-const NavBar = () => {
-  //   const navigate = useNavigate();
+const NavBar = ({user, updateUser}) => {
+//    const navigate = useNavigate();
   return (
     <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "#dc3545" }}>
       <div className="container-fluid">
@@ -46,7 +45,7 @@ const NavBar = () => {
 
             <li className="nav-item test">
               <a className="nav-link" href="/Search">
-                Home
+                Search
               </a>
             </li>
 
@@ -59,7 +58,9 @@ const NavBar = () => {
             <li className="nav-item">
               <a
                 onClick={() => {
-                  localStorage.setItem("userID", "null");
+                  console.log(user);
+                  localStorage.removeItem("userID");
+                  updateUser(null);
                 }}
                 className="nav-link"
                 href="/LogIn"

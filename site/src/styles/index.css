@@ -333,6 +333,18 @@ body {
 	white-space: break-spaces !important;
 }
 
+#backButton, #create-montage{
+    color: white;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    margin: 10px;
+    border: none;
+}
+
+#backButton:hover, #create-montage:hover{
+    background-color: #bb2d3b;
+}
+
 /* Refresh styling... */
 
 .dropElements a{

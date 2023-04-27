@@ -10,8 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "../components/NavBar";
 
+function Watchlist({user}) {
 
-function Watchlist() {
   const [list, updateList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
@@ -32,8 +32,19 @@ function Watchlist() {
   const handleDeleteClose = () => setDeleteShow(false);
   const handleDeleteShow = () => setDeleteShow(true);
 
+//   const [user, updateUser] = useState(localStorage.getItem('userID'));
+
   // Calling navigate() will allow us to redirect the webpage
   const navigate = useNavigate();
+
+  // access to page only if logged in
+  useEffect(() => {
+      console.log(user);
+      if (user == null || user == "null") {
+        navigate('/LogIn');
+      }
+    }, [user, navigate]);
+
 
   function navigateWatchlistDetail(currentWatchlist) {
     localStorage.setItem("watchlist", currentWatchlist);

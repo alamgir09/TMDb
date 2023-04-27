@@ -1,5 +1,4 @@
 import { render, screen, waitFor, act, fireEvent} from "@testing-library/react";
-import { debug } from 'jest-extended';
 import { MemoryRouter, Route, Routes, BrowserRouter, useParams, useNavigate } from "react-router-dom";
 import MovieDetails from "../components/MovieDetails";
 

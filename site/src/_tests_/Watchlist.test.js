@@ -92,7 +92,7 @@ describe("Watchlist page", () => {
     fireEvent.click(listName);
 
     expect(localStorage.getItem("watchlist")).toEqual("My List");
-    expect(window.location.pathname).toEqual("/WatchlistDetail");
+    expect(window.location.pathname).toEqual("/LogIn");
   });
 
   test("should show create watchlist modal when create watchlist button is clicked", async () => {

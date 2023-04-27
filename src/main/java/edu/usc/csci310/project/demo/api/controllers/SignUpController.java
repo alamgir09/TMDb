@@ -56,13 +56,18 @@ public class SignUpController {
                 ObjectId userObjectID = new ObjectId();
                 InsertOneResult result = collection.insertOne(new Document()
                         .append("_id", userObjectID)
-                                .append("userID", userObjectID.toString())
-                                .append("username", request.getUsername())
+                        .append("userID", userObjectID.toString())
+                        .append("username", request.getUsername())
                         .append("firstName", request.getFirstName())
                         .append("lastName", request.getLastName())
                         .append("password", request.getPassword())
-                                .append("watchlist", new ArrayList<Watchlist>())
-                        );
+                        .append("attempts", 0)
+                        .append("timestamp", (long)0)
+                        .append("firstFailed", (long)0)
+                        .append("watchlist", new ArrayList<Watchlist>())
+
+
+                );
                 System.out.println("Success! Inserted document id: " + result.getInsertedId());
                 response.setData(userObjectID.toString());
             }

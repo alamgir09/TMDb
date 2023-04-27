@@ -25,7 +25,7 @@ import java.util.List;
 
 public class movieDetailsStepDefinitions {
 
-    private static final String ROOT_URL = "http://localhost:8080/";
+    private static final String ROOT_URL = "https://localhost:8080/";
     private static WebDriver driver;
 
     @BeforeAll
@@ -41,6 +41,7 @@ public class movieDetailsStepDefinitions {
 //		options.addArguments("--headless");
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
+        options.setAcceptInsecureCerts(true);
         driver = new ChromeDriver(options);
     }
 
