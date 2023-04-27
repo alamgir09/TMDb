@@ -5,6 +5,8 @@ import edu.usc.csci310.project.demo.api.responses.SignUpResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
+import java.security.NoSuchAlgorithmException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,7 +15,7 @@ public class SignUpControllerTest {
     SignUpController signUpController = new SignUpController();
 
     @Test
-    void verifySignUpWithExistingUser() {
+    void verifySignUpWithExistingUser() throws NoSuchAlgorithmException {
         SignUpRequest request = new SignUpRequest();
         request.setFirstName("tommy");
         request.setLastName("trojan");
@@ -27,7 +29,7 @@ public class SignUpControllerTest {
     }
 
     @Test
-    void verifySignUp() {
+    void verifySignUp() throws NoSuchAlgorithmException {
         SignUpRequest request = new SignUpRequest();
         request.setFirstName("test");
         request.setLastName("testing");

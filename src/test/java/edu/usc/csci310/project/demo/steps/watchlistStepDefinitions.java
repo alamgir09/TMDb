@@ -14,7 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -25,7 +24,7 @@ import static org.junit.Assert.*;
 
 public class watchlistStepDefinitions {
 
-    private static final String ROOT_URL = "http://localhost:8080/";
+    private static final String ROOT_URL = "https://localhost:8080/";
     private static WebDriver driver;
 
     public static final String timestamp = String.valueOf(System.currentTimeMillis());
@@ -41,8 +40,9 @@ public class watchlistStepDefinitions {
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        // options.addArguments("--headless");
         // options.addArguments("--whitelisted-ips");
+        options.setAcceptInsecureCerts(true);
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
@@ -52,7 +52,7 @@ public class watchlistStepDefinitions {
     @Given("I am on the watchlist page")
     public void iAmOnTheWatchlistPage() throws InterruptedException {
 
-        driver.navigate().to("http://localhost:8080/Watchlist");
+        driver.navigate().to(ROOT_URL + "Watchlist");
 
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("localStorage.setItem('userID', '642617a23405041b9f616538');");
@@ -69,7 +69,6 @@ public class watchlistStepDefinitions {
 
     @When("I press the create watchlist button")
     public void iPressTheCreateWatchlistButton() {
-
         driver.findElement(By.id("createWatchlist")).click();
     }
 
@@ -100,7 +99,6 @@ public class watchlistStepDefinitions {
     @When("I press the edit watchlist button")
     public void iPressTheEditWatchlistButton() {
         driver.findElement(By.xpath("//*[@id=\"editWatchlist\"]")).click();
-
     }
 
     @And("I type {string} into edit watchlist modal")
@@ -120,7 +118,6 @@ public class watchlistStepDefinitions {
     @Then("I should see {string} with timestamp on the page")
     public void iShouldSeeWithTimestampOnThePage(String arg0) {
         assertTrue(driver.getPageSource().contains(arg0 + timestamp));
-
     }
 
     @When("I press the delete watchlist button")
@@ -148,7 +145,7 @@ public class watchlistStepDefinitions {
 
     @Then("I should see {string} on {string}")
     public void iShouldSeeOn(String arg0, String arg1) {
-        driver.navigate().to("http://localhost:8080/WatchlistDetail");
+        driver.navigate().to(ROOT_URL + "WatchlistDetail");
 
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("localStorage.setItem('userID', '642617a23405041b9f616538');");
@@ -185,7 +182,7 @@ public class watchlistStepDefinitions {
 
     @Given("I am on the watchlist detail page for {string}")
     public void iAmOnTheWatchlistDetailPageFor(String arg0) throws InterruptedException {
-        driver.navigate().to("http://localhost:8080/WatchlistDetail");
+        driver.navigate().to(ROOT_URL + "WatchlistDetail");
 
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("localStorage.setItem('userID', '642617a23405041b9f616538');");
@@ -202,35 +199,39 @@ public class watchlistStepDefinitions {
 
     @And("I press the {string} where movie box is {string}")
     public void iPressTheWhereMovieBoxIs(String arg0, String arg1) {
+        Duration duration = Duration.ofSeconds(60);
+
+        WebDriverWait wait = new WebDriverWait(driver, duration); // Wait for up to 60 seconds
+        WebElement movie_box_div = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text() = '" + arg1 + "']")));
 
         // find the div element with text "arg1"
-        WebElement movie_box_div = driver.findElement(By.xpath("//*[text() = '" + arg1 + "']"));
+        // WebElement movie_box_div = driver.findElement(By.xpath("//*[text() = '" + arg1 + "']"));
 
         // Scroll down to the div element
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", movie_box_div);
+        // ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", movie_box_div);
 
         WebElement grandParentDiv = (WebElement) ((JavascriptExecutor) driver)
                 .executeScript("return arguments[0].parentElement.parentElement;", movie_box_div);
 
-        Duration duration = Duration.ofSeconds(60);
-
         // create a new WebDriverWait object
-        WebDriverWait wait = new WebDriverWait(driver, duration);
+        Duration duration1 = Duration.ofSeconds(60);
+        WebDriverWait wait1 = new WebDriverWait(driver, duration1);
 
         // create a new Actions object
-        Actions actions = new Actions(driver);
+        // Actions actions = new Actions(driver);
 
         // find the svg element with data-icon="arg0" inside the movie_box div
         WebElement svg = grandParentDiv.findElement(By.className(arg0));
 
         // scroll to the element
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", svg);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", svg);
 
         // wait for the element to be clickable
-        wait.until(ExpectedConditions.elementToBeClickable(svg));
+        wait1.until(ExpectedConditions.elementToBeClickable(svg));
 
         // move to the element and click it
-        actions.moveToElement(svg).click().perform();
+        // actions.moveToElement(svg).click().perform();
+        svg.click();
     }
 
     @When("I press the change watchlist type button")
@@ -259,6 +260,11 @@ public class watchlistStepDefinitions {
 
     @Then("I should see {string} on the watchlist page")
     public void iShouldSeeOnTheWatchlistPage(String arg0) {
+        Duration duration = Duration.ofSeconds(30);
+
+        WebDriverWait wait = new WebDriverWait(driver, duration);
+        wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.tagName("body")), arg0));
+
         assertTrue(driver.getPageSource().contains(arg0));
     }
 
@@ -269,6 +275,7 @@ public class watchlistStepDefinitions {
 
     @When("I press the edit watchlist for button for {string}")
     public void iPressTheEditWatchlistForButtonFor(String arg0) {
+
         WebElement element = driver.findElement(By.xpath("//*[text() = '" + arg0 + "']"));
 
         WebElement grandParentDiv = (WebElement) ((JavascriptExecutor) driver)
@@ -310,5 +317,87 @@ public class watchlistStepDefinitions {
 
         // click on the svg element
         svg.click();
+    }
+
+    @Then("I should not see {string} with timestamp on the page")
+    public void iShouldNotSeeWithTimestampOnThePage(String arg0) throws InterruptedException {
+        Thread.sleep(5000);
+        String pageSource = driver.getPageSource();
+        assertFalse(pageSource.contains(arg0 + timestamp));
+    }
+
+    @When("I click on {string} button")
+    public void iClickOnButton(String arg0) {
+        WebElement element = driver.findElement(By.xpath("//*[text() = '" + arg0 + "']"));
+
+        Duration duration = Duration.ofSeconds(60);
+
+        // create a new WebDriverWait object
+        WebDriverWait wait = new WebDriverWait(driver, duration);
+
+        // wait for the element to be clickable
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+
+        element.click();
+
+    }
+
+    @And("I click on {string} user")
+    public void iClickOnUser(String arg0) {
+        WebElement element = driver.findElement(By.xpath("//*[text() = '" + arg0 + "']"));
+
+        Duration duration = Duration.ofSeconds(60);
+
+        // create a new WebDriverWait object
+        WebDriverWait wait = new WebDriverWait(driver, duration);
+
+        // wait for the element to be clickable
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+
+        element.click();
+    }
+
+    @And("I click on {string} watchlist")
+    public void iClickOnWatchlist(String arg0) {
+        WebElement element = driver.findElement(By.xpath("//*[text() = '" + arg0 + "']"));
+
+        Duration duration = Duration.ofSeconds(60);
+
+        // create a new WebDriverWait object
+        WebDriverWait wait = new WebDriverWait(driver, duration);
+
+        // wait for the element to be clickable
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+
+        element.click();
+    }
+
+    @Then("I should see merged watchlist")
+    public void iShouldSeeMergedWatchlist() {
+        assertTrue(driver.getPageSource().contains("Iron Man"));
+        assertTrue(driver.getPageSource().contains("Iron Man 2"));
+        assertTrue(driver.getPageSource().contains("Happy"));
+    }
+
+    @When("I press {string} on the navbar")
+    public void iPressOnTheNavbar(String arg0) {
+
+        Duration duration = Duration.ofSeconds(60);
+
+        // create an explicit wait with a timeout of 10 seconds
+        WebDriverWait wait = new WebDriverWait(driver, duration);
+
+        // wait until the link element is located by its visible text
+        WebElement link = driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[2]"));
+        wait.until(ExpectedConditions.elementToBeClickable(link));
+
+        // click the link
+        link.click();
+
+    }
+
+    @Then("I should be on the Watchlist page")
+    public void iShouldBeOnTheWatchlistPage() {
+        assertEquals(ROOT_URL + "Watchlist", driver.getCurrentUrl());
     }
 }

@@ -134,4 +134,3 @@ Feature: Search for movies based on various criteria
 #    Given I am on the search page
 #    When I select dollar icon
 #    Then I should "free movie ticket" and be redirected to movie theatre website
-

@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { addMovie, deleteMovie } from "../functions.js";
 
-function EditMovieModal({ modal, handleClose, fetchMovies }) {
+function EditMovieModal({ modal, handleClose, fetchMovies, setModal }) {
   function handleClick() {
     if (modal.data.type == "copy") {
       addMovie(
@@ -12,7 +12,8 @@ function EditMovieModal({ modal, handleClose, fetchMovies }) {
         modal.data.imgURL,
         modal.data.releaseDate,
         modal.data.rating,
-        modal.data.watchlist
+        modal.data.watchlist,
+        setModal
       );
     }
 
@@ -23,19 +24,23 @@ function EditMovieModal({ modal, handleClose, fetchMovies }) {
         modal.data.imgURL,
         modal.data.releaseDate,
         modal.data.rating,
-        modal.data.watchlist
+        modal.data.watchlist,
+        setModal
       );
-      deleteMovie(modal.data.id, localStorage.getItem("watchlist"));
+      deleteMovie(modal.data.id, localStorage.getItem("watchlist"), modal.data.watchlist);
     }
 
     if (modal.data.type == "delete") {
-      deleteMovie(modal.data.id, modal.data.watchlist);
+      console.log("id: " + modal.data.id);
+      console.log("watchlist: " + modal.data.watchlist);
+      deleteMovie(modal.data.id, modal.data.watchlist, "null");
     }
+    console.log("show: " + modal.data.show);
 
     setTimeout(() => {
       handleClose();
       fetchMovies();
-    }, 1000);
+    }, 3000);
   }
 
   return (
@@ -44,8 +49,9 @@ function EditMovieModal({ modal, handleClose, fetchMovies }) {
         <Modal.Title id="editMovieTitle">Edit Movie</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {modal.data.text ? <p className="text-center">{modal.data.text}</p> : null}
-        <p className="text-center">This action can not be undone.</p>
+        {modal.data.text ? modal.data.text : null}
+        {/*         <p className="text-center">This action cannot be undone.</p> */}
+        {/*         {modalBody ? <p className="text-center">{modalBody}</p> : null} */}
       </Modal.Body>
       <Modal.Footer>
         <Button data-testid="editMovieClose" variant="success" onClick={handleClose}>

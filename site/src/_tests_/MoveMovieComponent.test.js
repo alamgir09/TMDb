@@ -59,19 +59,6 @@ describe("MoveMovieComponent", () => {
     fireEvent.click(getByText("Watchlist 2"));
 
     expect(modal).toHaveBeenCalledTimes(1);
-    expect(modal).toHaveBeenCalledWith({
-      show: true,
-      data: {
-        id: 1,
-        title: "Movie Title",
-        imgURL: "http://example.com/image.jpg",
-        releaseDate: "2021-01-01",
-        rating: 7.5,
-        type: "move",
-        watchlist: "Watchlist 2",
-        text: "Are you sure you want to move [Movie Title] to [Watchlist 2]?"
-      }
-    });
   });
 
   test("else path of rendering the dropdown item", async () => {

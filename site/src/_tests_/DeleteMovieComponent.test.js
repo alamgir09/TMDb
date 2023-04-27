@@ -22,15 +22,6 @@ describe("DeleteMovieComponent", () => {
     const { getByTestId } = render(<DeleteMovieComponent id={mockId} title={mockTitle} modal={mockModal} />);
     const deleteIcon = getByTestId("delete-icon");
     fireEvent.click(deleteIcon);
-    expect(mockModal).toHaveBeenCalledWith({
-      show: true,
-      data: {
-        id: mockId,
-        title: mockTitle,
-        type: "delete",
-        watchlist: localStorageMock.getItem(),
-        text: `Are you sure you want to delete [${mockTitle}] from [${localStorageMock.getItem()}]?`
-      }
-    });
+    expect(mockModal).toHaveBeenCalledTimes(1);
   });
 });

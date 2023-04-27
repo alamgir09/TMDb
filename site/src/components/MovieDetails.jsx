@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import AddMovieDropdown from "./AddMovieComponent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDollarSign, faEye } from "@fortawesome/free-solid-svg-icons";
+import CreateWatchlistModal from "../components/CreateWatchlistModal";
+import NavBar from "../components/NavBar";
+
 
 function MovieDetails() {
   const { id } = useParams();
@@ -18,6 +24,10 @@ function MovieDetails() {
   const [directors, setDirectors] = useState([]);
   const [productionStudios, setProductionStudios] = useState([]);
   const [actors, setActors] = useState([]);
+  const [list, updateList] = useState([]);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const requestHeaders = {
     "Content-Type": "application/json"
@@ -27,22 +37,23 @@ function MovieDetails() {
     headers: requestHeaders
   };
 
-  function fetchDetails() {
+  async function fetchDetails() {
     //details API call
-    fetch(detailsApiUrl, requestOptions)
+    return fetch(detailsApiUrl, requestOptions)
       .then((res) => res.json())
       .then((response) => {
         console.log(response);
-        setPosterPath(response.poster_path);
-        setTitle(response.title);
-        setReleaseDate(response.release_date);
-        setRating(response.vote_average);
-        setDescription(response.overview);
+		setPosterPath(response.poster_path);
+		setTitle(response.title);
+		setReleaseDate(response.release_date);
+		setRating(response.vote_average);
+		setDescription(response.overview);
 
-        let movieGenres = response.genres;
-        setGenres(movieGenres.map((genres) => genres.name));
-        let productionCompanies = response.production_companies;
-        setProductionStudios(productionCompanies.map((company) => company.name));
+		let movieGenres = response.genres;
+		setGenres(movieGenres.map((genres) => genres.name));
+		let productionCompanies = response.production_companies;
+		setProductionStudios(productionCompanies.map((company) => company.name));
+
       })
       .catch((err) => {
         console.log(err);
@@ -50,8 +61,8 @@ function MovieDetails() {
   }
 
   //credit API call
-  function fetchCredits() {
-    fetch(creditsApiUrl, requestOptions)
+  async function fetchCredits() {
+    return fetch(creditsApiUrl, requestOptions)
       .then((res) => res.json())
       .then((response) => {
         console.log(response);
@@ -75,7 +86,7 @@ function MovieDetails() {
   };
   const handleGenreClick = (genre) => {
     //             console.log(text);
-    navigate(`/Search/Genres/${genre}`);
+    navigate(`/Search/Keywords/${genre}`);
   };
 
   const genreButtons = genres.map((genre) => (
@@ -99,12 +110,46 @@ function MovieDetails() {
     else return [prev, ", ", curr];
   }, "");
 
+    function fetchWatchlist() {
+      const apiUrl = "/api/getWatchlist";
+      const requestData = {
+        userID: localStorage.getItem("userID")
+      };
+      const requestHeaders = {
+        "Content-Type": "application/json"
+      };
+      const requestOptions = {
+        method: "POST",
+        headers: requestHeaders,
+        body: JSON.stringify(requestData)
+      };
+
+      fetch(apiUrl, requestOptions)
+        .then((res) => res.json())
+        .then((response) => {
+          if (Object.keys(response.data).length !== 0) {
+            console.log(response);
+
+            var jsonObject = JSON.parse(response.data);
+            updateList(jsonObject);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
   useEffect(() => {
+  	fetchWatchlist();
     fetchDetails();
     fetchCredits();
   }, []);
 
+
+
   return (
+  <div>
+  <NavBar />
     <div className="movie-details">
       <div className="movie-image">
         <img src={imgURL} alt={title} />
@@ -131,13 +176,29 @@ function MovieDetails() {
         <div>
           <strong> Cast: </strong>
         </div>
-        <div className="movie-cast">
-          {actorList}
-        </div>
+        <div className="movie-cast">{actorList}</div>
         <div className="movie-description">
           <p> {description} </p>
         </div>
+        <div>
+			<AddMovieDropdown id={id} imgURL={imgURL} title={title} releaseDate={releaseDate} rating={rating} watchlists={list} handleShow={handleShow} />
+			<div> <FontAwesomeIcon data-testid="eye-icon" icon={faEye} className="eye-icon" /> </div>
+			<div> <FontAwesomeIcon data-testid="dollar-icon" icon={faDollarSign} className="dollar-icon" /> </div>
+        </div>
       </div>
+      <div>
+            <CreateWatchlistModal
+              change
+              back
+              show={show}
+              handleClose={handleClose}
+              fetchWatchlist={fetchWatchlist}
+            ></CreateWatchlistModal>
+      </div>
+{/* //       <div className="box-hover-elements col-1 inner-text"> */}
+
+{/* 	  </div> */}
+    </div>
     </div>
   );
 }

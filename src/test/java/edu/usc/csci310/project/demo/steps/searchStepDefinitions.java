@@ -158,6 +158,7 @@ public class searchStepDefinitions {
     public void iPressTheHomeButton() {
 
         driver.findElement(By.xpath("//*[@id=\"search-form\"]/div/div/button")).click();
+        
 
     }
 
