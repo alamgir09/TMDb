@@ -394,3 +394,117 @@ test("pagination", async () => {
 
 });
 
+test('renders search bar', () => {
+  render(<App />);
+  const searchInput = screen.getByRole('textbox', { name: /search/i });
+  expect(searchInput).toBeInTheDocument();
+});
+
+test('renders search button', () => {
+  render(<App />);
+  const searchButton = screen.getByRole('button', { name: /search/i });
+  expect(searchButton).toBeInTheDocument();
+});
+
+test('renders movie box components when search button is clicked', async () => {
+  render(<App />);
+  const searchInput = screen.getByRole('textbox', { name: /search/i });
+  const searchButton = screen.getByRole('button', { name: /search/i });
+
+  // Set up mock responses
+  const moviesResponse = {
+    total_results: 3,
+    total_pages: 1,
+    results: [
+      {
+        id: 1,
+        poster_path: '/path/to/image1',
+        title: 'Movie 1',
+        release_date: '2022-01-01',
+        vote_average: 7.5,
+      },
+      {
+        id: 2,
+        poster_path: '/path/to/image2',
+        title: 'Movie 2',
+        release_date: '2022-02-01',
+        vote_average: 8.0,
+      },
+      {
+        id: 3,
+        poster_path: '/path/to/image3',
+        title: 'Movie 3',
+        release_date: '2022-03-01',
+        vote_average: 6.5,
+      },
+    ],
+  };
+
+  const actorsResponse = {
+    cast: [
+      {
+        id: 1,
+        poster_path: '/path/to/image1',
+        title: 'Movie 1',
+        release_date: '2022-01-01',
+        vote_average: 7.5,
+      },
+      {
+        id: 2,
+        poster_path: '/path/to/image2',
+        title: 'Movie 2',
+        release_date: '2022-02-01',
+        vote_average: 8.0,
+      },
+    ],
+  };
+
+  const keywordsResponse = {
+    total_results: 2,
+    total_pages: 1,
+    results: [
+      {
+        id: 1,
+        poster_path: '/path/to/image1',
+        title: 'Movie 1',
+        release_date: '2022-01-01',
+        vote_average: 7.5,
+      },
+      {
+        id: 2,
+        poster_path: '/path/to/image2',
+        title: 'Movie 2',
+        release_date: '2022-02-01',
+        vote_average: 8.0,
+      },
+    ],
+  };
+
+  // Mock the API calls
+  global.fetch = jest.fn()
+    .mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve(moviesResponse),
+    })
+    .mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve(actorsResponse),
+    })
+    .mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve(keywordsResponse),
+    });
+
+  // Enter search term and click search button
+  userEvent.type(searchInput, 'The Matrix');
+  userEvent.click(searchButton);
+
+  // Wait for components to render
+  const movie1 = await screen.findByText('Movie 1');
+  const movie2 = await screen.findByText('Movie 2');
+  const movie3 = await screen.findByText('Movie 3');
+
+  expect(movie1).toBeInTheDocument();
+  expect(movie2).toBeInTheDocument();
+  expect(movie3).toBeInTheDocument();
+  });

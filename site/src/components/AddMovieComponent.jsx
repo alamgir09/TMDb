@@ -1,15 +1,17 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { addMovie } from "../functions.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 function AddMovieDropdown({ id, imgURL, title, releaseDate, rating, watchlists, handleShow }) {
   return (
     <Dropdown onClick={(e) => e.stopPropagation()}>
       <Dropdown.Toggle variant="primary" id={imgURL}>
-        Add to Watchlist
+        <FontAwesomeIcon data-testid="plus-icon" icon={faPlus} className="plus-icon" />
       </Dropdown.Toggle>
       <Dropdown.Menu aria-labelledby={imgURL}>
-        {watchlists.map((element, index) => (
+      {watchlists && watchlists.map((element, index) => (
           <Dropdown.Item
             href="#"
             onClick={() => addMovie(id, title, imgURL, releaseDate, rating, element.name)}
