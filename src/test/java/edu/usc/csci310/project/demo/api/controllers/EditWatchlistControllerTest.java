@@ -6,6 +6,8 @@ import edu.usc.csci310.project.demo.api.responses.EditWatchlistResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -21,6 +23,7 @@ public class EditWatchlistControllerTest {
         createRequest.setUserID("64266002aa425f3c58eb9644");
         createRequest.setWatchlist("watchlist old");
         createRequest.setType("Private");
+        createRequest.setMovies(new ArrayList<>());
 
         createWatchlistController.createWatchlist(createRequest);
 

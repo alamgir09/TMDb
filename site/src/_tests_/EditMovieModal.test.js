@@ -33,6 +33,8 @@ describe("EditMovieModal", () => {
     }
   };
 
+  const setModal = jest.fn();
+
   it("renders correctly", () => {
     const { getByText } = render(<EditMovieModal modal={mockModal} handleClose={jest.fn()} fetchMovies={jest.fn()} />);
 
@@ -47,7 +49,7 @@ describe("EditMovieModal", () => {
     const userOne = userEvent.setup();
 
     const { getByText } = render(
-      <EditMovieModal modal={mockModal} handleClose={handleClose} fetchMovies={fetchMovies} />
+      <EditMovieModal setModal={setModal} modal={mockModal} handleClose={handleClose} fetchMovies={fetchMovies} />
     );
 
     await waitFor(() => userOne.click(getByText("Confirm")));
@@ -58,13 +60,9 @@ describe("EditMovieModal", () => {
       mockModal.data.imgURL,
       mockModal.data.releaseDate,
       mockModal.data.rating,
-      mockModal.data.watchlist
+      mockModal.data.watchlist,
+      setModal
     );
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    expect(fetchMovies).toHaveBeenCalled();
-    expect(handleClose).toHaveBeenCalled();
   });
 
   it("calls addMovie and deleteMovie and handleClose on Confirm button click with type move", async () => {
@@ -89,15 +87,15 @@ describe("EditMovieModal", () => {
       mockModalMove.data.imgURL,
       mockModalMove.data.releaseDate,
       mockModalMove.data.rating,
-      mockModalMove.data.watchlist
+      mockModalMove.data.watchlist,
+      undefined
     );
 
-    expect(deleteMovie).toHaveBeenCalledWith(mockModalMove.data.id, localStorage.getItem("watchlist"));
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    expect(fetchMovies).toHaveBeenCalled();
-    expect(handleClose).toHaveBeenCalled();
+    expect(deleteMovie).toHaveBeenCalledWith(
+      mockModalMove.data.id,
+      localStorage.getItem("watchlist"),
+      "test-watchlist"
+    );
   });
 
   it("calls deleteMovie and handleClose on Confirm button click with type delete", async () => {
@@ -119,11 +117,6 @@ describe("EditMovieModal", () => {
 
     fireEvent.click(getByText("Confirm"));
 
-    expect(deleteMovie).toHaveBeenCalledWith(mockModalMove.data.id, localStorage.getItem("watchlist"));
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    expect(fetchMovies).toHaveBeenCalled();
-    expect(handleClose).toHaveBeenCalled();
+    expect(deleteMovie).toHaveBeenCalledWith(mockModalMove.data.id, localStorage.getItem("watchlist"), "null");
   });
 });

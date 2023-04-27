@@ -34,7 +34,6 @@ test("full app rendering/navigating", async () => {
   // verify page content for expected route after navigating
   await waitFor(() => user.click(screen.getByText(/Log In/i)));
   expect(screen.getByText(/Log In/)).toBeInTheDocument();
-
 });
 
 test("full app rendering/navigating", async () => {
@@ -47,7 +46,6 @@ test("full app rendering/navigating", async () => {
   // verify page content for expected route after navigating
   await waitFor(() => user.click(screen.getByTestId("navigate-search")));
   await waitFor(() => expect(screen.getByText(/Search/)).toBeInTheDocument());
-
 });
 
 test("fetching works on the home page", async () => {
@@ -94,7 +92,7 @@ test("counting works on the other page", async () => {
   render(<App />, { wrapper: BrowserRouter });
 
   // verify page content for default route
-  expect(screen.getByText(/Home Page/)).toBeInTheDocument();
+  expect(screen.getByText(/Log In/)).toBeInTheDocument();
 
   // verify page content for expected route after navigating
   await waitFor(() => user.click(screen.getByText(/click to go to other page/i)));

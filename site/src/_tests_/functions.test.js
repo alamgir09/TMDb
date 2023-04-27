@@ -59,7 +59,7 @@ describe("movies", () => {
         body: JSON.stringify({
           userID: localStorage.getItem("userID"),
           movieID: id,
-          watchlist: watchlist
+          watchlistFrom: watchlist
         })
       });
     });

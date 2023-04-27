@@ -35,6 +35,7 @@ public class movieDetailsStepDefinitions {
 		WebDriverManager.chromedriver().setup();
 	}
 
+<<<<<<< HEAD
 	@Before
 	public void before() {
 		ChromeOptions options = new ChromeOptions();
@@ -43,6 +44,17 @@ public class movieDetailsStepDefinitions {
 		options.addArguments("--remote-allow-origins=*");
 		driver = new ChromeDriver(options);
 	}
+=======
+    @Before
+    public void before() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.setAcceptInsecureCerts(true);
+        options.addArguments("--disable-extensions");
+        options.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(options);
+    }
+>>>>>>> develop
 
 	@After
 	public void after() {

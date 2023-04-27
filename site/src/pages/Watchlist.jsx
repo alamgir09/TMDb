@@ -4,10 +4,14 @@ import CreateSuggestionlistButton from '../components/CreateSuggestionlistButton
 import CreateSuggestionlistModal from '../components/CreateSuggestionlistModal'
 import CreateWatchlistButton from "../components/CreateWatchlistButton";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
+import GetSuggestionListButton from "../components/GetSuggestionListButton";
+import GetSuggestionListModal from "../components/GetSuggestionListModal";
 import EditWatchlistModal from "../components/EditWatchlistModal";
 import DeleteWatchlistModal from "../components/DeleteWatchlistModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import NavBar from "../components/NavBar";
+
 
 function Watchlist() {
   const [list, updateList] = useState([]);
@@ -74,14 +78,12 @@ function Watchlist() {
     e.stopPropagation();
     setWatchlist(watchlist);
     handleDeleteShow();
-    console.log("delete watchlist: " + watchlist);
   }
 
   function handleEdit(e, watchlist) {
     e.stopPropagation();
     setWatchlist(watchlist);
     handleEditShow();
-    console.log("edit watchlist: " + watchlist);
   }
 
   // On page load
@@ -91,62 +93,72 @@ function Watchlist() {
   }, []);
 
   return (
-    <div className="container">
-      <div className="text-center pb-3 pt-3">
-        <h1>Watchlists</h1>
-      </div>
-      <div className="row mb-3">
-        <div className="col-sm">{!loading && list.length == 0 ? <h2>No watchlist created yet</h2> : null}</div>
-        <div className="col-sm text-end">
-          <CreateWatchlistButton handleShow={handleShow}></CreateWatchlistButton>
-          <CreateSuggestionlistButton handleShow={handleSuggestionShow}></CreateSuggestionlistButton>
+    <div>
+      <NavBar />
+      <div className="container">
+        <div className="text-center pb-3 pt-3">
+          <h1>Watchlists</h1>
         </div>
-      </div>
-      {!loading &&
-        list.map((element, index) => (
-          <div className="row mb-4 watchlistRow" key={index} onClick={() => navigateWatchlistDetail(element["name"])}>
-            <div className="col-6">
-              <h1>{element["name"]}</h1>
-            </div>
-            <div className="col-6 text-end align-self-center">
-              <FontAwesomeIcon
-                id="editWatchlist"
-                data-testid="edit-icon"
-                icon={faPen}
-                onClick={(e) => handleEdit(e, element["name"])}
-              />
-              <FontAwesomeIcon
-                id="deleteWatchlist"
-                data-testid="delete-icon"
-                icon={faTrash}
-                onClick={(e) => handleDelete(e, element["name"])}
-              />
-            </div>
+        <div className="row mb-3">
+          <div className="col-sm">{!loading && list.length == 0 ? <h2>No watchlist created yet</h2> : null}</div>
+          <div className="col-sm text-end">
+            <CreateWatchlistButton handleShow={handleShow}></CreateWatchlistButton>
+            <GetSuggestionListButton handleShow={handleSuggestionShow}></GetSuggestionListButton>
           </div>
-        ))}
-      <CreateSuggestionlistModal
+        </div>
+        {!loading &&
+          list.map((element, index) => (
+            <div className="row mb-4 watchlistRow" key={index} onClick={() => navigateWatchlistDetail(element["name"])}>
+              <div className="col-6">
+                <h1>{element["name"]}</h1>
+              </div>
+              <div className="col-6 text-end align-self-center">
+                <FontAwesomeIcon
+                  id="editWatchlist"
+                  data-testid="edit-icon"
+                  icon={faPen}
+                  onClick={(e) => handleEdit(e, element["name"])}
+                />
+                <FontAwesomeIcon
+                  id="deleteWatchlist"
+                  data-testid="delete-icon"
+                  icon={faTrash}
+                  onClick={(e) => handleDelete(e, element["name"])}
+                />
+              </div>
+            </div>
+          ))}
+        <CreateWatchlistModal
+          movies={[]}
+          show={show}
+          handleClose={handleClose}
+          fetchWatchlist={fetchWatchlist}
+        ></CreateWatchlistModal>
+        <GetSuggestionListModal
+          show={suggestionShow}
+          handleClose={handleSuggestionClose}
+          fetchWatchlist={fetchWatchlist}
+          watchlists={list}
+        ></GetSuggestionListModal>
+        <CreateSuggestionlistModal
         show={suggestionShow}
         handleClose={handleSuggestionClose}
 //         fetchWatchlist={fetchWatchlist}
         list={list}
       ></CreateSuggestionlistModal>
-      <CreateWatchlistModal
-        show={show}
-        handleClose={handleClose}
-        fetchWatchlist={fetchWatchlist}
-      ></CreateWatchlistModal>
-      <EditWatchlistModal
-        show={editShow}
-        handleClose={handleEditClose}
-        fetchWatchlist={fetchWatchlist}
-        watchlistOld={watchlist}
-      ></EditWatchlistModal>
-      <DeleteWatchlistModal
-        show={deleteShow}
-        handleClose={handleDeleteClose}
-        fetchWatchlist={fetchWatchlist}
-        watchlist={watchlist}
-      ></DeleteWatchlistModal>
+        <EditWatchlistModal
+          show={editShow}
+          handleClose={handleEditClose}
+          fetchWatchlist={fetchWatchlist}
+          watchlistOld={watchlist}
+        ></EditWatchlistModal>
+        <DeleteWatchlistModal
+          show={deleteShow}
+          handleClose={handleDeleteClose}
+          fetchWatchlist={fetchWatchlist}
+          watchlist={watchlist}
+        ></DeleteWatchlistModal>
+      </div>
     </div>
   );
 }

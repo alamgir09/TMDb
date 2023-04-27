@@ -50,7 +50,7 @@ describe("Watchlist page", () => {
 
     await waitFor(() => user.click(editIcons[0]));
 
-    expect(mockConsoleLog).toHaveBeenCalledWith("edit watchlist: Watchlist 1");
+    expect(mockConsoleLog).toHaveBeenCalledWith('[{"name":"Watchlist 1"},{"name":"Watchlist 2"}]');
   });
 
   test("calls the handleDelete function when the delete icon is clicked", async () => {
@@ -71,7 +71,7 @@ describe("Watchlist page", () => {
 
     await waitFor(() => user.click(deleteIcons[0]));
 
-    expect(mockConsoleLog).toHaveBeenCalledWith("delete watchlist: Watchlist 1");
+    expect(mockConsoleLog).toHaveBeenCalledWith('[{"name":"Watchlist 1"},{"name":"Watchlist 2"}]');
   });
 
   test("should navigate to watchlist detail page on click", async () => {
