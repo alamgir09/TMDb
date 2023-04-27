@@ -7,7 +7,6 @@ import CompareWatchlistModal from "../components/CompareWatchlistModal";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
-import SaveSuggestions from "../components/SaveSuggestions";
 
 
 function WatchlistDetail() {
@@ -152,6 +151,8 @@ function WatchlistDetail() {
             <WatchlistTypeDropdown type={watchlistType} />
             <CompareWatchlistComponent handleShow={handleShowCompare} setUsers={setUsers} />
             <button
+              id="createMontageBtn"
+              className="btn btn-danger"
               onClick={() => {
                 navigate("/Montage", { state: { movieIDList: movieIDs } });
               }}

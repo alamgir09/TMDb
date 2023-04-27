@@ -59,13 +59,14 @@ function CreateSuggestionlistModal({ show, handleClose, list }) {
         };
         const baseURL = "https://api.themoviedb.org/3"
         const apiKey = "?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US"
+
         list.forEach(watchlist => {
             if(selectedMovies.includes(watchlist.name)) {
                 const movieList = watchlist.movies
 
                 movieList.slice(1).forEach(movie => {
-                    const id = movie.id
-                    const movieIds = movieList.map(movie => movie.id);
+                    const id = movie._id
+                    const movieIds = movieList.map(movie => movie._id);
                     const suggestionsURL = baseURL + "/movie/" + id + "/similar" + apiKey
 
                      fetch(suggestionsURL, requestOptions)
@@ -96,7 +97,8 @@ function CreateSuggestionlistModal({ show, handleClose, list }) {
         const requestData = {
           watchlist: watchlistName,
           userID: localStorage.getItem("userID"),
-          type: type
+          type: type,
+          movies: []
         };
         const requestHeaders = {
           "Content-Type": "application/json"
@@ -111,8 +113,8 @@ function CreateSuggestionlistModal({ show, handleClose, list }) {
           .then((res) => res.json())
           .then((response) => {
             if (response.data == "Success") {
-                addToWatchList()
-              console.log('yay')
+                addToWatchList();
+              console.log('yay');
             }
             if (response.data == "Watchlist already exists") {
               setErrorMessage("Watchlist already exists");
@@ -138,7 +140,7 @@ function CreateSuggestionlistModal({ show, handleClose, list }) {
             }else if(!addedIds.includes(movie.id)) {
                 console.log(movie)
                 const imgURL = "http://image.tmdb.org/t/p/w500" + movie.poster_path
-                addMovie(movie.id, movie.title, imgURL, movie.release_date, movie.vote_average, watchlistName)
+                addMovie(movie.id, movie.title, imgURL, movie.release_date, movie.vote_average, watchlistName);
                 addedIds.push(movie.id)
                 suggestions.splice(randomIndex, 1)
             }

@@ -400,3 +400,17 @@ body {
 	border: none;
 	border-bottom: 1px solid;
 }
+
+/* button styling*/
+#compareWatchlist{
+    margin-right: 10px;
+    padding: 10px 20px;
+    border-radius: 0px;
+    font-size: 18px;
+}
+
+#createMontageBtn{
+    padding: 10px 20px;
+    border-radius: 0px;
+    font-size: 18px;
+}

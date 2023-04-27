@@ -24,20 +24,24 @@ export function addMovie(id, title, imgURL, releaseDate, rating, watchlist, moda
     .then((response) => {
       if (response.data == "Success") {
         console.log("Success");
-        modal({
-          show: true,
-          data: {
-            text: <p className="text-center">Success</p>
-          }
-        });
+        if(modal){
+           modal({
+            show: true,
+            data: {
+              text: <p className="text-center">Success</p>
+            }
+          });
+        }
       } else if (response.data == "Movie already exists") {
         console.log("movie already exists");
-        modal({
-          show: true,
-          data: {
-            text: <p className="text-center">Error: Movie already exists</p>
-          }
-        });
+        if(modal){
+          modal({
+            show: true,
+            data: {
+              text: <p className="text-center">Error: Movie already exists</p>
+            }
+          });
+        }
       }
       //      setTimeout(() => {
       //        modal({

@@ -55,9 +55,7 @@ Feature: Provide Movie Details for displayed movies
     And the search URL should contain "Action" genre
     And the search field should be "Action"
     And the search criteria should say Keywords
-
-<<<<<<< HEAD
-=======
+    
   Scenario: adding a movie to a watchlist
     Given I search for "Iron Man"
     When I click a movie
@@ -65,7 +63,6 @@ Feature: Provide Movie Details for displayed movies
     And I should see "Add to Watchlist" button
     And I add the movie to "Watchlist Test"
     And I should see "Iron Man" in "Watchlist Test"
->>>>>>> develop
 
 #  Scenario: Back navigation routes to the exact same page
 #    Given I search for "Iron Man"
