@@ -53,7 +53,7 @@ function Search({user, updateUser}) {
 
 
   useEffect(() => {
-    if (type === "Actors" || type === "Genres") {
+    if (type === "Actors" || type === "Keywords") {
       setCategory(type);
     }
     setTerm(id);

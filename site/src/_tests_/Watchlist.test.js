@@ -50,7 +50,7 @@ describe("Watchlist page", () => {
 
     await waitFor(() => user.click(editIcons[0]));
 
-    expect(mockConsoleLog).toHaveBeenCalledWith('[{"name":"Watchlist 1"},{"name":"Watchlist 2"}]');
+    expect(mockConsoleLog).toHaveBeenCalledWith([{"name": "Watchlist 1"}, {"name": "Watchlist 2"}]);
   });
 
   test("calls the handleDelete function when the delete icon is clicked", async () => {
@@ -71,7 +71,7 @@ describe("Watchlist page", () => {
 
     await waitFor(() => user.click(deleteIcons[0]));
 
-    expect(mockConsoleLog).toHaveBeenCalledWith('[{"name":"Watchlist 1"},{"name":"Watchlist 2"}]');
+    expect(mockConsoleLog).toHaveBeenCalledWith( [{"name": "Watchlist 1"}, {"name": "Watchlist 2"}]);
   });
 
   test("should navigate to watchlist detail page on click", async () => {
@@ -113,6 +113,27 @@ describe("Watchlist page", () => {
 
     expect(element).toBeInTheDocument();
   });
+
+    test("should show create suggestion modal when create suggestion button is clicked", async () => {
+      const user = userEvent.setup();
+
+      const { container } = render(<Watchlist />, { wrapper: BrowserRouter });
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      });
+
+      const element1 = container.querySelector("#CreateSuggestionlistButton");
+
+      await waitFor(() => user.click(element1));
+
+      const element = screen.queryByText("Create Suggestion List", {
+        selector: ".modal-title"
+      });
+
+			// const element = screen.queryByText("Create Suggestion List");
+
+      expect(element).toBeInTheDocument();
+    });
 
   test('renders "No watchlist created yet" when loading is false and list length is 0', async () => {
     const mockResponse = { data: JSON.stringify([]) };
