@@ -287,6 +287,11 @@ function Search() {
         
           currentComponents = components.slice(indexofFirstPost, indexofLastPost);
         }
+
+        if (currentComponents.length == 0) {
+	        setNumResults(0);
+        }
+
         // all the components have been pushed into the array, now set it to the global variable
         setComponents(currentComponents);
       })
@@ -464,6 +469,10 @@ function Search() {
       
         const currentComponents = components.slice(indexofFirstPost, indexofLastPost);
 
+        if (currentComponents.length == 0) {
+	        setNumResults(0);
+	      }
+
         // all the components have been pushed into the array, now set it to the global variable
         setComponents(currentComponents);
 
@@ -595,15 +604,6 @@ function Search() {
               id="endDate"
               className="datePicker"/>
             {/*<!-- nav --> */}
-            <div>
-              <button
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
-                Back to Home
-              </button>
-            </div>
           </div>
         </form>
       </div>

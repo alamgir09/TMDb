@@ -26,7 +26,7 @@ Feature: Search for movies based on various criteria
 
   Scenario: missing movie data should return "?"
     Given I am on the search page
-    When I enter "hi" into search input
+    When I enter "h" into search input
     And I press the submit search button
     Then I should see "?" title as a result
 
@@ -78,32 +78,23 @@ Feature: Search for movies based on various criteria
     And I press the submit search button
     Then I should see the dollar icon on hover of a movie
 
-  Scenario: adding a movie to a watchlist
+  Scenario: Successfully add new movie to watchlist with success confirmation
     Given I am on the search page with userID
     When I enter "iron man" into search input
     And I press the submit search button
     And I add the movie to "Watchlist Test"
     Then I should see "Iron Man" in "Watchlist Test"
 
-  Scenario: clicking on the home button redirects to home page
-    Given I am on the search page
-    When I press the home button
-    Then I should be on the home page
-
-#  Scenario: clicking on the myWatchlist button in NavBar redirects to Watchlists page
-#    Given I am on the search page
-#    When I press the myWatchList button
-#    Then I should be on the Watchlists page
+  Scenario: clicking on the myWatchlist button in NavBar redirects to Watchlists page
+    Given I am on the search page with userID
+    When I press the myWatchList button
+    Then I should be on the Watchlists page
 #
 #  Scenario: clicking on the Log Out button in NavBar redirects to Log In page
 #    Given I am on the search page
 #    When I press the Log Out button
 #    Then I should be on the Log In page
 #
-#  Scenario: Successfully add new movie to watchlist with success confirmation
-#    Given I am on the search page
-#    When I press the Add Movie button
-#    Then I should see "Movie added to Watchlist"
 #
 #  Scenario: Attempts to add duplicate movie to watchlist giving with error
 #    Given I am on the search page

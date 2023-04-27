@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 
 public class searchStepDefinitions {
 
-    private static final String ROOT_URL = "http://localhost:8080/";
+    private static final String ROOT_URL = "https://localhost:8080/";
     private static WebDriver driver;
 
 
@@ -39,15 +39,16 @@ public class searchStepDefinitions {
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        // options.addArguments("--headless");
         options.addArguments("--disable-extensions");
         options.addArguments("--remote-allow-origins=*");
+        options.setAcceptInsecureCerts(true);
         driver = new ChromeDriver(options);
     }
 
     @After
     public void after() {
-        driver.quit();
+        //driver.quit();
     }
 
     @Given("I am on the search page")
@@ -65,7 +66,7 @@ public class searchStepDefinitions {
 
     @Then("I should see {string} in results div")
     public void iShouldSeeInResultsDiv(String arg0) {
-        String result = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[2]/div[1]")).getText();
+        String result = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[2]/div[1]")).getText();
         assertEquals(arg0, result);
     }
 
@@ -78,6 +79,9 @@ public class searchStepDefinitions {
 
     @Then("I should see {string} title as a result")
     public void iShouldSeeTitleAsAResult(String arg0) {
+        Duration duration = Duration.ofSeconds(30);
+        WebDriverWait wait = new WebDriverWait(driver, duration);
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.tagName("body"), arg0));
         assertTrue(driver.getPageSource().contains(arg0));
     }
 
@@ -173,7 +177,10 @@ public class searchStepDefinitions {
 
         action.moveToElement(parentElement).build().perform();
 
-        assertTrue(driver.getPageSource().contains("Add to Watchlist"));
+        WebElement addToWatchlistButton = driver.findElement(By.className("fa-plus"));
+
+        assertTrue(addToWatchlistButton != null);
+        // assertTrue(driver.getPageSource().contains("Add to Watchlist"));
     }
 
     @Then("I should see the eye icon on hover of a movie")
@@ -231,12 +238,12 @@ public class searchStepDefinitions {
         WebElement parentElement = driver.findElement(By.className("movieButton"));
 
         action.moveToElement(parentElement).build().perform();
-        //action.click().build().perform();
 
         WebElement imgElement = parentElement.findElement(By.tagName("img"));
         String src = imgElement.getAttribute("src");
 
-        parentElement.findElement(By.xpath("//*[@id='" + src + "']")).click();
+        //parentElement.findElement(By.xpath("//*[@id='" + src + "']")).click();
+        parentElement.findElement(By.className("fa-plus")).click();
 
         driver.findElement(By.xpath("//a[text()='" + arg0 + "']")).click();
 
@@ -260,6 +267,17 @@ public class searchStepDefinitions {
 
         assertTrue(driver.getPageSource().contains(arg0));
 
+    }
+
+    @When("I press the myWatchList button")
+    public void iPressTheMyWatchListButton() {
+        WebElement element = driver.findElement(By.cssSelector("a.nav-link[href='/Watchlist']"));
+        element.click();
+    }
+
+    @Then("I should be on the Watchlists page")
+    public void iShouldBeOnTheWatchlistsPage() {
+        assertEquals(ROOT_URL + "Watchlist", driver.getCurrentUrl());
     }
 }
 
