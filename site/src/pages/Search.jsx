@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import MovieBox from "../components/MovieBox";
 import Pagination from "../components/Pagination";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
 import NavBar from "../components/NavBar";
 import "../styles/index.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-function Search() {
+function Search({user, updateUser}) {
 
  const navigate = useNavigate();
 // access to page only if logged in
