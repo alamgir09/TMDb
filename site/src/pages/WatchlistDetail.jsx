@@ -8,6 +8,7 @@ import CreateWatchlistModal from "../components/CreateWatchlistModal";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 
+
 function WatchlistDetail() {
   const [list, updateList] = useState([]);
   const [watchlistAll, setWatchlistAll] = useState([]);
@@ -68,6 +69,9 @@ function WatchlistDetail() {
       .then((res) => res.json())
       .then((response) => {
         if (response?.data) {
+            if(response.data === 'No results found.') {
+                navigate("/Watchlist")
+            }
           console.log(response.data);
 
           var jsonObject = JSON.parse(response.data);
@@ -147,6 +151,8 @@ function WatchlistDetail() {
             <WatchlistTypeDropdown type={watchlistType} />
             <CompareWatchlistComponent handleShow={handleShowCompare} setUsers={setUsers} />
             <button
+              id="createMontageBtn"
+              className="btn btn-danger"
               onClick={() => {
                 navigate("/Montage", { state: { movieIDList: movieIDs } });
               }}

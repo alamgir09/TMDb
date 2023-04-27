@@ -112,4 +112,6 @@ describe("Create Watchlist Modal", () => {
 
     expect(radioPrivate.checked).toBe(true);
   });
+
+
 });
