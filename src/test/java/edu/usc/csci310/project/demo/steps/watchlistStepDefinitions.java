@@ -62,7 +62,9 @@ public class watchlistStepDefinitions {
         WebDriverWait wait = new WebDriverWait(driver, duration); // wait up to 30 seconds
         wait.until(ExpectedConditions.jsReturnsValue("return localStorage.getItem('userID');"));
 
-        driver.navigate().refresh();
+        driver.navigate().to(ROOT_URL + "Watchlist");
+
+        // driver.navigate().refresh();
         Thread.sleep(10000);
     }
 
@@ -193,7 +195,9 @@ public class watchlistStepDefinitions {
         WebDriverWait wait = new WebDriverWait(driver, duration); // wait up to 30 seconds
         wait.until(ExpectedConditions.jsReturnsValue("return localStorage.getItem('userID');"));
 
-        driver.navigate().refresh();
+        driver.navigate().to(ROOT_URL + "WatchlistDetail");
+
+        // driver.navigate().refresh();
         Thread.sleep(10000);
     }
 
@@ -372,12 +376,6 @@ public class watchlistStepDefinitions {
         element.click();
     }
 
-    @Then("I should see merged watchlist")
-    public void iShouldSeeMergedWatchlist() {
-        assertTrue(driver.getPageSource().contains("Iron Man"));
-        assertTrue(driver.getPageSource().contains("Iron Man 2"));
-        assertTrue(driver.getPageSource().contains("Happy"));
-    }
 
     @When("I press {string} on the navbar")
     public void iPressOnTheNavbar(String arg0) {
@@ -399,5 +397,23 @@ public class watchlistStepDefinitions {
     @Then("I should be on the Watchlist page")
     public void iShouldBeOnTheWatchlistPage() {
         assertEquals(ROOT_URL + "Watchlist", driver.getCurrentUrl());
+    }
+
+    @Then("I should see a list containing union of both users watchlist")
+    public void iShouldSeeAListContainingUnionOfBothUsersWatchlist() {
+        assertTrue(driver.getPageSource().contains("Iron Man"));
+        assertTrue(driver.getPageSource().contains("Iron Man 2"));
+        assertTrue(driver.getPageSource().contains("Happy"));
+    }
+
+    @Then("I should be on the search page")
+    public void iShouldBeOnTheSearchPage() {
+        assertEquals(ROOT_URL + "Search", driver.getCurrentUrl());
+    }
+
+    @When("I press Search on the navbar")
+    public void iPressSearchOnTheNavbar() {
+        WebElement element = driver.findElement(By.cssSelector("a.nav-link[href='/Search']"));
+        element.click();
     }
 }

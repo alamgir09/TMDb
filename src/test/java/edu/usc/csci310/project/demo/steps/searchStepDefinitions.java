@@ -376,5 +376,6 @@ public class searchStepDefinitions {
     public void iShouldSeeOnTheSearchPage(String arg0) {
         assertTrue(driver.getPageSource().contains(arg0));
     }
+
 }
 
