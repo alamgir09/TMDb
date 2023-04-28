@@ -14,12 +14,11 @@ function App() {
 
 //     Idle checker for timeout
     const navigate = useNavigate();
-//    const [count, setCount] = useState(0)
     const [remaining, setRemaining] = useState(0)
 
     const onIdle = () => {
-       // localStorage.removeItem("userID")
-       // navigate('/LogIn')
+        localStorage.removeItem("userID")
+        navigate('/LogIn')
        console.log("clear user");
     }
 
@@ -37,7 +36,7 @@ function App() {
      useEffect(() => {
        const interval = setInterval(() => {
          setRemaining(Math.ceil(getRemainingTime() / 1000))
-         // console.log(remaining);
+         console.log(remaining);
        }, 500)
 
        return () => {
