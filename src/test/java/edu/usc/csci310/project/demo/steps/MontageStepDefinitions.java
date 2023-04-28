@@ -65,7 +65,7 @@ public class MontageStepDefinitions {
 
         WebDriverWait wait = new WebDriverWait(driver, duration); // wait up to 30 seconds
         wait.until(ExpectedConditions.jsReturnsValue("return localStorage.getItem('userID');"));
-        wait.until(ExpectedConditions.jsReturnsValue("return document.getElementById('create-montage') !== null;"));
+        wait.until(ExpectedConditions.jsReturnsValue("return document.getElementById('createMontageBtn') !== null;"));
         wait.until(ExpectedConditions.jsReturnsValue("return document.getElementsByClassName('movie-row-watchlist') !== null;"));
 
         driver.navigate().refresh();
@@ -74,7 +74,7 @@ public class MontageStepDefinitions {
 
     @When("I press the create montage button")
     public void iPressTheCreateMontageButton() throws InterruptedException {
-        driver.findElement(By.id("create-montage")).click();
+        driver.findElement(By.id("createMontageBtn")).click();
         Thread.sleep(10000);
     }
 
