@@ -290,14 +290,14 @@ function Search({user, updateUser}) {
           } else {
             indexofFirstPost = 10;
           }
-          if (indexofFirstPost + 9 > components.length-1) {
+          if (indexofFirstPost + 9 >= components.length-1) {
             indexofLastPost = components.length;
           } else {
-            indexofLastPost = indexofFirstPost + 9;
+            indexofLastPost = indexofFirstPost + 10;
           }
           if (category == "Actors") {
             indexofFirstPost = (pageNumber-1) * 10;
-            indexofLastPost = indexofFirstPost + 9;
+            indexofLastPost = indexofFirstPost + 10;
           }
         
           currentComponents = components.slice(indexofFirstPost, indexofLastPost);
@@ -308,6 +308,7 @@ function Search({user, updateUser}) {
         }
 
         // all the components have been pushed into the array, now set it to the global variable
+        console.log("currentComponents is " + currentComponents);
         setComponents(currentComponents);
       })
   }
@@ -322,8 +323,12 @@ function Search({user, updateUser}) {
       // Extract the necessary data from the API responses
       const movies = moviesResponse;
       // console.log("the moviesResponse is " + moviesResponse);
+      console.log("We did get here");
       const actorId = actorsId.results[0].id;
+      // const actorId = 243;
+      console.log("We did get here 2");
       const keywordId = keywordsId.results[0].id;
+      // const keywordId = 9840;
   
       // Fetch movie credits for the actors
       const actorCreditsUrl = `https://api.themoviedb.org/3/person/${actorId}/movie_credits?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US`;
@@ -425,11 +430,12 @@ function Search({user, updateUser}) {
         totalResults = 100;
       }
       
+      console.log('keywordAmount is ' + keywordAmount);
       let keywordList = [];
       // change totalPages to what has been fetched
       setTotalPages(keywordResults.total_pages);
       // Go through response from the api and create each individual movie box
-      for (let i = 0; i < keywordResults; i++) {
+      for (let i = 0; i < keywordAmount; i++) {
         let movie = keywordResults.results[i];
         let imgURL = "https://image.tmdb.org/t/p/w500" + movie.poster_path;
         let movieComponent = "";
@@ -464,7 +470,7 @@ function Search({user, updateUser}) {
       }
       setComponents(keywordList.push(...components));
       // Combine all the results into one array
-      const allResults = [...movieList, ...actorList, ...keywordList];
+      // const allResults = [...movieList, ...actorList, ...keywordList];
   
       // Set the state with the combined results
 
@@ -472,17 +478,19 @@ function Search({user, updateUser}) {
         let indexofFirstPost = 0;
         let indexofLastPost = 9;
         indexofFirstPost = (pageNumber-1)*10;
-        if (indexofFirstPost + 9 > allResults.length-1) {
-          indexofLastPost = allResults.length;
+        if (indexofFirstPost + 9 >= keywordList.length-1) {
+          indexofLastPost = keywordList.length;
         } else {
-          indexofLastPost = indexofFirstPost + 9;
+          indexofLastPost = indexofFirstPost + 10;
         }
         if (category == "Actors") {
           indexofFirstPost = (pageNumber-1) * 10;
-          indexofLastPost = indexofFirstPost + 9;
+          indexofLastPost = indexofFirstPost + 10;
         }
       
-        const currentComponents = components.slice(indexofFirstPost, indexofLastPost);
+        console.log("indexFirst is " + indexofFirstPost);
+        console.log("IndexLast is " + indexofLastPost);
+        const currentComponents = keywordList.slice(indexofFirstPost, indexofLastPost);
 
         if (currentComponents.length == 0) {
 	        setNumResults(0);
@@ -549,12 +557,12 @@ function Search({user, updateUser}) {
 
   // Use year picker when querying things
   function inRange(movieDate) {
-    console.log("We reached here!");
-    console.log("movieDate is " + movieDate);
+    // console.log("We reached here!");
+    // console.log("movieDate is " + movieDate);
     if (movieDate == null || movieDate == "") return false;
     movieDate = movieDate.slice(0,4);
     movieDate = parseInt(movieDate);
-    console.log("movieDate is now " + movieDate);
+    // console.log("movieDate is now " + movieDate);
     if (movieDate >= parseInt(dateStart) || dateStart == "") {
       if (movieDate <= parseInt(dateEnd) || dateEnd == "" ) {
         return true;
