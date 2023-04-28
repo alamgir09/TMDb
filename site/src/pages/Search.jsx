@@ -24,6 +24,8 @@ function Search({user, updateUser}) {
   const { id } = useParams();
   const { type } = useParams();
 
+  const api_key = "b8f33277c38d4286ab9e30134ebf037e";
+
   const [searchTerm, setTerm] = useState("");
   const [prevTerm, setPrevTerm] = useState("");
   const [category, setCategory] = useState("All");
@@ -88,7 +90,7 @@ function Search({user, updateUser}) {
 
     } else if (category == "Title") {
       url =
-        "https://api.themoviedb.org/3/search/movie?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&query=" +
+        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=` +
         term + `&page=${page}&include_adult=false`;
 
       console.log("total Pages is " + totalPages);
@@ -97,7 +99,7 @@ function Search({user, updateUser}) {
 
     } else if (category == "Actors") {
       url =
-        "https://api.themoviedb.org/3/search/person?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&query=" +
+        `https://api.themoviedb.org/3/search/person?api_key=${api_key}&language=en-US&query=` +
         term + `&page=1&include_adult=false`;
 
       idSearch(url)
@@ -106,7 +108,7 @@ function Search({user, updateUser}) {
           console.log("termID is " + termID);
           url =
             "https://api.themoviedb.org/3/person/" +
-            termID + "/movie_credits?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US";
+            termID + `/movie_credits?api_key=${api_key}&language=en-US`;
           nonIdSearch(url, pageNumber);
         })
         .catch((err) => {
@@ -114,7 +116,7 @@ function Search({user, updateUser}) {
         });
     } else if (category == "Keywords") {
       url =
-        "https://api.themoviedb.org/3/search/keyword?api_key=b8f33277c38d4286ab9e30134ebf037e&query=" +
+        `https://api.themoviedb.org/3/search/keyword?api_key=${api_key}&query=` +
         term + `&page=1&include_adult=false`;
 
       idSearch(url)
@@ -123,7 +125,7 @@ function Search({user, updateUser}) {
           console.log("termID is " + termID);
           url =
             "https://api.themoviedb.org/3/keyword/" +
-            termID + `/movies?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&page=${page}&include_adult=false`;
+            termID + `/movies?api_key=${api_key}&language=en-US&page=${page}&include_adult=false`;
           nonIdSearch(url, pageNumber);
         })
         .catch((err) => {
@@ -315,9 +317,9 @@ function Search({user, updateUser}) {
   function searchAll(term, page, pageNumber) {
     // Use Promise.all to wait for all three API requests to complete
     Promise.all([
-      nonIdSearch(`https://api.themoviedb.org/3/search/movie?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&query=${term}&page=${page}&include_adult=false`),
-      idSearch(`https://api.themoviedb.org/3/search/person?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&query=${term}&page=1&include_adult=false`),
-      idSearch(`https://api.themoviedb.org/3/search/keyword?api_key=b8f33277c38d4286ab9e30134ebf037e&query=${term}&page=1&include_adult=false`)
+      nonIdSearch(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${term}&page=${page}&include_adult=false`),
+      idSearch(`https://api.themoviedb.org/3/search/person?api_key=${api_key}&language=en-US&query=${term}&page=1&include_adult=false`),
+      idSearch(`https://api.themoviedb.org/3/search/keyword?api_key=${api_key}&query=${term}&page=1&include_adult=false`)
     ]).then(([moviesResponse, actorsId, keywordsId]) => {
       // Extract the necessary data from the API responses
       const movies = moviesResponse;
@@ -326,8 +328,8 @@ function Search({user, updateUser}) {
       const keywordId = keywordsId.results[0].id;
   
       // Fetch movie credits for the actors
-      const actorCreditsUrl = `https://api.themoviedb.org/3/person/${actorId}/movie_credits?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US`;
-      const keyWordsUrl = `https://api.themoviedb.org/3/keyword/${keywordId}/movies?api_key=b8f33277c38d4286ab9e30134ebf037e&language=en-US&include_adult=false`;
+      const actorCreditsUrl = `https://api.themoviedb.org/3/person/${actorId}/movie_credits?api_key=${api_key}&language=en-US`;
+      const keyWordsUrl = `https://api.themoviedb.org/3/keyword/${keywordId}/movies?api_key=${api_key}&language=en-US&include_adult=false`;
       return Promise.all([
         Promise.resolve(movies),
         Promise.resolve(nonIdSearch(actorCreditsUrl,pageNumber)),
