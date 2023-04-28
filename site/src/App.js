@@ -36,7 +36,7 @@ function App() {
      useEffect(() => {
        const interval = setInterval(() => {
          setRemaining(Math.ceil(getRemainingTime() / 1000))
-         console.log(remaining);
+		     console.log(remaining);
        }, 500)
 
        return () => {
@@ -57,7 +57,7 @@ function App() {
         <Route path="/LogIn" element={<LogIn user={user} updateUser={updateUser}/>} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Search" element={<Search user={user} updateUser={updateUser}/>} />
-        <Route path="/Search/:type/:id" element={<Search />} />
+        <Route path="/Search/:type/:id" element={<Search user={user} updateUser={updateUser}/>} />
         <Route path="/movies/:id" element={<MovieDetails />} />
 
         <Route path="/Watchlist" element={<Watchlist user={user} />} />

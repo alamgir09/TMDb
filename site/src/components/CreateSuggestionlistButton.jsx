@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 
 function CreateSuggestionlistButton({ handleShow }) {
   return (
-    <Button id="CreateSuggestionlistButton" onClick={() => handleShow()} variant="danger">
+    <Button id="CreateSuggestionlistButton" className = "CreateSuggestionlistButton" onClick={() => handleShow()} variant="danger">
       Create Suggestion List
     </Button>
   );

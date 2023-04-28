@@ -63,11 +63,13 @@ function CreateSuggestionlistModal({ show, handleClose, list }) {
         list.forEach(watchlist => {
             if(selectedMovies.includes(watchlist.name)) {
                 const movieList = watchlist.movies
+                console.log("Movie List: " + JSON.stringify(movieList))
 
-                movieList.slice(1).forEach(movie => {
+                movieList.forEach(movie => {
                     const id = movie._id
                     const movieIds = movieList.map(movie => movie._id);
                     const suggestionsURL = baseURL + "/movie/" + id + "/similar" + apiKey
+                    console.log("Suggestion URL: " + suggestionsURL)
 
                      fetch(suggestionsURL, requestOptions)
                     .then((res) => res.json())
@@ -122,20 +124,21 @@ function CreateSuggestionlistModal({ show, handleClose, list }) {
           })
           .catch((err) => {
             console.log(err);
-            console.log(err);
           });
     }
 
     const addToWatchList = async() => {
         console.log(suggestions[0])
         var addedIds = []
-        for(var i = 0; i < inputValue; i++) {
+//        var  z = 0;
+        for(var i = 0; i < inputValue;i++) {
             const randomIndex = Math.floor(Math.random() * suggestions.length);
             console.log(randomIndex);
             const movie = suggestions[randomIndex]
             console.log(movie)
 
             if(!movie) {
+//             	i--;
                 continue;
             }else if(!addedIds.includes(movie.id)) {
                 console.log(movie)

@@ -134,7 +134,7 @@ describe("WatchlistDetail page", () => {
 		fireEvent.change(numSuggestions, { target: { value: '1' } });
 		fireEvent.change(select, {target : { value: 'list1'}});
 		fireEvent.keyDown(getByTestId('form'), { key: 'Enter', keyCode: 13 });;
-		expect(fetch).toHaveBeenCalledTimes(1);
+		expect(fetch).toHaveBeenCalledTimes(2);
 
 		expect(await screen.getByText("Creating Suggestions Based On list1")).toBeInTheDocument();
 		const confirmationNumMovies = await screen.findByText('Confirmation: 1 recommendations', {}, { timeout: 3500 });
@@ -167,7 +167,7 @@ describe("WatchlistDetail page", () => {
 		fireEvent.change(numSuggestions, { target: { value: '1' } });
 		fireEvent.change(select, {target : { value: 'list1'}});
 		fireEvent.keyDown(getByTestId('form'), { key: 'Enter', keyCode: 13 });;
-		expect(fetch).toHaveBeenCalledTimes(1);
+		expect(fetch).toHaveBeenCalledTimes(2);
 
 		expect(await screen.getByText("Creating Suggestions Based On list1")).toBeInTheDocument();
 		const confirmationNumMovies = await screen.findByText('Confirmation: 1 recommendations', {}, { timeout: 3500 });
@@ -206,7 +206,7 @@ describe("WatchlistDetail page", () => {
 		fireEvent.change(numSuggestions, { target: { value: '1' } });
 		fireEvent.change(select, {target : { value: 'list1'}});
 		fireEvent.keyDown(getByTestId('form'), { key: 'Enter', keyCode: 13 });;
-		expect(fetch).toHaveBeenCalledTimes(1);
+		expect(fetch).toHaveBeenCalledTimes(2);
 
 		expect(await screen.getByText("Creating Suggestions Based On list1")).toBeInTheDocument();
 		const confirmationNumMovies = await screen.findByText('Confirmation: 1 recommendations', {}, { timeout: 3500 });
@@ -258,7 +258,7 @@ describe("WatchlistDetail page", () => {
     		fireEvent.change(numSuggestions, { target: { value: '1' } });
     		fireEvent.change(select, {target : { value: 'list1'}});
     		fireEvent.keyDown(getByTestId('form'), { key: 'Enter', keyCode: 13 });;
-    		expect(fetch).toHaveBeenCalledTimes(1);
+    		expect(fetch).toHaveBeenCalledTimes(2);
 
     		expect(await screen.getByText("Creating Suggestions Based On list1")).toBeInTheDocument();
     		const confirmationNumMovies = await screen.findByText('Confirmation: 1 recommendations', {}, { timeout: 3500 });
@@ -310,7 +310,7 @@ describe("WatchlistDetail page", () => {
 				fireEvent.change(numSuggestions, { target: { value: '1' } });
 				fireEvent.change(select, {target : { value: 'list1'}});
 				fireEvent.keyDown(getByTestId('form'), { key: 'Enter', keyCode: 13 });;
-				expect(fetch).toHaveBeenCalledTimes(1);
+				expect(fetch).toHaveBeenCalledTimes(2);
 
 				expect(await screen.getByText("Creating Suggestions Based On list1")).toBeInTheDocument();
 				const confirmationNumMovies = await screen.findByText('Confirmation: 1 recommendations', {}, { timeout: 3500 });
@@ -336,7 +336,7 @@ describe("WatchlistDetail page", () => {
 				const saveButton = getByTestId("save-button");
 				fireEvent.click(saveButton);
 
-				await waitFor(() => expect(fetchSpyFail).toHaveBeenCalledTimes(3));
+				await waitFor(() => expect(fetchSpyFail).toHaveBeenCalledTimes(4));
 
 			},20000);
 });
