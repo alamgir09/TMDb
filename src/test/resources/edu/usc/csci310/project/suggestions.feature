@@ -51,3 +51,4 @@ Feature: Generate suggestions for new movies
     Then I should see error "Error: At least 1 Source List Must Be Selected"
 
 
+
