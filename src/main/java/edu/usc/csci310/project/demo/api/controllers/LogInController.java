@@ -120,6 +120,9 @@ public class LogInController {
                 }
                 // password match (return userID)
                 else{
+                    //successful login, reset everything
+                    collection.updateOne(query, new Document("$set", new Document("timestamp", (long)0)));
+                    collection.updateOne(query, new Document("$set", new Document("attempts", (int)0)));
                     json.put("Type", "Success");
                     json.put("userID", userAccount.getUserID());
                 }

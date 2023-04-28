@@ -22,13 +22,13 @@ function App() {
        console.log("clear user");
     }
 
-    const onActive = () => {
-        console.log("active");
-    }
+//    const onActive = () => {
+//        console.log("active");
+//    }
 
      const { getRemainingTime } = useIdleTimer({
        onIdle,
-       onActive,
+//       onActive,
        timeout: 60_000,
        throttle: 500
      })
