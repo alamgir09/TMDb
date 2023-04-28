@@ -92,7 +92,7 @@ function WatchlistDetail({user}) {
 
           var vMovieIDs = [];
           for (var i = 0; i < jsonObject.length; i++) {
-            vMovieIDs.push(jsonObject[i]["id"]);
+            vMovieIDs.push(jsonObject[i]["_id"]);
           }
           setMovieIDs(vMovieIDs);
 
