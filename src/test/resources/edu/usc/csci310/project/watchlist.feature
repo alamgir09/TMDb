@@ -1,11 +1,11 @@
 Feature: Create and save movie watch lists
 
-  Scenario: Create a new watchlist
+  Scenario: Create a new unique watchlist
     Given I am on the watchlist page
     When I press the create watchlist button
-    And I type "Watchlist 1" with timestamp
+    And I type "Watchlist Unique" into modal
     And I press the create button
-    Then I should see "Watchlist 1" with timestamp on the page
+    Then I should see "Watchlist Unique" on the watchlist page
 
   Scenario: Create an existing watchlist
     Given I am on the watchlist page
@@ -16,25 +16,26 @@ Feature: Create and save movie watch lists
 
   Scenario: Edit watchlist name and confirm
     Given I am on the watchlist page
-    When I press the edit watchlist button
+    When I press the edit watchlist for button for "Watchlist 1"
     And I type "Watchlist Edited" into edit watchlist modal
     And I press the create button
     Then I should see "Watchlist Edited" on the watchlist page
 
   Scenario: Delete a watchlist and press confirm should delete the watchlist
     Given I am on the watchlist page
-    When I press the delete watchlist button
+    When I press the delete watchlist button for "Watchlist Unique"
     And I press the create button
-    Then I should not see "Watchlist Edited" on the page
+    Then I should not see "Watchlist Unique" on the page
 
-  Scenario: Add "Watchlist 1" back to Watchlists
+  Scenario: Change "Watchlist Edited" back to "Watchlist 1" confirm
     Given I am on the watchlist page
-    When I press the create watchlist button
-    And I type "Watchlist 1" into modal
+    When I press the edit watchlist for button for "Watchlist Edited"
+    And I type "Watchlist 1" into edit watchlist modal
     And I press the create button
     Then I should see "Watchlist 1" on the watchlist page
 
-  Scenario: On click of deleting a watchlist but clicking cancel should not delete it
+
+  Scenario: Attempts deleting a watchlist but canceling should not delete it
     Given I am on the watchlist page
     When I press the delete watchlist button
     And I press the cancel button
@@ -65,22 +66,22 @@ Feature: Create and save movie watch lists
     And I press the "privateWatchlist" dropdown menu item
     Then I should see "Private" on the watchlist page
 
-  Scenario: Copy Movie to another Watchlist (by clicking on copy-icon, clicking confirm)
+  Scenario: Copy Movie to another Watchlist with confirmation
     Given I am on the watchlist detail page for "Watchlist Test"
-    When I press the "fa-copy" where movie box is "Iron Man 2"
+    When I press the "fa-copy" where movie is "Iron Man 2"
     And I click on "Watchlist 1" dropdown item
     And I press the confirm button
     Then I should see "Iron Man 2" on "Watchlist 1"
 
-  Scenario: Delete Movie to from a Watchlist and confirm (by clicking on delete-icon, clicking confirm)
+  Scenario: Delete Movie from a Watchlist with confirmation
     Given I am on the watchlist detail page for "Watchlist 1"
-    When I press the "fa-trash" where movie box is "Iron Man 2"
+    When I press the "fa-trash" where movie is "Iron Man 2"
     And I press the confirm button
     Then I should not see "Iron Man 2" on the page
 
-  Scenario: Move Movie to another Watchlist and confirm (by clicking on move-icon, clicking confirm)
+  Scenario: Move Movie to another Watchlist with confirmation
     Given I am on the watchlist detail page for "Watchlist Test"
-    When I press the "fa-arrow-right-from-bracket" where movie box is "Iron Man 2"
+    When I press the "fa-arrow-right-from-bracket" where movie is "Iron Man 2"
     And I click on "Watchlist 1" dropdown item
     And I press the confirm button
     Then I should not see "Iron Man 2" on the page
@@ -88,35 +89,58 @@ Feature: Create and save movie watch lists
 
   Scenario: Move "Iron Man 2" back to Watchlist Test and confirm
     Given I am on the watchlist detail page for "Watchlist 1"
-    When I press the "fa-arrow-right-from-bracket" where movie box is "Iron Man 2"
+    When I press the "fa-arrow-right-from-bracket" where movie is "Iron Man 2"
     And I click on "Watchlist Test" dropdown item
     And I press the confirm button
     Then I should not see "Iron Man 2" on the page
     And I should see "Iron Man 2" on "Watchlist Test"
 
-  Scenario: click on copy-icon and cancel should not perform the action and closes the modal
+  Scenario: click on copy-icon and cancels
     Given I am on the watchlist detail page for "Watchlist Test"
-    When I press the "fa-copy" where movie box is "Iron Man"
+    When I press the "fa-copy" where movie is "Iron Man 2"
     And I click on "Watchlist 1" dropdown item
     And I press the cancel button
     Then I should not see the pop-up modal
 
-  Scenario: click on delete-icon and cancel should not perform the action and closes the modal
+  Scenario: click on delete-icon and cancels
     Given I am on the watchlist detail page for "Watchlist Test"
-    When I press the "fa-trash" where movie box is "Iron Man"
+    When I press the "fa-trash" where movie is "Iron Man 2"
     And I press the cancel button
     Then I should not see the pop-up modal
 
-  Scenario: click on move-icon and cancel should not perform the action and closes the modal
+  Scenario: click on move-icon and cancels
     Given I am on the watchlist detail page for "Watchlist Test"
-    When I press the "fa-arrow-right-from-bracket" where movie box is "Iron Man"
+    When I press the "fa-arrow-right-from-bracket" where movie is "Iron Man 2"
     And I click on "Watchlist 1" dropdown item
     And I press the cancel button
     Then I should not see the pop-up modal
 
+  Scenario: copy existing movie into another watchlist should throw error message
+    Given I am on the watchlist detail page for "Watchlist Test"
+    When I press the "fa-copy" where movie is "Iron Man"
+    And I click on "Watchlist 1" dropdown item
+    And I press the confirm button
+    Then I should see "Movie already exists" on the watchlist page
 
+  Scenario: move existing movie into another watchlist should throw error message
+    Given I am on the watchlist detail page for "Watchlist Test"
+    When I press the "fa-arrow-right-from-bracket" where movie is "Iron Man"
+    And I click on "Watchlist 1" dropdown item
+    And I press the confirm button
+    Then I should see "Movie already exists" on the watchlist page
 
+  Scenario: Delete "Iron Man" from "Watchlist 1"
+    Given I am on the watchlist detail page for "Watchlist 1"
+    When I press the "fa-trash" where movie is "Iron Man 2"
+    And I press the confirm button
+    Then I should not see "Iron Man 2" on the page
 
+  Scenario: clicking on the Search button in NavBar redirects to Search page
+    Given I am on the watchlist page
+    When I press Search on the navbar
+    Then I should be on the search page
 
-
-
+  Scenario: Navigating to Watchlists page
+    Given I am on the watchlist detail page for "Watchlist 1"
+    When I press "MyWatchLists" on the navbar
+    Then I should be on the Watchlist page

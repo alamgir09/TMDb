@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-function CreateWatchlistModal({ show, handleClose, fetchWatchlist }) {
+function CreateWatchlistModal({ show, handleClose, fetchWatchlist, movies }) {
   const [watchlistName, setWatchlistName] = useState("");
   const [type, setType] = useState("Private");
   const [errorMessage, setErrorMessage] = useState();
@@ -24,12 +24,16 @@ function CreateWatchlistModal({ show, handleClose, fetchWatchlist }) {
       return;
     }
 
-    // Construct the API request
+    if (movies == null) {
+      movies = [];
+    }
+
     const apiUrl = "api/createWatchlist";
     const requestData = {
       watchlist: watchlistName,
       userID: localStorage.getItem("userID"),
-      type: type
+      type: type,
+      movies: movies
     };
     const requestHeaders = {
       "Content-Type": "application/json"
@@ -45,7 +49,9 @@ function CreateWatchlistModal({ show, handleClose, fetchWatchlist }) {
       .then((res) => res.json())
       .then((response) => {
         if (response.data == "Success") {
-          fetchWatchlist();
+          if (fetchWatchlist) {
+            fetchWatchlist();
+          }
           handleClose();
           setWatchlistName("");
           setType("Private");
@@ -62,7 +68,9 @@ function CreateWatchlistModal({ show, handleClose, fetchWatchlist }) {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title data-testid="modal-title" id="createWatchlistTitle">Create Watchlist</Modal.Title>
+        <Modal.Title data-testid="modal-title" id="createWatchlistTitle">
+          Create Watchlist
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
