@@ -49,7 +49,6 @@ public class suggestionsStepDefinitions {
 	@Given("I am on the watchlist")
 	public void iAmOnTheWatchlist() throws InterruptedException {
 		driver.navigate().to("https://localhost:8080/Watchlist");
-		String currentUrl = driver.getCurrentUrl();
 
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 		jsExecutor.executeScript("localStorage.setItem('userID', '6438b175a342ef447b35a203');");
@@ -58,9 +57,25 @@ public class suggestionsStepDefinitions {
 
 		WebDriverWait wait = new WebDriverWait(driver, duration); // wait up to 30 seconds
 		wait.until(ExpectedConditions.jsReturnsValue("return localStorage.getItem('userID');"));
-		driver.navigate().refresh();
+		driver.get("https://localhost:8080/Watchlist");
+		String currentURL = driver.getCurrentUrl();
+		assertTrue(currentURL.matches("https://localhost:8080/Watchlist"));
 		Thread.sleep(10000);
 	}
+
+//	@And("I navigate to watchlist")
+//	public void iNavigateSecurelyToThe() throws InterruptedException {
+//		driver.get("https://localhost:8080/Watchlist");
+//
+//		Duration duration = Duration.ofSeconds(30);
+//
+//		WebDriverWait wait = new WebDriverWait(driver, duration);
+//
+//		String currentURL = driver.getCurrentUrl();
+//		assertTrue(currentURL.matches("https://localhost:8080/Watchlist"));
+//
+//
+//	}
 
 	@When("I click create suggestion list")
 	public void iClickCreateSuggestionList() {
