@@ -130,6 +130,7 @@ function CreateSuggestionlistModal({ show, handleClose, list }) {
     const addToWatchList = async() => {
         console.log(suggestions[0])
         var addedIds = []
+       var  z = 0;
         for(var i = 0; i < inputValue;i++) {
             const randomIndex = Math.floor(Math.random() * suggestions.length);
             console.log(randomIndex);
@@ -137,8 +138,8 @@ function CreateSuggestionlistModal({ show, handleClose, list }) {
             console.log(movie)
 
             if(!movie) {
-            	i--;
-                continue
+//             	i--;
+                continue;
             }else if(!addedIds.includes(movie.id)) {
                 console.log(movie)
                 const imgURL = "http://image.tmdb.org/t/p/w500" + movie.poster_path
