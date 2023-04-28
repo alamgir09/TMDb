@@ -1,6 +1,6 @@
 Feature: Be secure and protect user data
 
-  # trying to access pages without SSL
+#   trying to access pages without SSL
   Scenario: Attempting to access Search page without SSL
     And I navigate to the "Search" without SSL
     Then I should see error message and not be able to access the page  without SSl
@@ -93,39 +93,39 @@ Feature: Be secure and protect user data
     Then I should see that I am on the "LogIn" page
 
   # session timeout on all pages
-#  Scenario: Logs out user and returns to login page after 60 seconds of inactivity on Search page
-#    Given I am logged in
-#    And I navigate securely to the "Search"
-#    And I am inactive for 60 seconds
-#    Then I should see that I am on the "LogIn" page
-#
-#  Scenario: Logs out user and returns to login page after 60 seconds of inactivity on Watchlist page
-#    Given I am logged in
-#    And I navigate securely to the "Watchlist"
-#    And I am inactive for 60 seconds
-#    Then I should see that I am on the "LogIn" page
-#
-#  Scenario: Logs out user and returns to login page after 60 seconds of inactivity on WatchlistDetail page
-#    Given I am logged in
-#    And I navigate securely to the "WatchlistDetail"
-#    And I am inactive for 60 seconds
-#    Then I should see that I am on the "LogIn" page
-#
-#  Scenario: Logs out user and returns to login page after 60 seconds of inactivity on Montage page
-#    Given I am logged in
-#    And I am on 10movies watchlist detail page
-#    When I press the create montage button here
-#    And I am inactive for 60 seconds
-#    Then I should see that I am on the "LogIn" page
-#
-#  Scenario: Logs out user and returns to login page after 60 seconds of inactivity on MovieDetail page
-#    Given I am logged in
-#    And I navigate securely to the "Search"
-#    When search the Up movie
-#    And I press search
-#    And I click the Up movie
-#    And I am inactive for 60 seconds
-#    Then I should see that I am on the "LogIn" page
+  Scenario: Logs out user and returns to login page after 60 seconds of inactivity on Search page
+    Given I am logged in
+    And I navigate securely to the "Search"
+    And I am inactive for 60 seconds
+    Then I should see that I am on the "LogIn" page
+
+  Scenario: Logs out user and returns to login page after 60 seconds of inactivity on Watchlist page
+    Given I am logged in
+    And I navigate securely to the "Watchlist"
+    And I am inactive for 60 seconds
+    Then I should see that I am on the "LogIn" page
+
+  Scenario: Logs out user and returns to login page after 60 seconds of inactivity on WatchlistDetail page
+    Given I am logged in
+    And I navigate securely to the "WatchlistDetail"
+    And I am inactive for 60 seconds
+    Then I should see that I am on the "LogIn" page
+
+  Scenario: Logs out user and returns to login page after 60 seconds of inactivity on Montage page
+    Given I am logged in
+    And I am on 10movies watchlist detail page
+    When I press the create montage button here
+    And I am inactive for 60 seconds
+    Then I should see that I am on the "LogIn" page
+
+  Scenario: Logs out user and returns to login page after 60 seconds of inactivity on MovieDetail page
+    Given I am logged in
+    And I navigate securely to the "Search"
+    When search the Up movie
+    And I press search
+    And I click the Up movie
+    And I am inactive for 60 seconds
+    Then I should see that I am on the "LogIn" page
 
 #   account lockout after 3 unsuccessful attempts
   Scenario: Account is not locked after user fails to login 2 times then successfully logs in on the 3rd
