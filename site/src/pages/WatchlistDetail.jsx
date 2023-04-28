@@ -8,7 +8,9 @@ import CreateWatchlistModal from "../components/CreateWatchlistModal";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 
-function WatchlistDetail() {
+
+function WatchlistDetail({user}) {
+
   const [list, updateList] = useState([]);
   const [watchlistAll, setWatchlistAll] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,6 +23,15 @@ function WatchlistDetail() {
 
   //NEW
   const navigate = useNavigate();
+
+    // access to page only if logged in
+    useEffect(() => {
+        console.log(user);
+        if (user == null || user == "null") {
+          navigate('/LogIn');
+        }
+      }, [user, navigate]);
+
 
   // For Edit Watchlist Modal
   const [modal, setModal] = useState({ show: false, data: { text: "" } });
@@ -68,6 +79,9 @@ function WatchlistDetail() {
       .then((res) => res.json())
       .then((response) => {
         if (response?.data) {
+            if(response.data === 'No results found.') {
+                navigate("/Watchlist")
+            }
           console.log(response.data);
 
           var jsonObject = JSON.parse(response.data);
@@ -78,7 +92,7 @@ function WatchlistDetail() {
 
           var vMovieIDs = [];
           for (var i = 0; i < jsonObject.length; i++) {
-            vMovieIDs.push(jsonObject[i]["id"]);
+            vMovieIDs.push(jsonObject[i]["_id"]);
           }
           setMovieIDs(vMovieIDs);
 
@@ -147,6 +161,8 @@ function WatchlistDetail() {
             <WatchlistTypeDropdown type={watchlistType} />
             <CompareWatchlistComponent handleShow={handleShowCompare} setUsers={setUsers} />
             <button
+              id="createMontageBtn"
+              className="btn btn-danger"
               onClick={() => {
                 navigate("/Montage", { state: { movieIDList: movieIDs } });
               }}

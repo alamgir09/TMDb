@@ -69,7 +69,6 @@ public class watchlistStepDefinitions {
 
     @When("I press the create watchlist button")
     public void iPressTheCreateWatchlistButton() {
-
         driver.findElement(By.id("createWatchlist")).click();
     }
 
@@ -198,8 +197,8 @@ public class watchlistStepDefinitions {
         Thread.sleep(10000);
     }
 
-    @And("I press the {string} where movie box is {string}")
-    public void iPressTheWhereMovieBoxIs(String arg0, String arg1) {
+    @When("I press the {string} where movie is {string}")
+    public void iPressTheWhereMovieIs(String arg0, String arg1) {
         Duration duration = Duration.ofSeconds(60);
 
         WebDriverWait wait = new WebDriverWait(driver, duration); // Wait for up to 60 seconds

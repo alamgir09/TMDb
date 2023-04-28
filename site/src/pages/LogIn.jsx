@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
 
-function LogIn() {
+function LogIn({user, updateUser}) {
+  const navigate = useNavigate();
   // fetchResponse is a constant in this component's state. Use handleFetchResponse(newValue)
   // to update the value of fetchResponse
   const [fetchResponse, handleFetchResponse] = useState();
@@ -41,8 +43,13 @@ function LogIn() {
             setUsername("");
             setPassword("");
           } else {
+
+            handleFetchResponse(jsonObject["Message"]);
             localStorage.setItem("userID", jsonObject["userID"]);
-            handleFetchResponse(jsonObject["Type"]);
+            updateUser(jsonObject["userID"]);
+            console.log(user);
+            console.log("redirect");
+            navigate('/Search');
           }
         }
       })
@@ -87,7 +94,7 @@ function LogIn() {
           Submit
         </button>
       </form>
-      <p className="text-center pt-3" id="resdponse">
+      <p className="text-center pt-3" id="response">
         {fetchResponse}
       </p>
       <p className="text-center">

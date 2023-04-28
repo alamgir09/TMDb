@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import CreateSuggestionlistModal from '../components/CreateSuggestionlistModal'
 import CreateWatchlistButton from "../components/CreateWatchlistButton";
 import CreateWatchlistModal from "../components/CreateWatchlistModal";
-import GetSuggestionListButton from "../components/GetSuggestionListButton";
-import GetSuggestionListModal from "../components/GetSuggestionListModal";
+import CreateSuggestionlistButton from "../components/CreateSuggestionlistButton";
 import EditWatchlistModal from "../components/EditWatchlistModal";
 import DeleteWatchlistModal from "../components/DeleteWatchlistModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "../components/NavBar";
 
+function Watchlist({user}) {
 
-function Watchlist() {
   const [list, updateList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
@@ -32,8 +32,19 @@ function Watchlist() {
   const handleDeleteClose = () => setDeleteShow(false);
   const handleDeleteShow = () => setDeleteShow(true);
 
+//   const [user, updateUser] = useState(localStorage.getItem('userID'));
+
   // Calling navigate() will allow us to redirect the webpage
   const navigate = useNavigate();
+
+  // access to page only if logged in
+  useEffect(() => {
+      console.log(user);
+      if (user == null || user == "null") {
+        navigate('/LogIn');
+      }
+    }, [user, navigate]);
+
 
   function navigateWatchlistDetail(currentWatchlist) {
     localStorage.setItem("watchlist", currentWatchlist);
@@ -59,9 +70,10 @@ function Watchlist() {
       .then((res) => res.json())
       .then((response) => {
         if (Object.keys(response.data).length !== 0) {
-          console.log(response.data);
+//           console.log(response.data);
 
           var jsonObject = JSON.parse(response.data);
+           console.log(jsonObject)
           updateList(jsonObject);
           setLoading(false);
         }
@@ -86,6 +98,7 @@ function Watchlist() {
   // On page load
   useEffect(() => {
     fetchWatchlist();
+//     console.log(list)
   }, []);
 
   return (
@@ -99,7 +112,7 @@ function Watchlist() {
           <div className="col-sm">{!loading && list.length == 0 ? <h2>No watchlist created yet</h2> : null}</div>
           <div className="col-sm text-end">
             <CreateWatchlistButton handleShow={handleShow}></CreateWatchlistButton>
-            <GetSuggestionListButton handleShow={handleSuggestionShow}></GetSuggestionListButton>
+            <CreateSuggestionlistButton handleShow={handleSuggestionShow}></CreateSuggestionlistButton>
           </div>
         </div>
         {!loading &&
@@ -130,12 +143,12 @@ function Watchlist() {
           handleClose={handleClose}
           fetchWatchlist={fetchWatchlist}
         ></CreateWatchlistModal>
-        <GetSuggestionListModal
-          show={suggestionShow}
-          handleClose={handleSuggestionClose}
-          fetchWatchlist={fetchWatchlist}
-          watchlists={list}
-        ></GetSuggestionListModal>
+        <CreateSuggestionlistModal
+        show={suggestionShow}
+        handleClose={handleSuggestionClose}
+//         fetchWatchlist={fetchWatchlist}
+        list={list}
+      ></CreateSuggestionlistModal>
         <EditWatchlistModal
           show={editShow}
           handleClose={handleEditClose}

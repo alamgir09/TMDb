@@ -146,7 +146,9 @@
 .box-hover-elements {
 	visibility: hidden;
 }
-
+.dollar-icon {
+  color: rgba(0, 0, 0, 0.832);
+}
 .movieButton {
     border: 0;
     display: flex;
@@ -293,6 +295,12 @@ body {
 	padding-right: 10px;
 }
 
+.fa-dollar-sign, .fa-eye{
+	font-size: 2em;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
 .fa-pen:hover, .fa-plus:hover{
 	color: red;
 }
@@ -331,6 +339,18 @@ body {
 
 .watchlistTypeMenu .row{
 	white-space: break-spaces !important;
+}
+
+#backButton, #create-montage{
+    color: white;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    margin: 10px;
+    border: none;
+}
+
+#backButton:hover, #create-montage:hover{
+    background-color: #bb2d3b;
 }
 
 /* Refresh styling... */
@@ -399,4 +419,28 @@ body {
 #compareWatchlistModal .list-group-item{
 	border: none;
 	border-bottom: 1px solid;
+}
+
+/* button styling*/
+#compareWatchlist{
+    margin-right: 10px;
+    padding: 10px 20px;
+    border-radius: 0px;
+    font-size: 18px;
+}
+
+#createMontageBtn{
+    padding: 10px 20px;
+    border-radius: 0px;
+    font-size: 18px;
+}
+
+/* year picker */
+#startDate, #endDate{
+	border-radius: 0;
+  border: 2px solid #000;
+  box-shadow: none;
+  padding: 11px;
+  margin-left: 10px;
+  max-width: 100px;
 }
