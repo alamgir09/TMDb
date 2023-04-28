@@ -295,6 +295,12 @@ body {
 	padding-right: 10px;
 }
 
+.fa-dollar-sign, .fa-eye{
+	font-size: 2em;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
 .fa-pen:hover, .fa-plus:hover{
 	color: red;
 }
@@ -427,4 +433,14 @@ body {
     padding: 10px 20px;
     border-radius: 0px;
     font-size: 18px;
+}
+
+/* year picker */
+#startDate, #endDate{
+	border-radius: 0;
+  border: 2px solid #000;
+  box-shadow: none;
+  padding: 11px;
+  margin-left: 10px;
+  max-width: 100px;
 }
