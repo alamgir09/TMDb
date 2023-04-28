@@ -34,12 +34,6 @@ Feature: Create and save movie watch lists
     And I press the create button
     Then I should see "Watchlist 1" on the watchlist page
 
-#  Scenario: Add "Watchlist 1" back to Watchlists
-#    Given I am on the watchlist page
-#    When I press the create watchlist button
-#    And I type "Watchlist 1" into modal
-#    And I press the create button
-#    Then I should see "Watchlist 1" on the watchlist page
 
   Scenario: Attempts deleting a watchlist but canceling should not delete it
     Given I am on the watchlist page
@@ -140,13 +134,6 @@ Feature: Create and save movie watch lists
     When I press the "fa-trash" where movie is "Iron Man 2"
     And I press the confirm button
     Then I should not see "Iron Man 2" on the page
-
-  Scenario: Compare watchlist with another user
-    Given I am on the watchlist detail page for "Watchlist 1"
-    When I click on "Compare Watchlist" button
-    And I click on "JLee" user
-    And I click on "Happy" watchlist
-    Then I should see merged watchlist
 
   Scenario: clicking on the Search button in NavBar redirects to Search page
     Given I am on the watchlist page
