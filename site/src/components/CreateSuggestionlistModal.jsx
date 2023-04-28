@@ -130,7 +130,7 @@ function CreateSuggestionlistModal({ show, handleClose, list }) {
     const addToWatchList = async() => {
         console.log(suggestions[0])
         var addedIds = []
-       var  z = 0;
+//        var  z = 0;
         for(var i = 0; i < inputValue;i++) {
             const randomIndex = Math.floor(Math.random() * suggestions.length);
             console.log(randomIndex);
