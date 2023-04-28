@@ -522,7 +522,7 @@ function Search({user, updateUser}) {
   function fetchWatchlist() {
     const apiUrl = "api/getWatchlist";
     const requestData = {
-      userID: localStorage.getItem("userID")
+      userID:user
     };
     const requestHeaders = {
       "Content-Type": "application/json"
@@ -536,10 +536,15 @@ function Search({user, updateUser}) {
     fetch(apiUrl, requestOptions)
       .then((res) => res.json())
       .then((response) => {
+        // console.log("userID-old: " + localStorage.getItem("userID"));
+        console.log("hit fetch watchlist");
         if (Object.keys(response.data).length !== 0) {
+          console.log("userID-new: " + localStorage.getItem("userID"));
 
           var jsonObject = JSON.parse(response.data);
           updateList(jsonObject);
+          console.log(jsonObject);
+
         }
       })
       .catch((err) => {
@@ -598,7 +603,19 @@ function Search({user, updateUser}) {
                   </ul>
                 </li>
               </ul>{" "}
-              <button id="year-button" type="button">Year Filter</button>
+
+              <input value={dateStart}
+	              onChange={(e) => setStartDate(e.target.value)}
+	              type="text"
+	              placeholder="Start Year"
+	              id="startDate"
+	              className="datePicker"/>
+	            <input value={dateEnd}
+	              onChange={(e) => setEndDate(e.target.value)}
+	              type="text"
+	              placeholder="End Year"
+	              id="endDate"
+	              className="datePicker"/>
             </div>
 
             <input
@@ -614,38 +631,7 @@ function Search({user, updateUser}) {
               Search
             </button>
 
-            <ul id="nav">
-              <li id="active-nav">
-                <a href=""> {category} </a>
-                <ul>
-                  <li className="dropElements" onClick={() => setCategory("All")}>
-                    <a>All</a>
-                  </li>
-                  <li className="dropElements" onClick={() => setCategory("Title")}>
-                    <a>Title</a>
-                  </li>
-                  <li className="dropElements" onClick={() => setCategory("Actors")}>
-                    <a>Actors</a>
-                  </li>
-                  <li className="dropElements" onClick={() => setCategory("Keywords")}>
-                    <a>Keywords</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>{" "}
-            <input value={dateStart}
-              onChange={(e) => setStartDate(e.target.value)}
-              type="text"
-              placeholder="Start Date"
-              id="startDate"
-              className="datePicker"/>
-            <input value={dateEnd}
-              onChange={(e) => setEndDate(e.target.value)}
-              type="text"
-              placeholder="End Date"
-              id="endDate"
-              className="datePicker"/>
-            {/*<!-- nav --> */}
+
 
           </div>
 

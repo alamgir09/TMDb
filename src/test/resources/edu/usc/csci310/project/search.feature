@@ -26,9 +26,9 @@ Feature: Search for movies based on various criteria
 
   Scenario: missing movie data should return "?"
     Given I am on the search page
-    When I enter "h" into search input
+    When I enter "?" into search input
     And I press the submit search button
-    Then I should see "?" title as a result
+    Then I should see "?" rating as a result
 
   Scenario: should show "0 results" when input field is empty
     Given I am on the search page
@@ -79,27 +79,29 @@ Feature: Search for movies based on various criteria
     Then I should see the dollar icon on hover of a movie
 
   Scenario: Successfully add new movie to watchlist with success confirmation
-    Given I am on the search page with userID
+    Given I am on the search page
     When I enter "iron man" into search input
     And I press the submit search button
     And I add the movie to "Watchlist Test"
     Then I should see "Iron Man" in "Watchlist Test"
 
+  Scenario:  Attempts to add duplicate movie to watchlist giving with error
+    Given I am on the search page
+    When I enter "iron man" into search input
+    And I press the submit search button
+    And I add the movie to "Watchlist Test"
+    Then I should see "Movie already exists" on the search page
+
   Scenario: clicking on the myWatchlist button in NavBar redirects to Watchlists page
-    Given I am on the search page with userID
+    Given I am on the search page
     When I press the myWatchList button
     Then I should be on the Watchlists page
-#
-#  Scenario: clicking on the Log Out button in NavBar redirects to Log In page
-#    Given I am on the search page
-#    When I press the Log Out button
-#    Then I should be on the Log In page
-#
-#
-#  Scenario: Attempts to add duplicate movie to watchlist giving with error
-#    Given I am on the search page
-#    When I press the Add Movie button
-#    Then I should see "Error: Movie exists in Watchlist"
+
+  Scenario: clicking on the Log Out button in NavBar redirects to Log In page
+    Given I am on the search page
+    When I press the Log Out button
+    Then I should be on the Log In page
+
 #
 #  Scenario: Click eye icon and see movie is not in any watchlist
 #    Given I am on the search page
@@ -111,26 +113,38 @@ Feature: Search for movies based on various criteria
 #    When I press the eye icon on movie
 #    Then I should see movie in "Horror watchlist"
 #
-#  Scenario: Year picker defaults to no year
-#    Given I am on the search page
-#    Then I should see movies from all years
-#
-#  Scenario: Year picker selects starting year
-#    Given I am on the search page
-#    When I select starting year
-#    Then I should see all movies made after starting year
-#
-#  Scenario: Year picker selects ending year
-#    Given I am on the search page
-#    When I select starting year
-#    Then I should see movies made before ending year
-#
-#  Scenario: Year picker selects starting year and ending year
-#    Given I am on the search page
-#    When I select starting year and ending year
-#    Then I should see movies made between starting year ans ending year
-#
-#  Scenario: Select dollar sign and get free movie ticket
-#    Given I am on the search page
-#    When I select dollar icon
-#    Then I should "free movie ticket" and be redirected to movie theatre website
+  Scenario: Year picker defaults to no year
+    Given I am on the search page
+    When I enter "iron man" into search input
+    And I press the submit search button
+    Then I should see movies from all years
+
+  Scenario: Year picker selects starting year without ending
+    Given I am on the search page
+    When I enter "iron man" into search input
+    And I select starting year "2013"
+    And I press the submit search button
+    Then I should see all movies made after starting year "2013"
+
+  Scenario: Year picker selects ending year without starting
+    Given I am on the search page
+    When I enter "iron man" into search input
+    And I select ending year "2013"
+    And I press the submit search button
+    Then I should see all movies made before starting year "2013"
+
+  Scenario: Year picker selects starting year and ending year
+    Given I am on the search page
+    When I enter "iron man" into search input
+    And I select starting year "2008"
+    And I select ending year "2013"
+    And I press the submit search button
+    Then I should see all movies made after starting year "2008"
+    And I should see all movies made before starting year "2013"
+
+  Scenario: Select dollar sign and get free movie ticket
+    Given I am on the search page
+    When I enter "iron man" into search input
+    And I press the submit search button
+    And I select the dollar icon
+    Then I should be redirected to movie theatre website
