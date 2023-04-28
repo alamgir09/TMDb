@@ -94,7 +94,7 @@ function LogIn({user, updateUser}) {
           Submit
         </button>
       </form>
-      <p className="text-center pt-3" id="resdponse">
+      <p className="text-center pt-3" id="response">
         {fetchResponse}
       </p>
       <p className="text-center">
