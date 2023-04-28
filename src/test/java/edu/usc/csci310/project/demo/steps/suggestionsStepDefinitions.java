@@ -21,7 +21,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class suggestionsStepDefinitions {
-	private static final String ROOT_URL = "http://localhost:8080/";
+	private static final String ROOT_URL = "https://localhost:8080/";
 	private WebDriver driver;
 
 	@BeforeAll
@@ -34,9 +34,10 @@ public class suggestionsStepDefinitions {
 	@Before
 	public void before() {
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--headless");
+//		options.addArguments("--headless");
 		options.addArguments("--disable-extensions");
 		options.addArguments("--remote-allow-origins=*");
+		options.setAcceptInsecureCerts(true);
 		driver = new ChromeDriver(options);
 	}
 
@@ -47,7 +48,8 @@ public class suggestionsStepDefinitions {
 
 	@Given("I am on the watchlist")
 	public void iAmOnTheWatchlist() throws InterruptedException {
-		driver.navigate().to("http://localhost:8080/Watchlist");
+		driver.navigate().to("https://localhost:8080/Watchlist");
+		String currentUrl = driver.getCurrentUrl();
 
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 		jsExecutor.executeScript("localStorage.setItem('userID', '6438b175a342ef447b35a203');");
@@ -56,14 +58,13 @@ public class suggestionsStepDefinitions {
 
 		WebDriverWait wait = new WebDriverWait(driver, duration); // wait up to 30 seconds
 		wait.until(ExpectedConditions.jsReturnsValue("return localStorage.getItem('userID');"));
-
 		driver.navigate().refresh();
 		Thread.sleep(10000);
 	}
 
 	@When("I click create suggestion list")
 	public void iClickCreateSuggestionList() {
-		driver.findElement(By.xpath("//*[@id=\"CreateSuggestionlistButton\"]")).click();
+		driver.findElement(By.id("CreateSuggestionlistButton")).click();
 	}
 
 	@And("I make the name {string}")

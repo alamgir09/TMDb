@@ -36,7 +36,7 @@ function App() {
      useEffect(() => {
        const interval = setInterval(() => {
          setRemaining(Math.ceil(getRemainingTime() / 1000))
-         console.log(remaining);
+//         console.log(remaining);
        }, 500)
 
        return () => {
