@@ -1,0 +1,9 @@
+Best Practice ContinuousIntegration Report
+Owner: Team 4
+Grade: 11.2/12
+Comments: 
+Branch check failed: https://github.com/CSCI310/20231-project-team-4/actions/runs/4738322711
+Branch check failed: https://github.com/CSCI310/20231-project-team-4/actions/runs/4738082395
+	Found a total of 32 merge checks on branches: {'develop', 'main'}
+		Total successful merges: 30
+		Total failing merges: 2
