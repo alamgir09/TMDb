@@ -1,0 +1,97 @@
+Best Practice IssuesPullRequests Report
+Owner: Team 4
+Grade: 11.9/12
+Comments: 
+	Using commit: https://github.com/CSCI310/20231-project-team-4/commit/847cb5c10d01d3c888cbcad2897429e893fccb2b
+		Reviewing issue 84
+			Found refactor/84: +1
+			Found matching PR #96: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed properly: +1
+			Issue score: 7/7
+		Reviewing issue 83
+			Found refactor/83: +1
+			Found matching PR #113: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed properly: +1
+			Issue score: 7/7
+		Reviewing issue 82
+			Found refactor/82: +1
+			Found matching PR #100: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed properly: +1
+			Issue score: 7/7
+		Reviewing issue 81
+			Found refactor/81: +1
+			Found matching PR #86: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed properly: +1
+			Issue score: 7/7
+		Reviewing issue 80
+			Found refactor/80: +1
+			Found matching PR #110: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed properly: +1
+			Issue score: 7/7
+		Reviewing issue 79
+			Found refactor/79: +1
+			Found matching PR #97: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed properly: +1
+			Issue score: 7/7
+		Reviewing issue 78
+			Found refactor/78: +1
+			Found matching PR #107: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed properly: +1
+			Issue score: 7/7
+		Reviewing issue 77
+			Found refactor/77: +1
+			Found matching PR #99: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed properly: +1
+			Issue score: 7/7
+		Reviewing issue 76
+			Found refactor/76: +1
+			Found matching PR #87: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed properly: +1
+			Issue score: 7/7
+		Reviewing issue 75
+			Found refactor/75: +1
+			Found matching PR #117: +1
+			PR created by issue assignee: +1
+			Changes matched: +1
+			Branch merged on time: +1
+			Branch merged by other teammate: +1
+			Issue closed but not by authorized user (.5 deduction): +.5
+			Issue score: 6.5/7
+		Total issue score count: 69.5/70
+		Points earned: 11.9
