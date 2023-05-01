@@ -1,0 +1,37 @@
+Best Practice TDD Report
+Owner: Team 4
+Grade: 9.3/12
+Comments: 
+	No test found for: src.components.GetSuggestionListButton.jsx.GetSuggestionListButton
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/65f3ade40ce8ece9c5b3a1bf815b52e5585e5299
+	No test found for: src.components.GetSuggestionListModal.jsx.GetSuggestionListModal
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/65f3ade40ce8ece9c5b3a1bf815b52e5585e5299
+	No test found for: src.components.GetSuggestionListModal.jsx.onValueChange
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/65f3ade40ce8ece9c5b3a1bf815b52e5585e5299
+	No test found for: src.components.GetSuggestionListModal.jsx.handleMoviesCountChange
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/65f3ade40ce8ece9c5b3a1bf815b52e5585e5299
+	No test found for: src.components.GetSuggestionListModal.jsx.handleCreateSuggestions
+		Commit: https://github.com/CSCI310/20231-project-team-4/commit/65f3ade40ce8ece9c5b3a1bf815b52e5585e5299
+	Correct TDD Methods:
+		src.components.MovieDetails.jsx.fetchWatchlist
+		src.components.SaveSuggestions.jsx.SaveSuggestions
+		src.components.CreateSuggestionlistModal.jsx.CreateSuggestionlistModal
+		src.pages.Search.jsx.searchAll
+		src.components.AddMovieComponent.jsx.handleShowAdd
+		src.pages.Search.jsx.inRange
+		src.components.CompareWatchlistModal.jsx.handleCloseButton
+		src.components.CompareWatchlistModal.jsx.handleBack
+		src.components.CompareWatchlistModal.jsx.compareWatchlist
+		src.components.CompareWatchlistModal.jsx.handleWatchlist
+		src.components.CompareWatchlistModal.jsx.CompareWatchlistModal
+		src.components.CompareWatchlistComponent.jsx.fetchWatchlistUsers
+		src.components.CreateSuggestionlistButton.jsx.CreateSuggestionlistButton
+		src.components.CompareWatchlistComponent.jsx.CompareWatchlistComponent
+		src.components.CreateSuggestionlistModal.jsx.createWatchList
+		src.components.AddMovieComponent.jsx.handleAddMovie
+		src.components.CreateSuggestionlistModal.jsx.onValueChange
+
+
+Correct TDD methods: 17
+Incorrect TDD methods: 5
+Total methods evaluated for TDD: 22
