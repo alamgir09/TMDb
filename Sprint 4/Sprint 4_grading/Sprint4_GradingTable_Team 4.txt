@@ -1,0 +1,21 @@
+			Grading Table - Team Team 4
+
+| Section                  | Grade               | Note                                                                                                                                                        |
+|--------------------------|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Sprint Planning          | 8.0/8               |                                                                                                                                                             |
+| Scrums                   | 22.0/24             | Scrum 1:                                                                                                                                                    |
+|                          |                     | Scrum 2:More than one member is missing from the out of class Scrum meeting [-1] Absent member’s answers not read out or written down. [-1] Andrew Gonzales |
+|                          |                     | Scrum 3:                                                                                                                                                    |
+|                          |                     | Scrum 4:                                                                                                                                                    |
+| Retrospective            | 8.0/8               | Congrats on an excellent Sprint 4 score!                                                                                                                    |
+| TDD                      | 9.3/12              |                                                                                                                                                             |
+| GitFlow                  | 12.0/12             |                                                                                                                                                             |
+| Continuous Integration   | 11.2/12             |                                                                                                                                                             |
+| Refactor                 | 11.9/12             |                                                                                                                                                             |
+| Coverage                 | 9.9/12              |                                                                                                                                                             |
+| ------------------------ | ------------------- |                                                                                                                                                             |
+| Total                    | 92.3                |                                                                                                                                                             |
+| ------------------------ | ------------------- |                                                                                                                                                             |
+| Implementation Score     | 386.84/400          |                                                                                                                                                             |
+| Sustainable Pace Penalty | 60.0                |                                                                                                                                                             |
+|                          |                     |                                                                                                                                                             |
